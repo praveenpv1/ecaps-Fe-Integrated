@@ -1,0 +1,77 @@
+<!-- <div style="height:80px"></div> -->
+<div style="padding:10px" class="create-pot">
+  <mat-grid-list cols="1" rowHeight="6:1">
+    <mat-card>
+      <mat-grid-list cols="1" rowHeight="75px" class="pot-card">
+        <mat-grid-tile
+          *ngFor="let tile of tiles"
+          [colspan]="tile.cols"
+          [rowspan]="tile.rows"
+        >
+          <div fxFlex fxLayoutAlign="center center">
+            <a mat-list-item [routerLink]="[tile.route]">
+              <div class="mat-card-round-small">
+                <mat-icon matListIcon class="nav-list-icon"> add </mat-icon>
+              </div>
+            </a>
+          </div>
+        </mat-grid-tile>
+      </mat-grid-list>
+    </mat-card>
+  </mat-grid-list>
+
+  <mat-grid-list cols="1" rowHeight="6:1">
+    <mat-grid-tile class="mat-title"><b style="flex: auto">Car</b></mat-grid-tile>
+  </mat-grid-list>
+  <mat-grid-list cols="1" rowHeight="1:1" [gutterSize]="'10px'">
+    <mat-card>
+      <mat-grid-list cols="2" rowHeight="50px">
+        <mat-grid-tile colspan="1" rowspan="2">
+          <div>
+            <span class="new-line f-12">Current Savings</span>
+            <br />
+            <span class="new-line f-25">62,000</span>
+          </div>
+        </mat-grid-tile>
+        <mat-grid-tile colspan="1" rowspan="2">
+          <div>
+            <span class="new-line f-12">Monthly Goal</span>
+            <br />
+            <span class="new-line f-20">2,000</span>
+          </div>
+        </mat-grid-tile>
+        <mat-grid-tile colspan="1" rowspan="2">
+          <div>
+            <span class="new-line f-12">Pot Goal</span>
+            <br />
+            <span class="new-line f-20">1,62,000</span>
+          </div>
+        </mat-grid-tile>
+      </mat-grid-list>
+    </mat-card>
+  </mat-grid-list>
+  <br />
+  <mat-grid-list cols="2" rowHeight="6:1" [gutterSize]="'10px'">
+    <mat-grid-tile colspan="1" rowspan="2">
+      <button
+        mat-raised-button
+        color="primary"
+        class="full-width edit"
+        [routerLink]="['/', 'transfer']"
+      >
+        Edit Goal
+      </button>
+    </mat-grid-tile>
+    <mat-grid-tile colspan="1" rowspan="2">
+      <button
+        mat-raised-button
+        color="primary"
+        class="full-width"
+        [routerLink]="['/', 'transferfromto']"
+      >
+        Transfer
+      </button>
+    </mat-grid-tile>
+  </mat-grid-list>
+  <!-- type="submit" only works if the button is part of the <dynamic-form> -->
+</div>

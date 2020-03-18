@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+
+    <title>Enviar - Admin app</title>
+
+    <base href="/" />
+
+    <!-- Use viewport-fit=cover to fill the iPhone X notch and also prevent content going under the status bar (if it's translucent) -->
+    <!-- More info: https://css-tricks.com/the-notch-and-css/ -->
+    <meta
+      name="viewport"
+      content="initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, viewport-fit=cover"
+    />
+
+    <!-- Android -->
+    <link rel="manifest" href="manifest.json" />
+    <meta name="theme-color" content="#488aff" />
+
+    <!-- iOS -->
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-title" content="koppr" />
+
+    <!-- Possible values include default, black, or black-translucent; only black-translucent is truly full screen -->
+    <!-- More info: https://developer.apple.com/library/content/documentation/AppleApplications/Reference/SafariHTMLRef/Articles/MetaTags.html -->
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+
+    <!-- Home Screen Icons -->
+    <link rel="apple-touch-icon" sizes="57x57" href="assets/fav-icon/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="assets/fav-icon/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="assets/fav-icon/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="assets/fav-icon/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="assets/fav-icon/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="assets/fav-icon/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="assets/fav-icon/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="assets/fav-icon/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/fav-icon/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192"  href="assets/fav-icon/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/fav-icon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="assets/fav-icon/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/fav-icon/favicon-16x16.png">
+    <link rel="manifest" href="assets/fav-icon/manifest.json">
+    <meta name="msapplication-TileColor" content="#ffffff">
+    <meta name="msapplication-TileImage" content="/ms-icon-144x144.png">
+    <meta name="theme-color" content="#ffffff">
+    <!-- Windows Mobile specific styles -->
+    <meta name="msapplication-TileColor" content="#2d89ef" />
+    <meta
+      name="msapplication-TileImage"
+      content="assets/images/icons/mstile-150x150.png"
+    />
+
+    <!--
+  <meta http-equiv="x-ua-compatible" content="IE=Edge">
+
+  <meta name="msapplication-tap-highlight" content="no">
+  --></head>
+  <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+
+  <script>
+    var global = global || window;
+
+    var process = process || {
+      env: { DEBUG: undefined },
+      version: []
+    };
+  </script>
+
+  <body>
+    <div id="app-content">
+      <app-root></app-root>
+    </div>
+
+    <noscript>
+      <h2 style="padding: 20px; text-align: center;">
+        JavaScript must be enabled to use this application.
+      </h2>
+    </noscript>
+  </body>
+</html>

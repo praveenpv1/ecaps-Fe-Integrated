@@ -1,0 +1,27 @@
+.theme-cyan .button.button-fill {
+  background: #27878e !important; /* koppr */
+  color: #fff !important;
+  border-radius: 4px !important; /* koppr */
+}
+
+.button.button-fill.bg-lightgreen,
+.button.button-fill.color-lightgreen {
+  background: white !important; /* koppr */
+  color: #000000 !important; /* koppr */
+  border: 1px #27878e solid !important; /* koppr */
+  border-radius: 4px !important; /* koppr */
+}
+
+.header {
+  height: 64px;
+  padding: 0 10px;
+  line-height: 64px;
+  margin-bottom: 15px;
+  box-shadow: 2px 3px 8px -1px #d1fff4;
+}
+
+.logo {
+  height: 32px;
+  background: rgba(255, 255, 255, 0.2);
+  margin: 16px;
+}

@@ -1,0 +1,55 @@
+<div nz-row>
+  <div nz-col nzSm="24" nzMd="24" nzLg="24" nzXl="24">
+    <div nz-row>
+      <div nz-col nzSm="24" nzMd="24" nzLg="12" nzXl="12">
+        <a class="green-back-button" [routerLink]="['/', 'dashboard' ]"><img class="back-img" src="assets/images/back-button.svg">&nbsp;&nbsp;BACK</a>
+        <br>
+        <h3 class="dark-blue">Add New User</h3>
+        <p>Add, view and manage your users and roles here list here.</p>
+        </div>
+        <div nz-col nzSm="24" nzMd="24" nzLg="12" nzXl="12">
+           <div nz-row>
+              <div nz-col nzSm="24" nzMd="24" nzLg="8" nzXl="8"></div>
+              <div nz-col nzSm="24" nzMd="24" nzLg="8" nzXl="8">
+                <button nz-button nzType="primary" [routerLink]="['/', 'account', 'user', 'addnewuser']"><i nz-icon nzType="plus" nzTheme="outline"></i>Add User</button>
+              </div>
+              <div nz-col nzSm="24" nzMd="24" nzLg="8" nzXl="8"></div>
+            </div>
+          </div>
+      </div>
+    </div>
+</div>
+<br>
+<div nz-row>
+  <nz-tabset [nzTabPosition]="'top'" [nzType]="'card'">
+    <nz-tab *ngFor="let tab of tabs" [nzTitle]="tab">
+      <div *ngIf="tab == 'Users'">
+          <nz-table>
+          <thead>
+            <tr>
+              <th></th>
+              <th>User</th>
+              <th>Email Id</th>
+              <th>Role</th>
+              <th></th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><button nz-button nzType="primary">Active</button></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td><button class="blue-border-card" nz-button nzType="info" [routerLink]="['/', 'account', 'user', 'userdetails']"><i nz-icon nzType="arrow-right" nzTheme="outline"></i>View Details</button></td>
+              <td><i nz-icon nzType="more" nzTheme="outline"></i></td>
+            </tr>
+          </tbody>
+        </nz-table>
+      </div>
+      <div *ngIf="tab == 'Manage Roles'">
+          <p>Content of Tab Pane 2</p>
+      </div>
+    </nz-tab>
+  </nz-tabset>
+</div>

@@ -1,0 +1,70 @@
+<div nz-row>
+  <div nz-col
+  nzSm="24"
+  nzMd="24"
+  nzLg="24"
+  nzXl="24">
+    <h3 class="dark-blue">Briefkase Company Details</h3>
+    <p>Tell us about your company.</p>
+  </div>
+  <div nz-col
+  nzSm="24"
+  nzMd="24"
+  nzLg="24"
+  nzXl="24">
+<form nz-form>
+     <nz-form-item>
+       <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="YourFullName">Full Name</nz-form-label>
+       <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Please input your name">
+         <input type="text" nz-input placeholder="Your Full Name"/>
+       </nz-form-control>
+     </nz-form-item>
+     <nz-form-item>
+        <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="Designation">Designation</nz-form-label>
+       <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Please input your Designation">
+         <nz-select nzShowSearch nzAllowClear nzPlaceHolder="Designation">
+          <nz-option nzLabel="Founder" nzValue="Founder"></nz-option>
+          <nz-option nzLabel="CEO" nzValue="CEO"></nz-option>
+          <nz-option nzLabel="Proprietor/Self Employed" nzValue="Proprietor/Self Employed"></nz-option>
+          <nz-option nzLabel="Other" nzValue="Other"></nz-option>
+        </nz-select>
+       </nz-form-control>
+     </nz-form-item>
+     <nz-form-item>
+       <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="CIN">CIN</nz-form-label>
+       <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Please input your CIN">
+         <input type="text" nz-input placeholder="CIN"/>
+       </nz-form-control>
+     </nz-form-item>
+     <nz-form-item>
+       <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="PAN">PAN</nz-form-label>
+       <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Please input your PAN">
+         <input type="text" nz-input placeholder="PAN"/>
+       </nz-form-control>
+     </nz-form-item>
+     <nz-form-item>
+       <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="GSTIN">GSTIN</nz-form-label>
+       <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Please input your GSTIN">
+         <input type="text" nz-input placeholder="GSTIN"/>
+       </nz-form-control>
+     </nz-form-item>
+     <nz-form-item>
+       <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="NoofEmployees">No. of Employees</nz-form-label>
+       <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Please input your No. of Employees">
+         <nz-select nzShowSearch nzAllowClear nzPlaceHolder="No. of Employees">
+          <nz-option nzLabel="1 to 10" nzValue="1 to 10"></nz-option>
+          <nz-option nzLabel="upto 25" nzValue="upto 25"></nz-option>
+          <nz-option nzLabel="upto 50" nzValue="upto 50"></nz-option>
+          <nz-option nzLabel="50-100" nzValue="50-100"></nz-option>
+          <nz-option nzLabel="more than 100" nzValue="more than 100"></nz-option>
+        </nz-select>
+       </nz-form-control>
+     </nz-form-item>
+    <nz-form-item nz-row>
+      <nz-form-control [nzSpan]="14" [nzOffset]="6">
+        <button nz-button nzType="primary">Submit</button>
+      </nz-form-control>
+    </nz-form-item>
+   </form>
+  </div>
+</div>

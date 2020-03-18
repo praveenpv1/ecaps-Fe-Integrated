@@ -1,0 +1,41 @@
+.task-header {
+  background: whitesmoke;
+  height: 80px;  // 72px
+  min-height: 80px;  // 72px;
+}
+
+.task-header-content {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  background: whitesmoke;
+  padding-left: 16px;
+  padding-right: 16px;
+}
+
+.task-content {
+  background: white;
+  padding: 16px;
+}
+
+/*
+
+.pull-right {
+  // float: right !important;
+  text-align: right
+}
+
+  padding-left: 16px;
+  padding-left: 16px;
+  padding-right: 16px;
+
+.task-title {
+
+  h1, h2 {
+    font-weight: bold;
+  }
+
+}
+
+*/

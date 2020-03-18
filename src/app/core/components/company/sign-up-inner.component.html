@@ -1,0 +1,193 @@
+<div nz-row>
+  <ng-content></ng-content>
+
+  <div nz-col nzSm="24" nzMd="24" nzLg="24" nzXl="24">
+    <form nz-form [formGroup]="validateForm">
+      <div *ngIf="firstStep">
+        <nz-form-item class="text-center">
+          <nz-form-control nzErrorTip="Please enter the company name.">
+            <input
+              nz-input
+              placeholder="Company Name *"
+              formControlName="name"
+              id="name"
+            />
+          </nz-form-control>
+        </nz-form-item>
+
+        <nz-form-item *ngIf="company_id == ''">
+          <nz-form-control nzErrorTip="Please enter First Name.">
+            <input
+              placeholder="First Name *"
+              nz-input
+              formControlName="first_name"
+              id="first_name"
+            />
+          </nz-form-control>
+        </nz-form-item>
+
+        <nz-form-item *ngIf="company_id == ''">
+          <nz-form-control nzErrorTip="Please enter Last Name.">
+            <input
+              placeholder="Last Name *"
+              nz-input
+              formControlName="last_name"
+              id="last_name"
+              [disabled]="company_id == '' ? false : true"
+            />
+          </nz-form-control>
+        </nz-form-item>
+
+        <nz-form-item>
+          <nz-form-control nzErrorTip="Please enter the corporate email id.">
+            <input
+              placeholder="Corporate Email Id *"
+              nz-input
+              formControlName="email"
+              id="email"
+              [disabled]="company_id == '' ? false : true"
+            />
+          </nz-form-control>
+        </nz-form-item>
+
+        <nz-form-item class="text-center">
+          <nz-form-control nzErrorTip="Please input a valid phone number!">
+            <nz-input-group [nzAddOnBefore]="addOnBeforeTemplate">
+              <ng-template #addOnBeforeTemplate>
+                <nz-select
+                  formControlName="phoneNumberPrefix"
+                  class="phone-select"
+                  [(ngModel)]="selectedPrefixValue"
+                  [disabled]="company_id == '' ? false : true"
+                >
+                  <nz-option nzLabel="+91" nzValue="+91"></nz-option>
+                </nz-select>
+              </ng-template>
+              <input
+                [disabled]="company_id == '' ? false : true"
+                nz-input
+                formControlName="mobile"
+                id="'mobile'"
+                placeholder="Phone Number *"
+              />
+            </nz-input-group>
+          </nz-form-control>
+        </nz-form-item>
+
+        <nz-form-item *ngIf="company_id == ''">
+          <nz-form-control nzErrorTip="Please enter the gender.">
+            <nz-select
+              formControlName="gender"
+              id="gender"
+              [(ngModel)]="selectedValue"
+              nzAllowClear
+              nzPlaceHolder="Choose Gender"
+            >
+              <nz-option nzValue="male" nzLabel="Male"></nz-option>
+              <nz-option nzValue="female" nzLabel="Female"></nz-option>
+              <nz-option nzValue="other" nzLabel="Other"></nz-option>
+            </nz-select>
+          </nz-form-control>
+        </nz-form-item>
+      </div>
+
+      <div *ngIf="!firstStep">
+        <!-- <nz-form-item>
+          <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="Designation"
+            >Designation</nz-form-label
+          >
+          <nz-form-control
+            [nzSm]="14"
+            [nzXs]="24"
+            nzErrorTip="Please input your Designation"
+          >
+            <nz-select nzShowSearch nzAllowClear nzPlaceHolder="Designation">
+              <nz-option nzLabel="Founder" nzValue="Founder"></nz-option>
+              <nz-option nzLabel="CEO" nzValue="CEO"></nz-option>
+              <nz-option
+                nzLabel="Proprietor/Self Employed"
+                nzValue="Proprietor/Self Employed"
+              ></nz-option>
+              <nz-option nzLabel="Other" nzValue="Other"></nz-option>
+            </nz-select>
+          </nz-form-control>
+        </nz-form-item> -->
+        <nz-form-item>
+          <nz-form-control nzErrorTip="Please input your CIN">
+            <input
+              type="text"
+              formControlName="CIN"
+              nz-input
+              placeholder="CIN"
+            />
+          </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+          <nz-form-control nzErrorTip="Please input your PAN">
+            <input
+              type="text"
+              formControlName="PAN"
+              nz-input
+              placeholder="PAN"
+            />
+          </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+          <nz-form-control nzErrorTip="Please input your GSTIN">
+            <input
+              formControlName="GSTIN"
+              type="text"
+              nz-input
+              placeholder="GSTIN"
+            />
+          </nz-form-control>
+        </nz-form-item>
+        <nz-form-item *ngIf="company_id != ''">
+          <nz-form-control nzErrorTip="Please enter the corporate address.">
+            <input
+              placeholder="Address *"
+              nz-input
+              formControlName="head_office_address"
+              id="head_office_address"
+            />
+          </nz-form-control>
+        </nz-form-item>
+        <!-- <nz-form-item>
+          <nz-form-control nzErrorTip="Please input your No. of Employees">
+            <nz-select
+              nzShowSearch
+              nzAllowClear
+              nzPlaceHolder="No. of Employees"
+              formControlName="NoofEmployees"
+            >
+              <nz-option nzLabel="1 to 10" nzValue="1 to 10"></nz-option>
+              <nz-option nzLabel="upto 25" nzValue="upto 25"></nz-option>
+              <nz-option nzLabel="upto 50" nzValue="upto 50"></nz-option>
+              <nz-option nzLabel="50-100" nzValue="50-100"></nz-option>
+              <nz-option
+                nzLabel="more than 100"
+                nzValue="more than 100"
+              ></nz-option>
+            </nz-select>
+          </nz-form-control>
+        </nz-form-item> -->
+      </div>
+
+      <nz-form-item nz-row>
+        <nz-form-control [nzSpan]="14" [nzOffset]="6">
+          <button (click)="nextCompanySignup()" nz-button nzType="primary">
+            {{ firstStep ? "Next" : "Back" }}</button
+          >&nbsp;&nbsp;
+          <button
+            *ngIf="!firstStep"
+            (click)="submitForm()"
+            nz-button
+            nzType="primary"
+          >
+            Submit
+          </button>
+        </nz-form-control>
+      </nz-form-item>
+    </form>
+  </div>
+</div>

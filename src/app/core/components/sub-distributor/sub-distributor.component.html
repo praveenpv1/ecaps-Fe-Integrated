@@ -1,0 +1,116 @@
+<div nz-row>
+    <div nz-col nzSm="12" nzMd="12" nzLg="12" nzXl="21">
+        <h3 class="dark-blue">Sub-Distributors</h3>
+        <p>Add, View and Manage your Sub-Distributors here.</p>
+    </div>
+
+    <div nz-col nzSm="12" nzMd="12" nzLg="12" nzXl="3">
+        <button
+            class="margin-5px "
+            nz-button
+            nzType="primary"
+            [routerLink]="['/', 'sub-distributor', 'add']"
+        >
+            <i
+                nz-icon
+                nzType="plus-circle"
+                nzTheme="outline"
+                style="color: #fff"
+            ></i
+            >Add Sub-Distributor
+        </button>
+    </div>
+</div>
+
+<div nz-row>
+    <div nz-col nzSm="24" nzMd="24" nzLg="22" nzXl="22">
+        <nz-input-group
+            class="margin-5px"
+            [nzSuffix]="suffixIconSearch"
+            style="width: 100% ;max-width :400px"
+        >
+            <input
+                type="text"
+                [(ngModel)]="searchText"
+                nz-input
+                placeholder="Search Sub-Distributor"
+            />
+        </nz-input-group>
+        <ng-template #suffixIconSearch>
+            <i nz-icon nzType="search"></i>
+        </ng-template>
+    </div>
+
+    <div nz-col nzSm="24" nzMd="24" nzLg="2" nzXl="2">
+        <!-- <button class="margin-5px" nz-button nz-dropdown [nzDropdownMenu]="menu0">
+          Sort
+          <i nz-icon nzType="down"></i>
+        </button>
+        <nz-dropdown-menu #menu0="nzDropdownMenu">
+          <ul nz-menu>
+            <li nz-menu-item>By ??</li>
+            <li nz-menu-item>By ??</li>
+            <li nz-menu-item>By ??</li>
+          </ul>
+        </nz-dropdown-menu> -->
+    </div>
+</div>
+
+<br />
+<div nz-row>
+    <nz-table
+        #headerTable
+        [nzData]="employeesList"
+        [nzPageSize]="1000"
+        [nzScroll]="{ y: '240px' }"
+    >
+        <thead>
+            <tr>
+                <!-- <th nzWidth="250px">Id</th> -->
+                <th nzWidth="200px">Name</th>
+                <th nzWidth="200px">Mobile</th>
+                <th nzWidth="250px">Email</th>
+                <th>Action</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let data of headerTable.data | filter: searchText">
+                <!-- <td *ngIf="data.user">{{ data.user._id }}</td> -->
+                <td>{{ data.first_name }} {{ data.last_name }}</td>
+                <td>
+                    {{ data.mobile }}
+                    <i
+                        *ngIf="data.user"
+                        nz-icon
+                        nzType="{{
+                            data.user.phone_verification == 'approved'
+                                ? 'check-circle'
+                                : 'exclamation-circle'
+                        }}"
+                    ></i>
+                </td>
+                <td>
+                    {{ data.email }} {{ email_verification }}
+                    <i
+                        *ngIf="data.user"
+                        nz-icon
+                        nzType="{{
+                            data.user.email_verification == 'approved'
+                                ? 'check-circle'
+                                : 'exclamation-circle'
+                        }}"
+                    ></i>
+                </td>
+                <!-- <td>
+          <a (click)="resendVerification(data)">Resend verification</a>
+        </td>
+        <td>
+          <button nz-button class="table-btn" (click)="editRoute(data)">
+            <i nz-icon class="edit-icon" nzType="edit"></i>
+          </button>
+        </td> -->
+            </tr>
+        </tbody>
+    </nz-table>
+</div>

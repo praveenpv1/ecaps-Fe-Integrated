@@ -1,0 +1,23 @@
+[
+
+  {
+    "icon":  "attach_money",
+    "route": "spends",
+    "title": "SPENDS"
+  },
+  {
+    "icon":  "hotel",
+    "route": "claims",
+    "title": "CLAIMS"
+  },
+  {
+    "icon":  "pie_chart",
+    "route": "pots",
+    "title": "POTS"
+  },
+  {
+    "icon":  "credit_card",
+    "route": "cards",
+    "title": "CARD"
+  }
+]

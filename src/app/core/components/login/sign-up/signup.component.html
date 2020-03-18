@@ -1,0 +1,139 @@
+<div nz-row>
+  <div nz-col nzSm="24" nzMd="24" nzLg="12" nzXl="12">
+    <h1 class="dark-blue text-center">
+      MONEY TRANSFER & BILL PAYMENTS
+    </h1>
+    <!-- <h2 class="medium-blue text-center">
+      Simplest and fastest way to recharge and pay bills for all your mobile,<br>
+      DTH and other utilities at a single location.
+    </h2> -->
+    <br />
+    <nz-card class="blue-border-card">
+      <img
+        alt="example"
+        class="koppr-image1"
+        src="assets\images\enviar-logo.png"
+      />
+    </nz-card>
+    <br />
+    <div nz-row>
+      <p class="text-center">
+        Need help with your Enviar Account? Get in touch
+      </p>
+      <div nz-col nzSm="12" nzMd="12" nzLg="12" nzXl="12">
+        <h4 class="light-blue text-center">
+          <a href="tel:+918879600206">(+91) mob no.</a>
+        </h4>
+      </div>
+      <div nz-col nzSm="12" nzMd="12" nzLg="12" nzXl="12">
+        <h4 class="light-blue text-center">
+          <a href="mailto:care@koppr.in">care@enviar.in</a>
+        </h4>
+      </div>
+    </div>
+  </div>
+  <div nz-col nzSm="24" nzMd="24" nzLg="12" nzXl="12">
+    <!-- <h2 class="medium-blue text-center">
+      Sign up for your <span class="dark-blue">FREE</span> Enviar
+      Corporate account
+    </h2>
+    <br /> -->
+    <div nz-row>
+      <div nz-col nzSm="24" nzMd="24" nzLg="5" nzXl="5"></div>
+      <div nz-col nzSm="24" nzMd="24" nzLg="16" nzXl="16">
+        <form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()">
+          <sign-up-inner-company>
+            <h2 class="medium-blue text-center">
+              Sign up for your <span class="dark-blue">FREE</span> Enviar
+              retailer account
+            </h2>
+            <br />
+          </sign-up-inner-company>
+
+          <!-- <nz-form-item class="text-center">
+            <nz-form-control nzErrorTip="Please input your fullname!">
+              <input
+                nz-input
+                id="fullname"
+                formControlName="fullname"
+                placeholder="Full Name"
+              />
+            </nz-form-control>
+          </nz-form-item>
+          <nz-form-item class="text-center">
+            <nz-form-control nzErrorTip="Please input your companyname!">
+              <input
+                nz-input
+                id="companyname"
+                formControlName="companyname"
+                placeholder="Company Name"
+              />
+            </nz-form-control>
+          </nz-form-item>
+          <nz-form-item class="text-center">
+            <nz-form-control nzErrorTip="The input is not valid E-mail!">
+              <input
+                nz-input
+                formControlName="email"
+                id="email"
+                placeholder="Corporate E-mail Id"
+              />
+            </nz-form-control>
+          </nz-form-item>
+          <nz-form-item class="text-center">
+            <nz-form-control
+              [nzValidateStatus]="validateForm.controls['phoneNumber']"
+              nzErrorTip="Please input a valid phone number!"
+            >
+              <nz-input-group [nzAddOnBefore]="addOnBeforeTemplate">
+                <ng-template #addOnBeforeTemplate>
+                  <nz-select
+                    formControlName="phoneNumberPrefix"
+                    class="phone-select"
+                  >
+                    <nz-option nzLabel="+91" nzValue="91"></nz-option>
+                  </nz-select>
+                </ng-template>
+                <input
+                  nz-input
+                  formControlName="phoneNumber"
+                  id="'phoneNumber'"
+                  placeholder="Phone Number"
+                />
+              </nz-input-group>
+            </nz-form-control>
+          </nz-form-item> -->
+          <!-- <nz-form-item nz-row class="text-center">
+            <nz-form-control>
+              <label nz-checkbox formControlName="agree">
+                <span class="light-grey"
+                  >I agree to the Enviar
+                  <a class="light-blue">Terms of Service</a> of Use &
+                  <a class="light-blue">Privacy Policy*</a></span
+                >
+              </label>
+            </nz-form-control>
+          </nz-form-item> -->
+          <!-- <nz-form-item nz-row class="text-center">
+            <nz-form-control>
+              <button nz-button nzType="primary">Get Started</button>
+            </nz-form-control>
+          </nz-form-item> -->
+          <nz-form-item nz-row class="text-center">
+            <nz-form-control>
+              <label>
+                <span class="light-grey"
+                  >Already have a Enviar Account? Sign in
+                  <a class="medium-blue" [routerLink]="['/', 'signin']"
+                    >here</a
+                  ></span
+                >
+              </label>
+            </nz-form-control>
+          </nz-form-item>
+        </form>
+      </div>
+      <div nz-col nzSm="24" nzMd="24" nzLg="3" nzXl="3"></div>
+    </div>
+  </div>
+</div>

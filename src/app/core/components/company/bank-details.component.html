@@ -1,0 +1,59 @@
+<div nz-row>
+  <div nz-col
+  nzSm="24"
+  nzMd="24"
+  nzLg="24"
+  nzXl="24">
+    <a class="green-back-button" [routerLink]="['/', 'company', 'companydetails']"><img class="back-img" src="assets/images/back-button.svg">&nbsp;&nbsp;BACK</a>
+    <br>
+    <h3 class="dark-blue">Bank Account Details</h3>
+    <p>Link your bank account to your Enviar account.</p>
+  </div>
+  <div nz-col
+  nzSm="24"
+  nzMd="24"
+  nzLg="24"
+  nzXl="24">
+<form nz-form>
+     <nz-form-item>
+       <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="BankName">Bank Name</nz-form-label>
+       <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Please input bank name">
+         <input type="text" nz-input placeholder="Bank Name"/>
+       </nz-form-control>
+     </nz-form-item>
+     <nz-form-item>
+       <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="AccountType">Account Type</nz-form-label>
+       <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Please input Account Type">
+         <nz-select nzShowSearch nzAllowClear nzPlaceHolder="Account Type">
+          <nz-option nzLabel="Current Account" nzValue="Current Account"></nz-option>
+          <nz-option nzLabel="Savings Account" nzValue="Savings Account"></nz-option>
+        </nz-select>
+       </nz-form-control>
+     </nz-form-item>
+     <nz-form-item>
+       <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="AccountNumber">Account Number</nz-form-label>
+       <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Please input your Account Number">
+         <input type="text" nz-input placeholder="Account Number"/>
+       </nz-form-control>
+     </nz-form-item>
+     <nz-form-item>
+       <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="ConfirmAccountNumber">Confirm Account Number</nz-form-label>
+       <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Please Confirm Account Number">
+         <input type="text" nz-input placeholder="Confirm Account Number"/>
+       </nz-form-control>
+     </nz-form-item>
+     <nz-form-item>
+       <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="IFSC code">IFSC code</nz-form-label>
+       <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Please input IFSC code">
+         <input type="text" nz-input placeholder="IFSC code"/>
+       </nz-form-control>
+     </nz-form-item>
+     <nz-form-item nz-row>
+       <nz-form-control [nzSpan]="14" [nzOffset]="6">
+         <button nz-button nzType="primary">Continue</button>
+         <a>Skip this step</a>
+       </nz-form-control>
+     </nz-form-item>
+   </form>
+  </div>
+</div>

@@ -1,0 +1,28 @@
+
+<div style="height:80px"></div>
+<div style="padding:10px">
+
+  <mat-grid-list cols="1" rowHeight="6:1">
+    
+
+     <mat-grid-list cols="1" rowHeight="6:1">
+       <mat-grid-tile class="mat-title" colspan="1" rowspan="1">
+          <mat-icon matListIcon class="nav-list-icon" style="font-size: 50px"> done </mat-icon> 
+       </mat-grid-tile>
+       <mat-grid-tile class="mat-title"><b>Congratulations!</b></mat-grid-tile>
+     </mat-grid-list>
+
+     
+     <mat-grid-list cols="1" rowHeight="6:1">
+        <mat-grid-tile class="mat-caption" style="font-size: 16px"><b>You have successfully created -name- Pot!</b></mat-grid-tile>
+      </mat-grid-list>
+
+  
+  </mat-grid-list>
+
+
+<br>   <!-- type="submit" only works if the button is part of the <dynamic-form> -->
+    <button mat-raised-button color="primary" class="full-width"  [routerLink]="['/','pots']" >View</button>
+
+
+</div>

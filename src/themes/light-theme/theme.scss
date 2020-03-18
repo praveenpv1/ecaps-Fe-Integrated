@@ -1,0 +1,428 @@
+@import "~@angular/material/theming";
+@import "../fonts";
+@import "../icons";
+@import "../../../projects/utils/src/lib/angular-material/mat-variables";
+@import "./mixins";
+@import "./palette";
+@import "./typography";
+@import "../../../projects/utils/src/lib/angular-material/variables";
+
+// Generate Material’s core styles
+
+@include mat-core($custom-typography);
+// @include mat-toolbar-typography($custom-toolbar-typography);
+
+// Generate a Custom Theme
+
+$light-theme: mat-light-theme(
+  $light-theme-primary,
+  $light-theme-accent,
+  $light-theme-warn
+);
+// $dark-theme: mat-dark-theme($dark-theme-primary, $dark-theme-accent, $dark-theme-warn);
+
+@include angular-material-theme($light-theme);
+
+// Theme Custom components
+
+@include crm-light-theme($light-theme);
+
+// ------------------------------------------------------------------------------------------------------------------ //
+
+$foreground: map-get($light-theme, foreground);
+$background: map-get($light-theme, background);
+
+// top, right, bottom, and left
+// width: 100vw;
+// height: 100vh;
+
+.mat-sidenav-container {
+  height: 100vh;
+}
+
+// https://github.com/angular/material2/blob/master/src/lib/core/style/_variables.scss
+
+$sidenav-width: 320px; // 240px;
+
+.mat-sidenav {
+  width: $sidenav-width;
+}
+
+.mat-subheader {
+  font-size: 18px !important;
+  font-weight: 900 !important;
+}
+
+.mat-vertical-content {
+  padding: 24px 24px 24px 24px !important;
+}
+
+// auth-local - login, register
+
+.mat-drawer-container {
+  @media ($mat-xsmall) {
+    background-color: white;
+  }
+}
+
+.mat-header-row {
+  // background-color: mat-color($light-theme-accent, 300);
+  background-color: #f5f5f5;
+}
+
+.mat-footer-row {
+  // background-color: mat-color($light-theme-accent, 300);
+  background-color: #f5f5f5;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.mat-drawer-content {
+  background-color: #f4f4f4;
+}
+
+.mat-card-round-big {
+  height: 70px;
+  width: 70px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  object-fit: cover;
+  background-color: #fff;
+  display: flex; /* establish flex container */
+  flex-direction: column; /* make main axis vertical */
+  justify-content: center; /* center items vertically, in this case */
+  align-items: center;
+}
+
+.mat-card-round-small {
+  height: 60px;
+  width: 60px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  object-fit: cover;
+  background-color: #f4f4f4;
+  display: flex; /* establish flex container */
+  flex-direction: column; /* make main axis vertical */
+  justify-content: center; /* center items vertically, in this case */
+  align-items: center;
+}
+
+.mat-flat-button.mat-primary,
+.mat-raised-button.mat-primary,
+.mat-fab.mat-primary,
+.mat-mini-fab.mat-primary {
+  background-color: #000 !important;
+  color: white;
+}
+
+.mat-toolbar-row {
+  background-color: #ffffff;
+}
+// ------------------------------------------------------------------------------------------------------------------ //
+
+// https://material.angular.io/guide/theming
+// https://github.com/angular/components/blob/master/guides/theming.md
+
+// https://material.io/design/color/the-color-system.html
+// https://github.com/angular/material2/blob/master/src/lib/core/theming/_palette.scss
+
+// https://material.angular.io/guide/typography
+// https://github.com/Teradata/covalent/blob/develop/src/theme.scss
+
+// https://blog.thoughtram.io/angular/2017/05/23/custom-themes-with-angular-material.html
+// https://ultimatecourses.com/blog/the-missing-guide-to-angular-material
+
+.ant-layout-header {
+  background-color: white !important;
+  border-bottom: 1px #f2f2f2 solid !important;
+}
+
+.logo {
+  width: 166px;
+  height: 40px;
+  object-fit: contain;
+  margin-top: 10px !important;
+}
+
+.dark-brown {
+  color: #383b41 !important;
+}
+
+.light-grey {
+  color: #606060;
+}
+
+p {
+  color: #606060;
+}
+
+.white-gradient-card {
+  background: linear-gradient(to bottom, #ffffff, #ffffff) !important;
+  color: #606060 !important;
+}
+
+.white-gradient-card h1 {
+  color: #2a2265;
+}
+
+.white-gradient-card span {
+  color: #2a2265;
+  font-weight: bold;
+}
+
+.white-gradient-card i {
+  background: #ffffff;
+  color: #2a2265 !important;
+  display: inline-block;
+  text-align: center;
+  font-size: 13px;
+  position: relative;
+  padding: 5px;
+  border: 1px solid #2a2265;
+  border-radius: 50%;
+}
+
+.enviar-account-balance { 
+  background: linear-gradient(to bottom, #2a2265, #453E78) !important; 
+  color: #ffffff !important;
+  border: #2a2265 !important;
+}
+
+.enviar-account-balance h1 {
+  color: #ffffff;
+}
+.enviar-account-balance p {
+  color: #ffffff;
+}
+.enviar-account-balance span {
+  color: #ffffff;
+  font-weight: bold;
+}
+
+.enviar-account-balance i { 
+  background-image: linear-gradient(321deg, #faa61a 36%, #fbbc53 89%);
+  text-align: center;
+  display: inline-block;
+  font-size: 17px;
+  position: relative;
+  padding: 5px;
+  border-radius: 50%;
+}
+
+.card-h2 {
+  margin-left: 22px;
+}
+
+.ant-layout {
+  background-color: white !important;
+}
+
+.ant-layout-header {
+  margin-bottom: 15px;
+  -webkit-box-shadow: 2px 3px 8px -1px rgba(42, 34, 101, 1);
+  -moz-box-shadow: 2px 3px 8px -1px rgba(42, 34, 101, 1);
+  box-shadow: 2px 3px 8px -1px rgba(42, 34, 101, 1);
+}
+
+.header-menu {
+  height: 50px;
+}
+
+.ant-menu-horizontal {
+  border-bottom: 0px !important;
+}
+
+.sider-menu {
+  -webkit-box-shadow: 2px 3px 8px -1px rgb(42, 34, 101, 1);
+  -moz-box-shadow: 2px 3px 8px -1px rgba(42, 34, 101, 1);
+  box-shadow: 2px 3px 8px -1px rgba(42, 34, 101, 1) !important;
+  margin-top: -15px !important;
+}
+
+.ant-menu-item {
+  box-shadow: inset 0 -1.5px 0 0 #f2f2f2;
+  padding-right: 5px !important;
+}
+
+.blue-border-card {
+  border-radius: 6px !important;
+  -webkit-box-shadow: 0px 36px 45px -29px rgba(0, 0, 0, 0.63);
+  -moz-box-shadow: 0px 36px 45px -29px rgba(0, 0, 0, 0.63);
+  box-shadow: 0px 36px 45px -29px rgba(0, 0, 0, 0.63);
+  margin: 10px !important;
+  margin-left: 0px !important;
+  border: 1px #2a2265 solid !important;
+  outline: none !important;
+}
+.warning-card {
+  border-radius: 6px !important;
+  -webkit-box-shadow: 0px 36px 45px -29px rgba(0, 0, 0, 0.63);
+  -moz-box-shadow: 0px 36px 45px -29px rgba(0, 0, 0, 0.63);
+  box-shadow: 0px 36px 45px -29px rgba(0, 0, 0, 0.63);
+  margin: 10px !important;
+  margin-left: 0px !important;
+  border: 1px #ed1c24 solid !important;
+}
+.ant-table-scroll {
+  border-radius: 6px;
+}
+
+.top-menu-icons {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+}
+
+.card-print {
+  background-image: linear-gradient(305deg, #1e4758 101%, #258189 2%);
+  color: #fff;
+}
+
+.ant-tabs.ant-tabs-card .ant-tabs-card-bar .ant-tabs-tab-active {
+  color: white !important;
+  background-color: #453E78 !important;
+}
+
+.sider-menu li {
+  margin-top: 0px !important;
+  margin-bottom: 0px !important;
+}
+
+.ant-btn-primary {
+  background-color: #453E78 !important;
+  color: #ffffff !important;
+  border: #453E78 !important;
+  box-shadow: 0px 13px 12px -7px rgba(42, 34, 101, 2.5) !important;
+}
+
+.ant-btn-primary-disabled,
+.ant-btn-primary.disabled,
+.ant-btn-primary[disabled],
+.ant-btn-primary-disabled:hover,
+.ant-btn-primary.disabled:hover,
+.ant-btn-primary[disabled]:hover,
+.ant-btn-primary-disabled:focus,
+.ant-btn-primary.disabled:focus,
+.ant-btn-primary[disabled]:focus,
+.ant-btn-primary-disabled:active,
+.ant-btn-primary.disabled:active,
+.ant-btn-primary[disabled]:active,
+.ant-btn-primary-disabled.active,
+.ant-btn-primary.disabled.active,
+.ant-btn-primary[disabled].active {
+  background-color: #f5f5f5 !important;
+}
+.ant-btn-info {
+  background-color: #ffffff !important;
+  border: solid 1px #453E78 !important;
+  color: #453E78 !important;
+}
+.ant-btn-info-disabled,
+.ant-btn-info.disabled,
+.ant-btn-info[disabled],
+.ant-btn-info-disabled:hover,
+.ant-btn-info.disabled:hover,
+.ant-btn-info[disabled]:hover,
+.ant-btn-info-disabled:focus,
+.ant-btn-info.disabled:focus,
+.ant-btn-info[disabled]:focus,
+.ant-btn-info-disabled:active,
+.ant-btn-info-disabled.disabled:active,
+.ant-btn-info[disabled]:active,
+.ant-btn-info-disabled.active,
+.ant-btn-info.disabled.active,
+.ant-btn-info[disabled].active {
+  background-color: #f5f5f5 !important;
+}
+
+.table-btn {
+  color: #453E78 !important;
+  font-weight: bold !important;
+  background: none !important;
+  background-color: Transparent !important;
+  background-repeat: no-repeat !important;
+  border: none !important;
+  cursor: pointer !important;
+  overflow: hidden !important;
+  outline: none !important;
+}
+
+.green-shade {
+  color: #2a2265;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  height: 65px;
+}
+
+.arrow-icon {
+  font-size: 25px;
+  position: relative;
+  top: 4px;
+}
+
+.green-back-button {
+  width: 31px;
+  height: 18px;
+  font-size: 10px;
+  font-weight: bold;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.8;
+  letter-spacing: normal;
+  color: #2a2265;
+  cursor: pointer;
+}
+.back-img {
+  height: 30px;
+  width: 30px;
+  object-fit: contain;
+}
+.success-tick {
+  width: 80px;
+  height: 80px;
+  object-fit: contain;
+}
+
+.light-blue,
+.light-blue a {
+  font-weight: bold;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  color: #7A759F;
+}
+.medium-blue {
+  font-weight: bold;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  color: #453E78;
+}
+.dark-blue {
+  font-weight: bold;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  color: #2a2265;
+}
+
+nz-select {
+  min-width: 100px;
+}
+
+.ant-message-notice-content {
+  z-index: 999999 !important;
+}
+
+// .ant-layout-sider-light {
+//   background: #fff;
+//   position: absolute !important;
+//   height: 100%;
+//   z-index: 1000;
+// }

@@ -1,0 +1,201 @@
+<div nz-row>
+  <div nz-col nzSm="24" nzMd="24" nzLg="6" nzXl="6">
+    <a class="green-back-button" [routerLink]="['/', 'allowance']"
+      ><img
+        class="back-img"
+        src="assets/images/back-button.svg"
+      />&nbsp;&nbsp;BACK</a
+    >
+    <br />
+    <h3 class="dark-blue">Pay Allowances</h3>
+  </div>
+  <div nz-col nzSm="24" nzMd="24" nzLg="6" nzXl="6"></div>
+  <div nz-col nzSm="24" nzMd="24" nzLg="6" nzXl="6"></div>
+  <div nz-col nzSm="24" nzMd="24" nzLg="6" nzXl="6">
+    <p>Your Current Enviar A/C Balance</p>
+    <h2 class="dark-blue">{{ companyBalance | currency: "₹" }}</h2>
+  </div>
+</div>
+<br />
+<div nz-row class="grey-div">
+  <div nz-col nzSm="24" nzMd="24" nzLg="4" nzXl="4" class="text-center">
+    <p>Paying</p>
+    <nz-select
+      nzType="flex"
+      [(ngModel)]="selectedAllowance"
+      nzShowSearch
+      nzAllowClear
+      nzPlaceHolder="Allowances"
+    >
+      <nz-option nzLabel="Food" nzValue="food"></nz-option>
+      <nz-option nzLabel="Fuel" nzValue="fuel"></nz-option>
+      <nz-option nzLabel="Expense" nzValue="expense"></nz-option>
+    </nz-select>
+  </div>
+  <div nz-col nzSm="24" nzMd="24" nzLg="4" nzXl="4" class="text-center">
+    <p>For the Month of</p>
+    <nz-select
+      nzType="flex"
+      [(ngModel)]="selectedValue"
+      nzShowSearch
+      nzAllowClear
+      nzPlaceHolder="Month"
+    >
+      <nz-option nzLabel="January" nzValue="January"></nz-option>
+      <nz-option nzLabel="February" nzValue="February"></nz-option>
+      <nz-option nzLabel="March" nzValue="March"></nz-option>
+      <nz-option nzLabel="April" nzValue="April"></nz-option>
+      <nz-option nzLabel="May" nzValue="May"></nz-option>
+      <nz-option nzLabel="June" nzValue="June"></nz-option>
+      <nz-option nzLabel="July" nzValue="July"></nz-option>
+      <nz-option nzLabel="August" nzValue="August"></nz-option>
+      <nz-option nzLabel="September" nzValue="September"></nz-option>
+      <nz-option nzLabel="October" nzValue="October"></nz-option>
+      <nz-option nzLabel="November" nzValue="November"></nz-option>
+      <nz-option nzLabel="December" nzValue="December"></nz-option>
+    </nz-select>
+  </div>
+  <div nz-col nzSm="24" nzMd="24" nzLg="4" nzXl="4" class="text-center">
+    <p>No. of Employees</p>
+    <h3 class="light-blue">{{ noOfSelection }}</h3>
+  </div>
+  <div nz-col nzSm="24" nzMd="24" nzLg="4" nzXl="4" class="text-center">
+    <p>Allowance Amount for all</p>
+    <input
+      style="max-width: 120px;"
+      nz-input
+      id="global_amount"
+      type="number"
+      min="0"
+      (change)="setSelectionCount()"
+      [(ngModel)]="globalAmount"
+    />
+  </div>
+  <div nz-col nzSm="24" nzMd="24" nzLg="4" nzXl="4" class="text-center">
+    <p>Total Amount</p>
+    <h3 class="light-blue">₹ {{ totalAmount }}</h3>
+  </div>
+  <div nz-col nzSm="24" nzMd="24" nzLg="4" nzXl="4" class="text-center">
+    <button
+      class="pay-button"
+      nz-button
+      [disabled]="noOfSelection == 0 || totalAmount == 0"
+      nzType="primary"
+      (click)="continuePayAllowance()"
+      [routerLink]="['/', 'allowance', 'confirm']"
+    >
+      Pay Allowances
+    </button>
+  </div>
+</div>
+<br />
+<br />
+<br />
+<div nz-row>
+  <div nz-col nzSm="24" nzMd="24" nzLg="22" nzXl="22">
+    <nz-input-group
+      class="margin-5px"
+      [nzSuffix]="suffixIconSearch"
+      style="width:100%; max-width:400px"
+    >
+      <input
+        type="text"
+        [(ngModel)]="searchText"
+        nz-input
+        placeholder="Search by email"
+      />
+    </nz-input-group>
+    <ng-template #suffixIconSearch>
+      <i nz-icon nzType="search"></i>
+    </ng-template>
+  </div>
+  <div nz-col nzSm="24" nzMd="24" nzLg="2" nzXl="2">
+    <!-- <nz-select
+      class="margin-5px"
+      nzType="flex"
+      [(ngModel)]="selectedSort"
+      nzAllowClear
+      nzShowSearch
+      nzPlaceHolder="Sort"
+    >
+      <nz-option nzValue="Sort" nzLabel="Sort"></nz-option>
+      <nz-option nzValue="Sort" nzLabel="Sort"></nz-option>
+    </nz-select> -->
+  </div>
+</div>
+<br />
+
+<div nz-row>
+  <nz-table
+    #headerTable
+    [nzData]="employeeDetails"
+    [nzPageSize]="50"
+    [nzScroll]="{ y: '240px' }"
+  >
+    <thead>
+      <tr>
+        <th
+          nzWidth="70px"
+          nzShowCheckbox
+          nzShowRowSelection
+          [(nzChecked)]="isAllDisplayDataChecked"
+          [nzIndeterminate]="isIndeterminate"
+          (nzCheckedChange)="checkAll($event)"
+        ></th>
+        <th nzWidth="250px">Id</th>
+        <th nzWidth="200px">Name</th>
+        <th nzWidth="200px">Mobile</th>
+        <th nzWidth="200px">Email</th>
+        <th nzWidth="200px">Amount</th>
+
+        <!-- <th nzWidth="200px">Action</th>
+        <th>Edit</th> -->
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let data of headerTable.data | filter: searchText">
+        <td
+          nzShowCheckbox
+          [(nzChecked)]="mapOfCheckedId[data._id]"
+          (nzCheckedChange)="refreshStatus(data)"
+        ></td>
+        <td *ngIf="data.user">{{ data.user._id }}</td>
+        <td>{{ data.first_name }} {{ data.last_name }}</td>
+        <td>
+          {{ data.mobile }}
+          <i
+            *ngIf="data.user"
+            nz-icon
+            nzType="{{
+              data.user.phone_verification == 'approved'
+                ? 'check-circle'
+                : 'exclamation-circle'
+            }}"
+          ></i>
+        </td>
+        <td>
+          {{ data.email }} {{ email_verification }}
+          <i
+            *ngIf="data.user"
+            nz-icon
+            nzType="{{
+              data.user.email_verification == 'approved'
+                ? 'check-circle'
+                : 'exclamation-circle'
+            }}"
+          ></i>
+        </td>
+        <td>
+          <input
+            type="number"
+            min="0"
+            nz-input
+            id="amount{{ data._id }}"
+            value="{{ globalAmount }}"
+            (change)="setSelectionCount()"
+          />
+        </td>
+      </tr>
+    </tbody>
+  </nz-table>
+</div>

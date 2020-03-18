@@ -1,0 +1,97 @@
+
+<div style="height:40px"></div>
+<div style="padding:10px">
+
+  <mat-grid-list cols="1" rowHeight="6:1">
+    
+
+     <mat-grid-list cols="1" rowHeight="6:1">
+       <mat-grid-tile class="mat-title"><b>Please enter transfer details</b></mat-grid-tile>
+     </mat-grid-list>
+
+
+     <mat-grid-list  cols="2" rowHeight="20px" class="pot-card">
+        <mat-grid-tile colspan="1"
+        rowspan="1" >
+              from
+        </mat-grid-tile>
+        <mat-grid-tile colspan="1"
+          rowspan="1">
+          to
+        </mat-grid-tile>
+      </mat-grid-list>
+
+
+
+     <mat-grid-list  cols="2" rowHeight="60px" class="pot-card">
+        <mat-grid-tile colspan="1"
+        rowspan="1" >
+       
+
+            <mat-grid-list  cols="2"  rowHeight="30px" class="pot-card">
+                <mat-form-field>
+                    <mat-label>Select an option</mat-label>
+                    <mat-select>
+                      <mat-option>None</mat-option>
+                      <mat-option value="option1">Option 1</mat-option>
+                      <mat-option value="option2">Option 2</mat-option>
+                      <mat-option value="option3">Option 3</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+              </mat-grid-list>
+     
+
+        </mat-grid-tile>
+        <mat-grid-tile colspan="1"
+          rowspan="1">
+           <mat-grid-list  cols="2"  rowHeight="30px"  class="pot-card">
+                  <mat-form-field>
+                      <mat-label>Select an option</mat-label>
+                      <mat-select>
+                        <mat-option>None</mat-option>
+                        <mat-option value="option1">Option 1</mat-option>
+                        <mat-option value="option2">Option 2</mat-option>
+                        <mat-option value="option3">Option 3</mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                </mat-grid-list>
+         
+        </mat-grid-tile>
+      </mat-grid-list>
+    
+     <mat-grid-list cols="1" rowHeight="6:1">
+     
+      <mat-grid-tile>
+          <mat-form-field>
+              <mat-label>Select an option</mat-label>
+              <mat-select>
+                <mat-option>None</mat-option>
+                <mat-option value="option1">Option 1</mat-option>
+                <mat-option value="option2">Option 2</mat-option>
+                <mat-option value="option3">Option 3</mat-option>
+              </mat-select>
+            </mat-form-field>
+            <br>
+      </mat-grid-tile>
+
+
+    </mat-grid-list>
+
+     
+    <mat-grid-list cols="1" rowHeight="6:1">
+        <mat-grid-tile>
+
+        Amount to be transferred
+
+    </mat-grid-tile>
+    </mat-grid-list>
+     
+  
+  </mat-grid-list>
+
+
+<br>   <!-- type="submit" only works if the button is part of the <dynamic-form> -->
+    <button mat-raised-button color="primary" class="full-width"  [routerLink]="['/','potcongrats']" >Transfer Money</button>
+
+
+</div>

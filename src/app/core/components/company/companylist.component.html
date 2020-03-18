@@ -1,0 +1,45 @@
+<div nz-row>
+  <div nz-col nzSm="24" nzMd="24" nzLg="24" nzXl="24">
+    <br />
+    <h3 class="dark-blue">Companies</h3>
+
+    <br />
+  </div>
+  <div nz-col nzSm="24" nzMd="24" nzLg="24" nzXl="24">
+    <nz-table
+      #headerTable
+      [nzData]="companiesList"
+      [nzPageSize]="50"
+      [nzScroll]="{ y: '240px' }"
+    >
+      <thead>
+        <tr>
+          <th nzWidth="200px">Name</th>
+          <th nzWidth="200px">Mobile</th>
+          <th nzWidth="200px">Email</th>
+          <th nzWidth="200px">Top Ups</th>
+          <!-- <th nzWidth="200px">Action</th> -->
+          <!-- <th>Edit</th> -->
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let data of headerTable.data | filter: searchText">
+          <td>{{ data.name }}</td>
+          <td>
+            {{ data.mobile }}
+          </td>
+          <td>{{ data.email }}</td>
+          <td>
+            <a [routerLink]="['/', 'company', 'topups', data._id]">View</a>
+          </td>
+          <!-- <td>
+            <a (click)="resendVerification(data)">Resend verification</a>
+          </td> -->
+          <!-- <td>
+            <i nz-icon nzType="edit" (click)="editRoute(data)"></i>
+          </td> -->
+        </tr>
+      </tbody>
+    </nz-table>
+  </div>
+</div>

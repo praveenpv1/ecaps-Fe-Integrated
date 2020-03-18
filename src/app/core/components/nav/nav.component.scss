@@ -1,0 +1,127 @@
+@mixin crm-nav-theme($theme) {
+  $nav-list-icon-padding: 12px !default;
+  $toolbar-title-padding: 16px !default;
+
+  .list-item-active {
+    font-weight: bold;
+    color: mat-color(map-get($theme, accent), darker) !important;
+    background: rgba(0, 0, 0, 0.04);
+  }
+
+  .nav-list-icon {
+    margin: 0 $nav-list-icon-padding 0 $nav-list-icon-padding;
+  }
+
+  .toolbar-title {
+    margin: 0 $toolbar-title-padding 0 $toolbar-title-padding;
+  }
+}
+
+.logo {
+  width: 120px;
+  height: 31px;
+  background: rgba(255, 255, 255, 0.2);
+  margin: 16px 30px 16px 0;
+  float: left;
+}
+
+.header-menu {
+  line-height: 64px;
+}
+
+.iconpopover {
+  padding: 0;
+  border: none;
+  background: none;
+  text-align: center;
+}
+
+.sider-menu {
+  height: 100%;
+  border-right: 0;
+}
+
+.inner-layout {
+  padding: 0 24px 24px;
+}
+.topup-img {
+  width: 8%;
+  height: auto;
+  display: inline-block;
+  position: relative;
+  cursor: pointer;
+  outline: none;
+}
+nz-breadcrumb {
+  margin: 16px 0;
+}
+
+nz-content {
+  background: #fff;
+  padding: 24px;
+  min-height: 280px;
+}
+
+.refer {
+  width: 165px;
+  height: 45px;
+  object-fit: contain;
+}
+
+.my-account-top-section {
+  margin: 0px;
+  margin-top: 20px;
+  padding: 0px;
+  line-height: 24px;
+}
+
+.my-account-top-section li {
+  list-style: none;
+}
+
+.pad-10 {
+  padding: 10px !important;
+}
+
+.layout {
+  height: 100vh;
+}
+
+.logo {
+  height: 36px;
+  background: rgba(255, 255, 255, 0.2);
+  margin: 14px;
+}
+
+nz-content {
+  margin: 24px 16px 0;
+}
+
+.inner-content {
+  padding: 24px;
+  background: #fff;
+  min-height: 360px;
+}
+
+.account-li {
+  list-style-type: none !important;
+}
+
+nz-footer {
+  text-align: center;
+}
+
+.header-profile .ant-menu-submenu-title:nth-child(1) {
+  background-image: url("/assets/images/menu-avatar.svg");
+}
+
+.header-profile .ant-menu-horizontal > .ant-menu-item:hover,
+.ant-menu-horizontal > .ant-menu-submenu:hover,
+.ant-menu-horizontal > .ant-menu-item-active,
+.ant-menu-horizontal > .ant-menu-submenu-active,
+.ant-menu-horizontal > .ant-menu-item-open,
+.ant-menu-horizontal > .ant-menu-submenu-open,
+.ant-menu-horizontal > .ant-menu-item-selected,
+.ant-menu-horizontal > .ant-menu-submenu-selected {
+  border-bottom: 0px !important;
+}

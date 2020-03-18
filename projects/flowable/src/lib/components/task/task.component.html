@@ -1,0 +1,24 @@
+<!-- Task Header -->
+
+<div *ngIf="task" class="task-header">
+
+  <div class="task-header-content">
+
+    <h2> {{ task.name }} </h2>
+    <button mat-raised-button color="accent" [disabled]="!isValid()" (click)="onComplete()"> {{ completeButton }} </button>
+
+  </div>
+
+</div>
+
+<!-- Task Content -->
+
+<div *ngIf="taskFormGroup" class="task-content">
+
+  <dynamic-form autocomplete="off"
+                [className]="'crm-nested-grid-container'"
+                [formGroup]="taskFormGroup"
+                [model]="taskModel">
+  </dynamic-form>
+
+</div>

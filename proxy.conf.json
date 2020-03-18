@@ -1,0 +1,8 @@
+{  
+  "/demo/v2": {
+    "target": "https://api-stage.paysack.com",
+    "secure": false,
+    "crossOrigin": true,
+    "logLevel": "debug"
+  }
+}

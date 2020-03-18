@@ -1,0 +1,218 @@
+<div nz-row>
+  <div nz-col>
+    <a class="green-back-button" [routerLink]="['/', 'claims']"
+      ><img
+        class="back-img"
+        src="assets/images/back-button.svg"
+      />&nbsp;&nbsp;BACK</a
+    >
+    <br /><br />
+    <h3 class="dark-blue">View Claim Details</h3>
+  </div>
+</div>
+<div nz-row>
+  <nz-card class="blue-border-card">
+    <div nz-row>
+      <!-- <div nz-col nzSm="24" nzMd="24" nzLg="24" nzXl="24">
+        <p>Claim No.</p>
+        <h3 class="dark-blue">{{ _id }}</h3>
+      </div> -->
+
+      <div nz-col nzSm="24" nzMd="24" nzLg="24" nzXl="24">
+        <div nz-row>
+          <div nz-col nzSm="8" nzMd="8" nzLg="8" nzXl="8">
+            <p>Employee Name</p>
+          </div>
+          <div nz-col nzSm="8" nzMd="8" nzLg="8" nzXl="8">
+            <p>Claim No.</p>
+          </div>
+          <div nz-col nzSm="8" nzMd="8" nzLg="8" nzXl="8">
+            Merchant Name
+          </div>
+        </div>
+
+        <div nz-row>
+          <div nz-col nzSm="8" nzMd="8" nzLg="8" nzXl="8">
+            <h3 class="dark-blue">
+              {{ employeeDetails.first_name }}&nbsp;
+              {{ employeeDetails.last_name }}
+            </h3>
+          </div>
+          <div nz-col nzSm="8" nzMd="8" nzLg="8" nzXl="8">
+            <h3 class="dark-blue">{{ reimbursement_txn_id }}</h3>
+          </div>
+          <div nz-col nzSm="8" nzMd="8" nzLg="8" nzXl="8">
+            <h3 class="dark-blue">{{ merchantTxnsDetails.merchantName }}</h3>
+          </div>
+        </div>
+      </div>
+
+      <div nz-col nzSm="24" nzMd="24" nzLg="24" nzXl="24">
+        <nz-table
+          [nzData]="listOfData"
+          [nzScroll]="{ y: '240px' }"
+          class="koppr-grey-font"
+          [nzShowPagination]="false"
+        >
+          <thead>
+            <tr>
+              <th nzWidth="220px">Claim Date</th>
+              <th nzWidth="220px">Type</th>
+              <th nzWidth="220px">Claim Amount</th>
+              <th nzWidth="220px">Claim Status</th>
+              <th nzWidth="220px">Category</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>{{ merchantTxnsDetails.txnDate | date: "yyyy-MM-dd" }}</td>
+              <td>{{ getStatusText(txnType) }}</td>
+              <td>{{ merchantTxnsDetails.amount }}</td>
+              <td>{{ getStatusText(claimStatus) }}</td>
+              <td>{{ merchantTxnsDetails.tags }}</td>
+            </tr>
+          </tbody>
+        </nz-table>
+      </div>
+
+      <div nz-col nzSm="24" nzMd="24" nzLg="24" nzXl="24">
+        <br />
+        <h4 class="light-grey">Description</h4>
+        <br />
+        <p>
+          {{ merchantTxnsDetails.txnDesc }}
+        </p>
+        <br />
+      </div>
+    </div>
+    <div nz-row>
+      <div nz-col nzSm="24" nzMd="24" nzLg="24" nzXl="24" class="text-center" *ngIf="merchantTxnsDetails.files">
+        <mat-card>
+          <img
+            mat-card-image
+            class="image-card"
+            src="{{ merchantTxnsDetails.files }}"
+            alt="No Claim Image Available"
+          />
+        </mat-card>
+      </div>
+
+      <div nz-col nzSm="24" nzMd="24" nzLg="24" nzXl="24" *ngIf="comments">
+        <br />
+        <h3>Comments</h3>
+
+        <nz-comment
+          nzAuthor="Admin"
+          [nzDatetime]="time"
+          *ngFor="let items of comments"
+        >
+          <nz-comment-content>
+            <p>
+              {{ items.comment }}
+            </p>
+          </nz-comment-content>
+        </nz-comment>
+      </div>
+
+      <div nz-col nzSm="24" nzMd="24" nzLg="24" nzXl="24">
+        <br />
+        <div nz-row>
+          <div
+            class="text-center"
+            nz-col
+            nzSm="24"
+            nzMd="24"
+            nzLg="12"
+            nzXl="12"
+          >
+            <button
+              *ngIf="isClaimStatusPending()"
+              nz-button
+              nzType="primary"
+              (click)="showModal('Approve')"
+            >
+              Approve
+            </button>
+            &nbsp;
+            <button
+              *ngIf="isClaimStatusPending()"
+              nz-button
+              nzType="primary"
+              (click)="showModal('Settle')"
+            >
+              Settle
+            </button>
+            <nz-modal
+              [(nzVisible)]="isVisible"
+              [nzTitle]="approveTitle"
+              [nzContent]="approveContent"
+              [nzFooter]="approveFooter"
+              (nzOnCancel)="handleCancel()"
+            >
+              <ng-template #approveTitle>
+                Are you sure?
+              </ng-template>
+
+              <ng-template #approveContent>
+                <p>
+                  {{ typeOfAction }} Food expense for
+                  {{ employeeDetails.first_name }}
+                  {{ employeeDetails.last_name }} for
+                  {{ merchantTxnsDetails.amount | currency: "₹" }}
+                </p>
+                <div nz-row>
+                  <input
+                    *ngIf="typeOfAction != 'Reject'"
+                    nz-input
+                    placeholder="Amount"
+                    [(ngModel)]="amountToSettle"
+                  />
+                </div>
+
+                <br />
+                <div nz-row>
+                  <input
+                    nz-input
+                    placeholder="State Reason for {{ typeOfAction }} claim."
+                    [(ngModel)]="reasonText"
+                  />
+                </div>
+              </ng-template>
+              <ng-template #approveFooter>
+                <button
+                  nz-button
+                  nzType="primary"
+                  (click)="handleOk(_id)"
+                  [nzLoading]="isConfirmLoading"
+                >
+                  {{ typeOfAction }} Claim
+                </button>
+                <button nz-button nzType="default" (click)="handleCancel()">
+                  Cancel
+                </button>
+              </ng-template>
+            </nz-modal>
+          </div>
+
+          <div
+            class="text-center"
+            nz-col
+            nzSm="24"
+            nzMd="24"
+            nzLg="12"
+            nzXl="12"
+          >
+            <button
+              *ngIf="isClaimStatusPending()"
+              nz-button
+              nzType="info"
+              (click)="showModal('Reject')"
+            >
+              Reject
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nz-card>
+</div>

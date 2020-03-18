@@ -1,0 +1,8 @@
+<nz-modal
+  [(nzVisible)]="isVisible"
+  nzTitle="{{ title }}"
+  (nzOnCancel)="handleCancel()"
+  (nzOnOk)="handleOk()"
+>
+  <p>{{ message }}</p>
+</nz-modal>

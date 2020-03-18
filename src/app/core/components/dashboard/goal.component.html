@@ -1,0 +1,51 @@
+<div class="sign-in-container">
+
+    <mat-card class="sign-in-card">
+  
+
+      <mat-card-content *ngIf="formGroup" class="content-center">
+  
+    <mat-grid-list cols="1" rowHeight="9:1">
+        <mat-grid-tile><mat-icon>trending_up</mat-icon></mat-grid-tile>
+
+        <mat-grid-tile><mat-label>Enter your savings goal.</mat-label></mat-grid-tile>
+        <mat-grid-tile><mat-label>How much would you like to save?</mat-label></mat-grid-tile>
+       
+      </mat-grid-list>
+
+      <br>
+
+      <mat-grid-list cols="1" rowHeight="6:1">
+          <mat-grid-tile>
+              <form [formGroup]="formGroup">
+                  <dynamic-material-form [group]="formGroup" [model]="formModel"></dynamic-material-form>                                        
+              </form>
+          </mat-grid-tile>
+          <mat-grid-tile>
+  
+              <button mat-raised-button
+              color="accent"
+              (click)="onSubmit()">
+              {{ 'SET_GOAL' | translate }}
+              </button>
+              <br>
+  
+          </mat-grid-tile>
+       </mat-grid-list>
+        <!-- Chrome ignores autocomplete="off" so go to chrome://settings/autofill and turn 'Auto-fill forms' off -->
+       
+      
+        <mat-card-actions class="sign-in-card-actions" fxLayoutAlign="flex-end">
+  
+
+          <!-- type="submit" only works if the button is part of the <dynamic-form> -->
+  
+              
+        </mat-card-actions>
+  
+      </mat-card-content>
+  
+    </mat-card>
+  
+  </div>
+  

@@ -1,0 +1,20 @@
+[
+  {
+    "type": "input",
+    "id": "potname",
+    "label": "What would you like to call your benefits?",
+    "appearance": "fill",
+
+    "validators": [
+      {
+        "name": "required",
+        "args": null,
+        "propertyName": "required",
+        "message": "You must enter a name"
+      }
+    ],
+
+    "gridItemClass": "grid-column-1",
+    "required": true
+  }
+]

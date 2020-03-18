@@ -1,0 +1,72 @@
+
+<!-- <div style="height:80px"></div> -->
+<div style="padding:10px">
+
+  <mat-grid-list cols="1" rowHeight="6:1" class="new-pot-item">
+         
+    <mat-card>
+        <mat-grid-list  cols="1"  rowHeight="100px"  class="pot-card">
+      <mat-grid-tile
+      *ngFor="let tile of tiles"
+      [colspan]="tile.cols"
+      [rowspan]="tile.rows">
+      <div fxFlex fxLayoutAlign="center center">
+          <a mat-list-item  [routerLink]="[tile.route]">
+
+              <div class="mat-card-round-small">
+
+                  <mat-icon matListIcon class="nav-list-icon"> add </mat-icon> 
+
+              </div>
+        
+          </a>
+      </div>
+      </mat-grid-tile>
+        </mat-grid-list>
+    </mat-card>
+
+     <mat-grid-list cols="1" rowHeight="6:1">
+       <mat-grid-tile class="mat-title"><b style="flex: auto">Car</b></mat-grid-tile>
+       <mat-grid-tile colspan="1" rowspan="1" class="set-goal" >
+            <input type="number" placeholder="Set Goal">
+        </mat-grid-tile>
+     </mat-grid-list>
+     <mat-grid-list cols="4" rowHeight="6:1" [gutterSize]="'10px'">
+         <mat-grid-tile colspan="2" rowspan="4">
+            <input type="number" placeholder="Monthly SIP">
+         </mat-grid-tile>
+         <mat-grid-tile colspan="2" rowspan="4">
+            <input matInput [matDatepicker]="picker" placeholder="SIP date">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+         </mat-grid-tile>
+     </mat-grid-list>
+<!-- 
+     <mat-grid-list cols="1" rowHeight="6:1">
+        <mat-grid-tile class="mat-title"><b>Pot Lifetime</b></mat-grid-tile>
+      </mat-grid-list> -->
+     
+      <mat-grid-list cols="1" rowHeight="6:1">
+          <mat-grid-tile>
+
+      <button mat-raised-button color="primary" class="full-width"  [routerLink]="['/','potcongrats']" >Set Goal</button>
+
+      </mat-grid-tile>
+      </mat-grid-list>
+
+  
+  
+  </mat-grid-list>
+
+  <mat-grid-list cols="1" rowHeight="6:1">
+      <mat-grid-tile class="mat-title">
+        No transactions yet. Please transfer some money to get started.
+      </mat-grid-tile>
+    </mat-grid-list>
+ 
+
+<br>   <!-- type="submit" only works if the button is part of the <dynamic-form> -->
+    <button mat-raised-button color="primary" class="full-width"  [routerLink]="['/','transferfromto']" >Transfer Money</button>
+
+
+</div>

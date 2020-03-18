@@ -1,0 +1,476 @@
+<div nz-row>
+  <div nz-col nzSm="24" nzMd="24" nzLg="24" nzXl="24">
+    <a
+      class="green-back-button"
+      [routerLink]="['/', 'employee', 'list', 'add-type-selection']"
+      ><img
+        class="back-img"
+        src="assets/images/back-button.svg"
+      />&nbsp;&nbsp;BACK</a
+    >
+    <br />
+    <h3 class="dark-blue">{{ _id == "" ? "Add" : "Edit" }} Employee</h3>
+    <p>{{ _id == "" ? "Add" : "Edit" }} an employee here.</p>
+  </div>
+
+  <div nz-col nzType="flex" nzSm="24" nzMd="24" nzLg="24" nzXl="24">
+    <nz-tabset
+      [nzTabPosition]="'top'"
+      [nzType]="'card'"
+      [nzSelectedIndex]="tabIndex"
+    >
+      <nz-tab *ngFor="let tab of tabs" [nzTitle]="tab">
+        <div *ngIf="tab == 'Personal Details'">
+          <form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()">
+            <p>{{ tab }}</p>
+            <nz-form-item>
+              <nz-form-label
+                [nzSm]="6"
+                [nzXs]="24"
+                nzRequired
+                nzFor="first_name"
+                >First Name</nz-form-label
+              >
+              <nz-form-control
+                [nzSm]="14"
+                [nzXs]="24"
+                nzErrorTip="Please enter First Name."
+              >
+                <input
+                  nz-input
+                  formControlName="first_name"
+                  id="first_name"
+                  [disabled]="_id == '' ? false : true"
+                />
+              </nz-form-control>
+            </nz-form-item>
+            <nz-form-item>
+              <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="last_name" nzRequired
+                >Last Name</nz-form-label
+              >
+              <nz-form-control
+                [nzSm]="14"
+                [nzXs]="24"
+                nzErrorTip="Please enter Last Name."
+              >
+                <input
+                  nz-input
+                  type="text"
+                  id="last_name"
+                  formControlName="last_name"
+                  [disabled]="_id == '' ? false : true"
+                />
+              </nz-form-control>
+            </nz-form-item>
+            <nz-form-item>
+              <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="email" nzRequired
+                >Employee Email Id</nz-form-label
+              >
+              <nz-form-control
+                [nzSm]="14"
+                [nzXs]="24"
+                nzErrorTip="Please enter Employee Email."
+              >
+                <input
+                  nz-input
+                  type="email"
+                  id="email"
+                  formControlName="email"
+                  [disabled]="_id == '' ? false : true"
+                />
+              </nz-form-control>
+            </nz-form-item>
+            <nz-form-item>
+              <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="mobile" nzRequired
+                >Mobile No</nz-form-label
+              >
+              <nz-form-control
+                [nzSm]="14"
+                [nzXs]="24"
+                nzErrorTip="Please enter Mobile No"
+              >
+                <nz-input-group [nzAddOnBefore]="addOnBeforeTemplate">
+                  <ng-template #addOnBeforeTemplate>
+                    <nz-select
+                      formControlName="phoneNumberPrefix"
+                      class="phone-select"
+                      [(ngModel)]="selectedPrefixValue"
+                    >
+                      <nz-option nzLabel="+91" nzValue="+91"></nz-option>
+                    </nz-select>
+                  </ng-template>
+                  <input
+                    nz-input
+                    formControlName="mobile"
+                    id="'mobile'"
+                    placeholder="Phone Number *"
+                    [disabled]="_id == '' ? false : true"
+                  />
+                </nz-input-group>
+              </nz-form-control>
+            </nz-form-item>
+            <!-- <nz-form-item>
+              <nz-form-label
+                [nzSm]="6"
+                [nzXs]="24"
+                nzFor="EmployeeNumber"
+                nzRequired
+                >Employee Number</nz-form-label
+              >
+              <nz-form-control
+                [nzSm]="14"
+                [nzXs]="24"
+                nzErrorTip="Please input Employee Number!"
+              >
+                <input
+                  nz-input
+                  id="employeeNumber"
+                  formControlName="employeeNumber"
+                />
+              </nz-form-control>
+            </nz-form-item> -->
+            <!-- <p>Operational Information</p> -->
+
+            <!-- <nz-form-item>
+              <nz-form-label
+                [nzSm]="6"
+                [nzXs]="24"
+                nzRequired
+                nzFor="department"
+                >Department / Team</nz-form-label
+              >
+              <nz-form-control
+                [nzSm]="14"
+                [nzXs]="24"
+                nzErrorTip="Please enter your Department/Team!"
+              >
+                <input nz-input formControlName="department" id="department" />
+              </nz-form-control>
+            </nz-form-item> -->
+            <!-- <nz-form-item>
+              <nz-form-label
+                [nzSm]="6"
+                [nzXs]="24"
+                nzRequired
+                nzFor="joiningDate"
+                >Joining Date</nz-form-label
+              >
+
+              <nz-form-control
+                [nzSm]="14"
+                [nzXs]="24"
+                nzErrorTip="Please enter your Joining Date!"
+              >
+                <nz-date-picker
+                  formControlName="joiningDate"
+                  id="joiningDate"
+                  [(ngModel)]="date"
+                ></nz-date-picker>
+              </nz-form-control>
+            </nz-form-item> -->
+            <nz-form-item>
+              <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="gender"
+                >Gender</nz-form-label
+              >
+              <nz-form-control
+                [nzSm]="14"
+                [nzXs]="24"
+                nzErrorTip="Please enter Gender."
+              >
+                <nz-select
+                  formControlName="gender"
+                  id="gender"
+                  [(ngModel)]="selectedValue"
+                  nzAllowClear
+                  nzPlaceHolder="Choose"
+                >
+                  <nz-option nzValue="male" nzLabel="Male"></nz-option>
+                  <nz-option nzValue="female" nzLabel="Female"></nz-option>
+                  <nz-option nzValue="other" nzLabel="Other"></nz-option>
+                </nz-select>
+              </nz-form-control>
+            </nz-form-item>
+
+            <!-- <nz-form-item>
+              <nz-form-label
+                [nzSm]="6"
+                [nzXs]="24"
+                nzRequired
+                nzFor="dateOfBirth"
+                >Date of Birth</nz-form-label
+              >
+
+              <nz-form-control
+                [nzSm]="14"
+                [nzXs]="24"
+                nzErrorTip="Please enter your Date of Birth"
+              >
+                <nz-date-picker
+                  formControlName="dateOfBirth"
+                  id="dateOfBirth"
+                  [(ngModel)]="date"
+                ></nz-date-picker>
+              </nz-form-control>
+            </nz-form-item> -->
+
+            <nz-form-item nz-row class="register-area">
+              <nz-form-control [nzSpan]="14" [nzOffset]="6">
+                <button
+                  nz-button
+                  nzType="primary"
+                  [disabled]="_id == '' ? false : true"
+                >
+                  Submit
+                </button>
+              </nz-form-control>
+            </nz-form-item>
+          </form>
+        </div>
+
+        <form nz-form [formGroup]="ValidateUpdateDetails">
+          <div *ngIf="tab == 'Contact Details'">
+            <p>{{ tab }}</p>
+
+            <!-- <nz-form-item>
+              <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="employee_id"
+                >Employee Id</nz-form-label
+              >
+              <nz-form-control
+                [nzSm]="14"
+                [nzXs]="24"
+                nzErrorTip="Please enter Kit No"
+              >
+                <input
+                  [disabled]="true"
+                  nz-input
+                  formControlName="employee_id"
+                  id="employee_id"
+                />
+              </nz-form-control>
+            </nz-form-item> -->
+
+            <nz-form-item>
+              <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="address_2"
+                >Address 1</nz-form-label
+              >
+              <nz-form-control
+                [nzSm]="14"
+                [nzXs]="24"
+                nzErrorTip="Please enter Address 1"
+              >
+                <input nz-input id="address_1" formControlName="address_1" />
+              </nz-form-control>
+            </nz-form-item>
+            <nz-form-item>
+              <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="address_2"
+                >Address 2</nz-form-label
+              >
+              <nz-form-control
+                [nzSm]="14"
+                [nzXs]="24"
+                nzErrorTip="Please enter Address 2"
+              >
+                <input nz-input id="address_2" formControlName="address_2" />
+              </nz-form-control>
+            </nz-form-item>
+
+            <nz-form-item>
+              <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="city"
+                >City</nz-form-label
+              >
+              <nz-form-control
+                [nzSm]="14"
+                [nzXs]="24"
+                nzErrorTip="Please enter City"
+              >
+                <input nz-input id="city" formControlName="city" />
+              </nz-form-control>
+            </nz-form-item>
+            <nz-form-item>
+              <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="state"
+                >State</nz-form-label
+              >
+              <nz-form-control
+                [nzSm]="14"
+                [nzXs]="24"
+                nzErrorTip="Please enter State"
+              >
+                <input nz-input id="state" formControlName="state" />
+              </nz-form-control>
+            </nz-form-item>
+            <nz-form-item>
+              <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="pincode"
+                >Pincode</nz-form-label
+              >
+              <nz-form-control
+                [nzSm]="14"
+                [nzXs]="24"
+                nzErrorTip="Please enter Pincode"
+              >
+                <input nz-input id="pincode" formControlName="pincode" />
+              </nz-form-control>
+            </nz-form-item>
+
+            <nz-form-item nz-row class="register-area">
+              <nz-form-control [nzSpan]="14" [nzOffset]="6">
+                <button nz-button nzType="primary" (click)="goToTab(2)">
+                  Next
+                </button>
+                <!-- <a>Previous</a> -->
+              </nz-form-control>
+            </nz-form-item>
+          </div>
+
+          <div *ngIf="tab == 'KYC Details'">
+            <p>{{ tab }}</p>
+
+            <nz-form-item>
+              <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="special_date"
+                >Date of Birth</nz-form-label
+              >
+              <nz-form-control
+                [nzSm]="14"
+                [nzXs]="24"
+                nzErrorTip="Please enter Birthday"
+              >
+                <nz-date-picker
+                  formControlName="special_date"
+                  id="special_date"
+                  [(ngModel)]="date"
+                ></nz-date-picker>
+              </nz-form-control>
+            </nz-form-item>
+
+            <nz-form-item>
+              <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="id_type"
+                >ID Type</nz-form-label
+              >
+              <nz-form-control
+                [nzSm]="14"
+                [nzXs]="24"
+                nzErrorTip="Please enter id_type"
+              >
+                <nz-select
+                  formControlName="id_type"
+                  id="id_type"
+                  [(ngModel)]="selectedIDType"
+                  nzAllowClear
+                  nzPlaceHolder="Choose"
+                >
+                  <nz-option nzValue="AADHAAR" nzLabel="AADHAAR"></nz-option>
+                  <nz-option nzValue="PAN" nzLabel="PAN"></nz-option>
+                  <nz-option nzValue="PASSPORT" nzLabel="PASSPORT"></nz-option>
+                  <nz-option nzValue="DL" nzLabel="DL"></nz-option>
+                  <nz-option
+                    nzValue="RATIONCARD"
+                    nzLabel="RATIONCARD"
+                  ></nz-option>
+                  <nz-option nzValue="VOTERID" nzLabel="VOTERID"></nz-option>
+                </nz-select>
+              </nz-form-control>
+            </nz-form-item>
+
+            <nz-form-item>
+              <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="id_number"
+                >ID Number</nz-form-label
+              >
+              <nz-form-control
+                [nzSm]="14"
+                [nzXs]="24"
+                nzErrorTip="Please enter id_number"
+              >
+                <input nz-input id="id_number" formControlName="id_number" />
+              </nz-form-control>
+            </nz-form-item>
+
+            <nz-form-item nz-row class="register-area">
+              <nz-form-control [nzSpan]="14" [nzOffset]="6">
+                <button nz-button nzType="primary" (click)="goToTab(1)">
+                  Back
+                </button>
+                &nbsp;
+                <button nz-button nzType="primary" (click)="goToTab(3)">
+                  Next
+                </button>
+                <!-- <a>Previous</a> -->
+              </nz-form-control>
+            </nz-form-item>
+          </div>
+
+          <div *ngIf="tab == 'Enviar Account Details'">
+            <p>{{ tab }}</p>
+            <nz-form-item>
+              <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="kit_no"
+                >Kit No</nz-form-label
+              >
+              <nz-form-control
+                [nzSm]="14"
+                [nzXs]="24"
+                nzErrorTip="Please enter Kit No"
+              >
+                <input nz-input formControlName="kit_no" id="kit_no" />
+              </nz-form-control>
+            </nz-form-item>
+            <nz-form-item>
+              <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="last_digits"
+                >Last Digits</nz-form-label
+              >
+              <nz-form-control
+                [nzSm]="14"
+                [nzXs]="24"
+                nzErrorTip="Please enter 4 Last Digits"
+              >
+                <input
+                  nz-input
+                  id="last_digits"
+                  formControlName="last_digits"
+                />
+              </nz-form-control>
+            </nz-form-item>
+
+            <nz-form-item
+              *ngIf="tab != 'Personal Details'"
+              nz-row
+              class="register-area"
+            >
+              <nz-form-control [nzSpan]="14" [nzOffset]="6">
+                <button nz-button nzType="primary" (click)="goToTab(2)">
+                  Back
+                </button>
+                &nbsp;
+                <button
+                  nz-button
+                  nzType="primary"
+                  (click)="submitContactForm()"
+                >
+                  Update
+                </button>
+                <!-- <a>Previous</a> -->
+              </nz-form-control>
+            </nz-form-item>
+          </div>
+
+          <div *ngIf="tab == 'Roles'">
+            {{ tab }}
+
+            <div nz-row>
+              <nz-checkbox-wrapper
+                style="width: 100%;"
+                (nzOnChange)="log($event)"
+              >
+                <div nz-row>
+                  <div nz-col nzSpan="8">
+                    <label nz-checkbox nzValue="employee">Employee</label>
+                  </div>
+                  <div nz-col nzSpan="8">
+                    <label nz-checkbox nzValue="company">Company</label>
+                  </div>
+                </div>
+              </nz-checkbox-wrapper>
+            </div>
+          </div>
+        </form>
+      </nz-tab>
+    </nz-tabset>
+  </div>
+</div>
