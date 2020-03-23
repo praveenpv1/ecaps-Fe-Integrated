@@ -1,6 +1,6 @@
 <div nz-row>
   <div nz-col nzSm="8" nzMd="8" nzLg="12" nzXl="12">
-    <h3 class="dark-blue">Salary Disbursement</h3>
+    <h3 class="primary-color-font">Salary Disbursement</h3>
     <p>Manage and disburse salary to your employees from here.</p>
   </div>
   <div nz-col nzSm="8" nzMd="8" nzLg="10" nzXl="10"></div>
@@ -16,7 +16,7 @@
     <div nz-row nzJustify="center">
       <div nz-col nzSm="24" nzMd="24" nzLg="24" nzXl="24">
         <div nz-row *ngFor="let item of infoCards" class="margin-bottom-10">
-          <nz-card class="blue-border-card" [routerLink]="item.routerLink">
+          <nz-card class="primary-color-border-card" [routerLink]="item.routerLink">
             <p>{{ item.title }}</p>
             <div nz-row>
               <div nz-col nzXl="7">
@@ -25,7 +25,7 @@
                 </li>
               </div>
               <div nz-col nzXl="17">
-                <h2 class="green-shade card-h2">
+                <h2 class="primary-color-h2 card-h2">
                   {{ item.text }}
                 </h2>
               </div>
@@ -36,7 +36,7 @@
       <div nz-col nzSm="24" nzMd="24" nzLg="24" nzXl="24">
         <div nz-row *ngFor="let item of balanceCards" class="margin-bottom-10">
           <nz-card
-            class="blue-border-card"
+            class="primary-color-border-card"
             [ngClass]="item.bgClass"
             [routerLink]="item.routerLink"
           >
@@ -57,7 +57,7 @@
   <div nz-col nzSm="24" nzMd="24" nzLg="18" nzXl="18">
     <div nz-row>
       <div nz-col nzSm="24" nzMd="24" nzLg="8" nzXl="8">
-        <h3 class="dark-blue">&nbsp;Salary Paid Summary</h3>
+        <h3 class="primary-color-font">&nbsp;Salary Paid Summary</h3>
       </div>
       <div nz-col nzSm="24" nzMd="24" nzLg="8" nzXl="8"></div>
       <div nz-col nzSm="24" nzMd="24" nzLg="8" nzXl="8">

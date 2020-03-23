@@ -1,6 +1,6 @@
 <div nz-row>
     <div nz-col nzSm="24" nzMd="24" nzLg="24" nzXl="24">
-      <h3 class="dark-blue">Wallet Load</h3>
+      <h3 class="primary-color-font">Wallet Load</h3>
       <p>Manage your wallet load request</p>
     </div>
   </div>
@@ -14,7 +14,7 @@
       *ngFor="let item of balanceCards"
     >
       <nz-card
-        class="blue-border-card"
+        class="primary-color-border-card"
         [ngClass]="item.bgClass"
         [routerLink]="item.routerLink"
       >
@@ -95,7 +95,7 @@
                   <td>
                     <a
                       [routerLink]="['/', 'claims', 'details', data._id]"
-                      class="medium-blue"
+                      class="medium-color-font"
                       ><span>
                         View
                         <i nz-icon nzType="arrow-right" nzTheme="outline"></i>

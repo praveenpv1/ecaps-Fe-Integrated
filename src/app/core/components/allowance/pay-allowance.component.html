@@ -1,19 +1,19 @@
 <div nz-row>
   <div nz-col nzSm="24" nzMd="24" nzLg="6" nzXl="6">
-    <a class="green-back-button" [routerLink]="['/', 'allowance']"
+    <a class="back-button-text" [routerLink]="['/', 'allowance']"
       ><img
         class="back-img"
         src="assets/images/back-button.svg"
       />&nbsp;&nbsp;BACK</a
     >
     <br />
-    <h3 class="dark-blue">Pay Allowances</h3>
+    <h3 class="primary-color-font">Pay Allowances</h3>
   </div>
   <div nz-col nzSm="24" nzMd="24" nzLg="6" nzXl="6"></div>
   <div nz-col nzSm="24" nzMd="24" nzLg="6" nzXl="6"></div>
   <div nz-col nzSm="24" nzMd="24" nzLg="6" nzXl="6">
     <p>Your Current Enviar A/C Balance</p>
-    <h2 class="dark-blue">{{ companyBalance | currency: "₹" }}</h2>
+    <h2 class="primary-color-font">{{ companyBalance | currency: "₹" }}</h2>
   </div>
 </div>
 <br />
@@ -57,7 +57,7 @@
   </div>
   <div nz-col nzSm="24" nzMd="24" nzLg="4" nzXl="4" class="text-center">
     <p>No. of Employees</p>
-    <h3 class="light-blue">{{ noOfSelection }}</h3>
+    <h3 class="light-color-font">{{ noOfSelection }}</h3>
   </div>
   <div nz-col nzSm="24" nzMd="24" nzLg="4" nzXl="4" class="text-center">
     <p>Allowance Amount for all</p>
@@ -73,7 +73,7 @@
   </div>
   <div nz-col nzSm="24" nzMd="24" nzLg="4" nzXl="4" class="text-center">
     <p>Total Amount</p>
-    <h3 class="light-blue">₹ {{ totalAmount }}</h3>
+    <h3 class="light-color-font">₹ {{ totalAmount }}</h3>
   </div>
   <div nz-col nzSm="24" nzMd="24" nzLg="4" nzXl="4" class="text-center">
     <button

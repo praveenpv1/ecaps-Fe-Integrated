@@ -1,7 +1,7 @@
 <div nz-row>
   <div nz-col nzSm="24" nzMd="24" nzLg="24" nzXl="24">
     <a
-      class="green-back-button"
+      class="back-button-text"
       [routerLink]="['/', 'employee', 'list', 'add-type-selection']"
       ><img
         class="back-img"
@@ -9,7 +9,7 @@
       />&nbsp;&nbsp;BACK</a
     >
     <br />
-    <h3 class="dark-blue">{{ _id == "" ? "Add" : "Edit" }} Employee</h3>
+    <h3 class="primary-color-font">{{ _id == "" ? "Add" : "Edit" }} Employee</h3>
     <p>{{ _id == "" ? "Add" : "Edit" }} an employee here.</p>
   </div>
 

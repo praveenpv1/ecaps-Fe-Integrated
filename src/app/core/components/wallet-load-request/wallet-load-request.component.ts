@@ -196,7 +196,7 @@ export class WalletLoadRequestComponent implements OnInit, OnDestroy {
                 title: "Pending Requests",
                 text: this.pendingClaims + " requests",
                 icon: "more",
-                bgClass: "white-gradient-card",
+                bgClass: "white-bg-card",
                 desc: "VIEW DETAILS",
                 routerLink: ["/", "claims"],
                 type: InfoType.info,
@@ -206,7 +206,7 @@ export class WalletLoadRequestComponent implements OnInit, OnDestroy {
                 title: "Approved Requests",
                 text: this.approvedCounts + " requests",
                 icon: "more",
-                bgClass: "white-gradient-card",
+                bgClass: "white-bg-card",
                 desc: "VIEW DETAILS",
                 routerLink: ["/", "claims"],
                 type: InfoType.info,
@@ -216,7 +216,7 @@ export class WalletLoadRequestComponent implements OnInit, OnDestroy {
                 title: "Requests Settled",
                 text: this.currencyPipe.transform(this.settledClaims, "₹"),
                 icon: "more",
-                bgClass: "white-gradient-card",
+                bgClass: "white-bg-card",
                 desc: "VIEW DETAILS",
                 routerLink: ["/", "claims"],
                 type: InfoType.amount,
@@ -252,4 +252,5 @@ export class WalletLoadRequestComponent implements OnInit, OnDestroy {
         //   payload: { txnid: id, approval_status: "disapproved" }
         // });
     }
+    
 }

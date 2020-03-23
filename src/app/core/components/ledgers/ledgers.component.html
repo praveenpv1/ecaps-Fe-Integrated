@@ -1,11 +1,11 @@
 <div nz-row>
     <div nz-col nzSm="24" nzMd="24" nzLg="24" nzXl="24">
-      <h3 class="dark-blue">My Ledger</h3>
+      <h3 class="primary-color-font">My Ledger</h3>
       <p>Get Ledger By Date</p>
     </div>
   </div>
   <div nz-row >
-    <nz-card class="blue-border-card text-center">
+    <nz-card class="primary-color-border-card text-center">
       <div nz-row>
         <h4>VIEW LEDGER BY DATE</h4>
       </div>
@@ -14,6 +14,63 @@
         <nz-range-picker [nzFormat]="dateFormat"></nz-range-picker>&nbsp;&nbsp;
         <button nz-button nzType="primary">Get My Ledgers</button>
       </div>
-    </nz-card>
+    </nz-card><br><br>
+    <nz-table
+      #headerTable
+      [nzData]="employeesList"
+      [nzPageSize]="1000"
+      [nzScroll]="{ y: '240px' }"
+    >
+      <thead>
+        <tr>
+          <!-- <th nzWidth="250px">Id</th> -->
+          <th>SNo</th>
+          <th>TimeStamp</th>
+          <th>TransType</th>
+          <th>PrevBal</th>
+          <th>Amount</th>
+          <th>AfterBal</th>
+          <th>OpName</th>
+          <th>CustNo</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let data of headerTable.data | filter: searchText">
+          <!-- <td *ngIf="data.user">{{ data.user._id }}</td> -->
+          <td>{{ data.first_name }} {{ data.last_name }}</td>
+          <td>
+            {{ data.mobile }}
+            <i
+              *ngIf="data.user"
+              nz-icon
+              nzType="{{
+                data.user.phone_verification == 'approved'
+                  ? 'check-circle'
+                  : 'exclamation-circle'
+              }}"
+            ></i>
+          </td>
+          <td>
+            {{ data.email }} {{ email_verification }}
+            <i
+              *ngIf="data.user"
+              nz-icon
+              nzType="{{
+                data.user.email_verification == 'approved'
+                  ? 'check-circle'
+                  : 'exclamation-circle'
+              }}"
+            ></i>
+          </td>
+          <td>
+            <a (click)="resendVerification(data)">Resend verification</a>
+          </td>
+          <td>
+            <button nz-button class="table-btn" (click)="editRoute(data)">
+              <i nz-icon class="edit-icon" nzType="edit"></i>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </nz-table>
   </div>
-  
