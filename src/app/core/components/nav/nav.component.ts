@@ -160,7 +160,7 @@ export class NavComponent implements OnInit, OnDestroy {
     showUserName(): void {
         const initialState = this._dataStore.dataStore$.getValue();
         if (initialState.userInfo) {
-            this.userName = initialState.userInfo.first_name;
+            this.userName = initialState.userInfo.name;
         }
     }
 
@@ -245,6 +245,7 @@ export class NavComponent implements OnInit, OnDestroy {
     }
 
     logout(): void {
+        localStorage.setItem("userData", null);
         this.authService.logout("signin");
     }
 

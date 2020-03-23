@@ -49,7 +49,27 @@ export class UserReducers {
 
                 state = this._dataStore.dataStore$.getValue();
                 this.apiService.login(action.payload).subscribe(
-                    response => {
+                    (response: any) => {
+                        this.authService.setAccessToken(response.token);
+                        if (response.is_verified) {
+                            this._dataStore.dataStore$.next({
+                                ...state,
+                                ...successCommonData,
+                                userInfo: _.omit(response, "token")
+                            });
+                            localStorage.setItem(
+                                "userData",
+                                JSON.stringify(response)
+                            );
+                            this.router.navigate(["/", ...defaultRedirectURL]);
+                        } else {
+                            this._dataStore.dataStore$.next({
+                                ...state,
+                                ...catchCommonData,
+                                toastMessage: "Not verified."
+                            });
+                            this.router.navigate(["/sigin"]);
+                        }
                         console.log(response);
                     },
                     error => {

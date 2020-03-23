@@ -21,34 +21,20 @@ const BASE_URL = "http://159.89.168.255:5000/";
 export class ApiService {
     base_url = `${environment.apiBaseURL}${environment.restEndPoint}`;
     mf: any;
+    token: string = _.isEmpty(this.authService.getAccessToken())
+        ? ""
+        : this.authService.getAccessToken();
+
     constructor(
         private httpClient: HttpClient,
         private authService: AuthService
-    ) {
-        // this.mf = new ModelFactory({
-        //     api_base_url: this.base_url,
-        //     token: this.authService.getAccessToken()
-        // });
-    }
-
-    // public getMFObject() {
-    //     return new ModelFactory({
-    //         api_base_url: this.base_url,
-    //         token: this.authService.getAccessToken()
-    //     });
-    // }
-
-    // public async login(params: { email: string; password: string }) {
-    //   let sc = new SessionChallenge(this.base_url, params.email, params.password);
-    //   return await sc.login();
-    // }
+    ) {}
 
     public login(params: {
         email: string;
         password: string;
     }): Observable<Object> {
         const url = `${BASE_URL}main/auth/sign-in`;
-        // const headers = new HttpHeaders({'Content-Type':'application/x-www-form-urlencoded'});
         const body = new HttpParams()
             .set("email", params.email)
             .set("password", params.password);
@@ -63,7 +49,11 @@ export class ApiService {
             .pipe(retry(2), catchError(this.handleError));
     }
 
-    public async get(path: string, url: string, params: object = {}) {
+    public async get(
+        path: string,
+        url: string,
+        params: object = {}
+    ): Promise<Object> {
         return null;
     }
 
