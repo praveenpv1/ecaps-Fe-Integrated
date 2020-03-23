@@ -172,7 +172,7 @@ export class EarningsComponent implements OnInit, OnDestroy {
         this.barChartLabels = [];
         this.barChartData[0].data = [];
 
-        let dateGroup = _.orderBy(txnData, ["initiated_ts"], ["asc"]);
+        let dateGroup: any = _.orderBy(txnData, ["initiated_ts"], ["asc"]);
 
         dateGroup = _.groupBy(dateGroup, function(data) {
             return moment(data.initiated_ts * 1000)
@@ -186,7 +186,7 @@ export class EarningsComponent implements OnInit, OnDestroy {
 
         amountArray.forEach(element => {
             this.barChartLabels.push(_.keys(element));
-            this.barChartData[0].data.push(element[_.keys(element)]);
+            // this.barChartData[0].data.push(element[_.keys(element)]);
         });
     }
 
