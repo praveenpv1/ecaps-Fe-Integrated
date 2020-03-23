@@ -64,6 +64,20 @@ import { NavComponent } from "./components/nav/nav.component";
 import { SignInComponent } from "./components/login/sign-in/signin.component";
 import { SignInInnerComponent } from "./components/login/sign-in/signin-inner.component";
 import { LandingPageComponent } from "./components/login/landing-page/landing-page.component";
+import { TopupApprovalComponent } from "./components/company/topup-approval.component";
+import { DistributorComponent } from './components/distributor/distributor.component';
+import { AddDistributorComponent } from './components/distributor/add-distributor.component';
+import { SubDistributorComponent } from './components/sub-distributor/sub-distributor.component';
+import { AddSubDistributorComponent } from './components/sub-distributor/add-sub-distributor.component';
+import { RetailerComponent } from './components/retailer/retailer.component';
+import { AddRetailerComponent } from './components/retailer/add-retailer.component';
+import { LedgersComponent } from './components/ledgers/ledgers.component';
+import { EarningsComponent } from './components/earnings/earnings.component';
+import { MonthlyTransactionsComponent } from './components/monthly-transactions/monthly-transactions.component';
+import { WalletLoadRequestComponent } from './components/wallet-load-request/wallet-load-request.component';
+import { WalletTopUpComponent } from './components/wallet-top-up/wallet-top-up.component';
+import { PaymentsComponent } from './components/payments/payments.component';
+import { ForgotPasswordComponent } from "./components/login/forgot-password/forgot-password.component";
 
 import { KopprSignUpComponent } from "./components/login/sign-up/signup.component";
 import { ModalComponent } from "./components/modal/modal.component";
@@ -94,7 +108,6 @@ import { AngularMaterialModule } from "utils";
 import { DynamicFormsModule } from "dynamic-forms";
 import { ReactiveFormsModule, FormsModule } from "@angular/forms";
 import { DynamicFormsMaterialUIModule } from "@ng-dynamic-forms/ui-material";
-
 import { NzLayoutModule } from "ng-zorro-antd/layout";
 import { NzBreadCrumbModule } from "ng-zorro-antd/breadcrumb";
 import { NgZorroAntdModule, NZ_ICONS } from "ng-zorro-antd";
@@ -114,19 +127,6 @@ import { Ng2SearchPipeModule } from "ng2-search-filter";
 import { DatePipe, CurrencyPipe } from "@angular/common";
 import { NgxSpinnerModule } from "ngx-spinner";
 import { NzTabsModule } from "ng-zorro-antd/tabs";
-import { TopupApprovalComponent } from "./components/company/topup-approval.component";
-import { DistributorComponent } from './components/distributor/distributor.component';
-import { AddDistributorComponent } from './components/distributor/add-distributor.component';
-import { SubDistributorComponent } from './components/sub-distributor/sub-distributor.component';
-import { AddSubDistributorComponent } from './components/sub-distributor/add-sub-distributor.component';
-import { RetailerComponent } from './components/retailer/retailer.component';
-import { AddRetailerComponent } from './components/retailer/add-retailer.component';
-import { LedgersComponent } from './components/ledgers/ledgers.component';
-import { EarningsComponent } from './components/earnings/earnings.component';
-import { MonthlyTransactionsComponent } from './components/monthly-transactions/monthly-transactions.component';
-import { WalletLoadRequestComponent } from './components/wallet-load-request/wallet-load-request.component';
-import { WalletTopUpComponent } from './components/wallet-top-up/wallet-top-up.component';
-import { PaymentsComponent } from './components/payments/payments.component';
 
 const antDesignIcons = AllIcons as {
   [key: string]: IconDefinition;
@@ -261,7 +261,8 @@ const icons: IconDefinition[] = Object.keys(antDesignIcons).map(
     MonthlyTransactionsComponent,
     WalletLoadRequestComponent,
     WalletTopUpComponent,
-    PaymentsComponent
+    PaymentsComponent,
+    ForgotPasswordComponent
   ],
   exports: [
     PlaceholderComponent,
@@ -327,7 +328,8 @@ const icons: IconDefinition[] = Object.keys(antDesignIcons).map(
     MonthlyTransactionsComponent,
     WalletLoadRequestComponent,
     WalletTopUpComponent,
-    PaymentsComponent
+    PaymentsComponent,
+    ForgotPasswordComponent
   ]
 })
 export class CoreModule {

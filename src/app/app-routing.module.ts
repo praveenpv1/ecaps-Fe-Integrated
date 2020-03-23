@@ -2,7 +2,6 @@ import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
 import { AuthGuard } from "auth";
 
-import { PlaceholderComponent } from "@app/core/components/placeholder/placeholder.component";
 import { DashboardComponent } from "@app/core/components/dashboard/dashboard.component";
 import { AddEmployeeComponent } from "@app/core/components/employee/add-employee.component";
 import { BulkUploadComponent } from "@app/core/components/employee/bulk-upload.component";
@@ -71,6 +70,8 @@ import { MonthlyTransactionsComponent } from "@app/core/components/monthly-trans
 import { WalletLoadRequestComponent } from "@app/core/components/wallet-load-request/wallet-load-request.component";
 import { WalletTopUpComponent } from "@app/core/components/wallet-top-up/wallet-top-up.component";
 import { PaymentsComponent } from "@app/core/components/payments/payments.component";
+import { ForgotPasswordComponent } from '@app/core/components/login/forgot-password/forgot-password.component';
+
 
 export enum menuType {
   initialSetup = 1,
@@ -191,6 +192,12 @@ const routes: Routes = [
     // path: 'sales/accounts',
     path: "signin",
     component: SignInComponent,
+    data: { menuType: menuType.siginin }
+  },
+  {
+    // path: 'sales/accounts',
+    path: "forgot-password",
+    component: ForgotPasswordComponent,
     data: { menuType: menuType.siginin }
   },
   {
@@ -554,7 +561,7 @@ const routes: Routes = [
   },
   {
     path: "**",
-    redirectTo: "welcome",
+    redirectTo: "signin",
     data: { menuType: menuType.siginin }
   }
 ];
