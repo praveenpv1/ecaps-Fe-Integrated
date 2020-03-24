@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-ledgers',
@@ -6,9 +7,17 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./ledgers.component.scss']
 })
 export class LedgersComponent implements OnInit { 
-
-  constructor( ) { }
+  validateForm: FormGroup; 
+  
+  submitForm(): void {
+    console.log(this.validateForm.value);
+  }
+  constructor(private fb: FormBuilder) { }
 
   ngOnInit() {
+    this.validateForm = this.fb.group({
+      startDate: [null],
+      endDate: [null]
+    });
   }
 }

@@ -25,10 +25,25 @@
               </div>
               <br>
               <div nz-row>
-                <nz-range-picker [nzFormat]="dateFormat"></nz-range-picker>
-                <br><br><br>
-                <button nz-button nzType="primary">Get My Earnings</button>
-                <br>
+                <form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()">
+                  <nz-form-item>
+                    <nz-form-label [nzSm]="8" [nzXs]="24" nzRequired>Start Date</nz-form-label>
+                    <nz-form-control [nzSm]="16" [nzXs]="24">
+                      <nz-date-picker formControlName="startDate"></nz-date-picker>
+                    </nz-form-control>
+                  </nz-form-item>
+                  <nz-form-item>
+                    <nz-form-label [nzSm]="8" [nzXs]="24" nzRequired>End Date</nz-form-label>
+                    <nz-form-control [nzSm]="16" [nzXs]="24">
+                      <nz-date-picker formControlName="endDate"></nz-date-picker>
+                    </nz-form-control>
+                  </nz-form-item>
+                  <nz-form-item>
+                    <nz-form-control [nzXs]="{ span: 24, offset: 0 }" [nzSm]="{ span: 16, offset: 8 }">
+                      <button nz-button nzType="primary">Get My Ledgers</button>
+                    </nz-form-control>
+                  </nz-form-item>
+                </form>
               </div>
             </nz-card>
           </div>
@@ -109,41 +124,27 @@
     <br />
   
     <nz-table
-      #headerTable
-      [nzData]="txnsData"
+      #earningsTable
+      [nzData]=""
       [nzPageSize]="50"
       [nzScroll]="{ y: '240px' }"
     >
       <thead>
         <tr>
-          <th nzWidth="130px">Paid On</th>
-          <th nzWidth="130px">Amount</th>
-          <th nzWidth="130px">Month</th>
-          <th nzWidth="200px">Employees Paid</th>
-          <!-- <th nzWidth="130px">Paid by</th> -->
-          <th nzWidth="130px">Amount Type</th>
-  
-          <!-- <th nzWidth="130px">Approval Status</th> -->
-          <!-- <th></th> -->
+          <th>Paid On</th>
+          <th>Amount</th>
+          <th>Month</th>
+          <th>Employees Paid</th> 
+          <th>Amount Type</th> 
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let data of headerTable.data">
-          <td nzWidth="130px">
-            {{ data.modified_ts * 1000 | date: "yyyy-MM-dd" }}
-          </td>
-          <td nzWidth="130px">{{ data.amount | currency: "₹" }}</td>
-          <td nzWidth="130px">{{ data.modified_ts * 1000 | date: "MM" }}</td>
-          <td nzWidth="200px">{{ getEmployeeEmail(data.employee) }}</td>
-          <!-- <td nzWidth="130px">{{ data.company }}</td> -->
-          <td nzWidth="130px">{{ data.amount_type }}</td>
-  
-          <!-- <td nzWidth="130px">{{ data.approval_status }}</td> -->
-          <!-- <td>
-          <button nz-button class="table-btn">
-            View Details<i nz-icon nzType="arrow-right" nzTheme="outline"></i>
-          </button>
-        </td> -->
+        <tr *ngFor="let data of earningsTable.data">
+           <td></td>
+           <td></td>
+           <td></td>
+           <td></td>
+           <td></td>
         </tr>
       </tbody>
     </nz-table>
