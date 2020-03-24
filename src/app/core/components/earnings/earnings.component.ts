@@ -1,4 +1,5 @@
 import { Component, OnInit, OnDestroy } from "@angular/core";
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { CompanyReducers } from "@app/core/store/reducers/company.reducer";
 import { DataStore } from "@app/core/store/app.store";
 import { ChartOptions, ChartType, ChartDataSets } from "chart.js";
@@ -67,6 +68,11 @@ export class EarningsComponent implements OnInit, OnDestroy {
     txnsData: any = [];
     companyBalance: string = "0";
     balanceCards: InfoCards[] = [];
+    validateForm: FormGroup;
+
+  submitForm(): void {
+    console.log(this.validateForm.value);
+  }
     public subscribers: any = {};
 
     infoCards: InfoCards[] = [
@@ -91,7 +97,8 @@ export class EarningsComponent implements OnInit, OnDestroy {
     constructor(
         private cR: CompanyReducers,
         private ds: DataStore,
-        private eR: EmployeeReducers
+        private eR: EmployeeReducers,
+        private fb: FormBuilder
     ) {
         this.subscribers = this.ds.dataStore$.subscribe(res => {
             console.log(res);
@@ -157,6 +164,10 @@ export class EarningsComponent implements OnInit, OnDestroy {
         }
     }
     ngOnInit() {
+        this.validateForm = this.fb.group({
+            startDate: [null],
+            endDate: [null]
+          });
         // this.showCompanyWallet();
         //get all employees
         // this.eR.cardReducer({

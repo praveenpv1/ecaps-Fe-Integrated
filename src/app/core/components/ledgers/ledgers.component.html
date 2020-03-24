@@ -11,19 +11,35 @@
       </div>
       <br>
       <div nz-row>
-        <nz-range-picker [nzFormat]="dateFormat"></nz-range-picker>&nbsp;&nbsp;
-        <button nz-button nzType="primary">Get My Ledgers</button>
+        <form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()">
+          <nz-form-item>
+            <nz-form-label [nzSm]="8" [nzXs]="24" nzRequired>Start Date</nz-form-label>
+            <nz-form-control [nzSm]="16" [nzXs]="24">
+              <nz-date-picker formControlName="startDate"></nz-date-picker>
+            </nz-form-control>
+          </nz-form-item>
+          <nz-form-item>
+            <nz-form-label [nzSm]="8" [nzXs]="24" nzRequired>End Date</nz-form-label>
+            <nz-form-control [nzSm]="16" [nzXs]="24">
+              <nz-date-picker formControlName="endDate"></nz-date-picker>
+            </nz-form-control>
+          </nz-form-item>
+          <nz-form-item>
+            <nz-form-control [nzXs]="{ span: 24, offset: 0 }" [nzSm]="{ span: 16, offset: 8 }">
+              <button nz-button nzType="primary">Get My Ledgers</button>
+            </nz-form-control>
+          </nz-form-item>
+        </form>
       </div>
     </nz-card><br><br>
     <nz-table
-      #headerTable
-      [nzData]="employeesList"
+      #ledgersTable
+      [nzData]=""
       [nzPageSize]="1000"
       [nzScroll]="{ y: '240px' }"
     >
       <thead>
         <tr>
-          <!-- <th nzWidth="250px">Id</th> -->
           <th>SNo</th>
           <th>TimeStamp</th>
           <th>TransType</th>
@@ -35,41 +51,15 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let data of headerTable.data | filter: searchText">
-          <!-- <td *ngIf="data.user">{{ data.user._id }}</td> -->
-          <td>{{ data.first_name }} {{ data.last_name }}</td>
-          <td>
-            {{ data.mobile }}
-            <i
-              *ngIf="data.user"
-              nz-icon
-              nzType="{{
-                data.user.phone_verification == 'approved'
-                  ? 'check-circle'
-                  : 'exclamation-circle'
-              }}"
-            ></i>
-          </td>
-          <td>
-            {{ data.email }} {{ email_verification }}
-            <i
-              *ngIf="data.user"
-              nz-icon
-              nzType="{{
-                data.user.email_verification == 'approved'
-                  ? 'check-circle'
-                  : 'exclamation-circle'
-              }}"
-            ></i>
-          </td>
-          <td>
-            <a (click)="resendVerification(data)">Resend verification</a>
-          </td>
-          <td>
-            <button nz-button class="table-btn" (click)="editRoute(data)">
-              <i nz-icon class="edit-icon" nzType="edit"></i>
-            </button>
-          </td>
+        <tr *ngFor="let data of ledgersTable.data">
+           <td>{{ sNo.data }}</td>
+           <td>{{ time.data }}</td>
+           <td>{{ transType.data }}</td>
+           <td>{{ prevBal.data }}</td>
+           <td>{{ amount.data }}</td>
+           <td>{{ afterBal.data }}</td>
+           <td>{{ opName.data }}</td>
+           <td>{{ cusNo.data }}</td>
         </tr>
       </tbody>
     </nz-table>
