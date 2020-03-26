@@ -59,7 +59,7 @@ export class EmployeeReducers {
       case GET_EMPLOYEES:
         this._loader.loadingState({ type: LOADING });
         this.apiService
-          .get(this.apiPath, "", {
+          .pk_get(this.apiPath, "", {
             ...action.payload
           })
           .then(data => {
@@ -79,7 +79,7 @@ export class EmployeeReducers {
       case GET_EMPLOYEE:
         this._loader.loadingState({ type: LOADING });
         this.apiService
-          .get(this.apiPath + "/" + action.payload.id, "", {})
+          .pk_get(this.apiPath + "/" + action.payload.id, "", {})
           .then(data => {
             this._dataStore.dataStore$.next({
               ...state,
@@ -97,7 +97,7 @@ export class EmployeeReducers {
       case GET_COMPANY_EMPLOYEE_TXNS:
         this._loader.loadingState({ type: LOADING });
         this.apiService
-          .get(this.EmployeeTXNS + "/" + action.payload.id, "", {})
+          .pk_get(this.EmployeeTXNS + "/" + action.payload.id, "", {})
           .then(data => {
             this._dataStore.dataStore$.next({
               ...state,
@@ -290,7 +290,11 @@ export class EmployeeReducers {
         this._loader.loadingState({ type: LOADING });
 
         this.apiService
-          .get("/v1/companies/" + action.payload.company_id + "/admin", "", {})
+          .pk_get(
+            "/v1/companies/" + action.payload.company_id + "/admin",
+            "",
+            {}
+          )
           .then(data => {
             let userData: any = data;
 
@@ -303,11 +307,11 @@ export class EmployeeReducers {
             }
 
             this.apiService
-              .get("/v1/" + userData.entityId + "/authenticate", "", {})
+              .pk_get("/v1/" + userData.entityId + "/authenticate", "", {})
               .then(data => {
                 let userToken: any = data;
                 this.apiService
-                  .get(
+                  .pk_get(
                     this.company_transactions + "?token=" + userToken.token,
                     "",
                     {}

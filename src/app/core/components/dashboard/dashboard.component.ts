@@ -16,9 +16,9 @@ import {
 } from "@app/core/store/commonstoredata";
 import { CurrencyPipe } from "@angular/common";
 import { barGraphOptions } from "@app/core/services/graphoptions";
-import { ChartOptions, ChartType, ChartDataSets } from 'chart.js';
-import * as pluginDataLabels from 'chartjs-plugin-datalabels';
-import { Label } from 'ng2-charts';
+import { ChartOptions, ChartType, ChartDataSets } from "chart.js";
+import * as pluginDataLabels from "chartjs-plugin-datalabels";
+import { Label } from "ng2-charts";
 
 export interface Tile {
   color: string;
@@ -85,18 +85,26 @@ export class DashboardComponent implements OnInit, OnDestroy {
     scales: { xAxes: [{}], yAxes: [{}] },
     plugins: {
       datalabels: {
-        anchor: 'end',
-        align: 'end',
+        anchor: "end",
+        align: "end"
       }
     }
   };
-  public barChartLabels: Label[] = ['2006', '2007', '2008', '2009', '2010', '2011', '2012'];
-  public barChartType: ChartType = 'bar';
+  public barChartLabels: Label[] = [
+    "2006",
+    "2007",
+    "2008",
+    "2009",
+    "2010",
+    "2011",
+    "2012"
+  ];
+  public barChartType: ChartType = "bar";
   public barChartLegend = true;
   public barChartPlugins = [pluginDataLabels];
 
   public barChartData: ChartDataSets[] = [
-    { data: [65, 59, 80, 81, 56, 55, 40], label: 'Series A' },
+    { data: [65, 59, 80, 81, 56, 55, 40], label: "Series A" }
     // { data: [28, 48, 40, 19, 86, 27, 90], label: 'Series B' }
   ];
 
@@ -168,10 +176,9 @@ export class DashboardComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.showCompanyWallet();
-
-    this.getCompanyTransactions();
-    this.getCompanyTxns();
+    // this.showCompanyWallet();
+    // this.getCompanyTransactions();
+    // this.getCompanyTxns();
     //this.getClaims();
   }
 
@@ -234,11 +241,23 @@ export class DashboardComponent implements OnInit, OnDestroy {
     });
   }
 
-  public chartClicked({ event, active }: { event: MouseEvent, active: {}[] }): void {
+  public chartClicked({
+    event,
+    active
+  }: {
+    event: MouseEvent;
+    active: {}[];
+  }): void {
     console.log(event, active);
   }
 
-  public chartHovered({ event, active }: { event: MouseEvent, active: {}[] }): void {
+  public chartHovered({
+    event,
+    active
+  }: {
+    event: MouseEvent;
+    active: {}[];
+  }): void {
     console.log(event, active);
   }
 
@@ -248,10 +267,11 @@ export class DashboardComponent implements OnInit, OnDestroy {
       Math.round(Math.random() * 100),
       59,
       80,
-      (Math.random() * 100),
+      Math.random() * 100,
       56,
-      (Math.random() * 100),
-      40];
+      Math.random() * 100,
+      40
+    ];
     this.barChartData[0].data = data;
   }
 

@@ -2,6 +2,7 @@
 export const ADD_USER_INFO = "[USER_INFO] Add";
 export const IS_USER_VERIFIED = "[USER] Is User Verified";
 export const LOGIN = "[USER] Login";
+export const FORGOT_PASSWORD = "[USER] Forgot Password";
 
 //State
 export const RESET_STATE = "[RESET_STATE]";
