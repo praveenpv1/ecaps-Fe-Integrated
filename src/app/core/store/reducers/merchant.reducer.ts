@@ -12,8 +12,6 @@ import * as _ from "lodash";
 import { ToastReducers } from "./toast.reducer";
 import { LoadingReducers } from "./loading.reducer";
 
-
-
 @Injectable()
 export class MerchantReducers {
   merchantApi: string = MODEL_PATHS.merchant_transactions;
@@ -24,58 +22,57 @@ export class MerchantReducers {
     private _loader: LoadingReducers
   ) {}
 
-    merchantReducer(action: any) {
-      const state = this._dataStore.dataStore$.getValue();
-      switch (action.type) {
-        case GET_MERCHANT_TXNS:
-          this._loader.loadingState({ type: LOADING });
-          this.apiService
-            .get(`${this.merchantApi}`, "", {
-              ...action.payload
-            })
-            .then(data => {
-              let state = this._dataStore.dataStore$.getValue();
-              this._dataStore.dataStore$.next({
-                ...state,
-                ...successCommonData,
-                merchant_txns: {
-                  details: { data }
-                }
-              });
-            })
-            .catch(error => {
-              this.toast.commonCatchToast(
-                _.get(error.response, "data.error", "Something Went Wrong!")
-              );
-            });
-          break;
-
-          case GET_REIMBURSEMENT_MERCHANT_TXNS:
-            this._loader.loadingState({ type: LOADING });
-            this.apiService
-            .get(`${this.merchantApi}/${action.payload.id}`, "", {})
-            .then(data => {
-              this._dataStore.dataStore$.next({
-                ...state,
-                ...successCommonData,
-                reimbursement_merchant_txns: {
-                   details: { data }
-                }
-              });
-            })
-              .catch(error => {
-                this.toast.commonCatchToast(
-                  _.get(error.response, "data.error", "Something Went Wrong!")
-                );
-              });
-            break;
-
-          default:
-            console.log("IN MERCHANT TXNS DEFAULT");
+  merchantReducer(action: any) {
+    const state = this._dataStore.dataStore$.getValue();
+    switch (action.type) {
+      case GET_MERCHANT_TXNS:
+        this._loader.loadingState({ type: LOADING });
+        this.apiService
+          .pk_get(`${this.merchantApi}`, "", {
+            ...action.payload
+          })
+          .then(data => {
+            let state = this._dataStore.dataStore$.getValue();
             this._dataStore.dataStore$.next({
-              ...state
+              ...state,
+              ...successCommonData,
+              merchant_txns: {
+                details: { data }
+              }
             });
-      }
-    }
+          })
+          .catch(error => {
+            this.toast.commonCatchToast(
+              _.get(error.response, "data.error", "Something Went Wrong!")
+            );
+          });
+        break;
 
+      case GET_REIMBURSEMENT_MERCHANT_TXNS:
+        this._loader.loadingState({ type: LOADING });
+        this.apiService
+          .pk_get(`${this.merchantApi}/${action.payload.id}`, "", {})
+          .then(data => {
+            this._dataStore.dataStore$.next({
+              ...state,
+              ...successCommonData,
+              reimbursement_merchant_txns: {
+                details: { data }
+              }
+            });
+          })
+          .catch(error => {
+            this.toast.commonCatchToast(
+              _.get(error.response, "data.error", "Something Went Wrong!")
+            );
+          });
+        break;
+
+      default:
+        console.log("IN MERCHANT TXNS DEFAULT");
+        this._dataStore.dataStore$.next({
+          ...state
+        });
+    }
   }
+}

@@ -59,7 +59,7 @@ export class CardReducers {
         this._loader.loadingState({ type: LOADING });
 
         this.apiService
-          .get(this.cardKitPath, "", {
+          .pk_get(this.cardKitPath, "", {
             ...action.payload
           })
           .then(data => {

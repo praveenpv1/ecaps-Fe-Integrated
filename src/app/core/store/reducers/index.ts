@@ -7,7 +7,7 @@ import { CompanyReducers } from "./company.reducer";
 import { EmployeeReducers } from "./employee.reducer";
 import { ModalReducers } from "./modal.reducer";
 import { MerchantReducers } from "./merchant.reducer";
-
+import { LoginReducers } from "./login.reducer";
 
 export const rootReducers = [
   UserReducers,
@@ -18,5 +18,6 @@ export const rootReducers = [
   CompanyReducers,
   EmployeeReducers,
   ModalReducers,
-  MerchantReducers
+  MerchantReducers,
+  LoginReducers
 ];

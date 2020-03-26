@@ -64,7 +64,11 @@ export class CompanyReducers {
 
         //user check
         this.apiService
-          .get(this.employees + "/search?email=" + action.payload.email, "", {})
+          .pk_get(
+            this.employees + "/search?email=" + action.payload.email,
+            "",
+            {}
+          )
           .then(res => {
             let employeeResults: any = res;
             if (employeeResults.length > 0) {
@@ -72,7 +76,7 @@ export class CompanyReducers {
               this.toast.commonCatchToast("Email Already exists");
             } else {
               this.apiService
-                .get(
+                .pk_get(
                   this.employees +
                     "/search?mobile=" +
                     encodeURIComponent(action.payload.mobile),
@@ -265,7 +269,7 @@ export class CompanyReducers {
         this._loader.loadingState({ type: LOADING });
 
         this.apiService
-          .get(`${this.companyApi}/${state.company_id}/wallet`, "", {
+          .pk_get(`${this.companyApi}/${state.company_id}/wallet`, "", {
             ...action.payload
           })
           .then(data => {
@@ -290,7 +294,7 @@ export class CompanyReducers {
         this._loader.loadingState({ type: LOADING });
 
         this.apiService
-          .get(`${this.companyApi}`, "", {
+          .pk_get(`${this.companyApi}`, "", {
             ...action.payload
           })
           .then(data => {
@@ -314,7 +318,7 @@ export class CompanyReducers {
         this._loader.loadingState({ type: LOADING });
 
         this.apiService
-          .get(`${this.companyApi}/${action.payload.company_id}`, "", {
+          .pk_get(`${this.companyApi}/${action.payload.company_id}`, "", {
             ...action.payload
           })
           .then(data => {
@@ -449,7 +453,7 @@ export class CompanyReducers {
         this._loader.loadingState({ type: LOADING });
 
         this.apiService
-          .get(`${this.companyTXNS}`, "", {
+          .pk_get(`${this.companyTXNS}`, "", {
             ...action.payload
           })
           .then(data => {
@@ -473,7 +477,7 @@ export class CompanyReducers {
         this._loader.loadingState({ type: LOADING });
 
         this.apiService
-          .get(
+          .pk_get(
             `${this.companyTXNS}?txn_type=reimbursement&txn_type=cash_reimbursement`,
             "",
             {
@@ -501,7 +505,7 @@ export class CompanyReducers {
         this._loader.loadingState({ type: LOADING });
 
         this.apiService
-          .get(`${this.company_transactions}`, "", {
+          .pk_get(`${this.company_transactions}`, "", {
             ...action.payload
           })
           .then(data => {
@@ -525,7 +529,7 @@ export class CompanyReducers {
         this._loader.loadingState({ type: LOADING });
 
         this.apiService
-          .get(`${this.company_transactions}`, "", {
+          .pk_get(`${this.company_transactions}`, "", {
             ...action.payload
           })
           .then(data => {

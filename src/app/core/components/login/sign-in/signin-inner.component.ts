@@ -1,9 +1,9 @@
 import { Component, OnDestroy, OnInit } from "@angular/core";
 import { FormGroup, FormControl, Validators } from "@angular/forms";
-import { UserReducers } from "@app/core/store/reducers/user.reducer";
 import { LOGIN, RESET_STATE } from "@app/core/store/actions";
 import { ResetStateReducers } from "@app/core/store/reducers/resetstate.reducer";
 import { AuthService } from "auth";
+import { LoginReducers } from "@app/core/store/reducers/login.reducer";
 
 @Component({
   selector: "signin-component-inner",
@@ -18,9 +18,9 @@ export class SignInInnerComponent implements OnInit, OnDestroy {
   });
 
   constructor(
-    private userReducer: UserReducers,
     private resetReducer: ResetStateReducers,
-    private authService: AuthService
+    private authService: AuthService,
+    private loginReducer: LoginReducers
   ) {
     //clear state
     this.resetReducer.resetState({
@@ -34,7 +34,7 @@ export class SignInInnerComponent implements OnInit, OnDestroy {
 
   login() {
     if (this.signInForm.valid) {
-      this.userReducer.userReducer({
+      this.loginReducer.loginReducer({
         type: LOGIN,
         payload: {
           email: this.signInForm.controls["email"].value.toLowerCase(),
