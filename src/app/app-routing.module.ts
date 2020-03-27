@@ -58,6 +58,8 @@ import { CompanyListComponent } from "./core/components/company/companylist.comp
 import { DepositComponent } from "./core/components/company/deposit.component";
 import { TopupApprovalComponent } from "./core/components/company/topup-approval.component";
 
+import { SuperDistributorComponent } from "@app/core/components/super-distributor/super-distributor.component";
+import { AddSuperDistributorComponent } from "@app/core/components/super-distributor/add-super-distributor.component";
 import { DistributorComponent } from "@app/core/components/distributor/distributor.component";
 import { AddDistributorComponent } from "@app/core/components/distributor/add-distributor.component";
 import { SubDistributorComponent } from "@app/core/components/sub-distributor/sub-distributor.component";
@@ -100,67 +102,79 @@ const routes: Routes = [
   // Reference the lib wrapper modules using a relative path
   //
   {
-    // path: 'sales/accounts',
+     
     path: "distributor",
     component: DistributorComponent,
     data: { menuType: menuType.normal }
   },
   {
-    // path: 'sales/accounts',
+     
+    path: "super-distributor",
+    component: SuperDistributorComponent,
+    data: { menuType: menuType.normal }
+  },
+  {
+     
+    path: "super-distributor/add",
+    component: AddSuperDistributorComponent,
+    data: { menuType: menuType.normal }
+  },
+  {
+     
     path: "distributor/add",
     component: AddDistributorComponent,
     data: { menuType: menuType.normal }
   },
   {
-    // path: 'sales/accounts',
+     
     path: "sub-distributor",
     component: SubDistributorComponent,
     data: { menuType: menuType.normal }
   },
   {
-    // path: 'sales/accounts',
+     
     path: "sub-distributor/add",
     component: AddSubDistributorComponent,
     data: { menuType: menuType.normal }
   },
   {
-    // path: 'sales/accounts',
+     
     path: "retailer",
     component: RetailerComponent,
     data: { menuType: menuType.normal }
   },
   {
-    // path: 'sales/accounts',
+     
     path: "retailer/add",
     component: AddRetailerComponent,
     data: { menuType: menuType.normal }
   },
   {
-    // path: 'sales/accounts',
+     
     path: "ledgers",
     component: LedgersComponent,
     data: { menuType: menuType.normal }
   },
   {
-    // path: 'sales/accounts',
+     
     path: "earnings",
     component: EarningsComponent,
     data: { menuType: menuType.normal }
   },
   {
-    // path: 'sales/accounts',
+     
     path: "monthly-transactions",
     component: MonthlyTransactionsComponent,
     data: { menuType: menuType.normal }
   },
   {
-    // path: 'sales/accounts',
+     
     path: "wallet-load-request",
     component: WalletLoadRequestComponent,
     data: { menuType: menuType.normal }
   },
   {
-    // path: 'sales/accounts',
+     
     path: "wallet-top-up",
     component: WalletTopUpComponent,
     data: { menuType: menuType.normal }
@@ -171,158 +185,158 @@ const routes: Routes = [
     data: { menuType: menuType.normal }
   },
   {
-    // path: 'sales/accounts',
+     
     path: "signup",
     component: KopprSignUpComponent,
     data: { menuType: 4 }
   },
   {
-    // path: 'sales/accounts',
+     
     path: "account-update",
     component: SignUpInnerComponent,
     data: { menuType: 4 }
   },
   {
-    // path: 'sales/accounts',
+     
     path: "welcome",
     component: LandingPageComponent,
     data: { menuType: menuType.siginin }
   },
   {
-    // path: 'sales/accounts',
+     
     path: "signin",
     component: SignInComponent,
     data: { menuType: menuType.siginin }
   },
   {
-    // path: 'sales/accounts',
+     
     path: "forgot-password",
     component: ForgotPasswordComponent,
     data: { menuType: menuType.siginin }
   },
   {
-    // path: 'sales/accounts',
+     
     path: "signup",
     component: SignUpComponent,
     data: { menuType: menuType.siginin }
   },
   {
-    // path: 'sales/accounts',
+     
     path: "dashboard/:company_id",
     component: DashboardComponent,
     data: { menuType: menuType.normal }
   },
   {
-    // path: 'sales/accounts',
+     
     path: "dashboard",
     component: DashboardComponent,
     data: { menuType: menuType.normal }
   },
   {
-    // path: 'sales/accounts',
+     
     path: "employee/add",
     component: AddEmployeeComponent,
     data: { menuType: menuType.normal }
   },
   {
-    // path: 'sales/accounts',
+     
     path: "employee/add/:employeeid/:id",
     component: AddEmployeeComponent,
     data: { menuType: menuType.normal }
   },
   {
-    // path: 'sales/accounts',
+     
     path: "employee/list/add-type-selection",
     component: EmployeeAddTypeSelectionComponent,
     data: { menuType: menuType.normal }
   },
   {
-    // path: 'sales/accounts',
+     
     path: "employee/bulk",
     component: BulkUploadComponent,
     data: { menuType: menuType.normal }
   },
   {
-    // path: 'sales/accounts',
+     
     path: "employee/bulk/category",
     component: BulkCategoryComponent,
     data: { menuType: menuType.normal }
   },
   {
-    // path: 'sales/accounts',
+     
     path: "employee/list/bulkuploadsuccess",
     component: BulkUploadSuccessComponent,
     data: { menuType: menuType.normal }
   },
   {
-    // path: 'sales/accounts',
+     
     path: "employee/list",
     component: ListComponent,
     data: { menuType: menuType.normal }
   },
   {
-    // path: 'sales/accounts',
+     
     path: "company/signup",
     component: SignUpComponent,
     data: { menuType: menuType.normal }
   },
   {
-    // path: 'sales/accounts',
+     
     path: "company/listing",
     component: CompanyListComponent,
     data: { menuType: menuType.initialSetup }
   },
 
   {
-    // path: 'sales/accounts',
+     
     path: "company/listing/:company_id",
     component: CompanyListComponent,
     data: { menuType: menuType.initialSetup }
   },
   {
-    // path: 'sales/accounts',
+     
     path: "company/verifyemail",
     component: VerifyEmailComponent,
     data: { menuType: menuType.initialSetup }
   },
   {
-    // path: 'sales/accounts',
+     
     path: "company/companydetails",
     component: CompanyDetailsComponent,
     data: { menuType: menuType.initialSetup }
   },
   {
-    // path: 'sales/accounts',
+     
     path: "company/bankdetails",
     component: BankDetailsComponent,
     data: { menuType: menuType.initialSetup }
   },
   {
-    // path: 'sales/accounts',
+     
     path: "company/selectplan",
     component: SelectPlanComponent,
     data: { menuType: menuType.initialSetup }
   },
   {
-    // path: 'sales/accounts',
+     
     path: "company/deposit",
     component: DepositComponent,
     data: { menuType: menuType.normal }
   },
   {
-    // path: 'sales/accounts',
+     
     path: "company/topups/:company_id",
     component: TopupApprovalComponent,
     data: { menuType: menuType.initialSetup }
   },
   {
-    // path: 'sales/accounts',
+     
     path: "company/planpayment",
     component: PlanPaymentComponent,
     data: { menuType: menuType.initialSetup }
   },
   {
-    // path: 'sales/accounts',
+     
     path: "account-details/:company_id",
     component: KopprAccountDetailsComponent,
     data: { menuType: menuType.normal }
@@ -331,7 +345,7 @@ const routes: Routes = [
     // runGuardsAndResolvers: 'always'
   },
   {
-    // path: 'sales/accounts',
+     
     path: "account/user",
     component: UserComponent,
     data: { menuType: menuType.userRole }
@@ -340,7 +354,7 @@ const routes: Routes = [
     // runGuardsAndResolvers: 'always'
   },
   {
-    // path: 'sales/accounts',
+     
     path: "account/user/addnewuser",
     component: AddNewUserComponent,
     data: { menuType: menuType.userRole }
@@ -349,7 +363,7 @@ const routes: Routes = [
     // runGuardsAndResolvers: 'always'
   },
   {
-    // path: 'sales/accounts',
+     
     path: "account/user/userdetails",
     component: UserDetailsComponent,
     data: { menuType: menuType.userRole }
@@ -358,12 +372,12 @@ const routes: Routes = [
     // runGuardsAndResolvers: 'always'
   },
   {
-    // path: 'sales/accounts',
+     
     path: "potcongrats",
     component: PotCongratsComponent
   },
   {
-    // path: 'sales/accounts',
+     
     path: "salary",
     component: SalaryComponent,
     data: { menuType: menuType.normal }
@@ -372,7 +386,7 @@ const routes: Routes = [
     // runGuardsAndResolvers: 'always'
   },
   {
-    // path: 'sales/accounts',
+     
     path: "salary/pay",
     component: PaySalaryComponent,
     data: { menuType: menuType.normal }
@@ -381,7 +395,7 @@ const routes: Routes = [
     // runGuardsAndResolvers: 'always'
   },
   {
-    // path: 'sales/accounts',
+     
     path: "salary/confirmsalarypayment",
     component: ConfirmSalaryPaymentComponent,
     data: { menuType: menuType.normal }
@@ -390,7 +404,7 @@ const routes: Routes = [
     // runGuardsAndResolvers: 'always'
   },
   {
-    // path: 'sales/accounts',
+     
     path: "salary/salarypaymentresponse",
     component: SalaryPaymentResponseComponent,
     data: { menuType: menuType.normal }
@@ -399,7 +413,7 @@ const routes: Routes = [
     // runGuardsAndResolvers: 'always'
   },
   {
-    // path: 'sales/accounts',
+     
     path: "salary/topuppaymentresponse",
     component: TopUpPaymentResponseComponent,
     data: { menuType: menuType.normal }
@@ -408,7 +422,7 @@ const routes: Routes = [
     // runGuardsAndResolvers: 'always'
   },
   {
-    // path: 'sales/accounts',
+     
     path: "salary/topuppayment",
     component: TopUpPaymentComponent,
     data: { menuType: menuType.normal }
@@ -417,7 +431,7 @@ const routes: Routes = [
     // runGuardsAndResolvers: 'always'
   },
   {
-    // path: 'sales/accounts',
+     
     path: "salary/topup",
     component: TopUpComponent,
     data: { menuType: menuType.normal }
@@ -426,7 +440,7 @@ const routes: Routes = [
     // runGuardsAndResolvers: 'always'
   },
   {
-    // path: 'sales/accounts',
+     
     path: "allowance",
     component: AllowanceComponent,
     data: { menuType: menuType.normal }
@@ -435,7 +449,7 @@ const routes: Routes = [
     // runGuardsAndResolvers: 'always'
   },
   {
-    // path: 'sales/accounts',
+     
     path: "allowance/pay",
     component: PayAllowanceComponent,
     data: { menuType: menuType.normal }
@@ -444,7 +458,7 @@ const routes: Routes = [
     // runGuardsAndResolvers: 'always'
   },
   {
-    // path: 'sales/accounts',
+     
     path: "allowance/confirm",
     component: ConfirmAllowancePaymentComponent,
     data: { menuType: menuType.normal }
@@ -453,7 +467,7 @@ const routes: Routes = [
     // runGuardsAndResolvers: 'always'
   },
   {
-    // path: 'sales/accounts',
+     
     path: "allowance/allowancepaymentresponse",
     component: AllowancePaymentResponseComponent,
     data: { menuType: menuType.normal }
@@ -462,7 +476,7 @@ const routes: Routes = [
     // runGuardsAndResolvers: 'always'
   },
   {
-    // path: 'sales/accounts',
+     
     path: "allowance/topuppaymentresponse",
     component: AllowanceTopUpPaymentResponseComponent,
     data: { menuType: menuType.normal }
@@ -471,7 +485,7 @@ const routes: Routes = [
     // runGuardsAndResolvers: 'always'
   },
   {
-    // path: 'sales/accounts',
+     
     path: "allowance/topuppayment",
     component: AllowanceTopUpPaymentComponent,
     data: { menuType: menuType.normal }
@@ -480,7 +494,7 @@ const routes: Routes = [
     // runGuardsAndResolvers: 'always'
   },
   {
-    // path: 'sales/accounts',
+     
     path: "allowance/topup",
     component: AllowanceTopUpComponent,
     data: { menuType: menuType.normal }
@@ -489,14 +503,14 @@ const routes: Routes = [
     // runGuardsAndResolvers: 'always'
   },
   {
-    // path: 'sales/accounts',
+     
     path: "viewpot",
     component: ViewPotComponent
     // canActivate: [AuthGuard],
     // runGuardsAndResolvers: 'always'
   },
   {
-    // path: 'sales/accounts',
+     
     path: "transfer",
     component: TransferPotComponent
     // ,
@@ -504,7 +518,7 @@ const routes: Routes = [
     // runGuardsAndResolvers: 'always'
   },
   {
-    // path: 'sales/accounts',
+     
     path: "transferfromto",
     component: TransferFromToComponent
     // ,
@@ -512,7 +526,7 @@ const routes: Routes = [
     // runGuardsAndResolvers: 'always'
   },
   {
-    // path: 'sales/accounts',
+     
     path: "goal",
     component: GoalComponent,
     canActivate: [AuthGuard],
@@ -520,32 +534,32 @@ const routes: Routes = [
   },
 
   {
-    // path: 'sales/accounts',
+     
     path: "claims",
     component: ClaimComponent,
     data: { menuType: menuType.normal }
   },
   {
-    // path: 'sales/accounts',
+     
     path: "claims/details/:id",
     component: ClaimDetailsComponent,
     data: { menuType: menuType.normal }
   },
   {
-    // path: 'sales/accounts',
+     
     path: "claims/details/claimrejected",
     component: ClaimRejectedComponent,
     data: { menuType: menuType.normal }
   },
   {
-    // path: 'sales/accounts',
+     
     path: "claims/details/claimapproved",
     component: ClaimApprovedComponent,
     data: { menuType: menuType.normal }
   },
 
   {
-    // path: 'sales/accounts',
+     
     path: "spends",
     component: SpendComponent,
     canActivate: [AuthGuard],
@@ -553,7 +567,7 @@ const routes: Routes = [
   },
 
   {
-    // path: 'sales/accounts',
+     
     path: "cards",
     component: CardComponent,
     canActivate: [AuthGuard],

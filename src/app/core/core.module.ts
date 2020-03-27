@@ -66,6 +66,8 @@ import { SignInInnerComponent } from "./components/login/sign-in/signin-inner.co
 import { LandingPageComponent } from "./components/login/landing-page/landing-page.component";
 import { TopupApprovalComponent } from "./components/company/topup-approval.component";
 import { DistributorComponent } from './components/distributor/distributor.component';
+import { SuperDistributorComponent } from './components/super-distributor/super-distributor.component';
+import { AddSuperDistributorComponent } from './components/super-distributor/add-super-distributor.component';
 import { AddDistributorComponent } from './components/distributor/add-distributor.component';
 import { SubDistributorComponent } from './components/sub-distributor/sub-distributor.component';
 import { AddSubDistributorComponent } from './components/sub-distributor/add-sub-distributor.component';
@@ -262,7 +264,9 @@ const icons: IconDefinition[] = Object.keys(antDesignIcons).map(
     WalletLoadRequestComponent,
     WalletTopUpComponent,
     PaymentsComponent,
-    ForgotPasswordComponent
+    ForgotPasswordComponent,
+    SuperDistributorComponent,
+    AddSuperDistributorComponent
   ],
   exports: [
     PlaceholderComponent,
@@ -329,7 +333,9 @@ const icons: IconDefinition[] = Object.keys(antDesignIcons).map(
     WalletLoadRequestComponent,
     WalletTopUpComponent,
     PaymentsComponent,
-    ForgotPasswordComponent
+    ForgotPasswordComponent,
+    SuperDistributorComponent,
+    AddSuperDistributorComponent
   ]
 })
 export class CoreModule {

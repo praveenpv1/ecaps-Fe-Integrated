@@ -3,10 +3,10 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 
 @Component({
   selector: 'app-addnewuser',
-  templateUrl: './add-distributor.component.html',
-  styleUrls: ['./add-distributor.component.scss']
+  templateUrl: './add-super-distributor.component.html',
+  styleUrls: ['./add-super-distributor.component.scss']
 })
-export class AddDistributorComponent implements OnInit {
+export class AddSuperDistributorComponent implements OnInit {
   validateForm: FormGroup; 
 
   submitForm() {
@@ -17,15 +17,14 @@ export class AddDistributorComponent implements OnInit {
   }
   constructor(private fb: FormBuilder) { }
 
-
   ngOnInit() {
     this.validateForm = this.fb.group({ 
-      selectedSuperDistributor: [null, [Validators.required]],
       first_name: [null, [Validators.required]],
       last_name: [null, [Validators.required]],
       company_name: [null, [Validators.required]],
       phoneNumberPrefix: ['+91'],
-      phoneNumber: [null, [Validators.required]],      
+      phoneNumber: [null, [Validators.required]],  
+      selectedMargin: [null, [Validators.required]],
       email: [null, [Validators.email, Validators.required]],
       dateOfBirth: [null],
       pan: [null, [Validators.required]],
@@ -37,7 +36,14 @@ export class AddDistributorComponent implements OnInit {
       paymentBank: [null, [Validators.required]],
       paymentReferenceNo:[null, [Validators.required]],
       paymentDate: [null],
-      paymentRemarks: ['', [Validators.required]]      
+      paymentRemarks: ['', [Validators.required]],
+      kitsIssued: [null, [Validators.required]],
+      rate: [null, [Validators.required]],
+      complementaryKits: [null, [Validators.required]],
+      kitsRemarks: ['', [Validators.required]]
+
+
+
     });
   }
 

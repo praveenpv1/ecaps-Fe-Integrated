@@ -1,30 +1,17 @@
 <div nz-row>
   <div nz-col nzSm="24" nzMd="24" nzLg="24" nzXl="24">
-    <a class="back-button-text"  [routerLink]="['/', 'sub-distributor']" ><img class="back-img" src="assets/images/back-button.svg">&nbsp;&nbsp;BACK</a>
+    <a class="back-button-text"  [routerLink]="['/', 'super-distributor']" ><img class="back-img" src="assets/images/back-button.svg">&nbsp;&nbsp;BACK</a>
     <br>
-    <h3 class="primary-color-font">Add New Distributor</h3>
-    <p>Add a new distributor here</p>
+    <h3 class="primary-color-font">Add New Super Distributor</h3>
+    <p>Add a new super distributor here</p>
   </div>
   <div nz-col nzSm="24" nzMd="24" nzLg="24" nzXl="24">
-    <h3>Distributor Details</h3>
+    <h3>Super Distributor Details</h3>
     <div nz-row>
       <div nz-col nzSm="24" nzMd="24" nzLg="2" nzXl="2"></div>
       <div nz-col nzSm="24" nzMd="24" nzLg="22" nzXl="22">
         <div nzSm="24" nzMd="24" nzLg="24" nzXl="24" class="text-center">
-          <form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()"> 
-            <nz-form-item>
-              <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="selectedSuperDistributor" nzRequired>Super Distributor</nz-form-label>
-              <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Please choose your Super Distributor">
-                <nz-select
-                  id="selectedSuperDistributor"
-                  formControlName="selectedSuperDistributor"
-                  nzPlaceHolder="Select Super Distributor" 
-                >
-                  <nz-option nzValue="1" nzLabel="1"></nz-option>
-                  <nz-option nzValue="2" nzLabel="2"></nz-option>
-                </nz-select>
-              </nz-form-control>
-            </nz-form-item>
+          <form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()">               
             <nz-form-item> 
               <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="first_name">First Name</nz-form-label>
               <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Please enter First Name.">
@@ -59,6 +46,19 @@
                   </ng-template>
                   <input formControlName="phoneNumber" id="'phoneNumber'" nz-input />
                 </nz-input-group>
+              </nz-form-control>
+            </nz-form-item>
+            <nz-form-item>
+              <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="selectedMargin" nzRequired>Choose Margin Set</nz-form-label>
+              <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Please choose Margin Set">
+                <nz-select
+                  id="selectedMargin"
+                  formControlName="selectedMargin"
+                  nzPlaceHolder="Select Margin Set" 
+                >
+                  <nz-option nzValue="1" nzLabel="1"></nz-option>
+                  <nz-option nzValue="2" nzLabel="2"></nz-option>
+                </nz-select>
               </nz-form-control>
             </nz-form-item>
             <nz-form-item>
@@ -147,9 +147,34 @@
                 <textarea formControlName="paymentRemarks" nz-input rows="2" placeholder="write payments remarks"></textarea>
               </nz-form-control>
             </nz-form-item>
+            <p style="text-align: left;">Extra Details</p>
+            <nz-form-item> 
+              <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="kitsIssued">Kits Issued</nz-form-label>
+              <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Please enter kits issued.">
+                <input nz-input formControlName="kitsIssued" id="kitsIssued"/>
+              </nz-form-control>
+            </nz-form-item>
+            <nz-form-item> 
+              <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="rate">Rate</nz-form-label>
+              <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Please enter rate.">
+                <input nz-input formControlName="rate" id="rate"/>
+              </nz-form-control>
+            </nz-form-item>
+            <nz-form-item> 
+              <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="complementaryKits">Kits Complementary</nz-form-label>
+              <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Please enter kits complementary.">
+                <input nz-input formControlName="complementaryKits" id="complementaryKits"/>
+              </nz-form-control>
+            </nz-form-item>
+            <nz-form-item>
+              <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired>Kits Remarks</nz-form-label>
+              <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Please write something here!">
+                <textarea formControlName="kitsRemarks" nz-input rows="2" placeholder="write kits remarks"></textarea>
+              </nz-form-control>
+            </nz-form-item>
             <nz-form-item nz-row class="register-area">
               <nz-form-control [nzSpan]="14" [nzOffset]="6">
-                <button nz-button nzType="primary">Create Distributor</button>
+                <button nz-button nzType="primary">Create Super Distributor</button>
               </nz-form-control>
             </nz-form-item>
           </form>
