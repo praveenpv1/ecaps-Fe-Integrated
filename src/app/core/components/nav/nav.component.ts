@@ -75,7 +75,7 @@ export class NavComponent implements OnInit, OnDestroy {
     noLoaderExists: boolean = true;
     subscribers: Subscription;
     company_id: string = "";
-    customTheme: string = "theme-bronzeColor";
+    customTheme: string = "theme-enviar";
     constructor(
         private commandBarSidenavService: SidenavService,
         private dashboardService: MockDashboardService,

@@ -25,7 +25,6 @@ import { ListComponent } from "./components/employee/list.component";
 import { SignUpInnerComponent } from "./components/company/sign-up-inner.component";
 import { SignUpComponent } from "./components/company/sign-up.component";
 import { DepositComponent } from "./components/company/deposit.component";
-import { VerifyEmailComponent } from "./components/company/verify-email.component";
 import { CompanyListComponent } from "./components/company/companylist.component";
 import { CompanyDetailsComponent } from "./components/company/company-details.component";
 import { BankDetailsComponent } from "./components/company/bank-details.component";
@@ -62,8 +61,7 @@ import { CardComponent } from "./components/card/card.component";
 import { NavigationBarComponent } from "./components/navigation-bar/navigation-bar.component";
 import { NavComponent } from "./components/nav/nav.component";
 import { SignInComponent } from "./components/login/sign-in/signin.component";
-import { SignInInnerComponent } from "./components/login/sign-in/signin-inner.component";
-import { LandingPageComponent } from "./components/login/landing-page/landing-page.component";
+import { SignInInnerComponent } from "./components/login/sign-in/signin-inner.component"; 
 import { TopupApprovalComponent } from "./components/company/topup-approval.component";
 import { DistributorComponent } from './components/distributor/distributor.component';
 import { SuperDistributorComponent } from './components/super-distributor/super-distributor.component';
@@ -80,6 +78,9 @@ import { WalletLoadRequestComponent } from './components/wallet-load-request/wal
 import { WalletTopUpComponent } from './components/wallet-top-up/wallet-top-up.component';
 import { PaymentsComponent } from './components/payments/payments.component';
 import { ForgotPasswordComponent } from "./components/login/forgot-password/forgot-password.component";
+import { VerifyEmailComponent } from "./components/login/verify-email/verify-email.component";
+import { SetPasswordComponent } from './components/login/set-password/set-password.component';
+
 
 import { KopprSignUpComponent } from "./components/login/sign-up/signup.component";
 import { ModalComponent } from "./components/modal/modal.component";
@@ -194,7 +195,6 @@ const icons: IconDefinition[] = Object.keys(antDesignIcons).map(
     BulkCategoryComponent,
     SignUpInnerComponent,
     SignUpComponent,
-    VerifyEmailComponent,
     CompanyDetailsComponent,
     BankDetailsComponent,
     SelectPlanComponent,
@@ -237,8 +237,7 @@ const icons: IconDefinition[] = Object.keys(antDesignIcons).map(
     NavComponent,
     ViewPotComponent,
     SignInComponent,
-    SignInInnerComponent,
-    LandingPageComponent,
+    SignInInnerComponent, 
     KopprSignUpComponent,
     ModalComponent,
     PayAllowanceComponent,
@@ -266,7 +265,9 @@ const icons: IconDefinition[] = Object.keys(antDesignIcons).map(
     PaymentsComponent,
     ForgotPasswordComponent,
     SuperDistributorComponent,
-    AddSuperDistributorComponent
+    AddSuperDistributorComponent,    
+    VerifyEmailComponent,
+    SetPasswordComponent
   ],
   exports: [
     PlaceholderComponent,
@@ -307,8 +308,7 @@ const icons: IconDefinition[] = Object.keys(antDesignIcons).map(
     NavComponent,
     ViewPotComponent,
     SignInComponent,
-    SignInInnerComponent,
-    LandingPageComponent,
+    SignInInnerComponent, 
     KopprSignUpComponent,
     ModalComponent,
     PayAllowanceComponent,
@@ -335,7 +335,9 @@ const icons: IconDefinition[] = Object.keys(antDesignIcons).map(
     PaymentsComponent,
     ForgotPasswordComponent,
     SuperDistributorComponent,
-    AddSuperDistributorComponent
+    AddSuperDistributorComponent,
+    VerifyEmailComponent,
+    SetPasswordComponent
   ]
 })
 export class CoreModule {

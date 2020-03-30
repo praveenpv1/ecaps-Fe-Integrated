@@ -9,8 +9,7 @@ import { BulkCategoryComponent } from "@app/core/components/employee/bulk-catego
 
 import { BulkUploadSuccessComponent } from "@app/core/components/employee/bulk-upload-success.component";
 import { SignUpInnerComponent } from "@app/core/components/company/sign-up-inner.component";
-import { SignUpComponent } from "@app/core/components/company/sign-up.component";
-import { VerifyEmailComponent } from "@app/core/components/company/verify-email.component";
+import { SignUpComponent } from "@app/core/components/company/sign-up.component"; 
 import { CompanyDetailsComponent } from "@app/core/components/company/company-details.component";
 import { BankDetailsComponent } from "@app/core/components/company/bank-details.component";
 import { SelectPlanComponent } from "@app/core/components/company/select-plan.component";
@@ -51,8 +50,7 @@ import { TransferFromToComponent } from "@app/core/components/dashboard/transfer
 import { PotCongratsComponent } from "@app/core/components/dashboard/potcongrats.component";
 import { EmployeeAddTypeSelectionComponent } from "@app/core/components/employee/employee-add-type-selection.component";
 import { ListComponent } from "@app/core/components/employee/list.component";
-import { SignInComponent } from "@app/core/components/login/sign-in/signin.component";
-import { LandingPageComponent } from "@app/core/components/login/landing-page/landing-page.component";
+import { SignInComponent } from "@app/core/components/login/sign-in/signin.component"; 
 import { KopprSignUpComponent } from "@app/core/components/login/sign-up/signup.component";
 import { CompanyListComponent } from "./core/components/company/companylist.component";
 import { DepositComponent } from "./core/components/company/deposit.component";
@@ -72,8 +70,9 @@ import { MonthlyTransactionsComponent } from "@app/core/components/monthly-trans
 import { WalletLoadRequestComponent } from "@app/core/components/wallet-load-request/wallet-load-request.component";
 import { WalletTopUpComponent } from "@app/core/components/wallet-top-up/wallet-top-up.component";
 import { PaymentsComponent } from "@app/core/components/payments/payments.component";
-import { ForgotPasswordComponent } from '@app/core/components/login/forgot-password/forgot-password.component';
-
+import { ForgotPasswordComponent } from "@app/core/components/login/forgot-password/forgot-password.component"; 
+import { SetPasswordComponent } from "@app/core/components/login/set-password/set-password.component";
+import { VerifyEmailComponent } from "@app/core/components/login/verify-email/verify-email.component";
 
 export enum menuType {
   initialSetup = 1,
@@ -198,14 +197,20 @@ const routes: Routes = [
   },
   {
      
-    path: "welcome",
-    component: LandingPageComponent,
+    path: "signin",
+    component: SignInComponent,
     data: { menuType: menuType.siginin }
   },
   {
      
-    path: "signin",
-    component: SignInComponent,
+    path: "set-password/:token",
+    component: SetPasswordComponent,
+    data: { menuType: menuType.siginin }
+  },
+  {
+     
+    path: "verify-email/:token",
+    component: VerifyEmailComponent,
     data: { menuType: menuType.siginin }
   },
   {
@@ -291,12 +296,6 @@ const routes: Routes = [
      
     path: "company/listing/:company_id",
     component: CompanyListComponent,
-    data: { menuType: menuType.initialSetup }
-  },
-  {
-     
-    path: "company/verifyemail",
-    component: VerifyEmailComponent,
     data: { menuType: menuType.initialSetup }
   },
   {
