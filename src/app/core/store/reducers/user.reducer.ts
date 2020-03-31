@@ -7,7 +7,8 @@ import {
   NOT_LOADING,
   LOGIN,
   FETCH_USER_GRAPHQL,
-  RESET_STATE
+  RESET_STATE,
+  USERS_LIST
 } from "../actions";
 import { LoadingReducers } from "./loading.reducer";
 import { MODEL_PATHS } from "pk-client";
@@ -73,95 +74,6 @@ export class UserReducers {
             console.log(error);
           }
         );
-        // (
-        //   response => {
-        //     const token = _.get(response, "token", null);
-        //     this.authService.setAccessToken(token);
-        //     const responseStatus: number = _.get(
-        //       response,
-        //       "response.status",
-        //       null
-        //     );
-        //     const isTokenIncluded = _.keys(response).includes("token");
-        //     if (responseStatus === 200 || isTokenIncluded) {
-        //       this.userReducer({ type: ADD_USER_INFO });
-
-        //       this.apiService
-        //         .pk_get("/v1/auth_user", "", {})
-        //         .then(resp => {
-        //           const roles = _.get(resp, "roles", []);
-
-        //           state = this._dataStore.dataStore$.getValue();
-
-        //           if (roles.includes("admin")) {
-        //             defaultRedirectURL = ["company", "listing"];
-        //           }
-
-        //           if (!(roles.includes("admin") || roles.includes("company"))) {
-        //             state = this._dataStore.dataStore$.getValue();
-
-        //             this._dataStore.dataStore$.next({
-        //               ...state,
-        //               ...catchCommonData,
-        //               toastMessage: "Permission denied."
-        //             });
-        //             this.router.navigate(["/sigin"]);
-        //             return;
-        //           }
-
-        //           this.apiService
-        //             .pk_get(employeePath + "/me", "", {})
-        //             .then(data => {
-        //               const res: any = data;
-        //               state = this._dataStore.dataStore$.getValue();
-        //               sessionStorage.setItem("roles", roles);
-        //               this._dataStore.dataStore$.next({
-        //                 ...state,
-        //                 ...catchCommonData,
-        //                 company_id: res.company,
-        //                 roles: roles
-        //               });
-
-        //               sessionStorage.setItem("company_id", res.company);
-
-        //               const isUserVerified =
-        //                 _.get(resp, "email_verification", "") === "approved" &&
-        //                 _.get(resp, "phone_verification", "") === "approved";
-
-        //               if (
-        //                 isUserVerified ||
-        //                 _.get(resp, "username", "") == "care@koppr.in"
-        //               ) {
-        //                 this.router.navigate([
-        //                   "/",
-        //                   ...defaultRedirectURL,
-        //                   res.company
-        //                 ]);
-        //               } else {
-        //                 this._dataStore.dataStore$.next({
-        //                   ...state,
-        //                   ...catchCommonData,
-        //                   toastMessage: "User not Verified. Please Verify."
-        //                 });
-        //                 this.router.navigate([
-        //                   "/",
-        //                   ...defaultRedirectURL,
-        //                   res.company
-        //                 ]);
-        //               }
-        //             });
-        //         })
-        //         .catch(error => {
-        //           this.toast.commonCatchToast(error);
-        //         });
-        //     } else {
-        //       this.toast.commonCatchToast("User not found!");
-        //     }
-        //   },
-        //   error => {
-        //     this.toast.commonCatchToast(error);
-        //   }
-        // );
         break;
       case ADD_USER_INFO:
         console.log("IN USER ADD");
@@ -186,6 +98,33 @@ export class UserReducers {
               toastMessage: error.response.data.error
             });
           });
+        break;
+
+      case USERS_LIST:
+        console.log("IN USERS_LIST");
+        this._loader.loadingState({ type: LOADING });
+        this.apiService
+          .post(`main/users/allusers`, { pid: action.payload.id })
+          .subscribe(
+            (response: any) => {
+              this._dataStore.dataStore$.next({
+                ...state,
+                ...successCommonData,
+                [action.payload.childName]: response.data
+              });
+            },
+            error => {
+              console.log(error);
+
+              state = this._dataStore.dataStore$.getValue();
+
+              this._dataStore.dataStore$.next({
+                ...state,
+                ...catchCommonData,
+                toastMessage: _.get(error, "message", "Something Went Wrong!!")
+              });
+            }
+          );
         break;
 
       default:

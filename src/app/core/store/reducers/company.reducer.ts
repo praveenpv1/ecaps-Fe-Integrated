@@ -90,7 +90,7 @@ export class CompanyReducers {
                     this.toast.commonCatchToast("Phone Already exists");
                   } else {
                     this.apiService
-                      .post(this.companyApi, {
+                      .pk_post(this.companyApi, {
                         ...action.payload
                       })
                       .then(data => {
@@ -220,7 +220,7 @@ export class CompanyReducers {
         console.log("ADD EMPLOYEE ALLOWANCE");
         this._loader.loadingState({ type: LOADING });
         this.apiService
-          .post(this.companyAllowanceBulkAdd, {
+          .pk_post(this.companyAllowanceBulkAdd, {
             ...action.payload
           })
           .then(data => {
@@ -245,7 +245,7 @@ export class CompanyReducers {
         }
 
         this.apiService
-          .post(this.company_transactions, {
+          .pk_post(this.company_transactions, {
             ...action.payload
           })
           .then(data => {
