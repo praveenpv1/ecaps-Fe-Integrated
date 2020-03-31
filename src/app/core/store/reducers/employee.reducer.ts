@@ -130,7 +130,7 @@ export class EmployeeReducers {
         this._loader.loadingState({ type: LOADING });
 
         this.apiService
-          .post(this.apiPath, {
+          .pk_post(this.apiPath, {
             ...action.payload
           })
           .then(data => {
@@ -210,7 +210,7 @@ export class EmployeeReducers {
 
         action.payload.forEach(res => {
           this.apiService
-            .post(this.apiPath, {
+            .pk_post(this.apiPath, {
               first_name: res["First name (required)"],
               last_name: res["Last name (required)"],
               gender: res["Gender (required)"]
@@ -274,7 +274,7 @@ export class EmployeeReducers {
         console.log("SEND VERIFICATION");
         this._loader.loadingState({ type: LOADING });
         this.apiService
-          .post(
+          .pk_post(
             `${this.apiPath}/${action.payload.employee_id}/resend_otp_email`,
             {}
           )
@@ -445,7 +445,7 @@ export class EmployeeReducers {
     }
     obj.forEach(element => {
       this.apiService
-        .post(`${this.apiPath}/${element.id}/resend_otp_email`, {})
+        .pk_post(`${this.apiPath}/${element.id}/resend_otp_email`, {})
         .then(r => {
           counter++;
 

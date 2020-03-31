@@ -3,6 +3,9 @@ export const ADD_USER_INFO = "[USER_INFO] Add";
 export const IS_USER_VERIFIED = "[USER] Is User Verified";
 export const LOGIN = "[USER] Login";
 export const FORGOT_PASSWORD = "[USER] Forgot Password";
+export const USERS_LIST = "[USER] Get Users List";
+export const VERIFY_EMAIL = "[USER] Verify Email";
+export const SET_PASSWORD = "[USER] Set Password";
 
 //State
 export const RESET_STATE = "[RESET_STATE]";

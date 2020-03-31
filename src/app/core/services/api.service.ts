@@ -24,7 +24,7 @@ export class ApiService {
   token: string = _.isEmpty(this.authService.getAccessToken())
     ? ""
     : this.authService.getAccessToken();
-
+  userInfo: any = JSON.parse(localStorage.getItem("userData"));
   constructor(
     private httpClient: HttpClient,
     private authService: AuthService
@@ -57,6 +57,25 @@ export class ApiService {
     return body;
   }
 
+  public post(url: string, params: object = {}): Observable<Object> {
+    const postUrl = `${BASE_URL}/${url}`;
+    const body = this.stringParams(params).toString();
+    let headers = new HttpHeaders();
+    const token: string = _.isEmpty(this.authService.getAccessToken())
+      ? ""
+      : this.authService.getAccessToken();
+    const tokenType = _.get(this.userInfo, "token_type", "Bearer");
+
+    headers = headers.set("Content-Type", "application/x-www-form-urlencoded");
+    headers = headers.set("Authorization", `${tokenType} ${token}`);
+
+    return this.httpClient
+      .post<Object>(postUrl, body, {
+        headers
+      })
+      .pipe(retry(2), catchError(this.handleError));
+  }
+
   //   public get(
   //     url: string,
   //     params: object = { test: 1234, test1: "abc" }
@@ -75,13 +94,20 @@ export class ApiService {
   //       .pipe(retry(2), catchError(this.handleError));
   //   }
 
-  public get(url: string, params: object = {}): Observable<Object> {
+  public get(
+    url: string,
+    params: object = {},
+    isUrlEncoded: boolean = false
+  ): Observable<Object> {
     const getUrl = `${BASE_URL}/${url}`;
 
+    const headerType: string = isUrlEncoded
+      ? "application/x-www-form-urlencoded"
+      : "application/json";
     return this.httpClient
       .get<Object>(getUrl, {
         params: { ...params },
-        headers: new HttpHeaders().set("Content-Type", "application/json")
+        headers: new HttpHeaders().set("Content-Type", headerType)
       })
       .pipe(retry(2), catchError(this.handleError));
   }
@@ -94,7 +120,7 @@ export class ApiService {
     return null;
   }
 
-  public async post(path: string, params: object): Promise<Object> {
+  public async pk_post(path: string, params: object): Promise<Object> {
     return null;
   }
 

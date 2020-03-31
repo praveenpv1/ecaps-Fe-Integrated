@@ -9,7 +9,10 @@ import {
   FETCH_USER_GRAPHQL,
   RESET_STATE,
   FORGOT_PASSWORD,
-  SHOW_TOAST
+  SHOW_TOAST,
+  VERIFY_EMAIL,
+  SET_PASSWORD,
+  USERS_LIST
 } from "../actions";
 import { LoadingReducers } from "./loading.reducer";
 import { catchCommonData, successCommonData } from "../commonstoredata";
@@ -18,6 +21,7 @@ import { AuthService } from "auth";
 import { Router } from "@angular/router";
 import { ToastReducers } from "./toast.reducer";
 import { ResetStateReducers } from "@app/core/store/reducers/resetstate.reducer";
+import { UserReducers } from "./user.reducer";
 
 @Injectable()
 export class LoginReducers {
@@ -28,7 +32,8 @@ export class LoginReducers {
     private authService: AuthService,
     private router: Router,
     private toast: ToastReducers,
-    private resetReducer: ResetStateReducers
+    private resetReducer: ResetStateReducers,
+    private user: UserReducers
   ) {}
 
   loginReducer(action: any) {
@@ -49,16 +54,24 @@ export class LoginReducers {
 
         state = this._dataStore.dataStore$.getValue();
         this.apiService.login(action.payload).subscribe(
-          (response: any) => {
-            this.authService.setAccessToken(response.token);
-            if (response.is_verified) {
+          ({ data }: any) => {
+            this.authService.setAccessToken(data.token);
+            if (data.is_verified) {
               this._dataStore.dataStore$.next({
                 ...state,
                 ...successCommonData,
-                userInfo: _.omit(response, "token")
+                userInfo: _.omit(data, "token")
               });
-              localStorage.setItem("userData", JSON.stringify(response));
+              localStorage.setItem("userData", JSON.stringify(data));
               this.router.navigate(["/", ...defaultRedirectURL]);
+
+              // this.user.userReducer({
+              //   type: USERS_LIST,
+              //   payload: {
+              //     id: _.get(data, "_id", null),
+              //     childName: "childrenList"
+              //   }
+              // });
             } else {
               this._dataStore.dataStore$.next({
                 ...state,
@@ -67,7 +80,7 @@ export class LoginReducers {
               });
               this.router.navigate(["/sigin"]);
             }
-            console.log(response);
+            console.log(data);
           },
           error => {
             state = this._dataStore.dataStore$.getValue();
@@ -90,6 +103,94 @@ export class LoginReducers {
 
         this.apiService
           .get(`main/auth/forgot-password/${action.payload.email}`)
+          .subscribe(
+            (response: any) => {
+              if (_.get(response, "status", 500) === 200) {
+                this.toast.toastState({
+                  type: SHOW_TOAST,
+                  payload: { message: response.message, type: "success" }
+                });
+
+                this._dataStore.dataStore$.next({
+                  ...state,
+                  ...successCommonData
+                });
+                this.router.navigate(["/sigin"]);
+              } else {
+                state = this._dataStore.dataStore$.getValue();
+
+                this._dataStore.dataStore$.next({
+                  ...state,
+                  ...catchCommonData,
+                  toastMessage: _.get(
+                    response,
+                    "message",
+                    "Something Went Wrong!!"
+                  )
+                });
+              }
+            },
+            error => {
+              console.log(error);
+
+              state = this._dataStore.dataStore$.getValue();
+
+              this._dataStore.dataStore$.next({
+                ...state,
+                ...catchCommonData,
+                toastMessage: _.get(error, "message", "Something Went Wrong!!")
+              });
+            }
+          );
+        break;
+
+      case VERIFY_EMAIL:
+        this._loader.loadingState({ type: LOADING });
+
+        console.log("IN VERIFY_EMAIL");
+
+        state = this._dataStore.dataStore$.getValue();
+
+        this.apiService
+          .get(`main/auth/verify/${action.payload.token}`, {}, true)
+          .subscribe(
+            (response: any) => {
+              this.toast.toastState({
+                type: SHOW_TOAST,
+                payload: { message: response.message, type: "success" }
+              });
+
+              this._dataStore.dataStore$.next({
+                ...state,
+                ...successCommonData
+              });
+              this.router.navigate(["/sigin"]);
+            },
+            error => {
+              console.log(error);
+
+              state = this._dataStore.dataStore$.getValue();
+
+              this._dataStore.dataStore$.next({
+                ...state,
+                ...catchCommonData,
+                toastMessage: _.get(error, "message", "Something Went Wrong!!")
+              });
+            }
+          );
+        break;
+
+      case SET_PASSWORD:
+        this._loader.loadingState({ type: LOADING });
+
+        console.log("IN VERIFY_EMAIL");
+
+        state = this._dataStore.dataStore$.getValue();
+
+        this.apiService
+          .post(`main/auth/verify/${action.payload.token}`, {
+            newpassword: action.payload.password
+          })
           .subscribe(
             (response: any) => {
               this.toast.toastState({

@@ -9,7 +9,7 @@ import { BulkCategoryComponent } from "@app/core/components/employee/bulk-catego
 
 import { BulkUploadSuccessComponent } from "@app/core/components/employee/bulk-upload-success.component";
 import { SignUpInnerComponent } from "@app/core/components/company/sign-up-inner.component";
-import { SignUpComponent } from "@app/core/components/company/sign-up.component"; 
+import { SignUpComponent } from "@app/core/components/company/sign-up.component";
 import { CompanyDetailsComponent } from "@app/core/components/company/company-details.component";
 import { BankDetailsComponent } from "@app/core/components/company/bank-details.component";
 import { SelectPlanComponent } from "@app/core/components/company/select-plan.component";
@@ -50,7 +50,7 @@ import { TransferFromToComponent } from "@app/core/components/dashboard/transfer
 import { PotCongratsComponent } from "@app/core/components/dashboard/potcongrats.component";
 import { EmployeeAddTypeSelectionComponent } from "@app/core/components/employee/employee-add-type-selection.component";
 import { ListComponent } from "@app/core/components/employee/list.component";
-import { SignInComponent } from "@app/core/components/login/sign-in/signin.component"; 
+import { SignInComponent } from "@app/core/components/login/sign-in/signin.component";
 import { KopprSignUpComponent } from "@app/core/components/login/sign-up/signup.component";
 import { CompanyListComponent } from "./core/components/company/companylist.component";
 import { DepositComponent } from "./core/components/company/deposit.component";
@@ -70,7 +70,7 @@ import { MonthlyTransactionsComponent } from "@app/core/components/monthly-trans
 import { WalletLoadRequestComponent } from "@app/core/components/wallet-load-request/wallet-load-request.component";
 import { WalletTopUpComponent } from "@app/core/components/wallet-top-up/wallet-top-up.component";
 import { PaymentsComponent } from "@app/core/components/payments/payments.component";
-import { ForgotPasswordComponent } from "@app/core/components/login/forgot-password/forgot-password.component"; 
+import { ForgotPasswordComponent } from "@app/core/components/login/forgot-password/forgot-password.component";
 import { SetPasswordComponent } from "@app/core/components/login/set-password/set-password.component";
 import { VerifyEmailComponent } from "@app/core/components/login/verify-email/verify-email.component";
 
@@ -101,241 +101,207 @@ const routes: Routes = [
   // Reference the lib wrapper modules using a relative path
   //
   {
-     
     path: "distributor",
     component: DistributorComponent,
     data: { menuType: menuType.normal }
   },
   {
-     
     path: "super-distributor",
     component: SuperDistributorComponent,
     data: { menuType: menuType.normal }
   },
   {
-     
     path: "super-distributor/add",
     component: AddSuperDistributorComponent,
     data: { menuType: menuType.normal }
   },
   {
-     
     path: "distributor/add",
     component: AddDistributorComponent,
     data: { menuType: menuType.normal }
   },
   {
-     
     path: "sub-distributor",
     component: SubDistributorComponent,
     data: { menuType: menuType.normal }
   },
   {
-     
     path: "sub-distributor/add",
     component: AddSubDistributorComponent,
     data: { menuType: menuType.normal }
   },
   {
-     
     path: "retailer",
     component: RetailerComponent,
     data: { menuType: menuType.normal }
   },
   {
-     
     path: "retailer/add",
     component: AddRetailerComponent,
     data: { menuType: menuType.normal }
   },
   {
-     
     path: "ledgers",
     component: LedgersComponent,
     data: { menuType: menuType.normal }
   },
   {
-     
     path: "earnings",
     component: EarningsComponent,
     data: { menuType: menuType.normal }
   },
   {
-     
     path: "monthly-transactions",
     component: MonthlyTransactionsComponent,
     data: { menuType: menuType.normal }
   },
   {
-     
     path: "wallet-load-request",
     component: WalletLoadRequestComponent,
     data: { menuType: menuType.normal }
   },
   {
-     
     path: "wallet-top-up",
     component: WalletTopUpComponent,
     data: { menuType: menuType.normal }
-  }, 
+  },
   {
     path: "payments",
     component: PaymentsComponent,
     data: { menuType: menuType.normal }
   },
   {
-     
     path: "signup",
     component: KopprSignUpComponent,
     data: { menuType: 4 }
   },
   {
-     
     path: "account-update",
     component: SignUpInnerComponent,
     data: { menuType: 4 }
   },
   {
-     
     path: "signin",
     component: SignInComponent,
     data: { menuType: menuType.siginin }
   },
   {
-     
-    path: "set-password/:token",
+    path: "forgot-password/:token",
     component: SetPasswordComponent,
     data: { menuType: menuType.siginin }
   },
   {
-     
+    path: "new-password/:token",
+    component: SetPasswordComponent,
+    data: { menuType: menuType.siginin }
+  },
+  {
     path: "verify-email/:token",
     component: VerifyEmailComponent,
     data: { menuType: menuType.siginin }
   },
   {
-     
     path: "forgot-password",
     component: ForgotPasswordComponent,
     data: { menuType: menuType.siginin }
   },
   {
-     
     path: "signup",
     component: SignUpComponent,
     data: { menuType: menuType.siginin }
   },
   {
-     
     path: "dashboard/:company_id",
     component: DashboardComponent,
     data: { menuType: menuType.normal }
   },
   {
-     
     path: "dashboard",
     component: DashboardComponent,
     data: { menuType: menuType.normal }
   },
   {
-     
     path: "employee/add",
     component: AddEmployeeComponent,
     data: { menuType: menuType.normal }
   },
   {
-     
     path: "employee/add/:employeeid/:id",
     component: AddEmployeeComponent,
     data: { menuType: menuType.normal }
   },
   {
-     
     path: "employee/list/add-type-selection",
     component: EmployeeAddTypeSelectionComponent,
     data: { menuType: menuType.normal }
   },
   {
-     
     path: "employee/bulk",
     component: BulkUploadComponent,
     data: { menuType: menuType.normal }
   },
   {
-     
     path: "employee/bulk/category",
     component: BulkCategoryComponent,
     data: { menuType: menuType.normal }
   },
   {
-     
     path: "employee/list/bulkuploadsuccess",
     component: BulkUploadSuccessComponent,
     data: { menuType: menuType.normal }
   },
   {
-     
     path: "employee/list",
     component: ListComponent,
     data: { menuType: menuType.normal }
   },
   {
-     
     path: "company/signup",
     component: SignUpComponent,
     data: { menuType: menuType.normal }
   },
   {
-     
     path: "company/listing",
     component: CompanyListComponent,
     data: { menuType: menuType.initialSetup }
   },
 
   {
-     
     path: "company/listing/:company_id",
     component: CompanyListComponent,
     data: { menuType: menuType.initialSetup }
   },
   {
-     
     path: "company/companydetails",
     component: CompanyDetailsComponent,
     data: { menuType: menuType.initialSetup }
   },
   {
-     
     path: "company/bankdetails",
     component: BankDetailsComponent,
     data: { menuType: menuType.initialSetup }
   },
   {
-     
     path: "company/selectplan",
     component: SelectPlanComponent,
     data: { menuType: menuType.initialSetup }
   },
   {
-     
     path: "company/deposit",
     component: DepositComponent,
     data: { menuType: menuType.normal }
   },
   {
-     
     path: "company/topups/:company_id",
     component: TopupApprovalComponent,
     data: { menuType: menuType.initialSetup }
   },
   {
-     
     path: "company/planpayment",
     component: PlanPaymentComponent,
     data: { menuType: menuType.initialSetup }
   },
   {
-     
     path: "account-details/:company_id",
     component: KopprAccountDetailsComponent,
     data: { menuType: menuType.normal }
@@ -344,7 +310,6 @@ const routes: Routes = [
     // runGuardsAndResolvers: 'always'
   },
   {
-     
     path: "account/user",
     component: UserComponent,
     data: { menuType: menuType.userRole }
@@ -353,7 +318,6 @@ const routes: Routes = [
     // runGuardsAndResolvers: 'always'
   },
   {
-     
     path: "account/user/addnewuser",
     component: AddNewUserComponent,
     data: { menuType: menuType.userRole }
@@ -362,7 +326,6 @@ const routes: Routes = [
     // runGuardsAndResolvers: 'always'
   },
   {
-     
     path: "account/user/userdetails",
     component: UserDetailsComponent,
     data: { menuType: menuType.userRole }
@@ -371,12 +334,10 @@ const routes: Routes = [
     // runGuardsAndResolvers: 'always'
   },
   {
-     
     path: "potcongrats",
     component: PotCongratsComponent
   },
   {
-     
     path: "salary",
     component: SalaryComponent,
     data: { menuType: menuType.normal }
@@ -385,7 +346,6 @@ const routes: Routes = [
     // runGuardsAndResolvers: 'always'
   },
   {
-     
     path: "salary/pay",
     component: PaySalaryComponent,
     data: { menuType: menuType.normal }
@@ -394,7 +354,6 @@ const routes: Routes = [
     // runGuardsAndResolvers: 'always'
   },
   {
-     
     path: "salary/confirmsalarypayment",
     component: ConfirmSalaryPaymentComponent,
     data: { menuType: menuType.normal }
@@ -403,7 +362,6 @@ const routes: Routes = [
     // runGuardsAndResolvers: 'always'
   },
   {
-     
     path: "salary/salarypaymentresponse",
     component: SalaryPaymentResponseComponent,
     data: { menuType: menuType.normal }
@@ -412,7 +370,6 @@ const routes: Routes = [
     // runGuardsAndResolvers: 'always'
   },
   {
-     
     path: "salary/topuppaymentresponse",
     component: TopUpPaymentResponseComponent,
     data: { menuType: menuType.normal }
@@ -421,7 +378,6 @@ const routes: Routes = [
     // runGuardsAndResolvers: 'always'
   },
   {
-     
     path: "salary/topuppayment",
     component: TopUpPaymentComponent,
     data: { menuType: menuType.normal }
@@ -430,7 +386,6 @@ const routes: Routes = [
     // runGuardsAndResolvers: 'always'
   },
   {
-     
     path: "salary/topup",
     component: TopUpComponent,
     data: { menuType: menuType.normal }
@@ -439,7 +394,6 @@ const routes: Routes = [
     // runGuardsAndResolvers: 'always'
   },
   {
-     
     path: "allowance",
     component: AllowanceComponent,
     data: { menuType: menuType.normal }
@@ -448,7 +402,6 @@ const routes: Routes = [
     // runGuardsAndResolvers: 'always'
   },
   {
-     
     path: "allowance/pay",
     component: PayAllowanceComponent,
     data: { menuType: menuType.normal }
@@ -457,7 +410,6 @@ const routes: Routes = [
     // runGuardsAndResolvers: 'always'
   },
   {
-     
     path: "allowance/confirm",
     component: ConfirmAllowancePaymentComponent,
     data: { menuType: menuType.normal }
@@ -466,7 +418,6 @@ const routes: Routes = [
     // runGuardsAndResolvers: 'always'
   },
   {
-     
     path: "allowance/allowancepaymentresponse",
     component: AllowancePaymentResponseComponent,
     data: { menuType: menuType.normal }
@@ -475,7 +426,6 @@ const routes: Routes = [
     // runGuardsAndResolvers: 'always'
   },
   {
-     
     path: "allowance/topuppaymentresponse",
     component: AllowanceTopUpPaymentResponseComponent,
     data: { menuType: menuType.normal }
@@ -484,7 +434,6 @@ const routes: Routes = [
     // runGuardsAndResolvers: 'always'
   },
   {
-     
     path: "allowance/topuppayment",
     component: AllowanceTopUpPaymentComponent,
     data: { menuType: menuType.normal }
@@ -493,7 +442,6 @@ const routes: Routes = [
     // runGuardsAndResolvers: 'always'
   },
   {
-     
     path: "allowance/topup",
     component: AllowanceTopUpComponent,
     data: { menuType: menuType.normal }
@@ -502,14 +450,12 @@ const routes: Routes = [
     // runGuardsAndResolvers: 'always'
   },
   {
-     
     path: "viewpot",
     component: ViewPotComponent
     // canActivate: [AuthGuard],
     // runGuardsAndResolvers: 'always'
   },
   {
-     
     path: "transfer",
     component: TransferPotComponent
     // ,
@@ -517,7 +463,6 @@ const routes: Routes = [
     // runGuardsAndResolvers: 'always'
   },
   {
-     
     path: "transferfromto",
     component: TransferFromToComponent
     // ,
@@ -525,7 +470,6 @@ const routes: Routes = [
     // runGuardsAndResolvers: 'always'
   },
   {
-     
     path: "goal",
     component: GoalComponent,
     canActivate: [AuthGuard],
@@ -533,32 +477,27 @@ const routes: Routes = [
   },
 
   {
-     
     path: "claims",
     component: ClaimComponent,
     data: { menuType: menuType.normal }
   },
   {
-     
     path: "claims/details/:id",
     component: ClaimDetailsComponent,
     data: { menuType: menuType.normal }
   },
   {
-     
     path: "claims/details/claimrejected",
     component: ClaimRejectedComponent,
     data: { menuType: menuType.normal }
   },
   {
-     
     path: "claims/details/claimapproved",
     component: ClaimApprovedComponent,
     data: { menuType: menuType.normal }
   },
 
   {
-     
     path: "spends",
     component: SpendComponent,
     canActivate: [AuthGuard],
@@ -566,7 +505,6 @@ const routes: Routes = [
   },
 
   {
-     
     path: "cards",
     component: CardComponent,
     canActivate: [AuthGuard],

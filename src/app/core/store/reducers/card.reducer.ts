@@ -32,7 +32,7 @@ export class CardReducers {
         console.log("IN ASSIGN_CARD");
         this._loader.loadingState({ type: LOADING });
         this.apiService
-          .post(this.cardKitPath, {
+          .pk_post(this.cardKitPath, {
             ...action.payload
           })
           .then(data => {
@@ -85,7 +85,7 @@ export class CardReducers {
         this._loader.loadingState({ type: LOADING });
 
         this.apiService
-          .post(`${this.cardKitPath}/lock`, {
+          .pk_post(`${this.cardKitPath}/lock`, {
             ...action.payload
           })
           .then(data => {
