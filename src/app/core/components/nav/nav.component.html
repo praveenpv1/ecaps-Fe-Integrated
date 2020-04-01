@@ -134,6 +134,7 @@
                     nzOpen
                     nzIcon="user"
                     [routerLink]="['/', 'dashboard']"
+                    *ngIf="['master','admin','distributor','superdistributor','retailer'].includes(userRole)" 
                 >
                     <i nz-icon nzType="dashboard" nzTheme="outline"></i>
                     Dashboard
@@ -143,6 +144,7 @@
                     nzOpen
                     nzIcon="user"
                     [routerLink]="['/', 'super-distributor']"
+                    *ngIf="['master','admin'].includes(userRole)" 
                 >
                     <i nz-icon nzType="global" nzTheme="outline"></i>
                     Super Distributor
@@ -152,37 +154,39 @@
                     nzOpen
                     nzIcon="user"
                     [routerLink]="['/', 'distributor']"
+                    *ngIf="['master','admin','superdistributor'].includes(userRole)" 
                 >
                     <i nz-icon nzType="deployment-unit" nzTheme="outline"></i>
                     Distributor
-                </li>
-                <!-- <li
-                    nz-menu-item
-                    nzOpen
-                    nzIcon="user"
-                    [routerLink]="['/', 'sub-distributor']"
-                >
-                    <i nz-icon nzType="deployment-unit" nzTheme="outline"></i>
-                    Sub-Distributor
-                </li> -->
+                </li> 
                 <li
                     nz-menu-item
                     nzOpen
                     nzIcon="user"
                     [routerLink]="['/', 'retailer']"
+                    *ngIf="['master','admin','distributor','superdistributor'].includes(userRole)" 
                 >
                     <i nz-icon nzType="user" nzTheme="outline"></i> Retailer
                 </li>
-                <li nz-menu-item nzOpen [routerLink]="['/', 'ledgers']">
+                <li nz-menu-item
+                    nzOpen
+                    [routerLink]="['/', 'ledgers']"
+                    *ngIf="['master','admin','distributor','superdistributor','retailer'].includes(userRole)" 
+                    >
                     <i nz-icon nzType="file" nzTheme="outline"></i> Ledgers
                 </li>
-                <li nz-menu-item nzOpen [routerLink]="['/', 'earnings']">
+                <li nz-menu-item
+                    nzOpen 
+                    [routerLink]="['/', 'earnings']"
+                    *ngIf="['master','admin','distributor','superdistributor','retailer'].includes(userRole)" 
+                    >
                     <i nz-icon nzType="dollar" nzTheme="outline"></i> Earnings
                 </li>
                 <li
                     nz-menu-item
                     nzOpen
                     [routerLink]="['/', 'monthly-transactions']"
+                    *ngIf="['master','admin','distributor','superdistributor','retailer'].includes(userRole)" 
                 >
                     <i nz-icon nzType="calendar" nzTheme="outline"></i> Monthly
                     Transactions
@@ -191,46 +195,28 @@
                     nz-menu-item
                     nzOpen
                     [routerLink]="['/', 'wallet-load-request']"
+                    *ngIf="['master','admin','distributor','superdistributor','retailer'].includes(userRole)" 
                 >
                     <i nz-icon nzType="interaction" nzTheme="outline"></i>
                     Wallet Load Request
                 </li>
-                <li nz-menu-item nzOpen [routerLink]="['/', 'wallet-top-up']">
+                <li nz-menu-item 
+                    nzOpen 
+                    [routerLink]="['/', 'wallet-top-up']"
+                    *ngIf="['master','admin','distributor','superdistributor','retailer'].includes(userRole)" 
+                >
                     <img
                         src="assets/images/rupay-add.png"
                         style="width: 20px;"
                     />&nbsp;&nbsp; Wallet Top Up
                 </li>
-                <li nz-menu-item nzOpen [routerLink]="['/', 'payments']">
+                <li nz-menu-item 
+                    nzOpen 
+                    [routerLink]="['/', 'payments']"                    
+                    *ngIf="['retailer'].includes(userRole)" 
+                    >
                     <i nz-icon nzType="swap" nzTheme="outline"></i> Payments
-                </li>
-                <!-- <li nz-submenu nzOpen nzIcon="user" nzTitle="My Enviar Account">
-          <ul>
-            <li nz-menu-item (click)="gotoAccountDetails()" class="dark-brown">
-              <i nz-icon nzType="setting" nzTheme="outline"></i>
-            </li>
-            <li
-              nz-menu-item
-              [routerLink]="['/', 'company', 'deposit']"
-              class="dark-brown"
-            >
-              <img
-                src="assets/images/rupay-add.png"
-                style="width: 20px;"
-              />&nbsp;&nbsp;Top Up Balance
-            </li>
-          </ul>
-        </li> -->
-
-                <!-- <li
-          nz-menu-item
-          nzOpen
-          nzIcon="user"
-          [routerLink]="['/', 'company', 'signup']"
-          *ngIf="isRole('admin')"
-        >
-          <i nz-icon nzType="fund"></i> Company
-        </li> -->
+                </li> 
             </ul>
         </nz-sider>
 
@@ -244,15 +230,7 @@
             [nzZeroTrigger]="zeroTrigger"
             *ngIf="currentMenuType == menuTypes.initialSetup"
         >
-            <ul nz-menu nzMode="inline" class="sider-menu dark-brown">
-                <!-- <li
-          nz-menu-item
-          nzOpen
-          nzIcon="user"
-          [routerLink]="['/', 'company', 'signup']"
-        >
-          <i nz-icon nzType="dashboard"></i> Sign Up
-        </li> -->
+            <ul nz-menu nzMode="inline" class="sider-menu dark-brown"> 
                 <li
                     nz-menu-item
                     nzOpen
@@ -260,32 +238,7 @@
                     [routerLink]="['/', 'company', 'listing']"
                 >
                     <i nz-icon nzType="user"></i> Companies
-                </li>
-
-                <!-- <li
-          nz-menu-item
-          nzOpen
-          nzIcon="user"
-          [routerLink]="['/', 'company', 'companydetails']"
-        >
-          <i nz-icon nzType="user"></i> Company Details
-        </li>
-        <li
-          nz-menu-item
-          nzOpen
-          nzIcon="user"
-          [routerLink]="['/', 'company', 'bankdetails']"
-        >
-          <i nz-icon nzType="fund"></i> Bank Details
-        </li>
-        <li
-          nz-menu-item
-          nzOpen
-          nzIcon="user"
-          [routerLink]="['/', 'company', 'selectplan']"
-        >
-          <i nz-icon nzType="dashboard"></i> Select Plan
-        </li> -->
+                </li> 
             </ul>
         </nz-sider>
 
