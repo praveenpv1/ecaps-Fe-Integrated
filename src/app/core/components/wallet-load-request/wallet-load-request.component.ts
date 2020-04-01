@@ -198,7 +198,7 @@ export class WalletLoadRequestComponent implements OnInit, OnDestroy {
                 icon: "more",
                 bgClass: "white-bg-card",
                 desc: "VIEW DETAILS",
-                routerLink: ["/", "claims"],
+                routerLink: ["/", "wallet-load-request"],
                 type: InfoType.info,
                 showDetail: false
             },
@@ -208,7 +208,7 @@ export class WalletLoadRequestComponent implements OnInit, OnDestroy {
                 icon: "more",
                 bgClass: "white-bg-card",
                 desc: "VIEW DETAILS",
-                routerLink: ["/", "claims"],
+                routerLink: ["/", "wallet-load-request"],
                 type: InfoType.info,
                 showDetail: false
             },
@@ -218,7 +218,7 @@ export class WalletLoadRequestComponent implements OnInit, OnDestroy {
                 icon: "more",
                 bgClass: "white-bg-card",
                 desc: "VIEW DETAILS",
-                routerLink: ["/", "claims"],
+                routerLink: ["/", "wallet-load-request"],
                 type: InfoType.amount,
                 showDetail: false
             }
@@ -230,7 +230,7 @@ export class WalletLoadRequestComponent implements OnInit, OnDestroy {
             icon: "more",
             bgClass: "enviar-account-balance",
             desc: "TOP UP",
-            routerLink: ["/", "company", "deposit"],
+            routerLink: ["/", "wallet-top-up"],
             type: InfoType.amount,
             showDetail: true
         });

@@ -150,6 +150,7 @@ export class NavComponent implements OnInit, OnDestroy {
       }
 
       this.showUserName();
+      this.checkRole();
     });
   }
 
@@ -157,6 +158,13 @@ export class NavComponent implements OnInit, OnDestroy {
     const initialState = this._dataStore.dataStore$.getValue();
     if (initialState.userInfo) {
       this.userName = initialState.userInfo.name;
+    }
+  }
+
+  checkRole(): void {
+    const initialState = this._dataStore.dataStore$.getValue();
+    if (initialState.userInfo) {
+      this.userRole = initialState.userInfo.role;
     }
   }
 
