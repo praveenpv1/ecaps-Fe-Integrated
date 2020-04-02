@@ -41,6 +41,7 @@ interface Employees {
   styleUrls: ["./retailer.component.scss"]
 })
 export class RetailerComponent implements OnInit {
+  retailerLists:any = [];
   employeesList: any;
   selectedValue = "Sort";
   searchText = "";
@@ -72,8 +73,9 @@ export class RetailerComponent implements OnInit {
 
     console.log("Children", this.initialState.childrenList);
 
-    this.employeesList = mockData.distirbutorList;
 
+    this.employeesList = mockData.distirbutorList;
+    this.listRetailer();
     // this.ds.dataStore$.subscribe(data => {
     //   let employeeResponse = _.get(data.employees.details, "data", null);
     //   if (employeeResponse) {
@@ -90,6 +92,15 @@ export class RetailerComponent implements OnInit {
     //   // });
     // });
   }
+  listRetailer(): void {
+    let initialState = this.ds.dataStore$.getValue();
+    if (initialState.childrenList) {
+      this.retailerLists = initialState.childrenList.filter(function(retailerList){
+        return retailerList.role === "superdistributor";
+      });
+    }
+  }
+
   // editRoute(data: any): void {
   //   if (data._id) {
   //     this.route.navigate(["/", "employee", "add", data.user._id, data._id]);

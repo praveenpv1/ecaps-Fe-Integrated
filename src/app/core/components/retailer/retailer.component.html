@@ -1,9 +1,8 @@
 <div nz-row>
     <div nz-col nzSm="12" nzMd="12" nzLg="12" nzXl="21">
         <h3 class="primary-color-font">Retailers</h3>
-        <p>Add, View and Manage your Retailers here.</p>
+        <p>Add, View and Manage your Retailers here.</p> 
     </div>
-
     <div nz-col nzSm="12" nzMd="12" nzLg="12" nzXl="3">
         <button
             class="margin-5px "
@@ -60,7 +59,7 @@
 <div nz-row>
     <nz-table
         #headerTable
-        [nzData]="employeesList"
+        [nzData]="retailersList"
         [nzPageSize]="1000"
         [nzScroll]="{ y: '240px' }"
     >
@@ -76,40 +75,7 @@
         </thead>
         <tbody>
             <tr *ngFor="let data of headerTable.data | filter: searchText">
-                <!-- <td *ngIf="data.user">{{ data.user._id }}</td> -->
-                <td>{{ data.first_name }} {{ data.last_name }}</td>
-                <td>
-                    {{ data.mobile }}
-                    <i
-                        *ngIf="data.user"
-                        nz-icon
-                        nzType="{{
-                            data.user.phone_verification == 'approved'
-                                ? 'check-circle'
-                                : 'exclamation-circle'
-                        }}"
-                    ></i>
-                </td>
-                <td>
-                    {{ data.email }} {{ email_verification }}
-                    <i
-                        *ngIf="data.user"
-                        nz-icon
-                        nzType="{{
-                            data.user.email_verification == 'approved'
-                                ? 'check-circle'
-                                : 'exclamation-circle'
-                        }}"
-                    ></i>
-                </td>
-                <!-- <td>
-          <a (click)="resendVerification(data)">Resend verification</a>
-        </td>
-        <td>
-          <button nz-button class="table-btn" (click)="editRoute(data)">
-            <i nz-icon class="edit-icon" nzType="edit"></i>
-          </button>
-        </td> -->
+                <td>{{data.firstname}}</td>
             </tr>
         </tbody>
     </nz-table>
