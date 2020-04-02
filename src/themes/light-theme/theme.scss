@@ -16,9 +16,9 @@
 // Generate a Custom Theme
 
 $light-theme: mat-light-theme(
-    $light-theme-primary,
-    $light-theme-accent,
-    $light-theme-warn
+  $light-theme-primary,
+  $light-theme-accent,
+  $light-theme-warn
 );
 // $dark-theme: mat-dark-theme($dark-theme-primary, $dark-theme-accent, $dark-theme-warn);
 
@@ -38,7 +38,7 @@ $background: map-get($light-theme, background);
 // height: 100vh;
 
 .mat-sidenav-container {
-    height: 100vh;
+  height: 100vh;
 }
 
 // https://github.com/angular/material2/blob/master/src/lib/core/style/_variables.scss
@@ -46,80 +46,80 @@ $background: map-get($light-theme, background);
 $sidenav-width: 320px; // 240px;
 
 .mat-sidenav {
-    width: $sidenav-width;
+  width: $sidenav-width;
 }
 
 .mat-subheader {
-    font-size: 18px !important;
-    font-weight: 900 !important;
+  font-size: 18px !important;
+  font-weight: 900 !important;
 }
 
 .mat-vertical-content {
-    padding: 24px 24px 24px 24px !important;
+  padding: 24px 24px 24px 24px !important;
 }
 
 // auth-local - login, register
 
 .mat-drawer-container {
-    @media ($mat-xsmall) {
-        background-color: white;
-    }
+  @media ($mat-xsmall) {
+    background-color: white;
+  }
 }
 
 .mat-header-row {
-    // background-color: mat-color($light-theme-accent, 300);
-    background-color: #f5f5f5;
+  // background-color: mat-color($light-theme-accent, 300);
+  background-color: #f5f5f5;
 }
 
 .mat-footer-row {
-    // background-color: mat-color($light-theme-accent, 300);
-    background-color: #f5f5f5;
+  // background-color: mat-color($light-theme-accent, 300);
+  background-color: #f5f5f5;
 }
 
 .full-width {
-    width: 100%;
+  width: 100%;
 }
 
 .mat-drawer-content {
-    background-color: #f4f4f4;
+  background-color: #f4f4f4;
 }
 
 .mat-card-round-big {
-    height: 70px;
-    width: 70px;
-    border-radius: 50%;
-    flex-shrink: 0;
-    object-fit: cover;
-    background-color: #fff;
-    display: flex; /* establish flex container */
-    flex-direction: column; /* make main axis vertical */
-    justify-content: center; /* center items vertically, in this case */
-    align-items: center;
+  height: 70px;
+  width: 70px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  object-fit: cover;
+  background-color: #fff;
+  display: flex; /* establish flex container */
+  flex-direction: column; /* make main axis vertical */
+  justify-content: center; /* center items vertically, in this case */
+  align-items: center;
 }
 
 .mat-card-round-small {
-    height: 60px;
-    width: 60px;
-    border-radius: 50%;
-    flex-shrink: 0;
-    object-fit: cover;
-    background-color: #f4f4f4;
-    display: flex; /* establish flex container */
-    flex-direction: column; /* make main axis vertical */
-    justify-content: center; /* center items vertically, in this case */
-    align-items: center;
+  height: 60px;
+  width: 60px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  object-fit: cover;
+  background-color: #f4f4f4;
+  display: flex; /* establish flex container */
+  flex-direction: column; /* make main axis vertical */
+  justify-content: center; /* center items vertically, in this case */
+  align-items: center;
 }
 
 .mat-flat-button.mat-primary,
 .mat-raised-button.mat-primary,
 .mat-fab.mat-primary,
 .mat-mini-fab.mat-primary {
-    background-color: #000 !important;
-    color: white;
+  background-color: #000 !important;
+  color: white;
 }
 
 .mat-toolbar-row {
-    background-color: #ffffff;
+  background-color: #ffffff;
 }
 // ------------------------------------------------------------------------------------------------------------------ //
 
@@ -139,259 +139,271 @@ $sidenav-width: 320px; // 240px;
 
 .light-color-font,
 .light-color-font a {
-    @include themify($themes) {
-        color: themed("lightColor");
-        font-weight: bold;
-        font-stretch: normal;
-        font-style: normal;
-        line-height: normal;
-        letter-spacing: normal; 
-    }
+  @include themify($themes) {
+    color: themed("lightColor");
+    font-weight: bold;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: normal;
+  }
 }
 
 .medium-color-font {
-    @include themify($themes) {
-        color: themed("mediumColor");
-        font-weight: bold;
-        font-stretch: normal;
-        font-style: normal;
-        line-height: normal;
-        letter-spacing: normal; 
-    }
+  @include themify($themes) {
+    color: themed("mediumColor");
+    font-weight: bold;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: normal;
+  }
 }
 
 .primary-color-font {
-    @include themify($themes) {
-        color: themed("primaryColor");
-        font-weight: bold;
-        font-stretch: normal;
-        font-style: normal;
-        line-height: normal;
-        letter-spacing: normal; 
-    } 
+  @include themify($themes) {
+    color: themed("primaryColor");
+    font-weight: bold;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: normal;
+    letter-spacing: normal;
+  }
 }
 
 .primary-color-h2 {
-    @include themify($themes) {
-        color: themed("primaryColor");
-        display: flex;
-        justify-content: center;
-        flex-direction: column;
-        height: 65px;
-    } 
+  @include themify($themes) {
+    color: themed("primaryColor");
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    height: 65px;
+  }
 }
 
 .enviar-account-balance {
-    @include themify($themes) {
-        background: themed("gradientColor") !important;  
-    }
+  @include themify($themes) {
+    background: themed("gradientColor") !important;
+  }
 }
 
 .enviar-account-balance h1 {
-    color: #ffffff;
+  color: #ffffff;
 }
 
 .enviar-account-balance p {
-    color: #ffffff;
+  color: #ffffff;
 }
 
 .enviar-account-balance span {
-    color: #ffffff;
-    font-weight: bold;
+  color: #ffffff;
+  font-weight: bold;
 }
 
 .enviar-account-balance i {
-    background-image: linear-gradient(321deg, #faa61a 36%, #fbbc53 89%);
-    text-align: center;
-    display: inline-block;
-    font-size: 17px;
-    position: relative;
-    padding: 5px;
-    border-radius: 50%;
+  background-image: linear-gradient(321deg, #faa61a 36%, #fbbc53 89%);
+  text-align: center;
+  display: inline-block;
+  font-size: 17px;
+  position: relative;
+  padding: 5px;
+  border-radius: 50%;
 }
 
 .white-bg-card h1 {
-    @include themify($themes) {
-        color: themed("primaryColor");
-    }
+  @include themify($themes) {
+    color: themed("primaryColor");
+  }
 }
 
 .white-bg-card span {
-    @include themify($themes) {
-        color: themed("primaryColor");
-        font-weight: bold;
-    }
+  @include themify($themes) {
+    color: themed("primaryColor");
+    font-weight: bold;
+  }
 }
 
 .white-bg-card i {
-    @include themify($themes) {
-        color: themed("primaryColor");
-        border: themed("primaryColorBorder") !important;
-        background: #ffffff; 
-        display: inline-block;
-        text-align: center;
-        font-size: 13px;
-        position: relative;
-        padding: 5px; 
-        border-radius: 50%;
-    }
+  @include themify($themes) {
+    color: themed("primaryColor");
+    border: themed("primaryColorBorder") !important;
+    background: #ffffff;
+    display: inline-block;
+    text-align: center;
+    font-size: 13px;
+    position: relative;
+    padding: 5px;
+    border-radius: 50%;
+  }
 }
 
 .primary-color-border-card {
-    @include themify($themes) {
-        border: themed("primaryColorBorder") !important;
-        border-radius: 6px !important;
-        -webkit-box-shadow: 0px 36px 45px -29px rgba(0, 0, 0, 0.63);
-        -moz-box-shadow: 0px 36px 45px -29px rgba(0, 0, 0, 0.63);
-        box-shadow: 0px 36px 45px -29px rgba(0, 0, 0, 0.63);
-        margin: 10px !important;
-        margin-left: 0px !important; 
-        outline: none !important;
-    }
-}
-
-.ant-layout-header {
-    @include themify($themes) {
-        -webkit-box-shadow: themed("layoutShadow") !important;
-        -moz-box-shadow: themed("layoutShadow") !important;
-        box-shadow: themed("layoutShadow") !important;
-        margin-bottom: 15px;
-    }
-}
-
-.sider-menu { 
-    @include themify($themes) {
-        -webkit-box-shadow: themed("layoutShadow") !important;
-        -moz-box-shadow: themed("layoutShadow") !important;
-        box-shadow: themed("layoutShadow") !important;
-        margin-top: -15px;
-    }
-}
-
-.ant-tabs.ant-tabs-card .ant-tabs-card-bar .ant-tabs-tab-active {
-    @include themify($themes) {
-        background-color: themed("mediumColor") !important;
-        color: white !important;
-    } 
-}
-
-.ant-btn-primary {
-    @include themify($themes) {
-        background-color: themed("mediumColor") !important;
-        color: #ffffff !important;
-        border: themed("mediumColor") !important;
-        box-shadow: themed("buttonShadow") !important;
-    }
-}
-
-.ant-btn-info {
-    @include themify($themes) {
-        background-color: #ffffff !important;
-        border: themed("primaryColorBorder") !important;
-        color: themed("primaryColor") !important;
-    } 
-}
-
-.table-btn {
-    @include themify($themes) {
-        color: themed("mediumColor") !important;
-        font-weight: bold !important;
-        background: none !important;
-        background-color: Transparent !important;
-        background-repeat: no-repeat !important;
-        border: none !important;
-        cursor: pointer !important;
-        overflow: hidden !important;
-        outline: none !important;
-    }
-}
-
-.back-button-text {
-    @include themify($themes) {
-        color: themed("primaryColor") !important;
-        width: 31px;
-        height: 18px;
-        font-size: 10px;
-        font-weight: bold;
-        font-stretch: normal;
-        font-style: normal;
-        line-height: 1.8;
-        letter-spacing: normal; 
-        cursor: pointer;
-    }
-}
-
-// ------------------------------------------------------------------------------------------------------------------ //
-
-.ant-layout-header {
-    background-color: white !important;
-    border-bottom: 1px #f2f2f2 solid !important;
-}
-
-.logo {
-    width: 166px;
-    height: 40px;
-    object-fit: contain;
-    margin-top: 10px !important;
-}
-
-p {
-    color: #606060;
-}
-
-.text-center{
-    text-align: center !important;
-}
-
-.button-center { 
-    display: block !important;
-    margin: 0 auto !important;
-}
-
-.card-h2 {
-    margin-left: 22px;
-}
-
-.ant-layout {
-    background-color: white !important;
-}
-
-.header-menu {
-    height: 50px;
-}
-
-.ant-menu-horizontal {
-    border-bottom: 0px !important;
-}
-
-.ant-menu-item {
-    box-shadow: inset 0 -1.5px 0 0 #f2f2f2;
-    padding-right: 5px !important;
-}
-
-.warning-card {
+  @include themify($themes) {
+    border: themed("primaryColorBorder") !important;
     border-radius: 6px !important;
     -webkit-box-shadow: 0px 36px 45px -29px rgba(0, 0, 0, 0.63);
     -moz-box-shadow: 0px 36px 45px -29px rgba(0, 0, 0, 0.63);
     box-shadow: 0px 36px 45px -29px rgba(0, 0, 0, 0.63);
     margin: 10px !important;
     margin-left: 0px !important;
-    border: 1px #ed1c24 solid !important;
+    outline: none !important;
+  }
+}
+
+.ant-layout-header {
+  @include themify($themes) {
+    -webkit-box-shadow: themed("layoutShadow") !important;
+    -moz-box-shadow: themed("layoutShadow") !important;
+    box-shadow: themed("layoutShadow") !important;
+    margin-bottom: 15px;
+  }
+}
+
+.sider-menu {
+  @include themify($themes) {
+    -webkit-box-shadow: themed("layoutShadow") !important;
+    -moz-box-shadow: themed("layoutShadow") !important;
+    box-shadow: themed("layoutShadow") !important;
+    margin-top: -15px;
+  }
+}
+
+.ant-tabs.ant-tabs-card .ant-tabs-card-bar .ant-tabs-tab-active {
+  @include themify($themes) {
+    background-color: themed("mediumColor") !important;
+    color: white !important;
+  }
+}
+
+.ant-btn-primary {
+  @include themify($themes) {
+    background-color: themed("mediumColor") !important;
+    color: #ffffff !important;
+    border: themed("mediumColor") !important;
+    box-shadow: themed("buttonShadow") !important;
+  }
+}
+.ant-btn-primary[disabled] {
+  // @include themify($themes) {
+  //     background-color: #f5f5f5 !important;
+  //     color: #ffffff !important;
+  //     border: themed("mediumColor") !important;
+  //     box-shadow: themed("buttonShadow") !important;
+  // }
+  border: 2px solid rgba(0, 0, 0, 0.12) !important;
+  box-shadow: 0px 20px 15px -10px #f2f2f2,
+    0px 20px 15px -10px rgba(173, 172, 172, 0.5) !important;
+  color: darkgray !important;
+}
+
+.ant-btn-info {
+  @include themify($themes) {
+    background-color: #ffffff !important;
+    border: themed("primaryColorBorder") !important;
+    color: themed("primaryColor") !important;
+  }
+}
+
+.table-btn {
+  @include themify($themes) {
+    color: themed("mediumColor") !important;
+    font-weight: bold !important;
+    background: none !important;
+    background-color: Transparent !important;
+    background-repeat: no-repeat !important;
+    border: none !important;
+    cursor: pointer !important;
+    overflow: hidden !important;
+    outline: none !important;
+  }
+}
+
+.back-button-text {
+  @include themify($themes) {
+    color: themed("primaryColor") !important;
+    width: 31px;
+    height: 18px;
+    font-size: 10px;
+    font-weight: bold;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.8;
+    letter-spacing: normal;
+    cursor: pointer;
+  }
+}
+
+// ------------------------------------------------------------------------------------------------------------------ //
+
+.ant-layout-header {
+  background-color: white !important;
+  border-bottom: 1px #f2f2f2 solid !important;
+}
+
+.logo {
+  width: 166px;
+  height: 40px;
+  object-fit: contain;
+  margin-top: 10px !important;
+}
+
+p {
+  color: #606060;
+}
+
+.text-center {
+  text-align: center !important;
+}
+
+.button-center {
+  display: block !important;
+  margin: 0 auto !important;
+}
+
+.card-h2 {
+  margin-left: 22px;
+}
+
+.ant-layout {
+  background-color: white !important;
+}
+
+.header-menu {
+  height: 50px;
+}
+
+.ant-menu-horizontal {
+  border-bottom: 0px !important;
+}
+
+.ant-menu-item {
+  box-shadow: inset 0 -1.5px 0 0 #f2f2f2;
+  padding-right: 5px !important;
+}
+
+.warning-card {
+  border-radius: 6px !important;
+  -webkit-box-shadow: 0px 36px 45px -29px rgba(0, 0, 0, 0.63);
+  -moz-box-shadow: 0px 36px 45px -29px rgba(0, 0, 0, 0.63);
+  box-shadow: 0px 36px 45px -29px rgba(0, 0, 0, 0.63);
+  margin: 10px !important;
+  margin-left: 0px !important;
+  border: 1px #ed1c24 solid !important;
 }
 
 .ant-table-scroll {
-    border-radius: 6px;
+  border-radius: 6px;
 }
 
 .top-menu-icons {
-    width: 40px;
-    height: 40px;
-    object-fit: contain;
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
 }
 
 .sider-menu li {
-    margin-top: 0px !important;
-    margin-bottom: 0px !important;
+  margin-top: 0px !important;
+  margin-bottom: 0px !important;
 }
 
 .ant-btn-primary-disabled,
@@ -409,7 +421,7 @@ p {
 .ant-btn-primary-disabled.active,
 .ant-btn-primary.disabled.active,
 .ant-btn-primary[disabled].active {
-    background-color: #f5f5f5 !important;
+  background-color: #f5f5f5 !important;
 }
 .ant-btn-info-disabled,
 .ant-btn-info.disabled,
@@ -426,32 +438,32 @@ p {
 .ant-btn-info-disabled.active,
 .ant-btn-info.disabled.active,
 .ant-btn-info[disabled].active {
-    background-color: #f5f5f5 !important;
+  background-color: #f5f5f5 !important;
 }
 
 .arrow-icon {
-    font-size: 25px;
-    position: relative;
-    top: 4px;
+  font-size: 25px;
+  position: relative;
+  top: 4px;
 }
 
 .back-img {
-    height: 30px;
-    width: 30px;
-    object-fit: contain;
+  height: 30px;
+  width: 30px;
+  object-fit: contain;
 }
 .success-tick {
-    width: 80px;
-    height: 80px;
-    object-fit: contain;
+  width: 80px;
+  height: 80px;
+  object-fit: contain;
 }
 
 nz-select {
-    min-width: 100px;
+  min-width: 100px;
 }
 
 .ant-message-notice-content {
-    z-index: 999999 !important;
+  z-index: 999999 !important;
 }
 
 // .ant-layout-sider-light {
