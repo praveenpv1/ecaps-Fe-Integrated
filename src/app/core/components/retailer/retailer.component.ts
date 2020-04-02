@@ -41,7 +41,7 @@ interface Employees {
   styleUrls: ["./retailer.component.scss"]
 })
 export class RetailerComponent implements OnInit {
-  employeesList: any;
+  retailorsList: any;
   selectedValue = "Sort";
   searchText = "";
   initialState: any = "";
@@ -71,7 +71,7 @@ export class RetailerComponent implements OnInit {
     });
 
     this.ds.dataStore$.subscribe(data => {
-      this.employeesList = data.childrenList.filter(
+      this.retailorsList = data.childrenList.filter(
         (child: any) => child.role === "retailer"
       );
     });
