@@ -28,7 +28,7 @@
         type="text"
         [(ngModel)]="searchText"
         nz-input
-        placeholder="Search Distributor"
+        placeholder="Search Super Distributor"
       />
     </nz-input-group>
     <ng-template #suffixIconSearch>
@@ -55,40 +55,30 @@
 <div nz-row>
   <nz-table
     #headerTable
-    [nzData]="employeesList"
+    [nzData]="superDistributorList"
     [nzPageSize]="1000"
     [nzScroll]="{ y: '240px' }"
   >
     <thead>
-      <tr>
-        <!-- <th nzWidth="250px">Id</th> -->
+      <tr> 
         <th nzWidth="200px">Name</th>
         <th nzWidth="200px">Mobile</th>
-        <th nzWidth="250px">Email</th>
-        <!-- <th>Action</th>
-                <th></th> -->
+        <th nzWidth="200px">Company</th> 
+        <th nzWidth="250px">Email</th> 
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let data of headerTable.data | filter: searchText">
-        <!-- <td *ngIf="data.user">{{ data.user._id }}</td> -->
+      <tr *ngFor="let data of headerTable.data | filter: searchText"> 
         <td>{{ data.firstname }} {{ data.lastname }}</td>
         <td>
           {{ data.phone }}
         </td>
         <td>
-          {{ data.email }}
+          {{ data.company_name }}
         </td>
-        <!-- <td>
-                    <a (click)="resendVerification(data)"
-                        >Resend verification</a
-                    >
-                </td> -->
-        <!-- <td>
-          <button nz-button class="table-btn" (click)="editRoute(data)">
-            <i nz-icon class="edit-icon" nzType="edit"></i>
-          </button>
-        </td> -->
+        <td>
+          {{ data.email }}
+        </td> 
       </tr>
     </tbody>
   </nz-table>

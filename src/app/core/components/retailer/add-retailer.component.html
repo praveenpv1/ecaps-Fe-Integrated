@@ -10,34 +10,81 @@
       <div nz-row>
         <div nz-col nzSm="24" nzMd="24" nzLg="3" nzXl="3"></div>
         <div nz-col nzSm="24" nzMd="24" nzLg="21" nzXl="21">
-          <div nzSm="24" nzMd="24" nzLg="24" nzXl="24" class="text-center">
+          <div nzSm="24" nzMd="24" nzLg="24" nzXl="24" class="text-center"> 
             <form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()">
-              <nz-form-item> 
-                <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="kitsAvailable">Kits Available</nz-form-label>
-                <nz-form-control [nzSm]="14" [nzXs]="24">
-                  <input nz-input formControlName="kitsAvailable" id="kitsAvailable" [disabled]="true"/>
-                </nz-form-control>
-              </nz-form-item>
-              <nz-form-item> 
-                <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="first_name">First Name</nz-form-label>
-                <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Please enter First Name.">
-                  <input nz-input formControlName="first_name" id="first_name"/>
-                </nz-form-control>
-              </nz-form-item>
-              <nz-form-item> 
-                <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="last_name">Last Name</nz-form-label>
-                <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Please enter Last Name.">
-                  <input nz-input formControlName="last_name" id="last_name"/>
-                </nz-form-control>
-              </nz-form-item>
-              <nz-form-item> 
-                <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="company_name">Company Name</nz-form-label>
-                <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Please enter Company Name.">
-                  <input nz-input formControlName="company_name" id="company_name"/>
+              <nz-form-item>
+                <nz-form-label
+                  [nzSm]="6"
+                  [nzXs]="24"
+                  nzRequired
+                  nzFor="first_name"
+                  >First Name</nz-form-label
+                >
+                <nz-form-control
+                  [nzSm]="14"
+                  [nzXs]="24"
+                  nzErrorTip="Please enter First Name."
+                >
+                  <input nz-input formControlName="first_name" id="first_name" />
                 </nz-form-control>
               </nz-form-item>
               <nz-form-item>
-                <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="phoneNumber" nzRequired>Phone Number</nz-form-label>
+                <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="last_name"
+                  >Last Name</nz-form-label
+                >
+                <nz-form-control
+                  [nzSm]="14"
+                  [nzXs]="24"
+                  nzErrorTip="Please enter Last Name."
+                >
+                  <input nz-input formControlName="last_name" id="last_name" />
+                </nz-form-control>
+              </nz-form-item>
+              <nz-form-item>
+                <nz-form-label
+                  [nzSm]="6"
+                  [nzXs]="24"
+                  nzRequired
+                  nzFor="company_name"
+                  >Company Name</nz-form-label
+                >
+                <nz-form-control
+                  [nzSm]="14"
+                  [nzXs]="24"
+                  nzErrorTip="Please enter Company Name."
+                >
+                  <input
+                    nz-input
+                    formControlName="company_name"
+                    id="company_name"
+                  />
+                </nz-form-control>
+              </nz-form-item>
+              <nz-form-item>
+                <nz-form-label
+                  [nzSm]="6"
+                  [nzXs]="24"
+                  nzRequired
+                  nzFor="dateOfBirth"
+                >
+                  Date of Birth
+                </nz-form-label>
+                <nz-form-control [nzSm]="14" [nzXs]="24">
+                  <nz-date-picker
+                    class="date-picker"
+                    formControlName="dateOfBirth"
+                  ></nz-date-picker>
+                </nz-form-control>
+              </nz-form-item>
+              <nz-form-item>
+                <nz-form-label
+                  [nzSm]="6"
+                  [nzXs]="24"
+                  nzFor="phoneNumber"
+                  nzRequired
+                >
+                  Phone Number
+                </nz-form-label>
                 <nz-form-control
                   [nzSm]="14"
                   [nzXs]="24"
@@ -46,47 +93,225 @@
                 >
                   <nz-input-group [nzAddOnBefore]="addOnBeforeTemplate">
                     <ng-template #addOnBeforeTemplate>
-                      <nz-select formControlName="phoneNumberPrefix" class="phone-select">
+                      <nz-select
+                        formControlName="phoneNumberPrefix"
+                        class="phone-select"
+                      >
                         <nz-option nzLabel="+91" nzValue="+91"></nz-option>
                       </nz-select>
                     </ng-template>
-                    <input formControlName="phoneNumber" id="'phoneNumber'" nz-input />
+                    <input
+                      formControlName="phoneNumber"
+                      id="'phoneNumber'"
+                      nz-input
+                    />
                   </nz-input-group>
                 </nz-form-control>
               </nz-form-item>
               <nz-form-item>
-                <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="email">E-mail</nz-form-label>
-                <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="The input is not valid E-mail.">
+                <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="userName">
+                  User Name
+                </nz-form-label>
+                <nz-form-control
+                  [nzSm]="14"
+                  [nzXs]="24"
+                  nzErrorTip="Please enter Username"
+                >
+                  <input nz-input formControlName="userName" id="userName" />
+                </nz-form-control>
+              </nz-form-item>
+              <nz-form-item>
+                <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="email">
+                  E-mail
+                </nz-form-label>
+                <nz-form-control
+                  [nzSm]="14"
+                  [nzXs]="24"
+                  nzErrorTip="The input is not valid E-mail."
+                >
                   <input nz-input formControlName="email" id="email" />
                 </nz-form-control>
               </nz-form-item>
               <nz-form-item>
-                <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="dateOfBirth">Date of Birth</nz-form-label>
+                <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="password">
+                  Password
+                </nz-form-label>
+                <nz-form-control
+                  [nzSm]="14"
+                  [nzXs]="24"
+                  nzErrorTip="Please enter Password"
+                >
+                  <input nz-input formControlName="password" id="password" />
+                </nz-form-control>
+              </nz-form-item>
+              <nz-form-item>
+                <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="role">
+                  Role
+                </nz-form-label>
+                <nz-form-control
+                  [nzSm]="14"
+                  [nzXs]="24"
+                  nzErrorTip="Please enter Role"
+                >
+                  <input nz-input formControlName="role" id="role" disabled />
+                </nz-form-control>
+              </nz-form-item>
+              <nz-form-item>
+                <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="pan">
+                  PAN
+                </nz-form-label>
+                <nz-form-control
+                  [nzSm]="14"
+                  [nzXs]="24"
+                  nzErrorTip="Please enter PAN."
+                >
+                  <input nz-input formControlName="pan" id="pan" />
+                </nz-form-control>
+              </nz-form-item>
+              <nz-form-item>
+                <nz-form-label
+                  [nzSm]="6"
+                  [nzXs]="24"
+                  nzRequired
+                  nzFor="aadhaarNo"
+                >
+                  Aadhaar No
+                </nz-form-label>
+                <nz-form-control
+                  [nzSm]="14"
+                  [nzXs]="24"
+                  nzErrorTip="Please enter Aadhaar No."
+                >
+                  <input nz-input formControlName="aadhaarNo" id="aadhaarNo" />
+                </nz-form-control>
+              </nz-form-item>
+              <nz-form-item>
+                <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="voterId">
+                  VoterID No
+                </nz-form-label>
+                <nz-form-control
+                  [nzSm]="14"
+                  [nzXs]="24"
+                  nzErrorTip="Please enter VoterID No."
+                >
+                  <input nz-input formControlName="voterId" id="voterId" />
+                </nz-form-control>
+              </nz-form-item>
+              <nz-form-item>
+                <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="kitNo">
+                  Kit No
+                </nz-form-label>
+                <nz-form-control
+                  [nzSm]="14"
+                  [nzXs]="24"
+                  nzErrorTip="Please enter Kit No."
+                >
+                  <input nz-input formControlName="kitNo" id="kitNo" />
+                </nz-form-control>
+              </nz-form-item>
+              <!-- <nz-form-item>
+                <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="selectedMargin" nzRequired>Choose Margin Set</nz-form-label>
+                <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Please choose Margin Set">
+                  <nz-select
+                    id="selectedMargin"
+                    formControlName="selectedMargin"
+                    nzPlaceHolder="Select Margin Set" 
+                  >
+                    <nz-option nzValue="1" nzLabel="1"></nz-option>
+                    <nz-option nzValue="2" nzLabel="2"></nz-option>
+                  </nz-select>
+                </nz-form-control>
+              </nz-form-item>
+              <nz-form-item> 
+                <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="nonRefundableAmount">Non Refundable Amount</nz-form-label>
+                <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Please enter Non Refundable Amount.">
+                  <input nz-input formControlName="nonRefundableAmount" id="nonRefundableAmount"/>
+                </nz-form-control>
+              </nz-form-item>
+              <nz-form-item> 
+                <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="securityAmount">Security Amount</nz-form-label>
+                <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Please enter Security Amount.">
+                  <input nz-input formControlName="securityAmount" id="securityAmount"/>
+                </nz-form-control>
+              </nz-form-item> 
+              <nz-form-item>
+                <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="paymentMode" nzRequired>Mode of Payment</nz-form-label>
+                <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Please select mode of payment.">
+                  <nz-select
+                    id="paymentMode"
+                    formControlName="paymentMode"
+                    nzPlaceHolder="Select Payment Mode" 
+                  >
+                    <nz-option nzValue="1" nzLabel="1"></nz-option>
+                    <nz-option nzValue="2" nzLabel="2"></nz-option>
+                  </nz-select>
+                </nz-form-control>
+              </nz-form-item>
+              <nz-form-item>
+                <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="paymentBank" nzRequired>Payment Bank</nz-form-label>
+                <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Please select payment bank.">
+                  <nz-select
+                    id="paymentBank"
+                    formControlName="paymentBank"
+                    nzPlaceHolder="Select Bank" 
+                  >
+                    <nz-option nzValue="1" nzLabel="1"></nz-option>
+                    <nz-option nzValue="2" nzLabel="2"></nz-option>
+                  </nz-select>
+                </nz-form-control>
+              </nz-form-item>                       
+              <nz-form-item> 
+                <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="paymentReferenceNo">Payment Reference No</nz-form-label>
+                <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Please enter Payment Reference No.">
+                  <input nz-input formControlName="paymentReferenceNo" id="paymentReferenceNo"/>
+                </nz-form-control>
+              </nz-form-item>
+              <nz-form-item>
+                <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="paymentDate">Payment Date</nz-form-label>
                 <nz-form-control [nzSm]="14" [nzXs]="24">
-                  <nz-date-picker formControlName="dateOfBirth"></nz-date-picker>
+                  <nz-date-picker formControlName="paymentDate"></nz-date-picker>
+                </nz-form-control>
+              </nz-form-item>
+              <nz-form-item>
+                <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired>Payments Remarks</nz-form-label>
+                <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Please write something here!">
+                  <textarea formControlName="paymentRemarks" nz-input rows="2" placeholder="write payments remarks"></textarea>
+                </nz-form-control>
+              </nz-form-item>
+              <p style="text-align: left;">Extra Details</p>
+              <nz-form-item> 
+                <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="kitsIssued">Kits Issued</nz-form-label>
+                <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Please enter kits issued.">
+                  <input nz-input formControlName="kitsIssued" id="kitsIssued"/>
                 </nz-form-control>
               </nz-form-item>
               <nz-form-item> 
-                <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="pan">PAN</nz-form-label>
-                <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Please enter PAN.">
-                  <input nz-input formControlName="pan" id="pan"/>
+                <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="rate">Rate</nz-form-label>
+                <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Please enter rate.">
+                  <input nz-input formControlName="rate" id="rate"/>
                 </nz-form-control>
               </nz-form-item>
               <nz-form-item> 
-                <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="aadhaarNo">Aadhaar No</nz-form-label>
-                <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Please enter Aadhaar No.">
-                  <input nz-input formControlName="aadhaarNo" id="aadhaarNo"/>
+                <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="complementaryKits">Kits Complementary</nz-form-label>
+                <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Please enter kits complementary.">
+                  <input nz-input formControlName="complementaryKits" id="complementaryKits"/>
                 </nz-form-control>
               </nz-form-item>
-              <nz-form-item> 
-                <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="voterId">Voter ID No</nz-form-label>
-                <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Please enter VoterID No.">
-                  <input nz-input formControlName="voterId" id="voterId"/>
+              <nz-form-item>
+                <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired>Kits Remarks</nz-form-label>
+                <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Please write something here!">
+                  <textarea formControlName="kitsRemarks" nz-input rows="2" placeholder="write kits remarks"></textarea>
                 </nz-form-control>
-              </nz-form-item>              
+              </nz-form-item> -->
               <nz-form-item nz-row class="register-area">
                 <nz-form-control [nzSpan]="14" [nzOffset]="6">
-                  <button nz-button nzType="primary">Create Retailer</button>
+                  <button
+                    nz-button
+                    nzType="primary"
+                    [disabled]="!(validateForm.status === 'VALID')"
+                  >
+                    Create Retailer
+                  </button>
                 </nz-form-control>
               </nz-form-item>
             </form>

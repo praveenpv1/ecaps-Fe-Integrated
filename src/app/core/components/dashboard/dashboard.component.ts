@@ -153,8 +153,6 @@ export class DashboardComponent implements OnInit, OnDestroy {
           return claims.approval_status === "pending_approval";
         });
         this.pendingClaims = this.pendingClaimsData.length;
-
-        this.renderCards();
         this.clearClaimsStore();
       }
     });
@@ -176,6 +174,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
+    this.renderCards();
     // this.showCompanyWallet();
     // this.getCompanyTransactions();
     // this.getCompanyTxns();
@@ -281,7 +280,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
     this.balanceCards.push(
       {
         title: "Enviar Account Balance",
-        text: this.currencyPipe.transform(this.companyBalance, "₹"),
+        text: "₹ 9999",
         icon: "more",
 
         bgClass: "enviar-account-balance",
@@ -291,10 +290,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
       },
       {
         title: "Money Transferred",
-        text: this.currencyPipe.transform(
-          this.getTotalSalary(this.expenseData),
-          "₹"
-        ),
+        text: "₹ 999",
         icon: "more",
         bgClass: "white-bg-card",
         desc: "VIEW DETAILS",
@@ -303,7 +299,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
       },
       {
         title: "Earnings",
-        text: this.currencyPipe.transform(this.settledClaims, "₹"),
+        text: "₹ 99",
         icon: "more",
         bgClass: "white-bg-card",
         desc: "VIEW DETAILS",
@@ -312,10 +308,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
       },
       {
         title: "Ledgers",
-        text: this.currencyPipe.transform(
-          this.getTotalSalary(this.allowanceData),
-          "₹"
-        ),
+        text: "₹ 9",
         icon: "more",
         bgClass: "white-bg-card",
         desc: "VIEW DETAILS",
@@ -327,7 +320,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
     this.infoCards = [
       {
         title: "Auto Wallet Loading in",
-        text: SalaryIn(),
+        text: "9 Days",
         icon: "more",
         bgClass: "white-bg-card",
         desc: "VIEW DETAILS",
@@ -337,7 +330,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
       },
       {
         title: "Pending Transactions",
-        text: this.pendingClaims + "Txns",
+        text: "99 Txns",
         icon: "more",
         bgClass: "white-bg-card",
         desc: "VIEW DETAILS",
