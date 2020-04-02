@@ -31,6 +31,12 @@
               </nz-form-control>
             </nz-form-item>
             <nz-form-item>
+              <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="dateOfBirth">Date of Birth</nz-form-label>
+              <nz-form-control [nzSm]="14" [nzXs]="24">
+                <nz-date-picker formControlName="dateOfBirth"></nz-date-picker>
+              </nz-form-control>
+            </nz-form-item>
+            <nz-form-item>
               <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="phoneNumber" nzRequired>Phone Number</nz-form-label>
               <nz-form-control
                 [nzSm]="14"
@@ -47,30 +53,29 @@
                   <input formControlName="phoneNumber" id="'phoneNumber'" nz-input />
                 </nz-input-group>
               </nz-form-control>
-            </nz-form-item>
-            <nz-form-item>
-              <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="selectedMargin" nzRequired>Choose Margin Set</nz-form-label>
-              <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Please choose Margin Set">
-                <nz-select
-                  id="selectedMargin"
-                  formControlName="selectedMargin"
-                  nzPlaceHolder="Select Margin Set" 
-                >
-                  <nz-option nzValue="1" nzLabel="1"></nz-option>
-                  <nz-option nzValue="2" nzLabel="2"></nz-option>
-                </nz-select>
+            </nz-form-item>                        
+            <nz-form-item> 
+              <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="userName">User Name</nz-form-label>
+              <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Please enter Username">
+                <input nz-input formControlName="userName" id="userName"/>
               </nz-form-control>
-            </nz-form-item>
+            </nz-form-item> 
             <nz-form-item>
               <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="email">E-mail</nz-form-label>
               <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="The input is not valid E-mail.">
                 <input nz-input formControlName="email" id="email" />
               </nz-form-control>
             </nz-form-item>
-            <nz-form-item>
-              <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="dateOfBirth">Date of Birth</nz-form-label>
-              <nz-form-control [nzSm]="14" [nzXs]="24">
-                <nz-date-picker formControlName="dateOfBirth"></nz-date-picker>
+            <nz-form-item> 
+              <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="password">Password</nz-form-label>
+              <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Please enter Password">
+                <input nz-input formControlName="password" id="password"/>
+              </nz-form-control>
+            </nz-form-item>
+            <nz-form-item> 
+              <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="role">Role</nz-form-label>
+              <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Please enter Role">
+                <input nz-input formControlName="role" id="role"/>
               </nz-form-control>
             </nz-form-item>
             <nz-form-item> 
@@ -89,6 +94,25 @@
               <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="voterId">VoterID No</nz-form-label>
               <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Please enter VoterID No.">
                 <input nz-input formControlName="voterId" id="voterId"/>
+              </nz-form-control>
+            </nz-form-item>   
+            <nz-form-item> 
+              <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="kitNo">Kit No</nz-form-label>
+              <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Please enter Kit No.">
+                <input nz-input formControlName="kitNo" id="kitNo"/>
+              </nz-form-control>
+            </nz-form-item>          
+            <!-- <nz-form-item>
+              <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="selectedMargin" nzRequired>Choose Margin Set</nz-form-label>
+              <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Please choose Margin Set">
+                <nz-select
+                  id="selectedMargin"
+                  formControlName="selectedMargin"
+                  nzPlaceHolder="Select Margin Set" 
+                >
+                  <nz-option nzValue="1" nzLabel="1"></nz-option>
+                  <nz-option nzValue="2" nzLabel="2"></nz-option>
+                </nz-select>
               </nz-form-control>
             </nz-form-item>
             <nz-form-item> 
@@ -171,7 +195,7 @@
               <nz-form-control [nzSm]="14" [nzXs]="24" nzErrorTip="Please write something here!">
                 <textarea formControlName="kitsRemarks" nz-input rows="2" placeholder="write kits remarks"></textarea>
               </nz-form-control>
-            </nz-form-item>
+            </nz-form-item> -->
             <nz-form-item nz-row class="register-area">
               <nz-form-control [nzSpan]="14" [nzOffset]="6">
                 <button nz-button nzType="primary">Create Super Distributor</button>
