@@ -1,3 +1,4 @@
+import { ADD_CHILD, SHOW_TOAST } from "./../actions/index";
 import { Injectable } from "@angular/core";
 import { DataStore } from "../app.store";
 import { ApiService } from "@app/core/services/api.service";
@@ -18,6 +19,7 @@ import { AuthService } from "auth";
 import { Router } from "@angular/router";
 import { ToastReducers } from "./toast.reducer";
 import { ResetStateReducers } from "@app/core/store/reducers/resetstate.reducer";
+import { Location } from "@angular/common";
 
 @Injectable()
 export class UserReducers {
@@ -28,6 +30,7 @@ export class UserReducers {
     private authService: AuthService,
     private router: Router,
     private toast: ToastReducers,
+    private _location: Location,
     private resetReducer: ResetStateReducers
   ) {}
 
@@ -125,6 +128,38 @@ export class UserReducers {
               });
             }
           );
+        break;
+
+      case ADD_CHILD:
+        console.log("IN ADD_CHILD");
+        this._loader.loadingState({ type: LOADING });
+        this.apiService.post(`main/users/add`, { ...action.payload }).subscribe(
+          (response: any) => {
+            this.toast.toastState({
+              type: SHOW_TOAST,
+              payload: { message: response.message, type: "success" }
+            });
+
+            this._dataStore.dataStore$.next({
+              ...state,
+              ...successCommonData
+            });
+            // this.router.navigate(["/sigin"]);
+
+            this._location.back();
+          },
+          error => {
+            console.log(error);
+
+            state = this._dataStore.dataStore$.getValue();
+
+            this._dataStore.dataStore$.next({
+              ...state,
+              ...catchCommonData,
+              toastMessage: _.get(error, "message", "Something Went Wrong!!")
+            });
+          }
+        );
         break;
 
       default:
