@@ -13,7 +13,7 @@ export class DataStore {
     superDistributorList: {},
     distributorList: {},
     retailerList: {},
-    childrenList: {},
+    childrenList: [],
     loader: false,
     loadingMessage: "",
     toast: false,

@@ -70,25 +70,11 @@ export class SuperDistributorComponent implements OnInit {
       }
     });
 
-    console.log("Children", this.initialState.childrenList);
-
-    this.employeesList = mockData.distirbutorList;
-
-    // this.ds.dataStore$.subscribe(data => {
-    //   let employeeResponse = _.get(data.employees.details, "data", null);
-    //   if (employeeResponse) {
-    //     this.employeesList = _.get(data.employees.details, "data", []);
-    //   }
-
-    //   // data.employee.details.array.forEach(element => {
-    //   //   this.employeesList.push({
-    //   //     id: element._id,
-    //   //     name: element.firstName + " " + element.lastName,
-    //   //     designation: "Adminstrator",
-    //   //     department: "IT"
-    //   //   });
-    //   // });
-    // });
+    this.ds.dataStore$.subscribe(data => {
+      this.employeesList = data.childrenList.filter(
+        (child: any) => child.role === "superdistributor"
+      );
+    });
   }
   // editRoute(data: any): void {
   //   if (data._id) {
