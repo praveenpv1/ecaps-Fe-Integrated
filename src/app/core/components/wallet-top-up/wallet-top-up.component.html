@@ -1,12 +1,12 @@
 <div nz-row>
     <div nz-col nzSm="24" nzMd="24" nzLg="24" nzXl="24">
-      <h3 class="primary-color-font">Top Up Balance</h3>
+      <h3 class="primary-color-font">Wallet Top Up</h3>
       <p>Topup your Enviar Account balance.</p>
     </div>
     <br />
     <br />
     <br />
-  
+
     <div nz-col nzSm="24" nzMd="24" nzLg="24" nzXl="24">
       <nz-tabset
         [nzTabPosition]="'top'"
@@ -15,45 +15,32 @@
         (nzSelectedIndexChange)="tabChange($event)"
       >
         <nz-tab *ngFor="let tab of tabs" [nzTitle]="tab">
-          <div *ngIf="tab == 'Online Top Up' && !isAdminRole">
+          <div *ngIf="tab == 'Transfer Value' && !isAdminRole">
             <div nzSm="24" nzMd="24" nzLg="24" nzXl="24">
               <br />
-              <h3 class="primary-color-font">
-                Online Transfer
-              </h3>
-              <form
-                nz-form
-                [formGroup]="validateOnlineForm"
-                (ngSubmit)="submitOnlineForm()"
-              >
-                <nz-form-item>
-                  <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="Amount"
-                    >Transfer Amount</nz-form-label
-                  >
-                  <nz-form-control
-                    [nzSm]="14"
-                    [nzXs]="24"
-                    nzErrorTip="Please enter the amount."
-                  >
-                    <input
-                      type="number"
-                      nz-input
-                      formControlName="onlineAmount"
-                      id="onlineAmount"
-                    />
-                  </nz-form-control>
-                </nz-form-item>
-  
-                <nz-form-item nz-row class="register-area">
-                  <nz-form-control [nzSpan]="14" [nzOffset]="6">
-                    <button nz-button nzType="primary">
-                      Pay Online
-                    </button>
-                  </nz-form-control>
-                </nz-form-item>
-              </form>
-              <br /><br />
-            </div>
+              <div nz-row nzSm="24" nzMd="24" nzLg="24" nzXl="24">
+                <div nz-col nzSm="24" nzMd="24" nzLg="6" nzXl="6">
+                  <h4>Choose Retailer</h4>
+           <nz-select [(ngModel)]="selectedValue" nzAllowClear nzPlaceHolder="Choose Retailer">
+           <nz-option nzValue="Retailer1" nzLabel="Retailer1"></nz-option>
+           <nz-option nzValue="Retailer2" nzLabel="Retailer2"></nz-option>
+           <nz-option nzValue="Retailer3" nzLabel="Retailer3"></nz-option>
+           </nz-select>
+              </div>
+                <div nz-col nzSm="24" nzMd="24" nzLg="6" nzXl="6">
+                      <h4>Amount</h4>
+                      <nz-input-number [(ngModel)]="demoValue" [nzMin]="1" [nzMax]="" [nzStep]="1"></nz-input-number>
+                </div>
+                <div nz-col nzSm="24" nzMd="24" nzLg="6" nzXl="6">
+                  <br>
+                     <button nz-button nzType="primary">Submit</button>
+                </div>
+                <div nz-col nzSm="24" nzMd="24" nzLg="6" nzXl="6"></div>
+
+                <br /><br />
+              </div>
+              </div>
+
           </div>
           <div *ngIf="tab == 'Manual Top Up' && !isAdminRole">
             <div nzSm="24" nzMd="24" nzLg="24" nzXl="24">
@@ -97,7 +84,7 @@
                     />
                   </nz-form-control>
                 </nz-form-item>
-  
+
                 <nz-form-item>
                   <nz-form-label
                     [nzSm]="6"
@@ -106,7 +93,7 @@
                     nzRequired
                     >Transaction Type</nz-form-label
                   >
-  
+
                   <nz-form-control
                     [nzSm]="14"
                     [nzXs]="24"
@@ -127,7 +114,7 @@
                     </nz-select>
                   </nz-form-control>
                 </nz-form-item>
-  
+
                 <nz-form-item>
                   <nz-form-label
                     [nzSm]="6"
@@ -159,44 +146,81 @@
               </form>
             </div>
           </div>
-          <div *ngIf="tab == 'Transactions'">
+          <div *ngIf="tab == 'Transfer By Number'">
             <div nzSm="24" nzMd="24" nzLg="24" nzXl="24">
               <br />
-              <h3 class="primary-color-font">
-                Recent Transaction
-              </h3>
-              <br />
-              <nz-table
-                #headerTable
-                [nzData]="companyTranscations"
-                [nzPageSize]="50"
-                [nzScroll]="{ y: '240px' }"
-              >
-                <thead>
-                  <tr>
-                    <th nzWidth="150px">Date</th>
-                    <th>Details</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr *ngFor="let data of headerTable.data">
-                    <td>
-                      {{ data.initiated_ts * 1000 | date: "yyyy-MM-dd" }}
-                    </td>
-                    <td>
-                      Txn Id: {{ data.details.transaction_id }},
-                      {{ getStatusText(data.approval_status) }}, Amount -
-                      {{ data.amount | currency: "₹" }}
-                    </td>
-                  </tr>
-                </tbody>
-              </nz-table>
+              <div nz-row nzSm="24" nzMd="24" nzLg="24" nzXl="24">
+              <div nz-col nzSm="24" nzMd="24" nzLg="6" nzXl="6">
+                <h4>Enter Number or UserID</h4>
+                  <input nz-input placeholder="xxxxxxx" [(ngModel)]="value" />
+              </div>
+              <div nz-col nzSm="24" nzMd="24" nzLg="6" nzXl="6">
+                <h4>Amount</h4>
+                <nz-input-number [(ngModel)]="demoValue" [nzMin]="1" [nzMax]="" [nzStep]="1"></nz-input-number>
+              </div>
+              <div nz-col nzSm="24" nzMd="24" nzLg="6" nzXl="6">
+                <h4>Type</h4>
+         <nz-select [(ngModel)]="selectedValue" nzAllowClear nzPlaceHolder="Forward">
+         <nz-option nzValue="Forward" nzLabel="Forward"></nz-option>
+         <nz-option nzValue="Reverse" nzLabel="Reverse"></nz-option>
+         </nz-select>
+              </div>
+              <div nz-col nzSm="24" nzMd="24" nzLg="6" nzXl="6">
+                <h4>Remarks</h4>
+                  <input nz-input placeholder="........." [(ngModel)]="value" />
+              </div>
+               <button nz-button nzType="primary">Submit</button>
+                </div>
             </div>
           </div>
+          <div *ngIf="tab == 'Request Value'">
+            <div nzSm="24" nzMd="24" nzLg="24" nzXl="24">
+              <br />
+                <div nz-row nzSm="24" nzMd="24" nzLg="24" nzXl="24">
+                    <div nz-col nzSm="24" nzMd="24" nzLg="4" nzXl="4">
+                      <h4>Amount</h4>
+                      <nz-input-number [(ngModel)]="demoValue" [nzMin]="1" [nzMax]="" [nzStep]="1"></nz-input-number>
+                    </div>
+                    <div nz-col nzSm="24" nzMd="24" nzLg="4" nzXl="4">
+                      <h4>Payment Mode</h4>
+               <nz-select [(ngModel)]="selectedValue" nzAllowClear nzPlaceHolder="Choose Mode">
+               <nz-option nzValue="CASH" nzLabel="CASH"></nz-option>
+               <nz-option nzValue="Bank Transfer" nzLabel="Bank Transfer"></nz-option>
+               <nz-option nzValue="RTGS" nzLabel="RTGS"></nz-option>
+               <nz-option nzValue="NEFT" nzLabel="NEFT"></nz-option>
+               <nz-option nzValue="IMPS/UPI" nzLabel="IMPS/UPI"></nz-option>
+               <nz-option nzValue="Cheque" nzLabel="Cheque"></nz-option>
+                <nz-option nzValue="Capital float" nzLabel="Capital float"></nz-option>
+               </nz-select>
+                    </div>
+                    <div nz-col nzSm="24" nzMd="24" nzLg="4" nzXl="4">
+                      <h4>Ref No.</h4>
+                        <input nz-input placeholder="xxxxxxx" [(ngModel)]="value" />
+                    </div>
+                    <div nz-col nzSm="24" nzMd="24" nzLg="4" nzXl="4">
+                      <h4>Choose Bank</h4>
+               <nz-select [(ngModel)]="selectedValue" nzAllowClear nzPlaceHolder="Choose Bank">
+               <nz-option nzValue="Axis Bank" nzLabel="Axis Bank"></nz-option>
+               <nz-option nzValue="Icici Bank" nzLabel="Icici Bank"></nz-option>
+                </nz-select>
+                    </div>
+                    <div nz-col nzSm="24" nzMd="24" nzLg="4" nzXl="4">
+                      <h4>Payment Date</h4>
+                          <nz-date-picker [(ngModel)]="date" (ngModelChange)="onChange($event)"></nz-date-picker>
+                    </div>
+                      <div nz-col nzSm="24" nzMd="24" nzLg="4" nzXl="4">
+                        <br>
+                             <button nz-button nzType="primary">Submit</button>
+                      </div>
+
+                </div>
+
+
+              </div>
+            </div>
         </nz-tab>
       </nz-tabset>
     </div>
     <br />
     <br />
   </div>
-  
