@@ -35,7 +35,7 @@ import { FundReducers } from "@app/core/store/reducers/fund.reducer";
   styleUrls: ["./wallet-top-up.component.scss"]
 })
 export class WalletTopUpComponent implements OnInit, OnDestroy {
-  tabs = ["Online Top Up", "Transactions"];
+  tabs = ["Transfer Value", "Transfer By Number","Request Value"];
   validateForm: FormGroup;
   validateOnlineForm: FormGroup;
   selectedTransType = "neft";

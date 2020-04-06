@@ -3,8 +3,21 @@ nz-card {
     max-width: 720px;
     height: auto;
     max-height: 500px;
-  
-  } 
+
+  }
 
   tr:nth-child(even) {background-color: #f2f2f2 !important;}
-  
+
+  nz-select {
+       margin-right: 8px;
+       width: 120px;
+     }
+
+     [nz-button] {
+       margin-right: 8px;
+       margin-bottom: 12px;
+     }
+
+nz-date-picker {
+        margin: 0 8px 12px 0;
+      }
