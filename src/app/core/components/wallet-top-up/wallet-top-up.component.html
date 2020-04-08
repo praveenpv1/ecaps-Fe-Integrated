@@ -1,6 +1,6 @@
 <div nz-row>
     <div nz-col nzSm="24" nzMd="24" nzLg="24" nzXl="24">
-      <h3 class="primary-color-font">Wallet Top Up</h3>
+      <h3 class="primary-color-font">WalletTop Up</h3>
       <p>Topup your Enviar Account balance.</p>
     </div>
     <br />
@@ -221,6 +221,36 @@
         </nz-tab>
       </nz-tabset>
     </div>
-    <br />
-    <br />
+    <br>
+    <br>
+    <div nz-row>
+    <nz-table #basicTable [nzData]="listOfData">
+      <thead>
+        <tr>
+          <th>UserID</th>
+          <th>Name</th>
+          <th>Mobile</th>
+          <th>UserRole</th>
+          <th>Prev Bal.</th>
+          <th>Amount</th>
+          <th>After Bal.</th>
+          <th>Type</th>
+          <th>Date</th>
+
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let data of basicTable.data">
+          <td>{{ data.name }}</td>
+          <td>{{ data.age }}</td>
+          <td>{{ data.address }}</td>
+          <td>
+            <a>Action 一 {{ data.name }}</a>
+            <nz-divider nzType="vertical"></nz-divider>
+            <a>Delete</a>
+          </td>
+        </tr>
+      </tbody>
+    </nz-table>
+    </div>
   </div>

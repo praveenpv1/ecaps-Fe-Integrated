@@ -275,4 +275,5 @@ export class WalletTopUpComponent implements OnInit, OnDestroy {
       this.validateForm.controls.checkPassword.updateValueAndValidity()
     );
   }
+  
 }
