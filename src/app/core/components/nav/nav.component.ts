@@ -4,7 +4,7 @@ import {
   OnDestroy,
   ViewChild,
   ElementRef,
-  Renderer2
+  Renderer2,
 } from "@angular/core";
 
 import { MatSidenav } from "@angular/material";
@@ -26,7 +26,7 @@ import {
   Event,
   NavigationStart,
   NavigationEnd,
-  NavigationError
+  NavigationError,
 } from "@angular/router";
 import { DataStore } from "@app/core/store/app.store";
 import { HIDE_TOAST } from "@app/core/store/actions";
@@ -46,13 +46,13 @@ enum messageType {
   error = "error",
   success = "success",
   warning = "warning",
-  loader = "loader"
+  loader = "loader",
 }
 
 @Component({
   selector: "app-nav",
   templateUrl: "./nav.component.html",
-  styleUrls: ["./nav.component.scss"]
+  styleUrls: ["./nav.component.scss"],
 })
 export class NavComponent implements OnInit, OnDestroy {
   @ViewChild("commandbarSidenav", { static: true })
@@ -99,7 +99,7 @@ export class NavComponent implements OnInit, OnDestroy {
 
       if (event instanceof NavigationEnd) {
         // Hide loading indicator
-        this.route.firstChild.data.subscribe(res => {
+        this.route.firstChild.data.subscribe((res) => {
           this.currentMenuType = res.menuType;
         });
       }
@@ -131,7 +131,7 @@ export class NavComponent implements OnInit, OnDestroy {
 
     this.subscribe();
 
-    this.subscribers = this._dataStore.dataStore$.subscribe(data => {
+    this.subscribers = this._dataStore.dataStore$.subscribe((data) => {
       if (data.toast) {
         this.showToast(data.toastType, data.toastMessage);
         this._toastReducer.toastState({ type: HIDE_TOAST });
@@ -202,23 +202,23 @@ export class NavComponent implements OnInit, OnDestroy {
 
   createBasicMessage(): void {
     const id = this.message.loading("Action in progress..", {
-      nzDuration: 0
+      nzDuration: 0,
     }).messageId;
   }
 
   async loadNavListItems() {
     this.myWorkRoutes = await this.configService.get("my-work-routes");
 
-    this.myWorkRoutes.forEach(route => {
-      this.translate.get(route.title).subscribe(value => {
+    this.myWorkRoutes.forEach((route) => {
+      this.translate.get(route.title).subscribe((value) => {
         route.title = value;
       });
     });
 
     this.customerRoutes = await this.configService.get("customer-routes");
 
-    this.customerRoutes.forEach(route => {
-      this.translate.get(route.title).subscribe(value => {
+    this.customerRoutes.forEach((route) => {
+      this.translate.get(route.title).subscribe((value) => {
         route.title = value;
       });
     });
@@ -235,7 +235,7 @@ export class NavComponent implements OnInit, OnDestroy {
 
     this.subscription = this.dashboardService
       .getToolPaletteItems()
-      .subscribe(data => {
+      .subscribe((data) => {
         this.toolPaletteItems = data;
       });
   }
@@ -257,7 +257,7 @@ export class NavComponent implements OnInit, OnDestroy {
     this.router.navigate([
       "/",
       "account-details",
-      sessionStorage.getItem("company_id")
+      sessionStorage.getItem("company_id"),
     ]);
   }
 
