@@ -1,4 +1,3 @@
-import { ADD_CHILD } from "./../../store/actions/index";
 import { Component, OnInit } from "@angular/core";
 import {
   FormBuilder,
@@ -6,6 +5,8 @@ import {
   FormGroup,
   Validators
 } from "@angular/forms";
+import { ADD_CHILD,GET_CHILD_USER } from "./../../store/actions/index";
+import { ActivatedRoute } from "@angular/router";
 import * as _ from "lodash";
 import * as moment from "moment";
 import { UserReducers } from "@app/core/store/reducers/user.reducer";
@@ -17,11 +18,13 @@ import { DataStore } from "@app/core/store/app.store";
 })
 export class AddSuperDistributorComponent implements OnInit {
   validateForm: FormGroup;
+  _id: string = "";
   isFormValid: boolean = false;
 
   constructor(
     private fb: FormBuilder,
     private child: UserReducers,
+    private activatedRoute: ActivatedRoute,
     private _dataStore: DataStore
   ) {}
 
@@ -64,6 +67,18 @@ export class AddSuperDistributorComponent implements OnInit {
   }
 
   ngOnInit() {
+    if (this.activatedRoute.snapshot.paramMap.get("id")) {
+      this._id = this.activatedRoute.snapshot.paramMap.get("id");
+    }
+    if (this._id != "") {
+
+        this.child.userReducer({
+        type: GET_CHILD_USER,
+        payload: {
+          id: this._id
+        }
+      });
+    }
     this.validateForm = this.fb.group({
       first_name: [null, [Validators.required]],
       last_name: [null, [Validators.required]],

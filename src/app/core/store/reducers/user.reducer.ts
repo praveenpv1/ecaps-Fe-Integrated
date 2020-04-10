@@ -9,6 +9,7 @@ import {
   LOGIN,
   FETCH_USER_GRAPHQL,
   RESET_STATE,
+  GET_CHILD_USER,
   USERS_LIST
 } from "../actions";
 import { LoadingReducers } from "./loading.reducer";
@@ -129,6 +130,45 @@ export class UserReducers {
             }
           );
         break;
+        
+        case GET_CHILD_USER: 
+        this._loader.loadingState({ type: LOADING });
+        state = this._dataStore.dataStore$.getValue();
+        this.apiService.get(`main/users/update/${action.payload.id}`, {}, true)
+        .subscribe(
+          (response: any) => { 
+             this._dataStore.dataStore$.next({
+              ...state,
+              ...successCommonData,
+              childUser: response.data
+            }); 
+          },
+          error => {
+            console.log(error);
+
+            state = this._dataStore.dataStore$.getValue();
+
+            this._dataStore.dataStore$.next({
+              ...state,
+              ...catchCommonData,
+              toastMessage: _.get(error, "message", "Something Went Wrong!!")
+            });
+          }
+        );
+      break;
+        // .then(data => {
+        //   this._dataStore.dataStore$.next({
+        //     ...state,
+        //     ...successCommonData,
+        //     childUser: { 
+        //       data: data 
+        //     }
+        //   });
+        // })
+        // .catch(error => {
+        //   this.toast.commonCatchToast(error.response.data.error);
+        // });
+        // break;
 
       case ADD_CHILD:
         console.log("IN ADD_CHILD");

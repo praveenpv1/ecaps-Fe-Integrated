@@ -116,6 +116,11 @@ const routes: Routes = [
     data: { menuType: menuType.normal }
   },
   {
+    path: "super-distributor/add/:id",
+    component: AddSuperDistributorComponent,
+    data: { menuType: menuType.normal }
+  },
+  {
     path: "distributor/add",
     component: AddDistributorComponent,
     data: { menuType: menuType.normal }
