@@ -10,7 +10,7 @@ import { ActivatedRoute } from "@angular/router";
 import * as _ from "lodash";
 import * as moment from "moment";
 import { UserReducers } from "@app/core/store/reducers/user.reducer";
-import { DataStore } from "@app/core/store/app.store";
+import { DataStore } from "@app/core/store/app.store"; 
 @Component({
   selector: "app-addnewuser",
   templateUrl: "./add-super-distributor.component.html",
@@ -20,12 +20,13 @@ export class AddSuperDistributorComponent implements OnInit {
   validateForm: FormGroup;
   _id: string = "";
   isFormValid: boolean = false;
+  userDetails: any;
 
   constructor(
     private fb: FormBuilder,
     private child: UserReducers,
     private activatedRoute: ActivatedRoute,
-    private _dataStore: DataStore
+    private _dataStore: DataStore, 
   ) {}
 
   submitForm() {
@@ -52,7 +53,7 @@ export class AddSuperDistributorComponent implements OnInit {
           dob: moment(this.validateForm.controls.dateOfBirth.value).format(
             "DD-MM-YYYY"
           ),
-          phone: `+91${this.validateForm.controls.phoneNumber.value}`,
+          phone: this.validateForm.controls.phoneNumber.value,
           username: this.validateForm.controls.userName.value,
           email: this.validateForm.controls.email.value,
           password: this.validateForm.controls.password.value,
@@ -67,9 +68,13 @@ export class AddSuperDistributorComponent implements OnInit {
   }
 
   ngOnInit() {
+
+    this.setForm({});
+
     if (this.activatedRoute.snapshot.paramMap.get("id")) {
       this._id = this.activatedRoute.snapshot.paramMap.get("id");
     }
+
     if (this._id != "") {
 
         this.child.userReducer({
@@ -78,34 +83,67 @@ export class AddSuperDistributorComponent implements OnInit {
           id: this._id
         }
       });
-    }
-    this.validateForm = this.fb.group({
-      first_name: [null, [Validators.required]],
-      last_name: [null, [Validators.required]],
-      company_name: [null, [Validators.required]],
-      dateOfBirth: [null],
-      phoneNumberPrefix: ["+91"],
-      phoneNumber: [null, [Validators.required]],
-      userName: [null, [Validators.required]],
-      email: [null, [Validators.email, Validators.required]],
-      password: [null, [Validators.required]],
-      role: ["Super Distributor", [Validators.required]],
-      pan: [null, [Validators.required]],
-      aadhaarNo: [null, [Validators.required]],
-      voterId: [null, [Validators.required]],
-      kitNo: [null, [Validators.required]]
-      // selectedMargin: [null, [Validators.required]],
-      // nonRefundableAmount: [null, [Validators.required]],
-      // securityAmount: [null, [Validators.required]],
-      // paymentMode: [null, [Validators.required]],
-      // paymentBank: [null, [Validators.required]],
-      // paymentReferenceNo:[null, [Validators.required]],
-      // paymentDate: [null],
-      // paymentRemarks: ['', [Validators.required]],
-      // kitsIssued: [null, [Validators.required]],
-      // rate: [null, [Validators.required]],
-      // complementaryKits: [null, [Validators.required]],
-      // kitsRemarks: ['', [Validators.required]]
+
+    this._dataStore.dataStore$.subscribe(data => {
+      if(data.childUser) {
+        this.userDetails = data.childUser;
+        if(this.userDetails != null){
+          this.setDetails({})
+        } 
+      }
     });
+    }
+  }
+
+  setDetails(data: any){
+    
+    if(!_.isEmpty(this.userDetails)) {
+      // console.log("33333333333333", this.userDetails)
+      this.validateForm.patchValue({
+        
+        first_name: this.userDetails.firstname,
+        last_name: this.userDetails.lastname,
+        company_name: this.userDetails.company_name,
+        dateOfBirth: moment(this.userDetails.dob, "DD-MM-YYYY").format("MM-DD-YYYY"), 
+        phoneNumber: this.userDetails.phone,
+        userName: this.userDetails.username,
+        email: this.userDetails.email,
+        // password: "",
+        role: "Super Distributor",
+        pan: this.userDetails.pan,
+        aadhaarNo: this.userDetails.aadhaar,
+        voterId: this.userDetails.voter_id,
+        kitNo: this.userDetails.kit_number
+      });
+    } 
+  }
+  setForm(data: any) {
+    this.validateForm = this.fb.group({
+          first_name: [null, [Validators.required]],
+          last_name: [null, [Validators.required]],
+          company_name: [null, [Validators.required]],
+          dateOfBirth: [null], 
+          phoneNumber: [null, [Validators.required]],
+          userName: [null, [Validators.required]],
+          email: [null, [Validators.email, Validators.required]],
+          password: [null, [Validators.required]],
+          role: ["Super Distributor", [Validators.required]],
+          pan: [null, [Validators.required]],
+          aadhaarNo: [null, [Validators.required]],
+          voterId: [null, [Validators.required]],
+          kitNo: [null, [Validators.required]]
+          // selectedMargin: [null, [Validators.required]],
+          // nonRefundableAmount: [null, [Validators.required]],
+          // securityAmount: [null, [Validators.required]],
+          // paymentMode: [null, [Validators.required]],
+          // paymentBank: [null, [Validators.required]],
+          // paymentReferenceNo:[null, [Validators.required]],
+          // paymentDate: [null],
+          // paymentRemarks: ['', [Validators.required]],
+          // kitsIssued: [null, [Validators.required]],
+          // rate: [null, [Validators.required]],
+          // complementaryKits: [null, [Validators.required]],
+          // kitsRemarks: ['', [Validators.required]]
+        });
   }
 }

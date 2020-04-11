@@ -22,6 +22,8 @@ export class AddRetailerComponent implements OnInit {
   ) {}
 
   submitForm() {
+    
+    console.log(this.validateForm.value);
     const store = this._dataStore.dataStore$.getValue();
 
     this.isFormValid =

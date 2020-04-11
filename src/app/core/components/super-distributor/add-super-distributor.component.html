@@ -82,35 +82,15 @@
               </nz-form-control>
             </nz-form-item>
             <nz-form-item>
-              <nz-form-label
-                [nzSm]="6"
-                [nzXs]="24"
-                nzFor="phoneNumber"
-                nzRequired
+              <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="phoneNumber"
+                >Phone Number</nz-form-label
               >
-                Phone Number
-              </nz-form-label>
               <nz-form-control
                 [nzSm]="14"
                 [nzXs]="24"
-                [nzValidateStatus]="validateForm.controls['phoneNumber']"
-                nzErrorTip="Please input your phone number!"
+                nzErrorTip="Please enter phone number."
               >
-                <nz-input-group [nzAddOnBefore]="addOnBeforeTemplate">
-                  <ng-template #addOnBeforeTemplate>
-                    <nz-select
-                      formControlName="phoneNumberPrefix"
-                      class="phone-select"
-                    >
-                      <nz-option nzLabel="+91" nzValue="+91"></nz-option>
-                    </nz-select>
-                  </ng-template>
-                  <input
-                    formControlName="phoneNumber"
-                    id="'phoneNumber'"
-                    nz-input
-                  />
-                </nz-input-group>
+                <input nz-input formControlName="phoneNumber" id="phoneNumber" />
               </nz-form-control>
             </nz-form-item>
             <nz-form-item>
