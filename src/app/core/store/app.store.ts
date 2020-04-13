@@ -15,6 +15,7 @@ export class DataStore {
     retailerList: {},
     childUser: {},
     childrenList: [],
+    fundLoadRequests: {},
     loader: false,
     loadingMessage: "",
     toast: false,

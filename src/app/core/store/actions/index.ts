@@ -6,6 +6,8 @@ export const FORGOT_PASSWORD = "[USER] Forgot Password";
 export const USERS_LIST = "[USER] Get Users List";
 export const GET_CHILD_USER = "[GET_CHILD_USER] Get Child User ";
 export const UPDATE_CHILD_USER = "[UPDATE_CHILD_USER] Update Child User ";
+export const GET_FUND_LOADS = "[GET_FUND_LOADS] Get Fund Load Requests ";
+
 
 
 export const VERIFY_EMAIL = "[USER] Verify Email";
