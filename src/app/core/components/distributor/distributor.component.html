@@ -65,6 +65,7 @@
         <th nzWidth="200px">Mobile</th>
         <th nzWidth="200px">Company</th> 
         <th nzWidth="250px">Email</th> 
+        <th></th>
       </tr>
     </thead>
     <tbody>
@@ -79,6 +80,11 @@
         <td>
           {{ data.email }}
         </td> 
+        <td>
+          <button nz-button class="table-btn" (click)="editRoute(data)">
+            <i nz-icon class="edit-icon" nzType="edit"></i>
+          </button>
+        </td>
       </tr>
     </tbody>
   </nz-table>

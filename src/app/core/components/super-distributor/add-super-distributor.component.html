@@ -7,8 +7,8 @@
       />&nbsp;&nbsp;BACK</a
     >
     <br />
-    <h3 class="primary-color-font">Add New Super Distributor</h3>
-    <p>Add a new super distributor here</p>
+    <h3 class="primary-color-font">{{ _id != "" ? "Edit" : "Add New" }} Super Distributor</h3>
+    <p *ngIf="_id == ''">Add a new super distributor here</p>
   </div>
   <div nz-col nzSm="24" nzMd="24" nzLg="24" nzXl="24">
     <h3>Super Distributor Details</h3>
@@ -45,7 +45,7 @@
                 <input nz-input formControlName="last_name" id="last_name" />
               </nz-form-control>
             </nz-form-item>
-            <nz-form-item>
+            <nz-form-item *ngIf="_id == ''">
               <nz-form-label
                 [nzSm]="6"
                 [nzXs]="24"

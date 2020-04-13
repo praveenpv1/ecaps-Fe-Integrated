@@ -15,6 +15,7 @@ import * as _ from "lodash";
 import * as moment from "moment";
 import { UserReducers } from "@app/core/store/reducers/user.reducer";
 import { DataStore } from "@app/core/store/app.store";
+
 @Component({
   selector: "app-addnewuser",
   templateUrl: "./add-super-distributor.component.html",
@@ -164,7 +165,7 @@ export class AddSuperDistributorComponent implements OnInit {
     this.validateForm = this.fb.group({
       first_name: [null, [Validators.required]],
       last_name: [null, [Validators.required]],
-      company_name: [null, [Validators.required]],
+      company_name: [null],
       dateOfBirth: [null],
       phoneNumber: [null, [Validators.required]],
       userName: [null, [Validators.required]],
