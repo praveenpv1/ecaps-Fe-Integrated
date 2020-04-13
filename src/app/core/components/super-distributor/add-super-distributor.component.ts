@@ -49,9 +49,9 @@ export class AddSuperDistributorComponent implements OnInit {
             payload: {
               id: this._id,
               dob: moment(this.validateForm.controls.dateOfBirth.value).format("DD-MM-YYYY"),
-              is_verified: true,
-              status: true,
-              tpin: "",
+              is_verified: this.userDetails.is_verified,
+              status: this.userDetails.status,
+              tpin: this.userDetails.status.tpin,
               aadhaar: this.validateForm.controls.aadhaarNo.value,
               pan: this.validateForm.controls.pan.value,
               voter_id: this.validateForm.controls.voterId.value,
