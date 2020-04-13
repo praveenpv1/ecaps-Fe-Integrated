@@ -1,16 +1,21 @@
-import { ADD_CHILD, SHOW_TOAST } from "./../actions/index";
+import { 
+  ADD_CHILD,
+  GET_CHILD_USER,
+  USERS_LIST,
+  ADD_USER_INFO,
+  UPDATE_CHILD_USER
+
+} from "./../actions/index";
 import { Injectable } from "@angular/core";
 import { DataStore } from "../app.store";
 import { ApiService } from "@app/core/services/api.service";
 import {
-  ADD_USER_INFO,
   LOADING,
   NOT_LOADING,
   LOGIN,
   FETCH_USER_GRAPHQL,
   RESET_STATE,
-  GET_CHILD_USER,
-  USERS_LIST
+  SHOW_TOAST,
 } from "../actions";
 import { LoadingReducers } from "./loading.reducer";
 import { MODEL_PATHS } from "pk-client";
@@ -173,11 +178,45 @@ export class UserReducers {
       case ADD_CHILD:
         console.log("IN ADD_CHILD");
         this._loader.loadingState({ type: LOADING });
-        this.apiService.post(`main/users/add`, { ...action.payload }).subscribe(
+        this.apiService.post(`main/users/add`, { ...action.payload.id }).subscribe(
           (response: any) => {
             this.toast.toastState({
               type: SHOW_TOAST,
               payload: { message: response.message, type: "success" }
+            });
+
+            this._dataStore.dataStore$.next({
+              ...state,
+              ...successCommonData
+            });
+            // this.router.navigate(["/sigin"]);
+
+            this._location.back();
+          },
+          error => {
+            console.log(error);
+
+            state = this._dataStore.dataStore$.getValue();
+
+            this._dataStore.dataStore$.next({
+              ...state,
+              ...catchCommonData,
+              toastMessage: _.get(error, "message", "Something Went Wrong!!")
+            });
+          }
+        );
+        break;
+
+      case UPDATE_CHILD_USER: 
+        this._loader.loadingState({ type: LOADING });
+        this.apiService.post(`main/users/update/${ action.payload.id }`,{
+           params: _.omit( action.payload, "id")
+           })
+        .subscribe(
+          (response: any) => {
+            this.toast.toastState({
+              type: SHOW_TOAST,
+              payload: { message: response.message, type: "successfully updated" }
             });
 
             this._dataStore.dataStore$.next({

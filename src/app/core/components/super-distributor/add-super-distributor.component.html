@@ -117,7 +117,7 @@
                 <input nz-input formControlName="email" id="email" />
               </nz-form-control>
             </nz-form-item>
-            <nz-form-item>
+            <nz-form-item *ngIf = "_id == '' ">
               <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="password">
                 Password
               </nz-form-label>
@@ -295,7 +295,7 @@
                   nzType="primary"
                   [disabled]="!(validateForm.status === 'VALID')"
                 >
-                  Create Super Distributor
+                  {{ _id != "" ? "Update" : "Create Super Distributor" }}
                 </button>
               </nz-form-control>
             </nz-form-item>
