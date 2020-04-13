@@ -82,7 +82,11 @@
               </nz-form-control>
             </nz-form-item>
             <nz-form-item>
-              <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="phoneNumber"
+              <nz-form-label
+                [nzSm]="6"
+                [nzXs]="24"
+                nzRequired
+                nzFor="phoneNumber"
                 >Phone Number</nz-form-label
               >
               <nz-form-control
@@ -90,7 +94,11 @@
                 [nzXs]="24"
                 nzErrorTip="Please enter phone number."
               >
-                <input nz-input formControlName="phoneNumber" id="phoneNumber" />
+                <input
+                  nz-input
+                  formControlName="phoneNumber"
+                  id="phoneNumber"
+                />
               </nz-form-control>
             </nz-form-item>
             <nz-form-item>
@@ -117,7 +125,7 @@
                 <input nz-input formControlName="email" id="email" />
               </nz-form-control>
             </nz-form-item>
-            <nz-form-item *ngIf = "_id == '' ">
+            <nz-form-item *ngIf="_id == ''">
               <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="password">
                 Password
               </nz-form-label>
@@ -138,7 +146,7 @@
                 [nzXs]="24"
                 nzErrorTip="Please enter Role"
               >
-                <input nz-input formControlName="role" id="role" disabled />
+                <input nz-input formControlName="role" id="role" />
               </nz-form-control>
             </nz-form-item>
             <nz-form-item>
@@ -293,7 +301,7 @@
                 <button
                   nz-button
                   nzType="primary"
-                  [disabled]="!(validateForm.status === 'VALID')"
+                  [disabled]="!validateForm.valid"
                 >
                   {{ _id != "" ? "Update" : "Create Super Distributor" }}
                 </button>
