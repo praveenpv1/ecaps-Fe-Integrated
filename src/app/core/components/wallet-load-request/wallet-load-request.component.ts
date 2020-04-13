@@ -1,12 +1,14 @@
 import { Component, OnInit, OnDestroy } from "@angular/core";
 import { DataStore } from "@app/core/store/app.store";
 import { CompanyReducers } from "@app/core/store/reducers/company.reducer";
+import { FundReducers } from "@app/core/store/reducers/fund.reducer";
 import {
     GET_COMPANY_TXNS,
     GET_COMPANY_WALLET,
     UPDATE_COMPANY_TXNS,
     GET_CLAIMS_TXNS,
-    GET_EMPLOYEES
+    GET_EMPLOYEES,
+    GET_FUND_LOADS
 } from "@app/core/store/actions";
 import * as _ from "lodash";
 import { environment } from "@env/environment";
@@ -73,13 +75,18 @@ export class WalletLoadRequestComponent implements OnInit, OnDestroy {
     rejectedClaimsData: any;
     settledClaimsData: any = [];
     employees: any;
+    walletLoadRequests: any;
+    initialState: any = "";
     constructor(
         private cR: CompanyReducers,
         private ds: DataStore,
         private datePipe: DatePipe,
         private currencyPipe: CurrencyPipe,
-        private eR: EmployeeReducers
+        private eR: EmployeeReducers,
+        private fR: FundReducers
     ) {
+
+      this.initialState = ds.dataStore$.getValue();
         this.subscribers = this.ds.dataStore$.subscribe(res => {
             this.companyBalance = _.get(res.company.details, "data.value", 0);
             this.balanceCards = [];
@@ -178,16 +185,15 @@ export class WalletLoadRequestComponent implements OnInit, OnDestroy {
     ngOnInit() {
         this.showCompanyWallet();
 
-        //get all employees
-        // this.eR.cardReducer({
-        //   type: GET_EMPLOYEES,
-        //   payload: {}
-        // });
-
-        // this.cR.cardReducer({
-        //   type: GET_CLAIMS_TXNS,
-        //   payload: {}
-        // });
+        this.fR.fundReducer({
+          type: GET_FUND_LOADS,
+          payload: {id: _.get(this.initialState, "userInfo._id", null)}
+        });
+        this.ds.dataStore$.subscribe((data) => {
+        if (data.fundLoadRequests) {
+          this.walletLoadRequests = data.fundLoadRequests;
+        }
+      });
     }
     renderCards(): void {
         this.balanceCards = [];
@@ -252,5 +258,5 @@ export class WalletLoadRequestComponent implements OnInit, OnDestroy {
         //   payload: { txnid: id, approval_status: "disapproved" }
         // });
     }
-    
+
 }

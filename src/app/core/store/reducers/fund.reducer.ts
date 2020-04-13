@@ -13,7 +13,8 @@ import {
   VERIFY_EMAIL,
   SET_PASSWORD,
   USERS_LIST,
-  FUND_LOAD
+  FUND_LOAD,
+  GET_FUND_LOADS
 } from "../actions";
 import { LoadingReducers } from "./loading.reducer";
 import { catchCommonData, successCommonData } from "../commonstoredata";
@@ -77,6 +78,34 @@ export class FundReducers {
             }
           );
         break;
+
+        case GET_FUND_LOADS:
+        this._loader.loadingState({ type: LOADING });
+        state = this._dataStore.dataStore$.getValue();
+        this.apiService
+          .get(`main/fundloads/pendingtoapprove/${action.payload.id}`, {}, true)
+          .subscribe(
+            (response: any) => {
+              this._dataStore.dataStore$.next({
+                ...state,
+                ...successCommonData,
+                fundLoadRequests: response.data,
+              });
+            },
+            (error) => {
+              console.log(error);
+
+              state = this._dataStore.dataStore$.getValue();
+
+              this._dataStore.dataStore$.next({
+                ...state,
+                ...catchCommonData,
+                toastMessage: _.get(error, "message", "Something Went Wrong!!"),
+              });
+            }
+          );
+        break;
+
 
       default:
         console.log("IN FUND REDUCER DEFAULT");
