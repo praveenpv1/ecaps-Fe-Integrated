@@ -15,7 +15,7 @@ export class DataStore {
     retailerList: {},
     childUser: {},
     childrenList: [],
-    fundLoadRequests: {},
+    fundLoadRequests: [],
     loader: false,
     loadingMessage: "",
     toast: false,
@@ -25,7 +25,7 @@ export class DataStore {
     card: {
       assignCard: {},
       cardDetails: {},
-      isLocked: false
+      isLocked: false,
     },
     modal: {
       title: "",
@@ -34,74 +34,74 @@ export class DataStore {
       closeButtonText: "",
       submitButtonText: "",
       submitAction: {},
-      showModal: false
+      showModal: false,
     },
     createEmployee: {
-      details: {}
+      details: {},
     },
     editEmployee: {
-      details: {}
+      details: {},
     },
     company: {
-      details: {}
+      details: {},
     },
     company_id: sessionStorage.getItem("company_id"),
     allowance: {
       pay: {
         allowanceSelected: "",
-        employees: []
-      }
+        employees: [],
+      },
     },
     singleEmployee: {
-      detail: {}
+      detail: {},
     },
     company_txns: {
-      details: {}
+      details: {},
     },
     claims_txns: {
-      details: {}
+      details: {},
     },
     company_transactions: {
-      details: {}
+      details: {},
     },
     companies: {
-      details: {}
+      details: {},
     },
     roles: sessionStorage.getItem("roles"),
     token: {},
     claim_details: {
-      details: {}
+      details: {},
     },
     merchant_txns: {
-      details: {}
+      details: {},
     },
     reimbursement_merchant_txns: {
-      details: {}
+      details: {},
     },
     bulkImport: {
-      details: {}
+      details: {},
     },
     company_info: {
-      details: {}
+      details: {},
     },
     transcationAddResponse: {
-      details: {}
+      details: {},
     },
     employees: {
-      details: {}
+      details: {},
     },
     topUpTranscations: {
-      details: {}
+      details: {},
     },
     claims_update_data: {
-      details: {}
+      details: {},
     },
     ca_token: {
-      details: {}
+      details: {},
     },
     company_txn_approved: {
-      detail: {}
-    }
+      detail: {},
+    },
   };
 
   constructor() {
