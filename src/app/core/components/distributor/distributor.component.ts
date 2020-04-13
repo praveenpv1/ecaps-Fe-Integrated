@@ -76,19 +76,10 @@ export class DistributorComponent implements OnInit {
       );
     });
   }
-  // editRoute(data: any): void {
-  //   if (data._id) {
-  //     this.route.navigate(["/", "employee", "add", data.user._id, data._id]);
-  //   }
-  // }
-  // resendVerification(data: any): void {
-  //   if (data._id) {
-  //     this.er.cardReducer({
-  //       type: SEND_VERIFICATION,
-  //       payload: {
-  //         employee_id: data._id
-  //       }
-  //     });
-  //   }
-  // }
+
+  editRoute(data: any): void {
+    if (data._id) {
+      this.route.navigate(["/", "distributor", "add", data._id]);
+    }
+  } 
 }

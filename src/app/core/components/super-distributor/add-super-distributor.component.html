@@ -7,8 +7,8 @@
       />&nbsp;&nbsp;BACK</a
     >
     <br />
-    <h3 class="primary-color-font">Add New Super Distributor</h3>
-    <p>Add a new super distributor here</p>
+    <h3 class="primary-color-font">{{ _id != "" ? "Edit" : "Add New" }} Super Distributor</h3>
+    <p *ngIf="_id == ''">Add a new super distributor here</p>
   </div>
   <div nz-col nzSm="24" nzMd="24" nzLg="24" nzXl="24">
     <h3>Super Distributor Details</h3>
@@ -45,7 +45,7 @@
                 <input nz-input formControlName="last_name" id="last_name" />
               </nz-form-control>
             </nz-form-item>
-            <nz-form-item>
+            <nz-form-item *ngIf="_id == ''">
               <nz-form-label
                 [nzSm]="6"
                 [nzXs]="24"
@@ -85,32 +85,20 @@
               <nz-form-label
                 [nzSm]="6"
                 [nzXs]="24"
-                nzFor="phoneNumber"
                 nzRequired
+                nzFor="phoneNumber"
+                >Phone Number</nz-form-label
               >
-                Phone Number
-              </nz-form-label>
               <nz-form-control
                 [nzSm]="14"
                 [nzXs]="24"
-                [nzValidateStatus]="validateForm.controls['phoneNumber']"
-                nzErrorTip="Please input your phone number!"
+                nzErrorTip="Please enter phone number."
               >
-                <nz-input-group [nzAddOnBefore]="addOnBeforeTemplate">
-                  <ng-template #addOnBeforeTemplate>
-                    <nz-select
-                      formControlName="phoneNumberPrefix"
-                      class="phone-select"
-                    >
-                      <nz-option nzLabel="+91" nzValue="+91"></nz-option>
-                    </nz-select>
-                  </ng-template>
-                  <input
-                    formControlName="phoneNumber"
-                    id="'phoneNumber'"
-                    nz-input
-                  />
-                </nz-input-group>
+                <input
+                  nz-input
+                  formControlName="phoneNumber"
+                  id="phoneNumber"
+                />
               </nz-form-control>
             </nz-form-item>
             <nz-form-item>
@@ -137,7 +125,7 @@
                 <input nz-input formControlName="email" id="email" />
               </nz-form-control>
             </nz-form-item>
-            <nz-form-item>
+            <nz-form-item *ngIf="_id == ''">
               <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="password">
                 Password
               </nz-form-label>
@@ -158,7 +146,7 @@
                 [nzXs]="24"
                 nzErrorTip="Please enter Role"
               >
-                <input nz-input formControlName="role" id="role" disabled />
+                <input nz-input formControlName="role" id="role" />
               </nz-form-control>
             </nz-form-item>
             <nz-form-item>
@@ -313,9 +301,9 @@
                 <button
                   nz-button
                   nzType="primary"
-                  [disabled]="!(validateForm.status === 'VALID')"
+                  [disabled]="!validateForm.valid"
                 >
-                  Create Super Distributor
+                  {{ _id != "" ? "Update" : "Create Super Distributor" }}
                 </button>
               </nz-form-control>
             </nz-form-item>

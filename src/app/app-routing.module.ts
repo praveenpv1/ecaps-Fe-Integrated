@@ -116,7 +116,17 @@ const routes: Routes = [
     data: { menuType: menuType.normal }
   },
   {
+    path: "super-distributor/add/:id",
+    component: AddSuperDistributorComponent,
+    data: { menuType: menuType.normal }
+  },
+  {
     path: "distributor/add",
+    component: AddDistributorComponent,
+    data: { menuType: menuType.normal }
+  },
+  {
+    path: "distributor/add/:id",
     component: AddDistributorComponent,
     data: { menuType: menuType.normal }
   },
@@ -137,6 +147,11 @@ const routes: Routes = [
   },
   {
     path: "retailer/add",
+    component: AddRetailerComponent,
+    data: { menuType: menuType.normal }
+  },
+  {
+    path: "retailer/add/:id",
     component: AddRetailerComponent,
     data: { menuType: menuType.normal }
   },

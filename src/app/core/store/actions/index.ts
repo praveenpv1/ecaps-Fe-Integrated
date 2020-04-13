@@ -4,6 +4,10 @@ export const IS_USER_VERIFIED = "[USER] Is User Verified";
 export const LOGIN = "[USER] Login";
 export const FORGOT_PASSWORD = "[USER] Forgot Password";
 export const USERS_LIST = "[USER] Get Users List";
+export const GET_CHILD_USER = "[GET_CHILD_USER] Get Child User ";
+export const UPDATE_CHILD_USER = "[UPDATE_CHILD_USER] Update Child User ";
+
+
 export const VERIFY_EMAIL = "[USER] Verify Email";
 export const SET_PASSWORD = "[USER] Set Password";
 export const ADD_CHILD = "[ADD_CHILD] Add Child";

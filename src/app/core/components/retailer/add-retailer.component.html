@@ -2,8 +2,8 @@
     <div nz-col nzSm="24" nzMd="24" nzLg="24" nzXl="24">
       <a class="back-button-text"  [routerLink]="['/', 'retailer']" ><img class="back-img" src="assets/images/back-button.svg">&nbsp;&nbsp;BACK</a>
       <br>
-      <h3 class="primary-color-font">Add New Retailer</h3>
-      <p>Add a new retailer here</p>
+      <h3 class="primary-color-font">{{ _id != "" ? "Edit" : "Add New" }} Retailer</h3>
+      <p *ngIf="_id == ''">Add a new retailer here</p>
     </div>
     <div nz-col nzSm="24" nzMd="24" nzLg="24" nzXl="24">
       <h3>Retailer Details</h3>
@@ -40,7 +40,7 @@
                   <input nz-input formControlName="last_name" id="last_name" />
                 </nz-form-control>
               </nz-form-item>
-              <nz-form-item>
+              <nz-form-item *ngIf="_id == ''">
                 <nz-form-label
                   [nzSm]="6"
                   [nzXs]="24"
@@ -80,32 +80,20 @@
                 <nz-form-label
                   [nzSm]="6"
                   [nzXs]="24"
-                  nzFor="phoneNumber"
                   nzRequired
+                  nzFor="phoneNumber"
+                  >Phone Number</nz-form-label
                 >
-                  Phone Number
-                </nz-form-label>
                 <nz-form-control
                   [nzSm]="14"
                   [nzXs]="24"
-                  [nzValidateStatus]="validateForm.controls['phoneNumber']"
-                  nzErrorTip="Please input your phone number!"
+                  nzErrorTip="Please enter phone number."
                 >
-                  <nz-input-group [nzAddOnBefore]="addOnBeforeTemplate">
-                    <ng-template #addOnBeforeTemplate>
-                      <nz-select
-                        formControlName="phoneNumberPrefix"
-                        class="phone-select"
-                      >
-                        <nz-option nzLabel="+91" nzValue="+91"></nz-option>
-                      </nz-select>
-                    </ng-template>
-                    <input
-                      formControlName="phoneNumber"
-                      id="'phoneNumber'"
-                      nz-input
-                    />
-                  </nz-input-group>
+                  <input
+                    nz-input
+                    formControlName="phoneNumber"
+                    id="phoneNumber"
+                  />
                 </nz-form-control>
               </nz-form-item>
               <nz-form-item>
@@ -132,7 +120,7 @@
                   <input nz-input formControlName="email" id="email" />
                 </nz-form-control>
               </nz-form-item>
-              <nz-form-item>
+              <nz-form-item *ngIf="_id == ''">
                 <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="password">
                   Password
                 </nz-form-label>
@@ -310,7 +298,7 @@
                     nzType="primary"
                     [disabled]="!(validateForm.status === 'VALID')"
                   >
-                    Create Retailer
+                  {{ _id != "" ? "Update" : "Create Retailer" }}
                   </button>
                 </nz-form-control>
               </nz-form-item>
