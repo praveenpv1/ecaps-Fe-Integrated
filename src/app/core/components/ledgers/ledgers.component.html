@@ -5,13 +5,13 @@
     </div>
   </div>
   <div nz-row >
-    <nz-card class="primary-color-border-card text-center">
-      <div nz-row>
-        <h4>VIEW LEDGER BY DATE</h4>
+    <!-- <nz-card class="primary-color-border-card text-center">
+      <div nz-row> -->
+        <h3 class="medium-color-font text-center">VIEW LEDGER BY DATE</h3>
       </div>
       <br>
       <div nz-row>
-        <form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()">
+        <form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()" class="text-center">
           <nz-form-item>
             <nz-form-label [nzSm]="8" [nzXs]="24" nzRequired>Start Date</nz-form-label>
             <nz-form-control [nzSm]="16" [nzXs]="24">
@@ -25,13 +25,14 @@
             </nz-form-control>
           </nz-form-item>
           <nz-form-item>
-            <nz-form-control [nzXs]="{ span: 24, offset: 0 }" [nzSm]="{ span: 16, offset: 8 }">
-              <button nz-button nzType="primary">Get My Ledgers</button>
+            <nz-form-control [nzSm]="24" [nzXs]="24">
+              <button nz-button nzType="primary" class="button-center">Get My Ledgers</button>
             </nz-form-control>
           </nz-form-item>
         </form>
-      </div>
-    </nz-card><br><br>
+      <!-- </div>
+    </nz-card> -->
+    <br><br>
     <nz-table
       #ledgersTable
       [nzData]=""
@@ -63,4 +64,5 @@
         </tr>
       </tbody>
     </nz-table>
+    <br><br>
   </div>

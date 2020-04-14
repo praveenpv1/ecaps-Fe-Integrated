@@ -40,22 +40,21 @@
       >
         <thead>
           <tr>
-            <th nzWidth="220px">Amount </th>
-            <th nzWidth="220px">balance</th>
-            <th nzWidth="120px">Date</th>
-            <th nzWidth="180px">Status</th>
-            <th nzWidth="150px">Type</th>
-            <th nzWidth="150px">Claim Amount</th>
-            <th>Actions</th>
-            <!-- <th></th>
-          <th></th> -->
+            <th nzWidth="220px">From</th>
+            <th nzWidth="220px">To</th>
+            <th nzWidth="120px">Amount</th>
+            <th nzWidth="180px">Status</th> 
+            <th>Actions</th> 
           </tr>
         </thead>
         <tbody>
           <tr *ngFor="let data of nzTable.data | filter: searchText">
+            <td>{{ data.fl_from_uid }}</td>
+            <td>{{ data.fl_to_uid }}</td>
             <td>{{ data.fl_req_amount }}</td>
-            <td></td>
-
+            <td>{{ data.fl_status }}</td>
+            <td><button nz-button nzSize="small" nzType="primary" style="box-shadow: none !important;"
+              >Approve</button></td>
           </tr>
         </tbody>
       </nz-table>
