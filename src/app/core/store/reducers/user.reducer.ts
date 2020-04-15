@@ -1,9 +1,10 @@
 import {
   ADD_CHILD,
-  GET_CHILD_USER,
-  USERS_LIST,
+  GET_CHILD_USER_INFO,
+  CHILD_USERS_LIST,
   ADD_USER_INFO,
-  UPDATE_CHILD_USER,
+  UPDATE_CHILD_USER_INFO,
+  USER_EXTRA_DETAILS,
 } from "./../actions/index";
 import { Injectable } from "@angular/core";
 import { DataStore } from "../app.store";
@@ -43,73 +44,73 @@ export class UserReducers {
     let state = this._dataStore.dataStore$.getValue();
     const employeePath = MODEL_PATHS.employees;
     switch (action.type) {
-      case LOGIN:
-        this._loader.loadingState({ type: LOADING });
+      // case LOGIN:
+      //   this._loader.loadingState({ type: LOADING });
 
-        console.log("IN USER LOGIN");
+      //   console.log("IN USER LOGIN");
 
-        let defaultRedirectURL = ["dashboard"];
+      //   let defaultRedirectURL = ["dashboard"];
 
-        //clear state
-        this.resetReducer.resetState({
-          type: RESET_STATE,
-          payload: {},
-        });
+      //   //clear state
+      //   this.resetReducer.resetState({
+      //     type: RESET_STATE,
+      //     payload: {},
+      //   });
 
-        state = this._dataStore.dataStore$.getValue();
-        this.apiService.login(action.payload).subscribe(
-          (response: any) => {
-            this.authService.setAccessToken(response.token);
-            if (response.is_verified) {
-              this._dataStore.dataStore$.next({
-                ...state,
-                ...successCommonData,
-                userInfo: _.omit(response, "token"),
-              });
-              localStorage.setItem("userData", JSON.stringify(response));
-              this.router.navigate(["/", ...defaultRedirectURL]);
-            } else {
-              this._dataStore.dataStore$.next({
-                ...state,
-                ...catchCommonData,
-                toastMessage: "Not verified.",
-              });
-              this.router.navigate(["/sigin"]);
-            }
-            console.log(response);
-          },
-          (error) => {
-            console.log(error);
-          }
-        );
-        break;
-      case ADD_USER_INFO:
-        console.log("IN USER ADD");
-        this._loader.loadingState({ type: LOADING });
-        this.apiService
-          .pk_get(MODEL_PATHS.employees, "me", {})
-          .then((data) => {
-            sessionStorage.setItem("userInfo", JSON.stringify(data));
+      //   state = this._dataStore.dataStore$.getValue();
+      //   this.apiService.login(action.payload).subscribe(
+      //     (response: any) => {
+      //       this.authService.setAccessToken(response.token);
+      //       if (response.is_verified) {
+      //         this._dataStore.dataStore$.next({
+      //           ...state,
+      //           ...successCommonData,
+      //           userInfo: _.omit(response, "token"),
+      //         });
+      //         localStorage.setItem("userData", JSON.stringify(response));
+      //         this.router.navigate(["/", ...defaultRedirectURL]);
+      //       } else {
+      //         this._dataStore.dataStore$.next({
+      //           ...state,
+      //           ...catchCommonData,
+      //           toastMessage: "Not verified.",
+      //         });
+      //         this.router.navigate(["/sigin"]);
+      //       }
+      //       console.log(response);
+      //     },
+      //     (error) => {
+      //       console.log(error);
+      //     }
+      //   );
+      //   break;
+      // case ADD_USER_INFO:
+      //   console.log("IN USER ADD");
+      //   this._loader.loadingState({ type: LOADING });
+      //   this.apiService
+      //     .pk_get(MODEL_PATHS.employees, "me", {})
+      //     .then((data) => {
+      //       sessionStorage.setItem("userInfo", JSON.stringify(data));
 
-            this._dataStore.dataStore$.next({
-              ...state,
-              ...successCommonData,
-              userInfo: data,
-            });
-          })
-          .catch((error) => {
-            state = this._dataStore.dataStore$.getValue();
+      //       this._dataStore.dataStore$.next({
+      //         ...state,
+      //         ...successCommonData,
+      //         userInfo: data,
+      //       });
+      //     })
+      //     .catch((error) => {
+      //       state = this._dataStore.dataStore$.getValue();
 
-            this._dataStore.dataStore$.next({
-              ...state,
-              ...catchCommonData,
-              toastMessage: error.response.data.error,
-            });
-          });
-        break;
+      //       this._dataStore.dataStore$.next({
+      //         ...state,
+      //         ...catchCommonData,
+      //         toastMessage: error.response.data.error,
+      //       });
+      //     });
+      //   break;
 
-      case USERS_LIST:
-        console.log("IN USERS_LIST");
+      case CHILD_USERS_LIST:
+        console.log("IN CHILD_USERS_LIST");
         this._loader.loadingState({ type: LOADING });
         this.apiService
           .post(`main/users/allusers`, { pid: action.payload.id })
@@ -135,31 +136,23 @@ export class UserReducers {
           );
         break;
 
-      case GET_CHILD_USER:
+      case GET_CHILD_USER_INFO:
         this._loader.loadingState({ type: LOADING });
         state = this._dataStore.dataStore$.getValue();
-        this.apiService
-          .get(`main/users/update/${action.payload.id}`, {}, true)
-          .subscribe(
-            (response: any) => {
-              this._dataStore.dataStore$.next({
-                ...state,
-                ...successCommonData,
-                childUser: response.data,
-              });
-            },
-            (error) => {
-              console.log(error);
-
-              state = this._dataStore.dataStore$.getValue();
-
-              this._dataStore.dataStore$.next({
-                ...state,
-                ...catchCommonData,
-                toastMessage: _.get(error, "message", "Something Went Wrong!!"),
-              });
-            }
-          );
+        this.apiService.get(`main/users/update/${action.payload.id}`).subscribe(
+          (response: any) => {
+            this._dataStore.dataStore$.next({
+              ...state,
+              ...successCommonData,
+              childUser: response.data,
+            });
+          },
+          (error) => {
+            this.toast.commonCatchToast(
+              _.get(error, "message", "Something Went Wrong!!")
+            );
+          }
+        );
         break;
       // .then(data => {
       //   this._dataStore.dataStore$.next({
@@ -196,20 +189,14 @@ export class UserReducers {
               this._location.back();
             },
             (error) => {
-              console.log(error);
-
-              state = this._dataStore.dataStore$.getValue();
-
-              this._dataStore.dataStore$.next({
-                ...state,
-                ...catchCommonData,
-                toastMessage: _.get(error, "message", "Something Went Wrong!!"),
-              });
+              this.toast.commonCatchToast(
+                _.get(error, "message", "Something Went Wrong!!")
+              );
             }
           );
         break;
 
-      case UPDATE_CHILD_USER:
+      case UPDATE_CHILD_USER_INFO:
         this._loader.loadingState({ type: LOADING });
         this.apiService
           .post(
@@ -235,17 +222,31 @@ export class UserReducers {
               this._location.back();
             },
             (error) => {
-              console.log(error);
-
-              state = this._dataStore.dataStore$.getValue();
-
-              this._dataStore.dataStore$.next({
-                ...state,
-                ...catchCommonData,
-                toastMessage: _.get(error, "message", "Something Went Wrong!!"),
-              });
+              this.toast.commonCatchToast(
+                _.get(error, "message", "Something Went Wrong!!")
+              );
             }
           );
+        break;
+
+      case USER_EXTRA_DETAILS:
+        this._loader.loadingState({ type: LOADING });
+        state = this._dataStore.dataStore$.getValue();
+        this.apiService.get(`main/users/update/${action.payload.id}`).subscribe(
+          ({ data }: any) => {
+            this._dataStore.dataStore$.next({
+              ...state,
+              ...successCommonData,
+              userExtraDetails: data,
+            });
+          },
+          (error) => {
+            console.log(error);
+            this.toast.commonCatchToast(
+              _.get(error, "message", "Something Went Wrong!!")
+            );
+          }
+        );
         break;
 
       default:

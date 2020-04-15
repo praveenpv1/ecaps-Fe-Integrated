@@ -12,9 +12,9 @@ import {
   SHOW_TOAST,
   VERIFY_EMAIL,
   SET_PASSWORD,
-  USERS_LIST,
+  CHILD_USERS_LIST,
   FUND_LOAD,
-  GET_FUND_LOADS
+  GET_FUND_LOADS,
 } from "../actions";
 import { LoadingReducers } from "./loading.reducer";
 import { catchCommonData, successCommonData } from "../commonstoredata";
@@ -50,40 +50,34 @@ export class FundReducers {
 
         this.apiService
           .post(`main/fundloads/new-request`, {
-            ...action.payload
+            ...action.payload,
           })
           .subscribe(
             (response: any) => {
               this.toast.toastState({
                 type: SHOW_TOAST,
-                payload: { message: response.message, type: "success" }
+                payload: { message: response.message, type: "success" },
               });
 
               this._dataStore.dataStore$.next({
                 ...state,
-                ...successCommonData
+                ...successCommonData,
               });
               //   this.router.navigate(["/sigin"]);
             },
-            error => {
-              console.log(error);
-
-              state = this._dataStore.dataStore$.getValue();
-
-              this._dataStore.dataStore$.next({
-                ...state,
-                ...catchCommonData,
-                toastMessage: _.get(error, "message", "Something Went Wrong!!")
-              });
+            (error) => {
+              this.toast.commonCatchToast(
+                _.get(error, "message", "Something Went Wrong!!")
+              );
             }
           );
         break;
 
-        case GET_FUND_LOADS:
+      case GET_FUND_LOADS:
         this._loader.loadingState({ type: LOADING });
         state = this._dataStore.dataStore$.getValue();
         this.apiService
-          .get(`main/fundloads/pendingtoapprove/${action.payload.id}`, {}, true)
+          .get(`main/fundloads/pendingtoapprove/${action.payload.id}`)
           .subscribe(
             (response: any) => {
               this._dataStore.dataStore$.next({
@@ -93,24 +87,17 @@ export class FundReducers {
               });
             },
             (error) => {
-              console.log(error);
-
-              state = this._dataStore.dataStore$.getValue();
-
-              this._dataStore.dataStore$.next({
-                ...state,
-                ...catchCommonData,
-                toastMessage: _.get(error, "message", "Something Went Wrong!!"),
-              });
+              this.toast.commonCatchToast(
+                _.get(error, "message", "Something Went Wrong!!")
+              );
             }
           );
         break;
 
-
       default:
         console.log("IN FUND REDUCER DEFAULT");
         this._dataStore.dataStore$.next({
-          ...state
+          ...state,
         });
     }
   }

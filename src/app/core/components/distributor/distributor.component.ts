@@ -3,7 +3,7 @@ import { DataStore } from "@app/core/store/app.store";
 import {
   GET_EMPLOYEES,
   SEND_VERIFICATION,
-  USERS_LIST
+  CHILD_USERS_LIST,
 } from "@app/core/store/actions";
 import { EmployeeReducers } from "@app/core/store/reducers/employee.reducer";
 import * as _ from "lodash";
@@ -25,7 +25,7 @@ export interface Tile {
 
 enum InfoType {
   amount = 1,
-  info = 2
+  info = 2,
 }
 
 interface Employees {
@@ -38,7 +38,7 @@ interface Employees {
 @Component({
   selector: "app-distributor",
   templateUrl: "./distributor.component.html",
-  styleUrls: ["./distributor.component.scss"]
+  styleUrls: ["./distributor.component.scss"],
 })
 export class DistributorComponent implements OnInit {
   distributorsList: any;
@@ -63,14 +63,14 @@ export class DistributorComponent implements OnInit {
     // });
 
     this.user.userReducer({
-      type: USERS_LIST,
+      type: CHILD_USERS_LIST,
       payload: {
         id: _.get(this.initialState, "userInfo._id", null),
-        childName: "childrenList"
-      }
+        childName: "childrenList",
+      },
     });
 
-    this.ds.dataStore$.subscribe(data => {
+    this.ds.dataStore$.subscribe((data) => {
       this.distributorsList = data.childrenList.filter(
         (child: any) => child.role === "distributor"
       );
@@ -81,5 +81,5 @@ export class DistributorComponent implements OnInit {
     if (data._id) {
       this.route.navigate(["/", "distributor", "add", data._id]);
     }
-  } 
+  }
 }

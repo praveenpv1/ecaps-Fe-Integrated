@@ -12,7 +12,8 @@ import {
   SHOW_TOAST,
   VERIFY_EMAIL,
   SET_PASSWORD,
-  USERS_LIST
+  CHILD_USERS_LIST,
+  USER_EXTRA_DETAILS,
 } from "../actions";
 import { LoadingReducers } from "./loading.reducer";
 import { catchCommonData, successCommonData } from "../commonstoredata";
@@ -49,7 +50,7 @@ export class LoginReducers {
         //clear state
         this.resetReducer.resetState({
           type: RESET_STATE,
-          payload: {}
+          payload: {},
         });
 
         state = this._dataStore.dataStore$.getValue();
@@ -60,36 +61,31 @@ export class LoginReducers {
               this._dataStore.dataStore$.next({
                 ...state,
                 ...successCommonData,
-                userInfo: _.omit(data, "token")
+                userInfo: _.omit(data, "token"),
               });
               localStorage.setItem("userData", JSON.stringify(data));
               this.router.navigate(["/", ...defaultRedirectURL]);
-
+              this.user.userReducer({
+                type: USER_EXTRA_DETAILS,
+                payload: { id: data._id },
+              });
               // this.user.userReducer({
-              //   type: USERS_LIST,
+              //   type: CHILD_USERS_LIST,
               //   payload: {
               //     id: _.get(data, "_id", null),
               //     childName: "childrenList"
               //   }
               // });
             } else {
-              this._dataStore.dataStore$.next({
-                ...state,
-                ...catchCommonData,
-                toastMessage: "Not verified."
-              });
+              this.toast.commonCatchToast("Not Verified");
               this.router.navigate(["/sigin"]);
             }
             console.log(data);
           },
-          error => {
-            state = this._dataStore.dataStore$.getValue();
-
-            this._dataStore.dataStore$.next({
-              ...state,
-              ...catchCommonData,
-              toastMessage: _.get(error, "message", "Something Went Wrong!!")
-            });
+          (error) => {
+            this.toast.commonCatchToast(
+              _.get(error, "message", "Something Went Wrong!!")
+            );
           }
         );
         break;
@@ -102,44 +98,30 @@ export class LoginReducers {
         state = this._dataStore.dataStore$.getValue();
 
         this.apiService
-          .get(`main/auth/forgot-password/${action.payload.email}`)
+          .get(`main/auth/forgot-password/${action.payload.email}`, {}, false)
           .subscribe(
             (response: any) => {
               if (_.get(response, "status", 500) === 200) {
                 this.toast.toastState({
                   type: SHOW_TOAST,
-                  payload: { message: response.message, type: "success" }
+                  payload: { message: response.message, type: "success" },
                 });
 
                 this._dataStore.dataStore$.next({
                   ...state,
-                  ...successCommonData
+                  ...successCommonData,
                 });
                 this.router.navigate(["/sigin"]);
               } else {
-                state = this._dataStore.dataStore$.getValue();
-
-                this._dataStore.dataStore$.next({
-                  ...state,
-                  ...catchCommonData,
-                  toastMessage: _.get(
-                    response,
-                    "message",
-                    "Something Went Wrong!!"
-                  )
-                });
+                this.toast.commonCatchToast(
+                  _.get(response, "message", "Something Went Wrong!!")
+                );
               }
             },
-            error => {
-              console.log(error);
-
-              state = this._dataStore.dataStore$.getValue();
-
-              this._dataStore.dataStore$.next({
-                ...state,
-                ...catchCommonData,
-                toastMessage: _.get(error, "message", "Something Went Wrong!!")
-              });
+            (error) => {
+              this.toast.commonCatchToast(
+                _.get(error, "message", "Something Went Wrong!!")
+              );
             }
           );
         break;
@@ -152,30 +134,28 @@ export class LoginReducers {
         state = this._dataStore.dataStore$.getValue();
 
         this.apiService
-          .get(`main/auth/verify/${action.payload.token}`, {}, true)
+          .verifyEmail(`main/auth/verify/${action.payload.token}`)
           .subscribe(
             (response: any) => {
+              console.log("responsee", response);
+
               this.toast.toastState({
                 type: SHOW_TOAST,
-                payload: { message: response.message, type: "success" }
+                payload: { message: response.message, type: "success" },
               });
 
               this._dataStore.dataStore$.next({
                 ...state,
-                ...successCommonData
+                ...successCommonData,
               });
               this.router.navigate(["/sigin"]);
             },
-            error => {
-              console.log(error);
+            (error) => {
+              console.log("error", error);
 
-              state = this._dataStore.dataStore$.getValue();
-
-              this._dataStore.dataStore$.next({
-                ...state,
-                ...catchCommonData,
-                toastMessage: _.get(error, "message", "Something Went Wrong!!")
-              });
+              this.toast.commonCatchToast(
+                _.get(error, "message", "Something Went Wrong!!")
+              );
             }
           );
         break;
@@ -189,31 +169,25 @@ export class LoginReducers {
 
         this.apiService
           .post(`main/auth/verify/${action.payload.token}`, {
-            newpassword: action.payload.password
+            newpassword: action.payload.password,
           })
           .subscribe(
             (response: any) => {
               this.toast.toastState({
                 type: SHOW_TOAST,
-                payload: { message: response.message, type: "success" }
+                payload: { message: response.message, type: "success" },
               });
 
               this._dataStore.dataStore$.next({
                 ...state,
-                ...successCommonData
+                ...successCommonData,
               });
               this.router.navigate(["/sigin"]);
             },
-            error => {
-              console.log(error);
-
-              state = this._dataStore.dataStore$.getValue();
-
-              this._dataStore.dataStore$.next({
-                ...state,
-                ...catchCommonData,
-                toastMessage: _.get(error, "message", "Something Went Wrong!!")
-              });
+            (error) => {
+              this.toast.commonCatchToast(
+                _.get(error, "message", "Something Went Wrong!!")
+              );
             }
           );
         break;
@@ -221,7 +195,7 @@ export class LoginReducers {
       default:
         console.log("IN LOGIN DEFAULT");
         this._dataStore.dataStore$.next({
-          ...state
+          ...state,
         });
     }
   }
