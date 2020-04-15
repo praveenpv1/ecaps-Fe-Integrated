@@ -10,6 +10,7 @@ export class DataStore {
 
   public initialState: Object = {
     userInfo: JSON.parse(localStorage.getItem("userData")),
+    userExtraDetails: {},
     superDistributorList: {},
     distributorList: {},
     retailerList: {},

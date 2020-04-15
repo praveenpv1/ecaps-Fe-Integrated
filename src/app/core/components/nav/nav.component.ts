@@ -69,7 +69,7 @@ export class NavComponent implements OnInit, OnDestroy {
   menuTypes = menuType;
   currentMenuType: any = menuType.normal;
   loaderId: any = "";
-  companyBalance = "0";
+  userBalance = "0";
   userName = "";
   userRole = "";
   noLoaderExists: boolean = true;
@@ -145,9 +145,7 @@ export class NavComponent implements OnInit, OnDestroy {
         this.noLoaderExists = true;
       }
 
-      if (_.get(data.company.details, "data", null)) {
-        this.companyBalance = _.get(data.company.details, "data.value", 0);
-      }
+      this.userBalance = _.get(data.userExtraDetails, "wallet_balance", 0);
 
       this.showUserName();
       this.checkRole();

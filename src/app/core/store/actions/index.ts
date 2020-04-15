@@ -3,16 +3,16 @@ export const ADD_USER_INFO = "[USER_INFO] Add";
 export const IS_USER_VERIFIED = "[USER] Is User Verified";
 export const LOGIN = "[USER] Login";
 export const FORGOT_PASSWORD = "[USER] Forgot Password";
-export const USERS_LIST = "[USER] Get Users List";
-export const GET_CHILD_USER = "[GET_CHILD_USER] Get Child User ";
-export const UPDATE_CHILD_USER = "[UPDATE_CHILD_USER] Update Child User ";
+export const CHILD_USERS_LIST = "[USER] Get Users List";
+export const GET_CHILD_USER_INFO = "[GET_CHILD_USER_INFO] Get Child User ";
+export const UPDATE_CHILD_USER_INFO =
+  "[UPDATE_CHILD_USER_INFO] Update Child User ";
 export const GET_FUND_LOADS = "[GET_FUND_LOADS] Get Fund Load Requests ";
-
-
 
 export const VERIFY_EMAIL = "[USER] Verify Email";
 export const SET_PASSWORD = "[USER] Set Password";
 export const ADD_CHILD = "[ADD_CHILD] Add Child";
+export const USER_EXTRA_DETAILS = "[USER_EXTRA_DETAILS] Add Child";
 
 //State
 export const RESET_STATE = "[RESET_STATE]";

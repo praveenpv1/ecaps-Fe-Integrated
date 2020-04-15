@@ -3,7 +3,7 @@ import {
   HttpClient,
   HttpErrorResponse,
   HttpHeaders,
-  HttpParams
+  HttpParams,
 } from "@angular/common/http";
 import { Observable, throwError } from "rxjs";
 import { catchError, retry } from "rxjs/operators";
@@ -16,7 +16,7 @@ import { environment } from "@env/environment";
 const BASE_URL = "http://159.89.168.255:5000";
 
 @Injectable({
-  providedIn: "root"
+  providedIn: "root",
 })
 export class ApiService {
   base_url = `${environment.apiBaseURL}${environment.restEndPoint}`;
@@ -44,7 +44,21 @@ export class ApiService {
         headers: new HttpHeaders().set(
           "Content-Type",
           "application/x-www-form-urlencoded"
-        )
+        ),
+      })
+      .pipe(retry(2), catchError(this.handleError));
+  }
+
+  public verifyEmail(url: string): Observable<Object> {
+    console.log("inverifyemail");
+
+    const getUrl = `${BASE_URL}/${url}`;
+    let headers = new HttpHeaders();
+
+    headers = headers.set("Content-Type", "application/x-www-form-urlencoded");
+    return this.httpClient
+      .get<Object>(getUrl, {
+        headers,
       })
       .pipe(retry(2), catchError(this.handleError));
   }
@@ -71,7 +85,7 @@ export class ApiService {
 
     return this.httpClient
       .post<Object>(postUrl, body, {
-        headers
+        headers,
       })
       .pipe(retry(2), catchError(this.handleError));
   }
@@ -97,7 +111,7 @@ export class ApiService {
   public get(
     url: string,
     params: object = {},
-    isUrlEncoded: boolean = false
+    isUrlEncoded: boolean = true
   ): Observable<Object> {
     const getUrl = `${BASE_URL}/${url}`;
 
@@ -105,21 +119,20 @@ export class ApiService {
       ? "application/x-www-form-urlencoded"
       : "application/json";
     let headers = new HttpHeaders();
-    const isTokenAvailable = _.isEmpty(this.authService.getAccessToken())
+    const isTokenAvailable = _.isEmpty(this.authService.getAccessToken());
     const token: string = isTokenAvailable
       ? ""
       : this.authService.getAccessToken();
     const tokenType = _.get(this.userInfo, "token_type", "Bearer");
 
     headers = headers.set("Content-Type", headerType);
-    if(!_.isEmpty(token)){
+    if (!_.isEmpty(token)) {
       headers = headers.set("Authorization", `${tokenType} ${token}`);
     }
     return this.httpClient
       .get<Object>(getUrl, {
         params: { ...params },
-        headers
-
+        headers,
       })
       .pipe(retry(2), catchError(this.handleError));
   }
@@ -170,7 +183,7 @@ export class ApiService {
   ): Promise<Object> {
     const mf = new ModelFactory({
       api_base_url: `${environment.apiBaseURL}${environment.gqlEndPoint}`,
-      token: this.authService.getAccessToken()
+      token: this.authService.getAccessToken(),
     });
     if (!resolveMockData) {
       return await mf.gqlclient(path).query(url, params, returnData);
@@ -189,7 +202,7 @@ export class ApiService {
   ): Promise<Object> {
     const mf = new ModelFactory({
       api_base_url: `${environment.apiBaseURL}${environment.gqlEndPoint}`,
-      token: this.authService.getAccessToken()
+      token: this.authService.getAccessToken(),
     });
     if (!resolveMockData) {
       return await mf.gqlclient(path).mutation(url, params, returnData);
@@ -199,6 +212,6 @@ export class ApiService {
   }
 
   async resolveMockPromise(path: string) {
-    return await new Promise(resolve => resolve(_.get(mockData, path)));
+    return await new Promise((resolve) => resolve(_.get(mockData, path)));
   }
 }

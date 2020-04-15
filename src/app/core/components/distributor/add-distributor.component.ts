@@ -7,8 +7,8 @@ import {
 } from "@angular/forms";
 import {
   ADD_CHILD,
-  GET_CHILD_USER,
-  UPDATE_CHILD_USER,
+  GET_CHILD_USER_INFO,
+  UPDATE_CHILD_USER_INFO,
 } from "./../../store/actions/index";
 import { ActivatedRoute } from "@angular/router";
 import * as _ from "lodash";
@@ -17,9 +17,9 @@ import { UserReducers } from "@app/core/store/reducers/user.reducer";
 import { DataStore } from "@app/core/store/app.store";
 
 @Component({
-  selector: 'app-addnewuser',
-  templateUrl: './add-distributor.component.html',
-  styleUrls: ['./add-distributor.component.scss']
+  selector: "app-addnewuser",
+  templateUrl: "./add-distributor.component.html",
+  styleUrls: ["./add-distributor.component.scss"],
 })
 export class AddDistributorComponent implements OnInit {
   validateForm: FormGroup;
@@ -50,7 +50,7 @@ export class AddDistributorComponent implements OnInit {
       if (!_.isEmpty(this._id)) {
         if (!_.isEmpty(this.userDetails)) {
           this.child.userReducer({
-            type: UPDATE_CHILD_USER,
+            type: UPDATE_CHILD_USER_INFO,
             payload: {
               id: this._id,
               dob: moment(this.validateForm.controls.dateOfBirth.value).format(
@@ -110,7 +110,7 @@ export class AddDistributorComponent implements OnInit {
 
     if (!_.isEmpty(this._id)) {
       this.child.userReducer({
-        type: GET_CHILD_USER,
+        type: GET_CHILD_USER_INFO,
         payload: {
           id: this._id,
         },

@@ -1,3 +1,4 @@
+import { UserReducers } from "@app/core/store/reducers/user.reducer";
 import { Component, OnInit, OnDestroy } from "@angular/core";
 import { DataStore } from "@app/core/store/app.store";
 import { CompanyReducers } from "@app/core/store/reducers/company.reducer";
@@ -5,14 +6,15 @@ import {
   GET_COMPANY_WALLET,
   GET_COMPANY_MAIN_TXNS,
   GET_COMPANY_TXNS,
-  GET_CLAIMS_TXNS
+  GET_CLAIMS_TXNS,
+  USER_EXTRA_DETAILS,
 } from "@app/core/store/actions";
 import * as _ from "lodash";
 import { environment } from "@env/environment";
 import { SalaryIn, getStatusText } from "@app/core/services/utils";
 import {
   catchCommonData,
-  successCommonData
+  successCommonData,
 } from "@app/core/store/commonstoredata";
 import { CurrencyPipe } from "@angular/common";
 import { barGraphOptions } from "@app/core/services/graphoptions";
@@ -38,7 +40,7 @@ interface RecentTransactions {
 
 enum InfoType {
   amount = 1,
-  info = 2
+  info = 2,
 }
 
 interface InfoCards {
@@ -55,7 +57,7 @@ interface InfoCards {
 @Component({
   selector: "koppr-pot",
   templateUrl: "./dashboard.component.html",
-  styleUrls: ["./dashboard.component.scss"]
+  styleUrls: ["./dashboard.component.scss"],
 })
 export class DashboardComponent implements OnInit, OnDestroy {
   companyBalance: string = "0";
@@ -74,7 +76,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
   infoCards: InfoCards[] = [];
   recentTransaction: RecentTransactions[] = [];
   companyTranscations: any;
-  initialState: any = "";
+  initialState: any = {};
   expenseData: any = [];
   allowanceData: any;
   subscribers: any = [];
@@ -86,9 +88,9 @@ export class DashboardComponent implements OnInit, OnDestroy {
     plugins: {
       datalabels: {
         anchor: "end",
-        align: "end"
-      }
-    }
+        align: "end",
+      },
+    },
   };
   public barChartLabels: Label[] = [
     "2006",
@@ -97,27 +99,28 @@ export class DashboardComponent implements OnInit, OnDestroy {
     "2009",
     "2010",
     "2011",
-    "2012"
+    "2012",
   ];
   public barChartType: ChartType = "bar";
   public barChartLegend = true;
   public barChartPlugins = [pluginDataLabels];
 
   public barChartData: ChartDataSets[] = [
-    { data: [65, 59, 80, 81, 56, 55, 40], label: "Series A" }
+    { data: [65, 59, 80, 81, 56, 55, 40], label: "Series A" },
     // { data: [28, 48, 40, 19, 86, 27, 90], label: 'Series B' }
   ];
 
   constructor(
     private cR: CompanyReducers,
     private ds: DataStore,
-    private currencyPipe: CurrencyPipe
+    private currencyPipe: CurrencyPipe,
+    private uR: UserReducers
   ) {
     this.initialState = ds.dataStore$.getValue();
     this.clearCompanyTxnsStore();
     this.clearClaimsStore();
 
-    this.subscribers = this.ds.dataStore$.subscribe(res => {
+    this.subscribers = this.ds.dataStore$.subscribe((res) => {
       console.log(res);
 
       if (_.get(res.company.details, "data", null)) {
@@ -129,7 +132,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
       }
 
       if (_.get(res.company_txns.details, "data", null)) {
-        this.expenseData = _.filter(res.company_txns.details.data, function(
+        this.expenseData = _.filter(res.company_txns.details.data, function (
           txns
         ) {
           return txns.amount_type === "expense";
@@ -142,14 +145,14 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
       if (_.get(res.claims_txns.details, "data", null)) {
         this.claimsData = res.claims_txns.details.data;
-        this.settledClaimsData = _.filter(this.claimsData, function(claims) {
+        this.settledClaimsData = _.filter(this.claimsData, function (claims) {
           if (claims.approval_status === "approved") {
             return true;
           }
         });
         this.settledClaims = this.getSettledClaimAmount(this.settledClaimsData);
 
-        this.pendingClaimsData = _.filter(this.claimsData, function(claims) {
+        this.pendingClaimsData = _.filter(this.claimsData, function (claims) {
           return claims.approval_status === "pending_approval";
         });
         this.pendingClaims = this.pendingClaimsData.length;
@@ -160,7 +163,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   getSettledClaimAmount(data: any): number {
     let amount = 0;
-    data.forEach(element => {
+    data.forEach((element) => {
       amount = amount + element.amount;
     });
     return amount;
@@ -169,11 +172,16 @@ export class DashboardComponent implements OnInit, OnDestroy {
   public showCompanyWallet() {
     this.cR.cardReducer({
       type: GET_COMPANY_WALLET,
-      payload: {}
+      payload: {},
     });
   }
 
   ngOnInit() {
+    this.uR.userReducer({
+      type: USER_EXTRA_DETAILS,
+      payload: { id: this.initialState.userInfo._id },
+    });
+
     this.renderCards();
     // this.showCompanyWallet();
     // this.getCompanyTransactions();
@@ -188,21 +196,21 @@ export class DashboardComponent implements OnInit, OnDestroy {
   getCompanyTxns() {
     this.cR.cardReducer({
       type: GET_COMPANY_TXNS,
-      payload: {}
+      payload: {},
     });
   }
 
   getClaims() {
     this.cR.cardReducer({
       type: GET_CLAIMS_TXNS,
-      payload: {}
+      payload: {},
     });
   }
 
   getCompanyTransactions() {
     this.cR.cardReducer({
       type: GET_COMPANY_MAIN_TXNS,
-      payload: { company: this.initialState.company_id }
+      payload: { company: this.initialState.company_id },
     });
   }
 
@@ -212,7 +220,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   getTotalSalary(amounts: any): string {
     let totalSalary = 0;
-    amounts.forEach(element => {
+    amounts.forEach((element) => {
       totalSalary = totalSalary + element.amount;
     });
     return totalSalary.toString();
@@ -224,8 +232,8 @@ export class DashboardComponent implements OnInit, OnDestroy {
       ...state,
       ...successCommonData,
       company_txns: {
-        details: {}
-      }
+        details: {},
+      },
     });
   }
 
@@ -235,14 +243,14 @@ export class DashboardComponent implements OnInit, OnDestroy {
       ...state,
       ...successCommonData,
       claims_txns: {
-        details: {}
-      }
+        details: {},
+      },
     });
   }
 
   public chartClicked({
     event,
-    active
+    active,
   }: {
     event: MouseEvent;
     active: {}[];
@@ -252,7 +260,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   public chartHovered({
     event,
-    active
+    active,
   }: {
     event: MouseEvent;
     active: {}[];
@@ -269,7 +277,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
       Math.random() * 100,
       56,
       Math.random() * 100,
-      40
+      40,
     ];
     this.barChartData[0].data = data;
   }
@@ -286,7 +294,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
         bgClass: "enviar-account-balance",
         desc: "TOP UP",
         routerLink: ["/", "company", "deposit"],
-        type: InfoType.amount
+        type: InfoType.amount,
       },
       {
         title: "Money Transferred",
@@ -295,7 +303,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
         bgClass: "white-bg-card",
         desc: "VIEW DETAILS",
         routerLink: ["/", "salary"],
-        type: InfoType.amount
+        type: InfoType.amount,
       },
       {
         title: "Earnings",
@@ -304,7 +312,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
         bgClass: "white-bg-card",
         desc: "VIEW DETAILS",
         routerLink: ["/", "claims"],
-        type: InfoType.amount
+        type: InfoType.amount,
       },
       {
         title: "Ledgers",
@@ -313,7 +321,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
         bgClass: "white-bg-card",
         desc: "VIEW DETAILS",
         routerLink: ["/", "allowance"],
-        type: InfoType.amount
+        type: InfoType.amount,
       }
     );
 
@@ -326,7 +334,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
         desc: "VIEW DETAILS",
         routerLink: ["/", "salary"],
         type: InfoType.info,
-        iconImg: "assets/images/calendar.svg"
+        iconImg: "assets/images/calendar.svg",
       },
       {
         title: "Pending Transactions",
@@ -336,8 +344,8 @@ export class DashboardComponent implements OnInit, OnDestroy {
         desc: "VIEW DETAILS",
         routerLink: ["/", "claims"],
         type: InfoType.info,
-        iconImg: "assets/images/re-imbursement.svg"
-      }
+        iconImg: "assets/images/re-imbursement.svg",
+      },
     ];
   }
 }

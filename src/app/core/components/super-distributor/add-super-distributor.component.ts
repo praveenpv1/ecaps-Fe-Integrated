@@ -7,8 +7,8 @@ import {
 } from "@angular/forms";
 import {
   ADD_CHILD,
-  GET_CHILD_USER,
-  UPDATE_CHILD_USER,
+  GET_CHILD_USER_INFO,
+  UPDATE_CHILD_USER_INFO,
 } from "./../../store/actions/index";
 import { ActivatedRoute } from "@angular/router";
 import * as _ from "lodash";
@@ -50,7 +50,7 @@ export class AddSuperDistributorComponent implements OnInit {
       if (!_.isEmpty(this._id)) {
         if (!_.isEmpty(this.userDetails)) {
           this.child.userReducer({
-            type: UPDATE_CHILD_USER,
+            type: UPDATE_CHILD_USER_INFO,
             payload: {
               id: this._id,
               dob: moment(this.validateForm.controls.dateOfBirth.value).format(
@@ -110,7 +110,7 @@ export class AddSuperDistributorComponent implements OnInit {
 
     if (!_.isEmpty(this._id)) {
       this.child.userReducer({
-        type: GET_CHILD_USER,
+        type: GET_CHILD_USER_INFO,
         payload: {
           id: this._id,
         },
