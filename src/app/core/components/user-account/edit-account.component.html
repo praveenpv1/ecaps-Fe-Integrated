@@ -1,0 +1,222 @@
+<div nz-row>
+    <div nz-col nzSm="24" nzMd="24" nzLg="24" nzXl="24">
+      <a class="back-button-text" [routerLink]="['/', 'my-account']"
+        ><img
+          class="back-img"
+          src="assets/images/back-button.svg"
+        />&nbsp;&nbsp;BACK</a
+      >
+      <br />
+      <h3 class="primary-color-font">Edit My Account Details</h3>
+      <p>Edit your account details here</p>
+    </div>
+    <div nz-col nzSm="24" nzMd="24" nzLg="24" nzXl="24">
+      <h3>Account Details</h3>
+      <div nz-row>
+        <div nz-col nzSm="24" nzMd="24" nzLg="2" nzXl="2"></div>
+        <div nz-col nzSm="24" nzMd="24" nzLg="22" nzXl="22">
+          <div nzSm="24" nzMd="24" nzLg="24" nzXl="24" class="text-center">
+            <form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()">
+              <nz-form-item>
+                <nz-form-label
+                  [nzSm]="6"
+                  [nzXs]="24"
+                  nzRequired
+                  nzFor="first_name"
+                  >First Name</nz-form-label
+                >
+                <nz-form-control
+                  [nzSm]="14"
+                  [nzXs]="24"
+                  nzErrorTip="Please enter First Name."
+                >
+                  <input nz-input formControlName="first_name" id="first_name" />
+                </nz-form-control>
+              </nz-form-item>
+              <nz-form-item>
+                <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="last_name"
+                  >Last Name</nz-form-label
+                >
+                <nz-form-control
+                  [nzSm]="14"
+                  [nzXs]="24"
+                  nzErrorTip="Please enter Last Name."
+                >
+                  <input nz-input formControlName="last_name" id="last_name" />
+                </nz-form-control>
+              </nz-form-item>
+              <!-- <nz-form-item *ngIf="_id == ''">
+                <nz-form-label
+                  [nzSm]="6"
+                  [nzXs]="24"
+                  nzRequired
+                  nzFor="company_name"
+                  >Company Name</nz-form-label
+                >
+                <nz-form-control
+                  [nzSm]="14"
+                  [nzXs]="24"
+                  nzErrorTip="Please enter Company Name."
+                >
+                  <input
+                    nz-input
+                    formControlName="company_name"
+                    id="company_name"
+                  />
+                </nz-form-control>
+              </nz-form-item> -->
+              <nz-form-item>
+                <nz-form-label
+                  [nzSm]="6"
+                  [nzXs]="24"
+                  nzRequired
+                  nzFor="dateOfBirth"
+                >
+                  Date of Birth
+                </nz-form-label>
+                <nz-form-control [nzSm]="14" [nzXs]="24">
+                  <nz-date-picker
+                    class="date-picker"
+                    formControlName="dateOfBirth"
+                  ></nz-date-picker>
+                </nz-form-control>
+              </nz-form-item>
+              <nz-form-item>
+                <nz-form-label
+                  [nzSm]="6"
+                  [nzXs]="24"
+                  nzRequired
+                  nzFor="phoneNumber"
+                  >Phone Number</nz-form-label
+                >
+                <nz-form-control
+                  [nzSm]="14"
+                  [nzXs]="24"
+                  nzErrorTip="Please enter phone number."
+                >
+                  <input
+                    nz-input
+                    formControlName="phoneNumber"
+                    id="phoneNumber"
+                  />
+                </nz-form-control>
+              </nz-form-item>
+              <nz-form-item>
+                <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="userName">
+                  User Name
+                </nz-form-label>
+                <nz-form-control
+                  [nzSm]="14"
+                  [nzXs]="24"
+                  nzErrorTip="Please enter Username"
+                >
+                  <input nz-input formControlName="userName" id="userName" />
+                </nz-form-control>
+              </nz-form-item>
+              <nz-form-item>
+                <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="email">
+                  E-mail
+                </nz-form-label>
+                <nz-form-control
+                  [nzSm]="14"
+                  [nzXs]="24"
+                  nzErrorTip="The input is not valid E-mail."
+                >
+                  <input nz-input formControlName="email" id="email" />
+                </nz-form-control>
+              </nz-form-item>
+              <!-- <nz-form-item *ngIf="_id == ''">
+                <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="password">
+                  Password
+                </nz-form-label>
+                <nz-form-control
+                  [nzSm]="14"
+                  [nzXs]="24"
+                  nzErrorTip="Please enter Password"
+                >
+                  <input nz-input formControlName="password" id="password" />
+                </nz-form-control>
+              </nz-form-item> -->
+              <nz-form-item>
+                <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="role">
+                  Role
+                </nz-form-label>
+                <nz-form-control
+                  [nzSm]="14"
+                  [nzXs]="24"
+                  nzErrorTip="Please enter Role"
+                >
+                  <input nz-input formControlName="role" id="role" />
+                </nz-form-control>
+              </nz-form-item>
+              <nz-form-item>
+                <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="pan">
+                  PAN
+                </nz-form-label>
+                <nz-form-control
+                  [nzSm]="14"
+                  [nzXs]="24"
+                  nzErrorTip="Please enter PAN."
+                >
+                  <input nz-input formControlName="pan" id="pan" />
+                </nz-form-control>
+              </nz-form-item>
+              <nz-form-item>
+                <nz-form-label
+                  [nzSm]="6"
+                  [nzXs]="24"
+                  nzRequired
+                  nzFor="aadhaarNo"
+                >
+                  Aadhaar No
+                </nz-form-label>
+                <nz-form-control
+                  [nzSm]="14"
+                  [nzXs]="24"
+                  nzErrorTip="Please enter Aadhaar No."
+                >
+                  <input nz-input formControlName="aadhaarNo" id="aadhaarNo" />
+                </nz-form-control>
+              </nz-form-item>
+              <nz-form-item>
+                <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="voterId">
+                  VoterID No
+                </nz-form-label>
+                <nz-form-control
+                  [nzSm]="14"
+                  [nzXs]="24"
+                  nzErrorTip="Please enter VoterID No."
+                >
+                  <input nz-input formControlName="voterId" id="voterId" />
+                </nz-form-control>
+              </nz-form-item>
+              <nz-form-item>
+                <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="kitNo">
+                  Kit No
+                </nz-form-label>
+                <nz-form-control
+                  [nzSm]="14"
+                  [nzXs]="24"
+                  nzErrorTip="Please enter Kit No."
+                >
+                  <input nz-input formControlName="kitNo" id="kitNo" />
+                </nz-form-control>
+              </nz-form-item>
+              <nz-form-item nz-row class="register-area">
+                <nz-form-control [nzSpan]="14" [nzOffset]="6">
+                  <button
+                    nz-button
+                    nzType="primary"
+                    [disabled]="!validateForm.valid"
+                  >Update
+                  </button>
+                </nz-form-control>
+              </nz-form-item>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <br /><br />
+  

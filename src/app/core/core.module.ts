@@ -4,18 +4,17 @@ import { HttpClient, HttpClientModule } from "@angular/common/http";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { RouterModule } from "@angular/router";
 import { ServiceWorkerModule } from "@angular/service-worker";
-
 import {
   TranslateLoader,
   TranslateModule,
   TranslateService
 } from "@ngx-translate/core";
 import { TranslateHttpLoader } from "@ngx-translate/http-loader";
-
 import { FlexLayoutModule } from "@angular/flex-layout";
 
 import { PlaceholderComponent } from "./components/placeholder/placeholder.component";
 import { DashboardComponent } from "./components/dashboard/dashboard.component";
+import { KopprSignUpComponent } from "./components/login/sign-up/signup.component";
 import { SalaryComponent } from "./components/salary/salary.component";
 import { AddEmployeeComponent } from "./components/employee/add-employee.component";
 import { EmployeeAddTypeSelectionComponent } from "./components/employee/employee-add-type-selection.component";
@@ -48,6 +47,7 @@ import { AllowanceTopUpPaymentComponent } from "@app/core/components/allowance/t
 import { AllowanceTopUpComponent } from "@app/core/components/allowance/top-up.component";
 import { AllowanceComponent } from "@app/core/components/allowance/allowance.component";
 import { ViewPotComponent } from "./components/dashboard/viewpot.component";
+import { BulkCategoryComponent } from "@app/core/components/employee/bulk-category.component";
 import { TransferPotComponent } from "./components/dashboard/transferpot.component";
 import { TransferFromToComponent } from "./components/dashboard/transferfromto.component";
 import { PotCongratsComponent } from "./components/dashboard/potcongrats.component";
@@ -80,27 +80,21 @@ import { PaymentsComponent } from './components/payments/payments.component';
 import { ForgotPasswordComponent } from "./components/login/forgot-password/forgot-password.component";
 import { VerifyEmailComponent } from "./components/login/verify-email/verify-email.component";
 import { SetPasswordComponent } from './components/login/set-password/set-password.component';
+import { UserAccountComponent } from './components/user-account/user-account.component';
+import { EditAccountComponent } from './components/user-account/edit-account.component';
 
-
-import { KopprSignUpComponent } from "./components/login/sign-up/signup.component";
-import { ModalComponent } from "./components/modal/modal.component";
-
-import { environment } from "@env/environment";
-
-import { throwIfAlreadyLoaded } from "./module-import-guard";
-import { BulkCategoryComponent } from "@app/core/components/employee/bulk-category.component";
 
 //
 // koppr Components lib
 //
 
 import { kopprComponentsModule } from "koppr-components";
+import { ModalComponent } from "./components/modal/modal.component";
+import { environment } from "@env/environment";
+import { throwIfAlreadyLoaded } from "./module-import-guard";
 
-//
-//
 // Lazy Loaded Libs -> app.module.ts
-//
-//
+// 
 
 //
 // Utils lib
@@ -267,7 +261,9 @@ const icons: IconDefinition[] = Object.keys(antDesignIcons).map(
     SuperDistributorComponent,
     AddSuperDistributorComponent,    
     VerifyEmailComponent,
-    SetPasswordComponent
+    SetPasswordComponent,
+    UserAccountComponent, 
+    EditAccountComponent
   ],
   exports: [
     PlaceholderComponent,
@@ -337,7 +333,8 @@ const icons: IconDefinition[] = Object.keys(antDesignIcons).map(
     SuperDistributorComponent,
     AddSuperDistributorComponent,
     VerifyEmailComponent,
-    SetPasswordComponent
+    SetPasswordComponent,
+    UserAccountComponent, 
   ]
 })
 export class CoreModule {

@@ -355,6 +355,13 @@ p {
   text-align: center !important;
 }
 
+.div-center {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .button-center {
   display: block !important;
   margin: 0 auto !important;
