@@ -55,18 +55,17 @@
                     nzTitle="Hey {{ userName }}!"
                   >
                     <ul>
-                      <li *ngIf="!isAdmin()" nz-menu-item>
-                        <i nz-icon nzType="team" nzTheme="outline"></i>Manage
-                        Users
+                      <li nz-menu-item [routerLink]="['/', 'my-account']">
+                        <i nz-icon nzType="robot" nzTheme="outline"></i>
+                        My Account
                       </li>
-
-                      <li
+                      <!-- <li
                         nz-submenu
                         nzTitle="My Enviar Account"
                         *ngIf="!isAdmin()"
                       >
                         <ul>
-                          <!-- (click)="gotoAccountDetails()" function for acct settings-->
+                          (click)="gotoAccountDetails()" function for acct settings
                           <li nz-menu-item class="dark-brown">
                             <i nz-icon nzType="setting" nzTheme="outline"></i
                             >Account Settings
@@ -78,8 +77,7 @@
                             />&nbsp;&nbsp;Top Up Balance
                           </li>
                         </ul>
-                      </li>
-
+                      </li> -->
                       <li nz-menu-item (click)="logout()">
                         <i nz-icon nzType="logout" nzTheme="outline"></i>Sign
                         Out
@@ -308,12 +306,7 @@
         </li>
       </ul>
     </nz-sider>
-    <nz-layout class="inner-layout">
-      <!-- <nz-breadcrumb>
-        <nz-breadcrumb-item>Home</nz-breadcrumb-item>
-        <nz-breadcrumb-item>List</nz-breadcrumb-item>
-        <nz-breadcrumb-item>App</nz-breadcrumb-item>
-      </nz-breadcrumb> -->
+    <nz-layout class="inner-layout"> 
       <nz-content>
         <router-outlet></router-outlet>
         <ngx-spinner color="#27878e"></ngx-spinner>
