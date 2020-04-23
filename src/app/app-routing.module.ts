@@ -58,9 +58,7 @@ import { TopupApprovalComponent } from "./core/components/company/topup-approval
 import { SuperDistributorComponent } from "@app/core/components/super-distributor/super-distributor.component";
 import { AddSuperDistributorComponent } from "@app/core/components/super-distributor/add-super-distributor.component";
 import { DistributorComponent } from "@app/core/components/distributor/distributor.component";
-import { AddDistributorComponent } from "@app/core/components/distributor/add-distributor.component";
-import { SubDistributorComponent } from "@app/core/components/sub-distributor/sub-distributor.component";
-import { AddSubDistributorComponent } from "@app/core/components/sub-distributor/add-sub-distributor.component";
+import { AddDistributorComponent } from "@app/core/components/distributor/add-distributor.component"; 
 import { RetailerComponent } from "@app/core/components/retailer/retailer.component";
 import { AddRetailerComponent } from "@app/core/components/retailer/add-retailer.component";
 import { LedgersComponent } from "@app/core/components/ledgers/ledgers.component";
@@ -140,16 +138,6 @@ const routes: Routes = [
   {
     path: "distributor/add/:id",
     component: AddDistributorComponent,
-    data: { menuType: menuType.normal }
-  },
-  {
-    path: "sub-distributor",
-    component: SubDistributorComponent,
-    data: { menuType: menuType.normal }
-  },
-  {
-    path: "sub-distributor/add",
-    component: AddSubDistributorComponent,
     data: { menuType: menuType.normal }
   },
   {

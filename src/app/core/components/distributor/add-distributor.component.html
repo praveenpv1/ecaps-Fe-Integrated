@@ -87,7 +87,7 @@
               <nz-form-control
                 [nzSm]="14"
                 [nzXs]="24"
-                nzErrorTip="Please enter phone number."
+                nzErrorTip="Please enter 10 digit Phone number."
               >
                 <input
                   nz-input
@@ -168,7 +168,7 @@
               <nz-form-control
                 [nzSm]="14"
                 [nzXs]="24"
-                nzErrorTip="Please enter Aadhaar No."
+                nzErrorTip="Please enter 12 digit Aadhaar No."
               >
                 <input nz-input formControlName="aadhaarNo" id="aadhaarNo" />
               </nz-form-control>
@@ -296,7 +296,6 @@
                 <button
                   nz-button
                   nzType="primary"
-                  [disabled]="!(validateForm.status === 'VALID')"
                 >
                 {{ _id != "" ? "Update" : "Create Distributor" }}
                 </button>

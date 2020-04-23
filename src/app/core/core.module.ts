@@ -66,9 +66,7 @@ import { TopupApprovalComponent } from "./components/company/topup-approval.comp
 import { DistributorComponent } from './components/distributor/distributor.component';
 import { SuperDistributorComponent } from './components/super-distributor/super-distributor.component';
 import { AddSuperDistributorComponent } from './components/super-distributor/add-super-distributor.component';
-import { AddDistributorComponent } from './components/distributor/add-distributor.component';
-import { SubDistributorComponent } from './components/sub-distributor/sub-distributor.component';
-import { AddSubDistributorComponent } from './components/sub-distributor/add-sub-distributor.component';
+import { AddDistributorComponent } from './components/distributor/add-distributor.component'; 
 import { RetailerComponent } from './components/retailer/retailer.component';
 import { AddRetailerComponent } from './components/retailer/add-retailer.component';
 import { LedgersComponent } from './components/ledgers/ledgers.component';
@@ -246,9 +244,7 @@ const icons: IconDefinition[] = Object.keys(antDesignIcons).map(
     TopupApprovalComponent,
     CompanyListComponent,
     DistributorComponent,
-    AddDistributorComponent,
-    SubDistributorComponent,
-    AddSubDistributorComponent,
+    AddDistributorComponent, 
     RetailerComponent,
     AddRetailerComponent,
     LedgersComponent,
@@ -318,9 +314,7 @@ const icons: IconDefinition[] = Object.keys(antDesignIcons).map(
     TopupApprovalComponent,
     CompanyListComponent,
     DistributorComponent,
-    AddDistributorComponent,
-    SubDistributorComponent,
-    AddSubDistributorComponent,
+    AddDistributorComponent, 
     RetailerComponent,
     AddRetailerComponent,
     LedgersComponent,
