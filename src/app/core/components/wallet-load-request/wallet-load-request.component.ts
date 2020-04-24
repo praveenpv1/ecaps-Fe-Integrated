@@ -179,7 +179,7 @@ export class WalletLoadRequestComponent implements OnInit, OnDestroy {
       type: GET_FUND_LOADS,
       payload: { id: _.get(this.initialState, "userInfo._id", null) },
     });
-    this.ds.dataStore$.subscribe((data) => {
+    this.subscribers = this.ds.dataStore$.subscribe((data) => {
       if (data.fundLoadRequests) {
         this.walletLoadRequests = data.fundLoadRequests;
       }
