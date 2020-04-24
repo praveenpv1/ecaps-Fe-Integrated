@@ -46,7 +46,10 @@ export class ApiService {
           "application/x-www-form-urlencoded"
         ),
       })
-      .pipe(retry(2), catchError(this.handleError));
+      .pipe(
+        // retry(2),
+        catchError(this.handleError)
+      );
   }
 
   public verifyEmail(url: string): Observable<Object> {
@@ -60,7 +63,10 @@ export class ApiService {
       .get<Object>(getUrl, {
         headers,
       })
-      .pipe(retry(2), catchError(this.handleError));
+      .pipe(
+        // retry(2),
+        catchError(this.handleError)
+      );
   }
 
   stringParams(params: object = {}) {
@@ -87,7 +93,10 @@ export class ApiService {
       .post<Object>(postUrl, body, {
         headers,
       })
-      .pipe(retry(2), catchError(this.handleError));
+      .pipe(
+        // retry(2),
+        catchError(this.handleError)
+      );
   }
 
   //   public get(
@@ -134,7 +143,10 @@ export class ApiService {
         params: { ...params },
         headers,
       })
-      .pipe(retry(2), catchError(this.handleError));
+      .pipe(
+        // retry(2),
+        catchError(this.handleError)
+      );
   }
 
   public async pk_get(

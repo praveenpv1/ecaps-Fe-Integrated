@@ -41,6 +41,18 @@
                     <input nz-input formControlName="amount" id="amount" />
                   </nz-form-control>
                 </nz-form-item>
+                <nz-form-item>
+                  <nz-form-label [nzSm]="6" [nzXs]="24" nzRequired nzFor="ref">
+                    Reference
+                  </nz-form-label>
+                  <nz-form-control
+                    [nzSm]="14"
+                    [nzXs]="24"
+                    nzErrorTip="Enter Reference Number"
+                  >
+                    <input nz-input formControlName="ref" id="ref" />
+                  </nz-form-control>
+                </nz-form-item>
                 <nz-form-item nz-row class="register-area">
                   <nz-form-control [nzSpan]="14" [nzOffset]="6">
                     <button
@@ -79,7 +91,7 @@
               <br /><br />
             </div>
           </div>
-        </div> 
+        </div>
         <div *ngIf="tab == 'Transfer By Number'">
           <div nzSm="24" nzMd="24" nzLg="24" nzXl="24">
             <br />

@@ -101,7 +101,15 @@ export class WalletTopUpComponent implements OnInit, OnDestroy {
     });
 
     this.transferValueForm = this.fb.group({
-      amount: [null, [Validators.required, Validators.min(1)]],
+      amount: [
+        null,
+        [
+          Validators.required,
+          Validators.min(1),
+          Validators.pattern("^[0-9]*$"),
+        ],
+      ],
+      ref: [null, [Validators.required]],
     });
 
     // this.getCompanyTransactions();
@@ -254,7 +262,7 @@ export class WalletTopUpComponent implements OnInit, OnDestroy {
         payload: {
           uid: store.userInfo._id,
           request_amount: this.transferValueForm.controls["amount"].value,
-          support_ref: "",
+          support_ref: this.transferValueForm.controls["ref"].value,
           support_uploads: "",
         },
       });
