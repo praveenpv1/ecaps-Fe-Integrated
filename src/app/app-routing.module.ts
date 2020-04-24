@@ -226,15 +226,15 @@ const routes: Routes = [
     data: { menuType: menuType.siginin }
   },
   {
-    path: "dashboard/:company_id",
-    component: DashboardComponent,
-    data: { menuType: menuType.normal }
-  },
-  {
     path: "dashboard",
     component: DashboardComponent,
     data: { menuType: menuType.normal }
   },
+  // {
+  //   path: "dashboard/:company_id",
+  //   component: DashboardComponent,
+  //   data: { menuType: menuType.normal }
+  // },
   // {
   //   path: "employee/add",
   //   component: AddEmployeeComponent,

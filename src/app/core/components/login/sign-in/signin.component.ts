@@ -1,5 +1,9 @@
 import { Component, OnDestroy, OnInit } from "@angular/core";
-import { ActivatedRoute } from "@angular/router";
+import { FormGroup, FormControl, Validators } from "@angular/forms";
+import { LOGIN, RESET_STATE } from "@app/core/store/actions";
+import { ResetStateReducers } from "@app/core/store/reducers/resetstate.reducer";
+import { AuthService } from "auth";
+import { LoginReducers } from "@app/core/store/reducers/login.reducer";
 
 @Component({
   selector: "signin-component",
@@ -7,14 +11,47 @@ import { ActivatedRoute } from "@angular/router";
   styleUrls: ["./signin.component.scss"]
 })
 export class SignInComponent implements OnInit, OnDestroy {
-  verify: any = "";
-  constructor(private activatedRoute: ActivatedRoute) {
-    if (this.activatedRoute.snapshot.paramMap.get("verify")) {
-      this.verify = this.activatedRoute.snapshot.paramMap.get("verify");
+  showPassword: boolean = false;
+  signInForm = new FormGroup({
+    email: new FormControl(null, [Validators.required]),
+    password: new FormControl(null, [Validators.required])
+  });
+  constructor(
+    private resetReducer: ResetStateReducers,
+    private authService: AuthService,
+    private loginReducer: LoginReducers
+  ) {
+     //clear state
+     this.resetReducer.resetState({
+      type: RESET_STATE,
+      payload: {}
+    });
+
+    localStorage.setItem("token", "");
+    sessionStorage.setItem("company_id", "");
+     
+  }
+  login() {
+    if (this.signInForm.valid) {
+      this.loginReducer.loginReducer({
+        type: LOGIN,
+        payload: {
+          email: this.signInForm.controls["email"].value.toLowerCase(),
+          password: this.signInForm.controls["password"].value
+        }
+      });
     }
   }
 
   public ngOnInit() {}
 
   public ngOnDestroy() {}
+  
+  togglePasswordDisplay() {
+    this.showPassword = !this.showPassword;
+  }
+
+  public isFormValid(formName: string) {
+    return !this.signInForm.controls[formName].errors;
+  }
 }
