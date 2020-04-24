@@ -80,6 +80,7 @@ export class ApiService {
   public post(url: string, params: object = {}): Observable<Object> {
     const postUrl = `${BASE_URL}/${url}`;
     const body = this.stringParams(params).toString();
+    console.log("body", body);
     let headers = new HttpHeaders();
     const token: string = _.isEmpty(this.authService.getAccessToken())
       ? ""

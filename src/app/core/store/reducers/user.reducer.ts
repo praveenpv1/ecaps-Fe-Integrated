@@ -169,31 +169,31 @@ export class UserReducers {
       // break;
 
       case ADD_CHILD:
+        console.log("payload", action.payload);
         console.log("IN ADD_CHILD");
         this._loader.loadingState({ type: LOADING });
-        this.apiService
-          .post(`main/users/add`, { ...action.payload.id })
-          .subscribe(
-            (response: any) => {
-              this.toast.toastState({
-                type: SHOW_TOAST,
-                payload: { message: response.message, type: "success" },
-              });
 
-              this._dataStore.dataStore$.next({
-                ...state,
-                ...successCommonData,
-              });
-              // this.router.navigate(["/sigin"]);
+        this.apiService.post(`main/users/add`, { ...action.payload }).subscribe(
+          (response: any) => {
+            this.toast.toastState({
+              type: SHOW_TOAST,
+              payload: { message: response.message, type: "success" },
+            });
 
-              this._location.back();
-            },
-            (error) => {
-              this.toast.commonCatchToast(
-                _.get(error, "message", "Something Went Wrong!!")
-              );
-            }
-          );
+            this._dataStore.dataStore$.next({
+              ...state,
+              ...successCommonData,
+            });
+            // this.router.navigate(["/sigin"]);
+
+            this._location.back();
+          },
+          (error) => {
+            this.toast.commonCatchToast(
+              _.get(error, "message", "Something Went Wrong!!")
+            );
+          }
+        );
         break;
 
       case UPDATE_CHILD_USER_INFO:

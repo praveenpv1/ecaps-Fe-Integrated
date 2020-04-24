@@ -37,16 +37,16 @@ export class AddDistributorComponent implements OnInit {
   submitForm() {
     const store = this._dataStore.dataStore$.getValue();
 
-    this.isFormValid =
-      _.get(this.validateForm, "status", "INVALID") === "VALID";
-    console.log(
-      moment(this.validateForm.controls.dateOfBirth.value).format("DD-MM-YYYY")
-    );
+    // this.isFormValid =
+    //   _.get(this.validateForm, "status", "INVALID") === "VALID";
+    // console.log(
+    //   moment(this.validateForm.controls.dateOfBirth.value).format("DD-MM-YYYY")
+    // );
     for (const i in this.validateForm.controls) {
       this.validateForm.controls[i].markAsDirty();
       this.validateForm.controls[i].updateValueAndValidity();
     }
-    if (this.isFormValid) {
+    if (this.validateForm.valid) {
       if (!_.isEmpty(this._id)) {
         if (!_.isEmpty(this.userDetails)) {
           this.child.userReducer({
@@ -56,14 +56,14 @@ export class AddDistributorComponent implements OnInit {
               dob: moment(this.validateForm.controls.dateOfBirth.value).format(
                 "DD-MM-YYYY"
               ),
-              is_verified: true,
-              status: true,
-              tpin: "",
+              // is_verified: true,
+              // status: true,
+              // tpin: "",
               aadhaar: this.validateForm.controls.aadhaarNo.value,
               pan: this.validateForm.controls.pan.value,
               voter_id: this.validateForm.controls.voterId.value,
               kit_number: this.validateForm.controls.kitNo.value,
-              wallet_balance: this.userDetails.wallet_balance,
+              // wallet_balance: this.userDetails.wallet_balance,
               firstname: this.validateForm.controls.first_name.value,
               lastname: this.validateForm.controls.last_name.value,
               phone: this.validateForm.controls.phoneNumber.value,
@@ -163,25 +163,39 @@ export class AddDistributorComponent implements OnInit {
 
   setForm(data: any) {
     this.validateForm = this.fb.group({
-      first_name: [null, [Validators.required,
-        Validators.pattern('[a-zA-Z ]*')]],
-      last_name: [null, [Validators.required,
-        Validators.pattern('[a-zA-Z ]*')]],
+      first_name: [
+        null,
+        [Validators.required, Validators.pattern("[a-zA-Z ]*")],
+      ],
+      last_name: [
+        null,
+        [Validators.required, Validators.pattern("[a-zA-Z ]*")],
+      ],
       company_name: [null, [Validators.required]],
       dateOfBirth: [null, [Validators.required]],
-      phoneNumber: [null, [Validators.required,
-        Validators.pattern(/^[0-9]\d*$/),
-        Validators.minLength(10),
-        Validators.maxLength(10)]],
+      phoneNumber: [
+        null,
+        [
+          Validators.required,
+          Validators.pattern(/^[0-9]\d*$/),
+          Validators.minLength(10),
+          Validators.maxLength(10),
+        ],
+      ],
       userName: [null, [Validators.required]],
       email: [null, [Validators.email, Validators.required]],
-      password: [null, [Validators.required]],
+      password: [null],
       role: ["Distributor", [Validators.required]],
       pan: [null, [Validators.required]],
-      aadhaarNo: [null, [Validators.required,
-        Validators.pattern(/^[0-9]\d*$/),
-        Validators.minLength(12),
-        Validators.maxLength(12)]],
+      aadhaarNo: [
+        null,
+        [
+          Validators.required,
+          Validators.pattern(/^[0-9]\d*$/),
+          Validators.minLength(12),
+          Validators.maxLength(12),
+        ],
+      ],
       voterId: [null, [Validators.required]],
       kitNo: [null, [Validators.required]],
       // selectedMargin: [null, [Validators.required]],
