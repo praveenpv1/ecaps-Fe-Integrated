@@ -166,7 +166,7 @@ const routes: Routes = [
     data: { menuType: menuType.normal }
   },
   {
-    path: "monthly-transactions",
+    path: "transactions",
     component: MonthlyTransactionsComponent,
     data: { menuType: menuType.normal }
   },

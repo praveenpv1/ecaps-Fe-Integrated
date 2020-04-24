@@ -190,7 +190,7 @@
         <li
           nz-menu-item
           nzOpen
-          [routerLink]="['/', 'monthly-transactions']"
+          [routerLink]="['/', 'transactions']"
           *ngIf="
             [
               'master',
@@ -201,7 +201,7 @@
             ].includes(userRole)
           "
         >
-          <i nz-icon nzType="calendar" nzTheme="outline"></i> Monthly
+          <i nz-icon nzType="calendar" nzTheme="outline"></i>
           Transactions
         </li>
         <li
