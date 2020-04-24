@@ -1,1 +1,23 @@
-<p>monthly-transactions works!</p>
+<div nz-row>
+    <h3  class="primary-color-font">Transactions</h3><br>
+    <div>
+        <nz-table #basicTable [nzData]="listOfData">
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>Type</th>
+                <th>Amount</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let data of basicTable.data">
+                <td>{{ data.date }}</td>
+                <td>{{ data.type }}</td>
+                <td>{{ data.amount }}</td>
+                <td></td>
+              </tr>
+            </tbody>
+          </nz-table>
+    </div>
+</div>
