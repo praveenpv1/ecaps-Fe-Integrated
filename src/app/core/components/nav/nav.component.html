@@ -209,13 +209,9 @@
           nzOpen
           [routerLink]="['/', 'wallet-load-request']"
           *ngIf="
-            [
-              'master',
-              'admin',
-              'distributor',
-              'superdistributor',
-              'retailer'
-            ].includes(userRole)
+            ['master', 'admin', 'distributor', 'superdistributor'].includes(
+              userRole
+            )
           "
         >
           <i nz-icon nzType="interaction" nzTheme="outline"></i>
@@ -306,7 +302,7 @@
         </li>
       </ul>
     </nz-sider>
-    <nz-layout class="inner-layout"> 
+    <nz-layout class="inner-layout">
       <nz-content>
         <router-outlet></router-outlet>
         <ngx-spinner color="#27878e"></ngx-spinner>
