@@ -7,18 +7,15 @@
     nzXl="6"
     *ngFor="let item of balanceCards"
   >
-    <nz-card
-      class="primary-color-border-card" 
-      [ngClass]="item.bgClass"
-    >
+    <nz-card class="primary-color-border-card" [ngClass]="item.bgClass">
       <p>{{ item.title }}</p>
       <h1>{{ item.text }}</h1>
-      <p>
+      <!-- <p>
         <span>
           {{ item.desc }} 
          &nbsp;<i nz-icon nzType="arrow-right" nzTheme="outline"></i>
         </span>
-      </p>
+      </p> -->
     </nz-card>
   </div>
 </div>
@@ -27,66 +24,70 @@
   <div nz-col nzSm="24" nzMd="24" nzLg="6" nzXl="6">
     <!-- <div style="padding-top:57px;"></div> -->
     <div nz-row *ngFor="let item of infoCards" class="margin-bottom-10">
-      <nz-card
-        class="primary-color-border-card" 
-        [ngClass]="item.bgClass"
-      >
+      <nz-card class="primary-color-border-card" [ngClass]="item.bgClass">
         <p>{{ item.title }}</p>
-        <h1>{{ item.text }}</h1> 
-        <p>
+        <h1>{{ item.text }}</h1>
+        <!-- <p>
           <span>
             {{ item.desc }}
             &nbsp;<i nz-icon nzType="arrow-right" nzTheme="outline"></i>
           </span>
-        </p>
+        </p> -->
       </nz-card>
     </div>
   </div>
-  <div nz-col nzSm="1" nzMd="1" nzLg="1" nzXl="1" 
-  nzJustify="space-around" 
-  nzAlign="middle">
-  </div>
+  <div
+    nz-col
+    nzSm="1"
+    nzMd="1"
+    nzLg="1"
+    nzXl="1"
+    nzJustify="space-around"
+    nzAlign="middle"
+  ></div>
   <div nz-col nzSm="24" nzMd="24" nzLg="17" nzXl="17">
     <div style="display: block; margin-top: 60px;">
-      <canvas baseChart
-      [datasets]="barChartData"
-      [labels]="barChartLabels"
-      [options]="barGraphOptions.options"
-      [colors]="barGraphOptions.colors"
-      [legend]="barGraphOptions.legend"
-      [chartType]="barGraphOptions.type"
-      [plugins]="barGraphOptions.plugins">
+      <canvas
+        baseChart
+        [datasets]="barChartData"
+        [labels]="barChartLabels"
+        [options]="barGraphOptions.options"
+        [colors]="barGraphOptions.colors"
+        [legend]="barGraphOptions.legend"
+        [chartType]="barGraphOptions.type"
+        [plugins]="barGraphOptions.plugins"
+      >
       </canvas>
     </div>
   </div>
 </div>
 <div nz-row>
   <br />
-    <h4>Recent Transactions</h4>
-    <br />
-    <nz-table
-      #headerTable
-      [nzData]="companyTranscations"
-      [nzPageSize]="50"
-      [nzScroll]="{ y: '240px' }"
-    >
-      <thead>
-        <tr>
-          <th nzWidth="150px">Date</th>
-          <th>Details</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let data of headerTable.data">
-          <td>
-            {{ data.initiated_ts * 1000 | date: "yyyy-MM-dd" }}
-          </td>
-          <td>
-            Txn Id: {{ data.details.transaction_id }},
-            {{ getStatusText(data.approval_status) }}, Amount -
-            {{ data.amount | currency: "₹" }}
-          </td>
-        </tr>
-      </tbody>
-    </nz-table>
+  <h4>Recent Transactions</h4>
+  <br />
+  <nz-table
+    #headerTable
+    [nzData]="companyTranscations"
+    [nzPageSize]="50"
+    [nzScroll]="{ y: '240px' }"
+  >
+    <thead>
+      <tr>
+        <th nzWidth="150px">Date</th>
+        <th>Details</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let data of headerTable.data">
+        <td>
+          {{ data.initiated_ts * 1000 | date: "yyyy-MM-dd" }}
+        </td>
+        <td>
+          Txn Id: {{ data.details.transaction_id }},
+          {{ getStatusText(data.approval_status) }}, Amount -
+          {{ data.amount | currency: "₹" }}
+        </td>
+      </tr>
+    </tbody>
+  </nz-table>
 </div>
