@@ -1,8 +1,15 @@
 <div nz-row>
   <div nz-col nzSm="24" nzMd="24" nzLg="24" nzXl="24">
-    <a class="back-button-text"  [routerLink]="['/', 'sub-distributor']" ><img class="back-img" src="assets/images/back-button.svg">&nbsp;&nbsp;BACK</a>
-    <br>
-    <h3 class="primary-color-font">{{ _id != "" ? "Edit" : "Add New" }} Distributor</h3>
+    <a class="back-button-text" [routerLink]="['/', 'sub-distributor']"
+      ><img
+        class="back-img"
+        src="assets/images/back-button.svg"
+      />&nbsp;&nbsp;BACK</a
+    >
+    <br />
+    <h3 class="primary-color-font">
+      {{ _id != "" ? "Edit" : "Add New" }} Distributor
+    </h3>
     <p *ngIf="_id == ''">Add a new distributor here</p>
   </div>
   <div nz-col nzSm="24" nzMd="24" nzLg="24" nzXl="24">
@@ -296,8 +303,9 @@
                 <button
                   nz-button
                   nzType="primary"
+                  [disabled]="!validateForm.valid"
                 >
-                {{ _id != "" ? "Update" : "Create Distributor" }}
+                  {{ _id != "" ? "Update" : "Create Distributor" }}
                 </button>
               </nz-form-control>
             </nz-form-item>
@@ -305,6 +313,6 @@
         </div>
       </div>
     </div>
- </div>
+  </div>
 </div>
-<br><br>
+<br /><br />

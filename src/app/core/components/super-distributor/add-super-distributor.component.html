@@ -7,7 +7,9 @@
       />&nbsp;&nbsp;BACK</a
     >
     <br />
-    <h3 class="primary-color-font">{{ _id != "" ? "Edit" : "Add New" }} Super Distributor</h3>
+    <h3 class="primary-color-font">
+      {{ _id != "" ? "Edit" : "Add New" }} Super Distributor
+    </h3>
     <p *ngIf="_id == ''">Add a new super distributor here</p>
   </div>
   <div nz-col nzSm="24" nzMd="24" nzLg="24" nzXl="24">
@@ -78,6 +80,7 @@
                 <nz-date-picker
                   class="date-picker"
                   formControlName="dateOfBirth"
+                  nzErrorTip="Please select Date of Birth"
                 ></nz-date-picker>
               </nz-form-control>
             </nz-form-item>
@@ -300,7 +303,8 @@
               <nz-form-control [nzSpan]="14" [nzOffset]="6">
                 <button
                   nz-button
-                  nzType="primary" 
+                  nzType="primary"
+                  [disabled]="!validateForm.valid"
                 >
                   {{ _id != "" ? "Update" : "Create Super Distributor" }}
                 </button>
