@@ -60,8 +60,7 @@ import { SpendComponent } from "./components/spend/spend.component";
 import { CardComponent } from "./components/card/card.component";
 import { NavigationBarComponent } from "./components/navigation-bar/navigation-bar.component";
 import { NavComponent } from "./components/nav/nav.component";
-import { SignInComponent } from "./components/login/sign-in/signin.component";
-import { SignInInnerComponent } from "./components/login/sign-in/signin-inner.component"; 
+import { SignInComponent } from "./components/login/sign-in/signin.component"; 
 import { TopupApprovalComponent } from "./components/company/topup-approval.component";
 import { DistributorComponent } from './components/distributor/distributor.component';
 import { SuperDistributorComponent } from './components/super-distributor/super-distributor.component';
@@ -228,8 +227,7 @@ const icons: IconDefinition[] = Object.keys(antDesignIcons).map(
     NavigationBarComponent,
     NavComponent,
     ViewPotComponent,
-    SignInComponent,
-    SignInInnerComponent, 
+    SignInComponent, 
     KopprSignUpComponent,
     ModalComponent,
     PayAllowanceComponent,
@@ -299,8 +297,7 @@ const icons: IconDefinition[] = Object.keys(antDesignIcons).map(
     NavigationBarComponent,
     NavComponent,
     ViewPotComponent,
-    SignInComponent,
-    SignInInnerComponent, 
+    SignInComponent,  
     KopprSignUpComponent,
     ModalComponent,
     PayAllowanceComponent,
