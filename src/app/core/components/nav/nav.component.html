@@ -222,13 +222,9 @@
           nzOpen
           [routerLink]="['/', 'wallet-top-up']"
           *ngIf="
-            [
-              'master',
-              'admin',
-              'distributor',
-              'superdistributor',
-              'retailer'
-            ].includes(userRole)
+            ['admin', 'distributor', 'superdistributor', 'retailer'].includes(
+              userRole
+            )
           "
         >
           <img
