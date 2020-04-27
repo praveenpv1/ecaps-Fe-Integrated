@@ -15,6 +15,7 @@ import {
   CHILD_USERS_LIST,
   FUND_LOAD,
   GET_FUND_LOADS,
+  APPROVE_FUND_LOADS,
 } from "../actions";
 import { LoadingReducers } from "./loading.reducer";
 import { catchCommonData, successCommonData } from "../commonstoredata";
@@ -84,6 +85,30 @@ export class FundReducers {
                 ...state,
                 ...successCommonData,
                 fundLoadRequests: response.data,
+              });
+            },
+            (error) => {
+              this.toast.commonCatchToast(
+                _.get(error, "message", "Something Went Wrong!!")
+              );
+            }
+          );
+        break;
+
+      case APPROVE_FUND_LOADS:
+        this._loader.loadingState({ type: LOADING });
+        state = this._dataStore.dataStore$.getValue();
+        this.apiService
+          .get(`main/fundloads/approve/${action.payload.requestId}`)
+          .subscribe(
+            (response: any) => {
+              this._dataStore.dataStore$.next({
+                ...state,
+                ...successCommonData,
+              });
+              this.fundReducer({
+                type: GET_FUND_LOADS,
+                payload: { id: action.payload.userId },
               });
             },
             (error) => {
