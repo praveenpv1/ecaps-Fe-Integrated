@@ -1,56 +1,88 @@
 <div nz-row>
     <div nz-col nzSm="24" nzMd="24" nzLg="24" nzXl="24">
       <h3 class="primary-color-font">Loyalty</h3>
-      <p>Manage Loyalty</p>
-      <br>
+      <p>View and Manage Loyalty</p> 
     </div>
 </div>
-<div nz-row>
-    <div nz-col nzSm="24" nzMd="24" nzLg="24" nzXl="24">
-      <nz-table
-        #nzTable
-        [nzData]="childLists"
-        [nzScroll]="{ y: '240px' }"
-        >
-            <thead>
-            <tr>
-                <th nzWidth="220px">Name</th>
-                <th nzWidth="220px">Company</th>
-                <th nzWidth="120px">Role</th>
-                <th nzWidth="180px">Phone Number</th> 
-                <th>Actions</th> 
-            </tr>
-            </thead>
-            <tbody>
-            <tr *ngFor="let data of nzTable.data | filter: searchText">
-                <td>{{ data.firstname }} {{ data.lastname }}</td>
-                <td>{{ data.company_name }}</td>
-                <td>{{ data.role }}</td>
-                <td>{{ data.phone }}</td>
-                <td><button 
-                    nz-button 
-                    nzSize="small" 
-                    nzType="primary" 
-                    style="box-shadow: none !important;"
-                    (click)="showModal()"
-                >Set Loyalty</button>
-                </td>
-            </tr>
-            </tbody>
-      </nz-table>
-      <nz-modal
-        [(nzVisible)]="isVisible"
-        nzTitle=" Set Loyalty"
-        (nzOnCancel)="handleCancel()"
-        (nzOnOk)="handleOk()"
-        [nzOkLoading]="isOkLoading"
-        >
-        <nz-radio-group [(ngModel)]="loyaltyValue">
-            <label nz-radio nzValue="enviar">Basic</label>
-            <label nz-radio nzValue="gold">Gold</label>
-            <label nz-radio nzValue="silver">Silver</label>
-            <label nz-radio nzValue="bronze">Bronze</label>
-        </nz-radio-group>
-      </nz-modal>
-    </div>
+<div nz-row> 
+  <div nz-col nzSm="24" nzMd="24" nzLg="22" nzXl="22">
+    <nz-input-group
+      class="margin-5px"
+      [nzSuffix]="suffixIconSearch"
+      style="width: 100% ;max-width :400px"
+    >
+      <input
+        type="text"
+        [(ngModel)]="searchText"
+        nz-input
+        placeholder="Search"
+      />
+    </nz-input-group>
+    <ng-template #suffixIconSearch>
+      <i nz-icon nzType="search"></i>
+    </ng-template>
   </div>
+  <div nz-col nzSm="24" nzMd="24" nzLg="2" nzXl="2">
+    <!-- <button class="margin-5px" nz-button nz-dropdown [nzDropdownMenu]="menu0">
+          Sort
+          <i nz-icon nzType="down"></i>
+        </button>
+        <nz-dropdown-menu #menu0="nzDropdownMenu">
+          <ul nz-menu>
+            <li nz-menu-item>By ??</li>
+            <li nz-menu-item>By ??</li>
+            <li nz-menu-item>By ??</li>
+          </ul>
+        </nz-dropdown-menu> -->
+  </div>
+</div>
+<br />
+<div nz-row>
+  <div nz-col nzSm="24" nzMd="24" nzLg="24" nzXl="24">
+    <nz-table
+      #nzTable
+      [nzData]="childLists"
+      [nzScroll]="{ y: '240px' }"
+      >
+          <thead>
+          <tr>
+              <th nzWidth="220px">Name</th>
+              <th nzWidth="220px">Company</th>
+              <th nzWidth="120px">Role</th>
+              <th nzWidth="180px">Phone</th> 
+              <th>Actions</th> 
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let data of nzTable.data | filter: searchText">
+              <td>{{ data.firstname }} {{ data.lastname }}</td>
+              <td>{{ data.company_name }}</td>
+              <td>{{ data.role }}</td>
+              <td>{{ data.phone }}</td>
+              <td><button 
+                  nz-button 
+                  nzSize="small" 
+                  nzType="primary" 
+                  style="box-shadow: none !important;"
+                  (click)="showModal()"
+              >Set Loyalty</button>
+              </td>
+          </tr>
+          </tbody>
+    </nz-table>
+    <nz-modal
+      [(nzVisible)]="isVisible"
+      nzTitle="Set Loyalty"
+      (nzOnCancel)="handleCancel()"
+      (nzOnOk)="handleOk()"
+      [nzOkLoading]="isOkLoading"
+      >
+      <nz-radio-group [(ngModel)]="loyaltyValue">
+          <label nz-radio nzValue="gold">Gold</label>
+          <label nz-radio nzValue="silver">Silver</label>
+          <label nz-radio nzValue="bronze">Bronze</label>
+          <label nz-radio nzValue="enviar">Basic</label>
+      </nz-radio-group>
+    </nz-modal>
+  </div>
+</div> 

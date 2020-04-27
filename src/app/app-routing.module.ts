@@ -7,53 +7,53 @@ import { SignInComponent } from "@app/core/components/login/sign-in/signin.compo
 import { KopprSignUpComponent } from "@app/core/components/login/sign-up/signup.component";
 import { SignUpInnerComponent } from "@app/core/components/company/sign-up-inner.component";
 import { SignUpComponent } from "@app/core/components/company/sign-up.component";
-import { AddEmployeeComponent } from "@app/core/components/employee/add-employee.component";
-import { BulkUploadComponent } from "@app/core/components/employee/bulk-upload.component";
-import { BulkCategoryComponent } from "@app/core/components/employee/bulk-category.component";
-import { BulkUploadSuccessComponent } from "@app/core/components/employee/bulk-upload-success.component";
-import { CompanyDetailsComponent } from "@app/core/components/company/company-details.component";
-import { BankDetailsComponent } from "@app/core/components/company/bank-details.component";
-import { SelectPlanComponent } from "@app/core/components/company/select-plan.component";
-import { PlanPaymentComponent } from "@app/core/components/company/plan-payment.component";
+// import { AddEmployeeComponent } from "@app/core/components/employee/add-employee.component";
+// import { BulkUploadComponent } from "@app/core/components/employee/bulk-upload.component";
+// import { BulkCategoryComponent } from "@app/core/components/employee/bulk-category.component";
+// import { BulkUploadSuccessComponent } from "@app/core/components/employee/bulk-upload-success.component";
+// import { CompanyDetailsComponent } from "@app/core/components/company/company-details.component";
+// import { BankDetailsComponent } from "@app/core/components/company/bank-details.component";
+// import { SelectPlanComponent } from "@app/core/components/company/select-plan.component";
+// import { PlanPaymentComponent } from "@app/core/components/company/plan-payment.component";
 
-import { PaySalaryComponent } from "@app/core/components/salary/pay-salary.component";
-import { ConfirmSalaryPaymentComponent } from "@app/core/components/salary/confirm-salary-payment.component";
-import { SalaryPaymentResponseComponent } from "@app/core/components/salary/salary-payment-response.component";
-import { TopUpPaymentResponseComponent } from "@app/core/components/salary/top-up-payment-response.component";
-import { TopUpPaymentComponent } from "@app/core/components/salary/top-up-payment.component";
-import { TopUpComponent } from "@app/core/components/salary/top-up.component";
+// import { PaySalaryComponent } from "@app/core/components/salary/pay-salary.component";
+// import { ConfirmSalaryPaymentComponent } from "@app/core/components/salary/confirm-salary-payment.component";
+// import { SalaryPaymentResponseComponent } from "@app/core/components/salary/salary-payment-response.component";
+// import { TopUpPaymentResponseComponent } from "@app/core/components/salary/top-up-payment-response.component";
+// import { TopUpPaymentComponent } from "@app/core/components/salary/top-up-payment.component";
+// import { TopUpComponent } from "@app/core/components/salary/top-up.component";
 
-import { PayAllowanceComponent } from "@app/core/components/allowance/pay-allowance.component";
-import { ConfirmAllowancePaymentComponent } from "@app/core/components/allowance/confirm-allowance-payment.component";
-import { AllowancePaymentResponseComponent } from "@app/core/components/allowance/allowance-payment-response.component";
-import { AllowanceTopUpPaymentResponseComponent } from "@app/core/components/allowance/top-up-payment-response.component";
-import { AllowanceTopUpPaymentComponent } from "@app/core/components/allowance/top-up-payment.component";
-import { AllowanceTopUpComponent } from "@app/core/components/allowance/top-up.component";
-import { AllowanceComponent } from "@app/core/components/allowance/allowance.component";
-import { KopprAccountDetailsComponent } from "@app/core/components/account/koppr-account-details.component";
-import { UserComponent } from "@app/core/components/account/user.component";
-import { AddNewUserComponent } from "@app/core/components/account/addnewuser.component";
-import { UserDetailsComponent } from "@app/core/components/account/userdetails.component";
+// import { PayAllowanceComponent } from "@app/core/components/allowance/pay-allowance.component";
+// import { ConfirmAllowancePaymentComponent } from "@app/core/components/allowance/confirm-allowance-payment.component";
+// import { AllowancePaymentResponseComponent } from "@app/core/components/allowance/allowance-payment-response.component";
+// import { AllowanceTopUpPaymentResponseComponent } from "@app/core/components/allowance/top-up-payment-response.component";
+// import { AllowanceTopUpPaymentComponent } from "@app/core/components/allowance/top-up-payment.component";
+// import { AllowanceTopUpComponent } from "@app/core/components/allowance/top-up.component";
+// import { AllowanceComponent } from "@app/core/components/allowance/allowance.component";
+// import { KopprAccountDetailsComponent } from "@app/core/components/account/koppr-account-details.component";
+// import { UserComponent } from "@app/core/components/account/user.component";
+// import { AddNewUserComponent } from "@app/core/components/account/addnewuser.component";
+// import { UserDetailsComponent } from "@app/core/components/account/userdetails.component";
 
-import { ViewPotComponent } from "@app/core/components/dashboard/viewpot.component";
-import { TransferPotComponent } from "@app/core/components/dashboard/transferpot.component";
-import { SalaryComponent } from "@app/core/components/salary/salary.component";
+// import { ViewPotComponent } from "@app/core/components/dashboard/viewpot.component";
+// import { TransferPotComponent } from "@app/core/components/dashboard/transferpot.component";
+// import { SalaryComponent } from "@app/core/components/salary/salary.component";
 
-import { GoalComponent } from "@app/core/components/dashboard/goal.component";
+// import { GoalComponent } from "@app/core/components/dashboard/goal.component";
 
-import { ClaimComponent } from "@app/core/components/claim/claim.component";
-import { ClaimDetailsComponent } from "@app/core/components/claim/claim-details.component";
-import { ClaimApprovedComponent } from "@app/core/components/claim/claim-approved.component";
-import { ClaimRejectedComponent } from "@app/core/components/claim/claim-rejected.component";
-import { SpendComponent } from "@app/core/components/spend/spend.component";
-import { CardComponent } from "@app/core/components/card/card.component";
-import { TransferFromToComponent } from "@app/core/components/dashboard/transferfromto.component";
-import { PotCongratsComponent } from "@app/core/components/dashboard/potcongrats.component";
-import { EmployeeAddTypeSelectionComponent } from "@app/core/components/employee/employee-add-type-selection.component";
-import { ListComponent } from "@app/core/components/employee/list.component";
-import { CompanyListComponent } from "./core/components/company/companylist.component";
-import { DepositComponent } from "./core/components/company/deposit.component";
-import { TopupApprovalComponent } from "./core/components/company/topup-approval.component";
+// import { ClaimComponent } from "@app/core/components/claim/claim.component";
+// import { ClaimDetailsComponent } from "@app/core/components/claim/claim-details.component";
+// import { ClaimApprovedComponent } from "@app/core/components/claim/claim-approved.component";
+// import { ClaimRejectedComponent } from "@app/core/components/claim/claim-rejected.component";
+// import { SpendComponent } from "@app/core/components/spend/spend.component";
+// import { CardComponent } from "@app/core/components/card/card.component";
+// import { TransferFromToComponent } from "@app/core/components/dashboard/transferfromto.component";
+// import { PotCongratsComponent } from "@app/core/components/dashboard/potcongrats.component";
+// import { EmployeeAddTypeSelectionComponent } from "@app/core/components/employee/employee-add-type-selection.component";
+// import { ListComponent } from "@app/core/components/employee/list.component";
+// import { CompanyListComponent } from "./core/components/company/companylist.component";
+// import { DepositComponent } from "./core/components/company/deposit.component";
+// import { TopupApprovalComponent } from "./core/components/company/topup-approval.component";
 
 import { SuperDistributorComponent } from "@app/core/components/super-distributor/super-distributor.component";
 import { AddSuperDistributorComponent } from "@app/core/components/super-distributor/add-super-distributor.component";
@@ -73,6 +73,8 @@ import { VerifyEmailComponent } from "@app/core/components/login/verify-email/ve
 import { UserAccountComponent } from "@app/core/components/user-account/user-account.component";
 import { EditAccountComponent } from "@app/core/components/user-account/edit-account.component";
 import { LoyaltyComponent } from "@app/core/components/loyalty/loyalty.component";
+import { CommissionsComponent } from "@app/core/components/commissions/commissions.component";
+
 
 
 
@@ -170,6 +172,11 @@ const routes: Routes = [
   {
     path: "loyalty",
     component: LoyaltyComponent,
+    data: { menuType: menuType.normal }
+  },
+  {
+    path: "commissions",
+    component: CommissionsComponent,
     data: { menuType: menuType.normal }
   },
   {

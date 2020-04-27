@@ -6,6 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./monthly-transactions.component.scss']
 })
 export class MonthlyTransactionsComponent implements OnInit {
+  searchText = "";
 
   constructor() { }
 

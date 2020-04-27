@@ -69,8 +69,7 @@ export class WalletLoadRequestComponent implements OnInit, OnDestroy {
   settledClaims: any = 0;
   approvedCounts: any = 0;
   companyTranscations: any;
-  balanceCards: InfoCards[] = [];
-  mockCards: InfoCards[] = [];
+  balanceCards: InfoCards[] = []; 
   claimsData: any;
   pendingClaimsData: any;
   rejectedClaimsData: any;
@@ -189,12 +188,11 @@ export class WalletLoadRequestComponent implements OnInit, OnDestroy {
       this.renderCards();
     });
   }
-  renderCards(): void {
-    this.balanceCards = [];
-    this.mockCards = [
+  renderCards(): void { 
+    this.balanceCards = [
       {
         title: "Pending Requests",
-        text: this.walletLoadRequests.length + " requests",
+        text: "0 requests",
         icon: "more",
         bgClass: "white-bg-card",
         desc: "VIEW DETAILS",
@@ -204,7 +202,7 @@ export class WalletLoadRequestComponent implements OnInit, OnDestroy {
       },
       {
         title: "Approved Requests",
-        text: this.approvedCounts + " requests",
+        text: "0 requests",
         icon: "more",
         bgClass: "white-bg-card",
         desc: "VIEW DETAILS",
@@ -214,7 +212,7 @@ export class WalletLoadRequestComponent implements OnInit, OnDestroy {
       },
       {
         title: "Requests Settled",
-        text: this.currencyPipe.transform(this.settledClaims, "₹"),
+        text: "₹",
         icon: "more",
         bgClass: "white-bg-card",
         desc: "VIEW DETAILS",
@@ -222,21 +220,17 @@ export class WalletLoadRequestComponent implements OnInit, OnDestroy {
         type: InfoType.amount,
         showDetail: false,
       },
-    ];
-
-    this.balanceCards.push(
-      ...this.mockCards
-      //     {
-      //   title: "Enviar Account Balance",
-      //   text: this.currencyPipe.transform(this.companyBalance, "₹"),
-      //   icon: "more",
-      //   bgClass: "enviar-account-balance",
-      //   desc: "TOP UP",
-      //   routerLink: ["/", "wallet-top-up"],
-      //   type: InfoType.amount,
-      //   showDetail: false,
-      // }
-    );
+      {
+        title: "Enviar Account Balance",
+        text: "₹",
+        icon: "more",
+        bgClass: "enviar-account-balance",
+        desc: "TOP UP",
+        routerLink: ["/", "wallet-top-up"],
+        type: InfoType.amount,
+        showDetail: true,
+        }
+    ]; 
   }
 
   //   getStatusText(status: string): string {
