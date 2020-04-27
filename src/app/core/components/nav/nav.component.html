@@ -109,15 +109,7 @@
           nzOpen
           nzIcon="user"
           [routerLink]="['/', 'dashboard']"
-          *ngIf="
-            [
-              'master',
-              'admin',
-              'distributor',
-              'superdistributor',
-              'retailer'
-            ].includes(userRole)
-          "
+          *ngIf="showMenuForUser('dashboard')"
         >
           <i nz-icon nzType="dashboard" nzTheme="outline"></i>
           Dashboard
@@ -127,7 +119,7 @@
           nzOpen
           nzIcon="user"
           [routerLink]="['/', 'super-distributor']"
-          *ngIf="['master', 'admin'].includes(userRole)"
+          *ngIf="showMenuForUser('superDistributor')"
         >
           <i nz-icon nzType="global" nzTheme="outline"></i>
           Super Distributor
@@ -137,7 +129,7 @@
           nzOpen
           nzIcon="user"
           [routerLink]="['/', 'distributor']"
-          *ngIf="['master', 'admin', 'superdistributor'].includes(userRole)"
+          *ngIf="showMenuForUser('distributor')"
         >
           <i nz-icon nzType="deployment-unit" nzTheme="outline"></i>
           Distributor
@@ -147,11 +139,7 @@
           nzOpen
           nzIcon="user"
           [routerLink]="['/', 'retailer']"
-          *ngIf="
-            ['master', 'admin', 'distributor', 'superdistributor'].includes(
-              userRole
-            )
-          "
+          *ngIf="showMenuForUser('retailer')"
         >
           <i nz-icon nzType="user" nzTheme="outline"></i> Retailer
         </li>
@@ -159,15 +147,7 @@
           nz-menu-item
           nzOpen
           [routerLink]="['/', 'ledgers']"
-          *ngIf="
-            [
-              'master',
-              'admin',
-              'distributor',
-              'superdistributor',
-              'retailer'
-            ].includes(userRole)
-          "
+          *ngIf="showMenuForUser('ledgers')"
         >
           <i nz-icon nzType="file" nzTheme="outline"></i> Ledgers
         </li>
@@ -175,15 +155,7 @@
           nz-menu-item
           nzOpen
           [routerLink]="['/', 'earnings']"
-          *ngIf="
-            [
-              'master',
-              'admin',
-              'distributor',
-              'superdistributor',
-              'retailer'
-            ].includes(userRole)
-          "
+          *ngIf="showMenuForUser('earnings')"
         >
           <i nz-icon nzType="dollar" nzTheme="outline"></i> Earnings
         </li>
@@ -191,15 +163,7 @@
           nz-menu-item
           nzOpen
           [routerLink]="['/', 'transactions']"
-          *ngIf="
-            [
-              'master',
-              'admin',
-              'distributor',
-              'superdistributor',
-              'retailer'
-            ].includes(userRole)
-          "
+          *ngIf="showMenuForUser('transactions')"
         >
           <i nz-icon nzType="calendar" nzTheme="outline"></i>
           Transactions
@@ -208,11 +172,7 @@
           nz-menu-item
           nzOpen
           [routerLink]="['/', 'wallet-load-request']"
-          *ngIf="
-            ['master', 'admin', 'distributor', 'superdistributor'].includes(
-              userRole
-            )
-          "
+          *ngIf="showMenuForUser('walletLoadRequest')"
         >
           <i nz-icon nzType="interaction" nzTheme="outline"></i>
           Wallet Load Request
@@ -221,29 +181,25 @@
           nz-menu-item
           nzOpen
           [routerLink]="['/', 'wallet-top-up']"
-          *ngIf="
-            ['admin', 'distributor', 'superdistributor', 'retailer'].includes(
-              userRole
-            )
-          "
+          *ngIf="showMenuForUser('walletTopUp')"
         >
           <img
             src="assets/images/rupay-add.png"
             style="width: 20px;"
           />&nbsp;&nbsp; Wallet Top Up
         </li>
-        <li
+        <!-- <li
           nz-menu-item
           nzOpen
           [routerLink]="['/', 'payments']"
           *ngIf="['retailer'].includes(userRole)"
         >
           <i nz-icon nzType="swap" nzTheme="outline"></i> Payments
-        </li>
+        </li> -->
       </ul>
     </nz-sider>
 
-    <nz-sider
+    <!-- <nz-sider
       nzWidth="231px"
       nzTheme="light"
       nzCollapsible
@@ -297,7 +253,7 @@
           <i nz-icon nzType="fund"></i> Users and Roles
         </li>
       </ul>
-    </nz-sider>
+    </nz-sider> -->
     <nz-layout class="inner-layout">
       <nz-content>
         <router-outlet></router-outlet>

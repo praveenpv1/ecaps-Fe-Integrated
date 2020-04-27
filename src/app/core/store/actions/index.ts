@@ -7,7 +7,6 @@ export const CHILD_USERS_LIST = "[USER] Get Users List";
 export const GET_CHILD_USER_INFO = "[GET_CHILD_USER_INFO] Get Child User ";
 export const UPDATE_CHILD_USER_INFO =
   "[UPDATE_CHILD_USER_INFO] Update Child User ";
-export const GET_FUND_LOADS = "[GET_FUND_LOADS] Get Fund Load Requests ";
 
 export const VERIFY_EMAIL = "[USER] Verify Email";
 export const SET_PASSWORD = "[USER] Set Password";
@@ -88,4 +87,8 @@ export const UPDATE_COMPANY_TXNS_CLAIMREVIEW =
   "[UPDATE_COMPANY_TXNS_CLAIMREVIEW]";
 export const GET_CA_TOKEN = "[GET_CA_TOKEN]";
 
+// Fund Load
+
 export const FUND_LOAD = "[FUND_LOAD]";
+export const GET_FUND_LOADS = "[GET_FUND_LOADS] Get Fund Load Requests ";
+export const APPROVE_FUND_LOADS = "[APPROVE_FUND_LOADS] Approve Fund Load ";

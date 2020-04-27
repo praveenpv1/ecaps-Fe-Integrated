@@ -9,6 +9,7 @@ import {
   GET_CLAIMS_TXNS,
   GET_EMPLOYEES,
   GET_FUND_LOADS,
+  APPROVE_FUND_LOADS,
 } from "@app/core/store/actions";
 import * as _ from "lodash";
 import { environment } from "@env/environment";
@@ -18,7 +19,7 @@ import {
   catchCommonData,
   successCommonData,
 } from "@app/core/store/commonstoredata";
-import { getStatusText } from "@app/core/services/utils";
+// import { getStatusText } from "@app/core/services/utils";
 
 export interface Tile {
   color: string;
@@ -77,6 +78,7 @@ export class WalletLoadRequestComponent implements OnInit, OnDestroy {
   employees: any;
   walletLoadRequests: any = [];
   initialState: any = "";
+  userId: any = "";
   constructor(
     private cR: CompanyReducers,
     private ds: DataStore,
@@ -86,6 +88,7 @@ export class WalletLoadRequestComponent implements OnInit, OnDestroy {
     private fR: FundReducers
   ) {
     this.initialState = ds.dataStore$.getValue();
+    this.userId = _.get(this.initialState, "userInfo._id", null);
     // this.subscribers = this.ds.dataStore$.subscribe((res) => {
     //   this.companyBalance = _.get(res.company.details, "data.value", 0);
     //   this.balanceCards = [];
@@ -177,7 +180,7 @@ export class WalletLoadRequestComponent implements OnInit, OnDestroy {
 
     this.fR.fundReducer({
       type: GET_FUND_LOADS,
-      payload: { id: _.get(this.initialState, "userInfo._id", null) },
+      payload: { id: this.userId },
     });
     this.subscribers = this.ds.dataStore$.subscribe((data) => {
       if (data.fundLoadRequests) {
@@ -236,20 +239,28 @@ export class WalletLoadRequestComponent implements OnInit, OnDestroy {
     );
   }
 
-  getStatusText(status: string): string {
-    return getStatusText(status);
-  }
-  approveClaims(id: string): void {
-    // this.cR.cardReducer({
-    //   type: UPDATE_COMPANY_TXNS,
-    //   payload: { txnid: id, approval_status: "internally_approved" }
-    // });
-  }
+  //   getStatusText(status: string): string {
+  //     return getStatusText(status);
+  //   }
 
-  rejectClaims(id: string): void {
-    // this.cR.cardReducer({
-    //   type: UPDATE_COMPANY_TXNS,
-    //   payload: { txnid: id, approval_status: "disapproved" }
-    // });
+  //   approveClaims(id: string): void {
+  // this.cR.cardReducer({
+  //   type: UPDATE_COMPANY_TXNS,
+  //   payload: { txnid: id, approval_status: "internally_approved" }
+  // });
+  //   }
+
+  //   rejectClaims(id: string): void {
+  // this.cR.cardReducer({
+  //   type: UPDATE_COMPANY_TXNS,
+  //   payload: { txnid: id, approval_status: "disapproved" }
+  // });
+  //   }
+  approveLoadRequest(data) {
+    console.log(data);
+    this.fR.fundReducer({
+      type: APPROVE_FUND_LOADS,
+      payload: { requestId: data._id, userId: this.userId },
+    });
   }
 }
