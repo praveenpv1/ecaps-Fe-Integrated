@@ -240,6 +240,11 @@ export class NavComponent implements OnInit, OnDestroy {
           "superdistributor",
           "retailer",
         ].includes(this.userRole);
+      case "loyalty":
+        return [
+          "master" 
+        ].includes(this.userRole);
+      
       case "transactions":
         return [
           "master",

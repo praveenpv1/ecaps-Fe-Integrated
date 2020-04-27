@@ -162,6 +162,14 @@
         <li
           nz-menu-item
           nzOpen
+          [routerLink]="['/', 'loyalty']"
+          *ngIf="showMenuForUser('loyalty')"
+        >
+        <i nz-icon nzType="crown" nzTheme="outline"></i> Loyalty
+        </li>
+        <li
+          nz-menu-item
+          nzOpen
           [routerLink]="['/', 'transactions']"
           *ngIf="showMenuForUser('transactions')"
         >
