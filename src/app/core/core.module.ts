@@ -79,6 +79,7 @@ import { VerifyEmailComponent } from "./components/login/verify-email/verify-ema
 import { SetPasswordComponent } from './components/login/set-password/set-password.component';
 import { UserAccountComponent } from './components/user-account/user-account.component';
 import { EditAccountComponent } from './components/user-account/edit-account.component';
+import { LoyaltyComponent } from './components/loyalty/loyalty.component';
 
 
 //
@@ -257,7 +258,8 @@ const icons: IconDefinition[] = Object.keys(antDesignIcons).map(
     VerifyEmailComponent,
     SetPasswordComponent,
     UserAccountComponent, 
-    EditAccountComponent
+    EditAccountComponent, 
+    LoyaltyComponent
   ],
   exports: [
     PlaceholderComponent,
@@ -326,6 +328,7 @@ const icons: IconDefinition[] = Object.keys(antDesignIcons).map(
     VerifyEmailComponent,
     SetPasswordComponent,
     UserAccountComponent, 
+    LoyaltyComponent
   ]
 })
 export class CoreModule {
