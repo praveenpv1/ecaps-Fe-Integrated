@@ -204,6 +204,69 @@ export class NavComponent implements OnInit, OnDestroy {
     }).messageId;
   }
 
+  showMenuForUser(menuName) {
+    const allUsers = [
+      "master",
+      "admin",
+      "distributor",
+      "superdistributor",
+      "retailer",
+    ];
+    switch (menuName) {
+      case "dashboard":
+        return allUsers.includes(this.userRole);
+      case "superDistributor":
+        return ["admin", "master"].includes(this.userRole);
+
+      case "distributor":
+        return ["admin", "master", "superdistributor"].includes(this.userRole);
+      case "retailer":
+        return ["admin", "master", "superdistributor", "distributor"].includes(
+          this.userRole
+        );
+      case "ledgers":
+        return [
+          "master",
+          "admin",
+          "distributor",
+          "superdistributor",
+          "retailer",
+        ].includes(this.userRole);
+      case "earnings":
+        return [
+          "master",
+          "admin",
+          "distributor",
+          "superdistributor",
+          "retailer",
+        ].includes(this.userRole);
+      case "transactions":
+        return [
+          "master",
+          "admin",
+          "distributor",
+          "superdistributor",
+          "retailer",
+        ].includes(this.userRole);
+      case "walletLoadRequest":
+        return [
+          "master",
+          "admin",
+          "distributor",
+          "superdistributor",
+          "retailer",
+        ].includes(this.userRole);
+      case "walletTopUp":
+        return [
+          "master",
+          "admin",
+          "distributor",
+          "superdistributor",
+          "retailer",
+        ].includes(this.userRole);
+    }
+  }
+
   async loadNavListItems() {
     this.myWorkRoutes = await this.configService.get("my-work-routes");
 

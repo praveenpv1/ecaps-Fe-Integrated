@@ -1,62 +1,71 @@
 <div nz-row>
-    <div nz-col nzSm="24" nzMd="24" nzLg="24" nzXl="24">
-      <h3 class="primary-color-font">Wallet Load</h3>
-      <p>Manage your wallet load request</p>
-    </div>
+  <div nz-col nzSm="24" nzMd="24" nzLg="24" nzXl="24">
+    <h3 class="primary-color-font">Wallet Load</h3>
+    <p>Manage your wallet load request</p>
   </div>
-  <div nz-row>
-    <div
-      nz-col
-      nzSm="24"
-      nzMd="24"
-      nzLg="6"
-      nzXl="6"
-      *ngFor="let item of balanceCards"
+</div>
+<div nz-row>
+  <div
+    nz-col
+    nzSm="24"
+    nzMd="24"
+    nzLg="6"
+    nzXl="6"
+    *ngFor="let item of balanceCards"
+  >
+    <nz-card
+      class="primary-color-border-card"
+      [ngClass]="item.bgClass"
+      [routerLink]="item.routerLink"
     >
-      <nz-card
-        class="primary-color-border-card"
-        [ngClass]="item.bgClass"
-        [routerLink]="item.routerLink"
-      >
-        <p>{{ item.title }}</p>
-        <h1>{{ item.text }}</h1>
-        <p *ngIf="item.showDetail">
-          <span>
-            {{ item.desc }}
-            &nbsp;<i nz-icon nzType="arrow-right" nzTheme="outline"></i>
-          </span>
-        </p>
-        <div *ngIf="!item.showDetail" style="height: 40px;"></div>
-      </nz-card>
-    </div>
+      <p>{{ item.title }}</p>
+      <h1>{{ item.text }}</h1>
+      <p *ngIf="item.showDetail">
+        <span>
+          {{ item.desc }}
+          &nbsp;<i nz-icon nzType="arrow-right" nzTheme="outline"></i>
+        </span>
+      </p>
+      <div *ngIf="!item.showDetail" style="height: 40px;"></div>
+    </nz-card>
   </div>
-  <br />
-  <div nz-row>
-    <div nz-col nzSm="24" nzMd="24" nzLg="24" nzXl="24">
-      <nz-table
-        #nzTable
-        [nzData]="walletLoadRequests"
-        [nzScroll]="{ y: '240px' }"
-      >
-        <thead>
-          <tr>
-            <th nzWidth="220px">From</th>
-            <th nzWidth="220px">To</th>
-            <th nzWidth="120px">Amount</th>
-            <th nzWidth="180px">Status</th> 
-            <th>Actions</th> 
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let data of nzTable.data | filter: searchText">
-            <td>{{ data.fl_from_uid }}</td>
-            <td>{{ data.fl_to_uid }}</td>
-            <td>{{ data.fl_req_amount }}</td>
-            <td>{{ data.fl_status }}</td>
-            <td><button nz-button nzSize="small" nzType="primary" style="box-shadow: none !important;"
-              >Approve</button></td>
-          </tr>
-        </tbody>
-      </nz-table>
-    </div>
+</div>
+<br />
+<div nz-row>
+  <div nz-col nzSm="24" nzMd="24" nzLg="24" nzXl="24">
+    <nz-table
+      #nzTable
+      [nzData]="walletLoadRequests"
+      [nzScroll]="{ y: '240px' }"
+    >
+      <thead>
+        <tr>
+          <th nzWidth="220px">From</th>
+          <th nzWidth="220px">To</th>
+          <th nzWidth="120px">Amount</th>
+          <th nzWidth="180px">Status</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let data of nzTable.data | filter: searchText">
+          <td>{{ data.fl_from_uid }}</td>
+          <td>{{ data.fl_to_uid }}</td>
+          <td>{{ data.fl_req_amount }}</td>
+          <td>{{ data.fl_status }}</td>
+          <td>
+            <button
+              nz-button
+              nzSize="small"
+              nzType="primary"
+              style="box-shadow: none !important;"
+              (click)="approveLoadRequest(data)"
+            >
+              Approve
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </nz-table>
   </div>
+</div>
