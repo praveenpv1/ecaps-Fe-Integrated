@@ -72,6 +72,8 @@ import { SetPasswordComponent } from "@app/core/components/login/set-password/se
 import { VerifyEmailComponent } from "@app/core/components/login/verify-email/verify-email.component";
 import { UserAccountComponent } from "@app/core/components/user-account/user-account.component";
 import { EditAccountComponent } from "@app/core/components/user-account/edit-account.component";
+import { LoyaltyComponent } from "@app/core/components/loyalty/loyalty.component";
+
 
 
 export enum menuType {
@@ -163,6 +165,11 @@ const routes: Routes = [
   {
     path: "earnings",
     component: EarningsComponent,
+    data: { menuType: menuType.normal }
+  },
+  {
+    path: "loyalty",
+    component: LoyaltyComponent,
     data: { menuType: menuType.normal }
   },
   {

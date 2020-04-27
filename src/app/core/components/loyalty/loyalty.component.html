@@ -1,0 +1,56 @@
+<div nz-row>
+    <div nz-col nzSm="24" nzMd="24" nzLg="24" nzXl="24">
+      <h3 class="primary-color-font">Loyalty</h3>
+      <p>Manage Loyalty</p>
+      <br>
+    </div>
+</div>
+<div nz-row>
+    <div nz-col nzSm="24" nzMd="24" nzLg="24" nzXl="24">
+      <nz-table
+        #nzTable
+        [nzData]="childLists"
+        [nzScroll]="{ y: '240px' }"
+        >
+            <thead>
+            <tr>
+                <th nzWidth="220px">Name</th>
+                <th nzWidth="220px">Company</th>
+                <th nzWidth="120px">Role</th>
+                <th nzWidth="180px">Phone Number</th> 
+                <th>Actions</th> 
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let data of nzTable.data | filter: searchText">
+                <td>{{ data.firstname }} {{ data.lastname }}</td>
+                <td>{{ data.company_name }}</td>
+                <td>{{ data.role }}</td>
+                <td>{{ data.phone }}</td>
+                <td><button 
+                    nz-button 
+                    nzSize="small" 
+                    nzType="primary" 
+                    style="box-shadow: none !important;"
+                    (click)="showModal()"
+                >Set Loyalty</button>
+                </td>
+            </tr>
+            </tbody>
+      </nz-table>
+      <nz-modal
+        [(nzVisible)]="isVisible"
+        nzTitle=" Set Loyalty"
+        (nzOnCancel)="handleCancel()"
+        (nzOnOk)="handleOk()"
+        [nzOkLoading]="isOkLoading"
+        >
+        <nz-radio-group [(ngModel)]="loyaltyValue">
+            <label nz-radio nzValue="enviar">Basic</label>
+            <label nz-radio nzValue="gold">Gold</label>
+            <label nz-radio nzValue="silver">Silver</label>
+            <label nz-radio nzValue="bronze">Bronze</label>
+        </nz-radio-group>
+      </nz-modal>
+    </div>
+  </div>
