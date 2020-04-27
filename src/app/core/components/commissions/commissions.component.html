@@ -1,0 +1,31 @@
+<div nz-row>
+    <div nz-col nzSm="24" nzMd="24" nzLg="24" nzXl="24">
+        <h3 class="primary-color-font">Commissions</h3>
+        <p>View Commissions rate here</p> 
+    </div>
+</div>
+<br>
+<div nz-row>
+    <div nz-col nzSm="24" nzMd="24" nzLg="24" nzXl="24">
+      <nz-table
+        #nzTable
+        [nzData]="commissionsList"
+        [nzScroll]="{ y: '240px' }"
+        >
+            <thead>
+            <tr>
+                <th nzWidth="220px">Type</th>
+                <th nzWidth="220px">Operator</th>
+                <th nzWidth="120px">slab</th> 
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let data of nzTable.data">
+                <td>{{ data.type }}</td>
+                <td>{{ data.operator }}</td>
+                <td>{{ data.slab }}</td> 
+            </tr>
+            </tbody>
+      </nz-table>
+    </div>
+</div> 

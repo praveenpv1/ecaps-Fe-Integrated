@@ -2,23 +2,60 @@
   <div nz-col nzSm="24" nzMd="24" nzLg="24" nzXl="24"> 
     <h3  class="primary-color-font">Transactions</h3>
      <p>View and Manage your Transactions here.</p> 
-        <nz-table #basicTable [nzData]="listOfData">
-            <thead>
-              <tr>
-                <th>Date</th>
-                <th>Type</th>
-                <th>Amount</th>
-                <th>Status</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr *ngFor="let data of basicTable.data">
-                <td>{{ data.date }}</td>
-                <td>{{ data.type }}</td>
-                <td>{{ data.amount }}</td>
-                <td></td>
-              </tr>
-            </tbody>
-          </nz-table>
     </div>
+</div>
+<div nz-row> 
+  <div nz-col nzSm="24" nzMd="24" nzLg="22" nzXl="22">
+    <nz-input-group
+      class="margin-5px"
+      [nzSuffix]="suffixIconSearch"
+      style="width: 100% ;max-width :400px"
+    >
+      <input
+        type="text"
+        [(ngModel)]="searchText"
+        nz-input
+        placeholder="Search"
+      />
+    </nz-input-group>
+    <ng-template #suffixIconSearch>
+      <i nz-icon nzType="search"></i>
+    </ng-template>
+  </div>
+  <div nz-col nzSm="24" nzMd="24" nzLg="2" nzXl="2">
+    <!-- <button class="margin-5px" nz-button nz-dropdown [nzDropdownMenu]="menu0">
+          Sort
+          <i nz-icon nzType="down"></i>
+        </button>
+        <nz-dropdown-menu #menu0="nzDropdownMenu">
+          <ul nz-menu>
+            <li nz-menu-item>By ??</li>
+            <li nz-menu-item>By ??</li>
+            <li nz-menu-item>By ??</li>
+          </ul>
+        </nz-dropdown-menu> -->
+  </div>
+</div>
+<br />
+<div nz-row>
+  <div nz-col nzSm="24" nzMd="24" nzLg="24" nzXl="24">      
+    <nz-table #basicTable [nzData]="listOfData">
+      <thead>
+        <tr>
+          <th>Date</th>
+          <th>Type</th>
+          <th>Amount</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let data of basicTable.data | filter: searchText">
+          <td>{{ data.date }}</td>
+          <td>{{ data.type }}</td>
+          <td>{{ data.amount }}</td>
+          <td></td>
+        </tr>
+      </tbody>
+    </nz-table>
+  </div>
 </div>

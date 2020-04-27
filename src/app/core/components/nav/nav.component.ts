@@ -216,12 +216,23 @@ export class NavComponent implements OnInit, OnDestroy {
       case "dashboard":
         return allUsers.includes(this.userRole);
       case "superDistributor":
-        return ["admin", "master"].includes(this.userRole);
+        return [
+          "admin", 
+          "master"
+        ].includes(this.userRole);
 
       case "distributor":
-        return ["admin", "master", "superdistributor"].includes(this.userRole);
+        return [
+          "admin", 
+          "master", 
+          "superdistributor"
+      ].includes(this.userRole);
       case "retailer":
-        return ["admin", "master", "superdistributor", "distributor"].includes(
+        return ["admin", 
+          "master", 
+          "superdistributor", 
+          "distributor"
+      ].includes(
           this.userRole
         );
       case "ledgers":
@@ -233,6 +244,14 @@ export class NavComponent implements OnInit, OnDestroy {
           "retailer",
         ].includes(this.userRole);
       case "earnings":
+        return [
+          "master",
+          "admin",
+          "distributor",
+          "superdistributor",
+          "retailer",
+        ].includes(this.userRole);
+      case "commissions":
         return [
           "master",
           "admin",

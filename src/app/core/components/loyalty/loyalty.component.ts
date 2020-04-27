@@ -8,6 +8,7 @@ import { Component, OnInit } from '@angular/core';
 export class LoyaltyComponent implements OnInit {  
   isVisible = false;
   isOkLoading = false;
+  searchText = "";
   loyaltyValue = 'enviar';
   childLists = [
     {

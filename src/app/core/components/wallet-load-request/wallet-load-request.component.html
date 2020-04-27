@@ -1,7 +1,7 @@
 <div nz-row>
   <div nz-col nzSm="24" nzMd="24" nzLg="24" nzXl="24">
     <h3 class="primary-color-font">Wallet Load</h3>
-    <p>Manage your wallet load request</p>
+    <p>Manage your Wallet Load Request</p>
   </div>
 </div>
 <div nz-row>
@@ -28,6 +28,39 @@
       </p>
       <div *ngIf="!item.showDetail" style="height: 40px;"></div>
     </nz-card>
+  </div>
+</div>
+<br>
+<div nz-row> 
+  <div nz-col nzSm="24" nzMd="24" nzLg="22" nzXl="22">
+    <nz-input-group
+      class="margin-5px"
+      [nzSuffix]="suffixIconSearch"
+      style="width: 100% ;max-width :400px"
+    >
+      <input
+        type="text"
+        [(ngModel)]="searchText"
+        nz-input
+        placeholder="Search"
+      />
+    </nz-input-group>
+    <ng-template #suffixIconSearch>
+      <i nz-icon nzType="search"></i>
+    </ng-template>
+  </div>
+  <div nz-col nzSm="24" nzMd="24" nzLg="2" nzXl="2">
+    <!-- <button class="margin-5px" nz-button nz-dropdown [nzDropdownMenu]="menu0">
+          Sort
+          <i nz-icon nzType="down"></i>
+        </button>
+        <nz-dropdown-menu #menu0="nzDropdownMenu">
+          <ul nz-menu>
+            <li nz-menu-item>By ??</li>
+            <li nz-menu-item>By ??</li>
+            <li nz-menu-item>By ??</li>
+          </ul>
+        </nz-dropdown-menu> -->
   </div>
 </div>
 <br />
