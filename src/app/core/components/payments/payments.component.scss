@@ -1,0 +1,26 @@
+.mat-card-round-big {
+    height: 70px;
+    width: 70px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    object-fit: cover;
+    background-color: white;
+    display: flex; /* establish flex container */
+    flex-direction: column; /* make main axis vertical */
+    justify-content: center; /* center items vertically, in this case */
+    align-items: center;
+  }
+  
+  .mat-card-round-small {
+    height: 60px;
+    width: 60px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    object-fit: cover;
+    background-color: #f4f4f4;
+    display: flex; /* establish flex container */
+    flex-direction: column; /* make main axis vertical */
+    justify-content: center; /* center items vertically, in this case */
+    align-items: center;
+  }
+  

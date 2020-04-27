@@ -250,6 +250,13 @@ $sidenav-width: 320px; // 240px;
   }
 }
 
+.payment-card {
+  background: #2a0055;
+  background: -webkit-linear-gradient(135deg, #2a0055 0%, #292163 100%);  
+  background: linear-gradient(135deg, #2a0055 0%, #292163 100%);
+  color: white;
+}
+
 .ant-layout-header {
   @include themify($themes) {
     -webkit-box-shadow: themed("layoutShadow") !important;
@@ -369,7 +376,7 @@ p {
   flex-direction: row !important;
 }
 
-.inline-block-element{
+.inline-block-element {
   display: inline-block;
   margin-left: auto;
   margin-right: auto;
