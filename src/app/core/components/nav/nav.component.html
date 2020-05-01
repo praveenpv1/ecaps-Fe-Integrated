@@ -111,8 +111,8 @@
           [routerLink]="['/', 'dashboard']"
           *ngIf="showMenuForUser('dashboard')"
         >
-        <i nz-icon nzType="dashboard" nzTheme="outline"></i>
-        Dashboard
+          <i nz-icon nzType="dashboard" nzTheme="outline"></i>
+          Dashboard
         </li>
         <li
           nz-menu-item
@@ -121,8 +121,8 @@
           [routerLink]="['/', 'super-distributor']"
           *ngIf="showMenuForUser('superDistributor')"
         >
-        <i nz-icon nzType="global" nzTheme="outline"></i>
-        Super Distributor
+          <i nz-icon nzType="global" nzTheme="outline"></i>
+          Super Distributor
         </li>
         <li
           nz-menu-item
@@ -131,8 +131,8 @@
           [routerLink]="['/', 'distributor']"
           *ngIf="showMenuForUser('distributor')"
         >
-        <i nz-icon nzType="deployment-unit" nzTheme="outline"></i>
-        Distributor
+          <i nz-icon nzType="deployment-unit" nzTheme="outline"></i>
+          Distributor
         </li>
         <li
           nz-menu-item
@@ -141,8 +141,8 @@
           [routerLink]="['/', 'retailer']"
           *ngIf="showMenuForUser('retailer')"
         >
-        <i nz-icon nzType="user" nzTheme="outline"></i> 
-        Retailer
+          <i nz-icon nzType="user" nzTheme="outline"></i>
+          Retailer
         </li>
         <li
           nz-menu-item
@@ -150,8 +150,8 @@
           [routerLink]="['/', 'ledgers']"
           *ngIf="showMenuForUser('ledgers')"
         >
-        <i nz-icon nzType="file" nzTheme="outline"></i> 
-        Ledgers
+          <i nz-icon nzType="file" nzTheme="outline"></i>
+          Ledgers
         </li>
         <li
           nz-menu-item
@@ -159,8 +159,8 @@
           [routerLink]="['/', 'earnings']"
           *ngIf="showMenuForUser('earnings')"
         >
-        <i nz-icon nzType="dollar" nzTheme="outline"></i> 
-        Earnings
+          <i nz-icon nzType="dollar" nzTheme="outline"></i>
+          Earnings
         </li>
         <li
           nz-menu-item
@@ -168,8 +168,8 @@
           [routerLink]="['/', 'commissions']"
           *ngIf="showMenuForUser('commissions')"
         >
-        <i nz-icon nzType="dollar" nzTheme="outline"></i> 
-        Commissions
+          <i nz-icon nzType="dollar" nzTheme="outline"></i>
+          Commissions
         </li>
         <li
           nz-menu-item
@@ -177,8 +177,8 @@
           [routerLink]="['/', 'loyalty']"
           *ngIf="showMenuForUser('loyalty')"
         >
-        <i nz-icon nzType="crown" nzTheme="outline"></i> 
-        Loyalty
+          <i nz-icon nzType="crown" nzTheme="outline"></i>
+          Loyalty
         </li>
         <li
           nz-menu-item
@@ -186,8 +186,17 @@
           [routerLink]="['/', 'transactions']"
           *ngIf="showMenuForUser('transactions')"
         >
-        <i nz-icon nzType="calendar" nzTheme="outline"></i>
-        Transactions
+          <i nz-icon nzType="calendar" nzTheme="outline"></i>
+          Transactions
+        </li>
+        <li
+          nz-menu-item
+          nzOpen
+          [routerLink]="['/', 'margins']"
+          *ngIf="showMenuForUser('margins')"
+        >
+          <i nz-icon nzType="sliders" nzTheme="outline"></i>
+          Margins
         </li>
         <li
           nz-menu-item
@@ -195,8 +204,8 @@
           [routerLink]="['/', 'wallet-load-request']"
           *ngIf="showMenuForUser('walletLoadRequest')"
         >
-        <i nz-icon nzType="interaction" nzTheme="outline"></i>
-        Wallet Load Request
+          <i nz-icon nzType="interaction" nzTheme="outline"></i>
+          Wallet Load Request
         </li>
         <li
           nz-menu-item
@@ -204,11 +213,8 @@
           [routerLink]="['/', 'wallet-top-up']"
           *ngIf="showMenuForUser('walletTopUp')"
         >
-        <img
-          src="assets/images/rupay-add.png"
-          style="width: 20px;"
-        />
-        &nbsp;&nbsp; Wallet Top Up
+          <img src="assets/images/rupay-add.png" style="width: 20px;" />
+          &nbsp;&nbsp; Wallet Top Up
         </li>
         <!-- <li
           nz-menu-item

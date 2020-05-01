@@ -7,7 +7,7 @@ import { ServiceWorkerModule } from "@angular/service-worker";
 import {
   TranslateLoader,
   TranslateModule,
-  TranslateService
+  TranslateService,
 } from "@ngx-translate/core";
 import { TranslateHttpLoader } from "@ngx-translate/http-loader";
 import { FlexLayoutModule } from "@angular/flex-layout";
@@ -60,28 +60,27 @@ import { SpendComponent } from "./components/spend/spend.component";
 import { CardComponent } from "./components/card/card.component";
 import { NavigationBarComponent } from "./components/navigation-bar/navigation-bar.component";
 import { NavComponent } from "./components/nav/nav.component";
-import { SignInComponent } from "./components/login/sign-in/signin.component"; 
+import { SignInComponent } from "./components/login/sign-in/signin.component";
 import { TopupApprovalComponent } from "./components/company/topup-approval.component";
-import { DistributorComponent } from './components/distributor/distributor.component';
-import { SuperDistributorComponent } from './components/super-distributor/super-distributor.component';
-import { AddSuperDistributorComponent } from './components/super-distributor/add-super-distributor.component';
-import { AddDistributorComponent } from './components/distributor/add-distributor.component'; 
-import { RetailerComponent } from './components/retailer/retailer.component';
-import { AddRetailerComponent } from './components/retailer/add-retailer.component';
-import { LedgersComponent } from './components/ledgers/ledgers.component';
-import { EarningsComponent } from './components/earnings/earnings.component';
-import { MonthlyTransactionsComponent } from './components/monthly-transactions/monthly-transactions.component';
-import { WalletLoadRequestComponent } from './components/wallet-load-request/wallet-load-request.component';
-import { WalletTopUpComponent } from './components/wallet-top-up/wallet-top-up.component';
-import { PaymentsComponent } from './components/payments/payments.component';
+import { DistributorComponent } from "./components/distributor/distributor.component";
+import { SuperDistributorComponent } from "./components/super-distributor/super-distributor.component";
+import { AddSuperDistributorComponent } from "./components/super-distributor/add-super-distributor.component";
+import { AddDistributorComponent } from "./components/distributor/add-distributor.component";
+import { RetailerComponent } from "./components/retailer/retailer.component";
+import { AddRetailerComponent } from "./components/retailer/add-retailer.component";
+import { LedgersComponent } from "./components/ledgers/ledgers.component";
+import { EarningsComponent } from "./components/earnings/earnings.component";
+import { TransactionsComponent } from "./components/transactions/transactions.component";
+import { WalletLoadRequestComponent } from "./components/wallet-load-request/wallet-load-request.component";
+import { WalletTopUpComponent } from "./components/wallet-top-up/wallet-top-up.component";
+import { PaymentsComponent } from "./components/payments/payments.component";
 import { ForgotPasswordComponent } from "./components/login/forgot-password/forgot-password.component";
 import { VerifyEmailComponent } from "./components/login/verify-email/verify-email.component";
-import { SetPasswordComponent } from './components/login/set-password/set-password.component';
-import { UserAccountComponent } from './components/user-account/user-account.component';
-import { EditAccountComponent } from './components/user-account/edit-account.component';
-import { CommissionsComponent } from './components/commissions/commissions.component';
-import { LoyaltyComponent } from './components/loyalty/loyalty.component';
-
+import { SetPasswordComponent } from "./components/login/set-password/set-password.component";
+import { UserAccountComponent } from "./components/user-account/user-account.component";
+import { EditAccountComponent } from "./components/user-account/edit-account.component";
+import { CommissionsComponent } from "./components/commissions/commissions.component";
+import { LoyaltyComponent } from "./components/loyalty/loyalty.component";
 
 //
 // koppr Components lib
@@ -93,7 +92,7 @@ import { environment } from "@env/environment";
 import { throwIfAlreadyLoaded } from "./module-import-guard";
 
 // Lazy Loaded Libs -> app.module.ts
-// 
+//
 
 //
 // Utils lib
@@ -123,12 +122,14 @@ import { Ng2SearchPipeModule } from "ng2-search-filter";
 import { DatePipe, CurrencyPipe } from "@angular/common";
 import { NgxSpinnerModule } from "ngx-spinner";
 import { NzTabsModule } from "ng-zorro-antd/tabs";
+import { MarginsComponent } from "./components/margins/margins.component";
+import { AddMarginsComponent } from './components/margins/add-margins/add-margins.component';
 
 const antDesignIcons = AllIcons as {
   [key: string]: IconDefinition;
 };
 const icons: IconDefinition[] = Object.keys(antDesignIcons).map(
-  key => antDesignIcons[key]
+  (key) => antDesignIcons[key]
 );
 
 @NgModule({
@@ -150,7 +151,7 @@ const icons: IconDefinition[] = Object.keys(antDesignIcons).map(
     NzDropDownModule,
     NzSelectModule,
     ServiceWorkerModule.register("ngsw-worker.js", {
-      enabled: environment.production
+      enabled: environment.production,
     }),
     NzLayoutModule,
     NzTableModule,
@@ -163,20 +164,20 @@ const icons: IconDefinition[] = Object.keys(antDesignIcons).map(
       loader: {
         provide: TranslateLoader,
         useFactory: HttpLoaderFactory,
-        deps: [HttpClient]
-      }
+        deps: [HttpClient],
+      },
     }),
     Ng2SearchPipeModule,
     ChartsModule,
     UtilsModule.forRoot(environment),
     NgxSpinnerModule,
-    RouterModule // There is no directive with "exportAs" set to "routerLinkActive ...
+    RouterModule, // There is no directive with "exportAs" set to "routerLinkActive ...
   ],
   providers: [
     { provide: NZ_I18N, useValue: en_US },
     { provide: NZ_ICONS, useValue: icons },
     DatePipe,
-    CurrencyPipe
+    CurrencyPipe,
   ],
   declarations: [
     PlaceholderComponent,
@@ -229,7 +230,7 @@ const icons: IconDefinition[] = Object.keys(antDesignIcons).map(
     NavigationBarComponent,
     NavComponent,
     ViewPotComponent,
-    SignInComponent, 
+    SignInComponent,
     KopprSignUpComponent,
     ModalComponent,
     PayAllowanceComponent,
@@ -244,24 +245,26 @@ const icons: IconDefinition[] = Object.keys(antDesignIcons).map(
     TopupApprovalComponent,
     CompanyListComponent,
     DistributorComponent,
-    AddDistributorComponent, 
+    AddDistributorComponent,
     RetailerComponent,
     AddRetailerComponent,
     LedgersComponent,
     EarningsComponent,
-    MonthlyTransactionsComponent,
+    TransactionsComponent,
     WalletLoadRequestComponent,
     WalletTopUpComponent,
     PaymentsComponent,
     ForgotPasswordComponent,
     SuperDistributorComponent,
-    AddSuperDistributorComponent,    
+    AddSuperDistributorComponent,
     VerifyEmailComponent,
     SetPasswordComponent,
-    UserAccountComponent, 
-    EditAccountComponent, 
-    LoyaltyComponent, 
-    CommissionsComponent
+    UserAccountComponent,
+    EditAccountComponent,
+    LoyaltyComponent,
+    CommissionsComponent,
+    MarginsComponent,
+    AddMarginsComponent,
   ],
   exports: [
     PlaceholderComponent,
@@ -301,7 +304,7 @@ const icons: IconDefinition[] = Object.keys(antDesignIcons).map(
     NavigationBarComponent,
     NavComponent,
     ViewPotComponent,
-    SignInComponent,  
+    SignInComponent,
     KopprSignUpComponent,
     ModalComponent,
     PayAllowanceComponent,
@@ -315,12 +318,12 @@ const icons: IconDefinition[] = Object.keys(antDesignIcons).map(
     TopupApprovalComponent,
     CompanyListComponent,
     DistributorComponent,
-    AddDistributorComponent, 
+    AddDistributorComponent,
     RetailerComponent,
     AddRetailerComponent,
     LedgersComponent,
     EarningsComponent,
-    MonthlyTransactionsComponent,
+    TransactionsComponent,
     WalletLoadRequestComponent,
     WalletTopUpComponent,
     PaymentsComponent,
@@ -329,10 +332,11 @@ const icons: IconDefinition[] = Object.keys(antDesignIcons).map(
     AddSuperDistributorComponent,
     VerifyEmailComponent,
     SetPasswordComponent,
-    UserAccountComponent, 
+    UserAccountComponent,
     LoyaltyComponent,
-    CommissionsComponent
-  ]
+    CommissionsComponent,
+    MarginsComponent,
+  ],
 })
 export class CoreModule {
   constructor(

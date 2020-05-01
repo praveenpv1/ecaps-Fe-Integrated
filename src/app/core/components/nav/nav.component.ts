@@ -149,6 +149,7 @@ export class NavComponent implements OnInit, OnDestroy {
 
       this.showUserName();
       this.checkRole();
+      this.setTheme(data.userExtraDetails);
     });
   }
 
@@ -205,6 +206,8 @@ export class NavComponent implements OnInit, OnDestroy {
   }
 
   showMenuForUser(menuName) {
+    const initialState = this._dataStore.dataStore$.getValue();
+
     const allUsers = [
       "master",
       "admin",
@@ -212,83 +215,135 @@ export class NavComponent implements OnInit, OnDestroy {
       "superdistributor",
       "retailer",
     ];
-    switch (menuName) {
-      case "dashboard":
-        return allUsers.includes(this.userRole);
-      case "superDistributor":
-        return [
-          "admin", 
-          "master"
-        ].includes(this.userRole);
+    const masterRoles = ["main", "marketing", "kyc", "accounting"];
+    const masterRole = initialState.userExtraDetails.pan;
 
-      case "distributor":
-        return [
-          "admin", 
-          "master", 
-          "superdistributor"
-      ].includes(this.userRole);
-      case "retailer":
-        return ["admin", 
-          "master", 
-          "superdistributor", 
-          "distributor"
-      ].includes(
-          this.userRole
-        );
-      case "ledgers":
-        return [
-          "master",
-          "admin",
-          "distributor",
-          "superdistributor",
-          "retailer",
-        ].includes(this.userRole);
-      case "earnings":
-        return [
-          "master",
-          "admin",
-          "distributor",
-          "superdistributor",
-          "retailer",
-        ].includes(this.userRole);
-      case "commissions":
-        return [
-          "master",
-          "admin",
-          "distributor",
-          "superdistributor",
-          "retailer",
-        ].includes(this.userRole);
-      case "loyalty":
-        return [
-          "master" 
-        ].includes(this.userRole);
-      
-      case "transactions":
-        return [
-          "master",
-          "admin",
-          "distributor",
-          "superdistributor",
-          "retailer",
-        ].includes(this.userRole);
-      case "walletLoadRequest":
-        return [
-          "master",
-          "admin",
-          "distributor",
-          "superdistributor",
-          "retailer",
-        ].includes(this.userRole);
-      case "walletTopUp":
-        return [
-          "master",
-          "admin",
-          "distributor",
-          "superdistributor",
-          "retailer",
-        ].includes(this.userRole);
+    if (this.userRole === "master") {
+      switch (menuName) {
+        case "dashboard":
+          return masterRoles.includes(masterRole);
+        case "superDistributor":
+          return ["kyc", "main"].includes(masterRole);
+
+        case "distributor":
+          return ["kyc", "main"].includes(masterRole);
+
+        case "retailer":
+          return ["kyc", "main"].includes(masterRole);
+
+        case "ledgers":
+          return ["accounting", "main"].includes(masterRole);
+
+        case "earnings":
+          return ["accounting", "main"].includes(masterRole);
+
+        case "commissions":
+          return ["accounting", "main"].includes(masterRole);
+
+        case "loyalty":
+          return ["marketing", "main"].includes(masterRole);
+
+        case "transactions":
+          return masterRoles.includes(masterRole);
+        case "walletLoadRequest":
+          return ["accounting", "main"].includes(masterRole);
+        case "walletTopUp":
+          return false;
+        // return [
+        //   "master",
+        //   "admin",
+        //   "distributor",
+        //   "superdistributor",
+        //   "retailer",
+        // ].includes(masterRole);
+        case "margins":
+          return masterRoles.includes(masterRole);
+      }
+    } else {
+      switch (menuName) {
+        case "dashboard":
+          return allUsers.includes(this.userRole);
+        case "superDistributor":
+          return [
+            "admin",
+            // "master"
+          ].includes(this.userRole);
+
+        case "distributor":
+          return [
+            "admin",
+            // "master",
+            "superdistributor",
+          ].includes(this.userRole);
+        case "retailer":
+          return [
+            "admin",
+            // "master",
+            "superdistributor",
+            "distributor",
+          ].includes(this.userRole);
+        case "ledgers":
+          return [
+            // "master",
+            "admin",
+            "distributor",
+            "superdistributor",
+            "retailer",
+          ].includes(this.userRole);
+        case "earnings":
+          return [
+            // "master",
+            "admin",
+            "distributor",
+            "superdistributor",
+            "retailer",
+          ].includes(this.userRole);
+        case "commissions":
+          return [
+            // "master",
+            "admin",
+            "distributor",
+            "superdistributor",
+            "retailer",
+          ].includes(this.userRole);
+        // case "loyalty":
+        //   return ["master"].includes(this.userRole);
+
+        case "transactions":
+          return [
+            // "master",
+            "admin",
+            "distributor",
+            "superdistributor",
+            "retailer",
+          ].includes(this.userRole);
+        case "walletLoadRequest":
+          return [
+            // "master",
+            "admin",
+            "distributor",
+            "superdistributor",
+            // "retailer",
+          ].includes(this.userRole);
+        case "walletTopUp":
+          return [
+            // "master",
+            "admin",
+            "distributor",
+            "superdistributor",
+            "retailer",
+          ].includes(this.userRole);
+      }
     }
+  }
+
+  setTheme(data: any) {
+    const themeKey = _.get(data, "voter_id", "enviar");
+    if (
+      ["enviar", "goldColor", "silverColor", "bronzeColor"].includes(themeKey)
+    ) {
+      this.customTheme = `theme-${themeKey}`;
+    } else this.customTheme = "theme-enviar";
   }
 
   async loadNavListItems() {

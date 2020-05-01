@@ -1,5 +1,8 @@
 import { DataStore } from "./../../store/app.store";
-import { CHILD_USERS_LIST } from "./../../store/actions/index";
+import {
+  CHILD_USERS_LIST,
+  UPDATE_CHILD_USER_INFO,
+} from "./../../store/actions/index";
 import { UserReducers } from "./../../store/reducers/user.reducer";
 import { Component, OnInit } from "@angular/core";
 import * as _ from "lodash";
@@ -15,6 +18,7 @@ export class LoyaltyComponent implements OnInit {
   searchText = "";
   loyaltyValue = "enviar";
   initialState: any = "";
+  selectedUser: any;
   childLists = [
     {
       margins: {
@@ -92,8 +96,15 @@ export class LoyaltyComponent implements OnInit {
     });
   }
 
-  showModal(): void {
+  showModal(data): void {
     this.isVisible = true;
+    this.selectedUser = data;
+    const lValue = _.get(data, "loyalty", "enviar");
+    if (
+      ["enviar", "goldColor", "silverColor", "bronzeColor"].includes(lValue)
+    ) {
+      this.loyaltyValue = lValue;
+    } else this.loyaltyValue = "enviar";
   }
 
   handleOk(): void {
@@ -102,6 +113,13 @@ export class LoyaltyComponent implements OnInit {
       this.isVisible = false;
       this.isOkLoading = false;
     }, 1000);
+    this.user.userReducer({
+      type: UPDATE_CHILD_USER_INFO,
+      payload: {
+        id: this.selectedUser._id,
+        loyalty: this.loyaltyValue,
+      },
+    });
   }
 
   handleCancel(): void {

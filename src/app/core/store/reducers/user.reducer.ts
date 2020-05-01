@@ -209,7 +209,7 @@ export class UserReducers {
                 type: SHOW_TOAST,
                 payload: {
                   message: response.message,
-                  type: "successfully updated",
+                  type: "success",
                 },
               });
 

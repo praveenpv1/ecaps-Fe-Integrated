@@ -27,7 +27,7 @@ import { GlobalErrorHandler } from "./error-handler";
 import { HttpErrorInterceptor } from "./core/http-interceptors/error-interceptor";
 import {
   MAT_FORM_FIELD_DEFAULT_OPTIONS,
-  MatFormFieldDefaultOptions
+  MatFormFieldDefaultOptions,
 } from "@angular/material";
 //
 //
@@ -49,7 +49,7 @@ import { DynamicFormsMaterialUIModule } from "@ng-dynamic-forms/ui-material";
 import { HashLocationStrategy, LocationStrategy } from "@angular/common";
 
 const appearance: MatFormFieldDefaultOptions = {
-  appearance: "outline"
+  appearance: "outline",
 };
 
 @NgModule({
@@ -64,7 +64,7 @@ const appearance: MatFormFieldDefaultOptions = {
     AppRoutingModule, // https://angular.io/guide/router#routing-module-order,
     FormsModule,
     ReactiveFormsModule,
-    DynamicFormsMaterialUIModule
+    DynamicFormsMaterialUIModule,
   ],
   declarations: [AppComponent],
   providers: [
@@ -73,20 +73,20 @@ const appearance: MatFormFieldDefaultOptions = {
     angularMaterialProviders,
     {
       provide: ErrorHandler,
-      useClass: GlobalErrorHandler
+      useClass: GlobalErrorHandler,
     },
     {
       provide: HTTP_INTERCEPTORS,
       useClass: HttpErrorInterceptor,
-      multi: true
+      multi: true,
     },
     {
       provide: MAT_FORM_FIELD_DEFAULT_OPTIONS,
-      useValue: appearance
+      useValue: appearance,
     },
-    { provide: LocationStrategy, useClass: HashLocationStrategy }
+    { provide: LocationStrategy, useClass: HashLocationStrategy },
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule {
   constructor(private logger: LoggerService) {
