@@ -92,3 +92,16 @@ export const GET_CA_TOKEN = "[GET_CA_TOKEN]";
 export const FUND_LOAD = "[FUND_LOAD]";
 export const GET_FUND_LOADS = "[GET_FUND_LOADS] Get Fund Load Requests ";
 export const APPROVE_FUND_LOADS = "[APPROVE_FUND_LOADS] Approve Fund Load ";
+
+// Transactions
+
+export const GET_WALLET_TRANSACTION_LIST =
+  "[GET_WALLET_TRANSACTION_LIST] Get wallet transactions ";
+
+//Margins
+
+export const GET_MARGIN_TYPE_LIST =
+  "[GET_MARGIN_TYPE_LIST] Get Margin list for specific type ";
+
+export const CREATE_NEW_MARGIN =
+  "[CREATE_NEW_MARGIN] Get Margin list for specific type ";

@@ -72,6 +72,9 @@ export class AddDistributorComponent implements OnInit {
               role: "distributor",
               updated_at: moment.utc().format(),
             },
+            navigation: {
+              path: "/distributor",
+            },
           });
         }
       } else {

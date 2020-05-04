@@ -1,15 +1,15 @@
 <div nz-row>
-  <div nz-col nzSm="24" nzMd="24" nzLg="24" nzXl="24"> 
-    <h3  class="primary-color-font">Transactions</h3>
-     <p>View and Manage your Transactions here.</p> 
-    </div>
+  <div nz-col nzSm="24" nzMd="24" nzLg="24" nzXl="24">
+    <h3 class="primary-color-font">Transactions</h3>
+    <p>View and Manage your Transactions here.</p>
+  </div>
 </div>
-<div nz-row> 
+<div nz-row>
   <div nz-col nzSm="24" nzMd="24" nzLg="22" nzXl="22">
     <nz-input-group
       class="margin-5px"
       [nzSuffix]="suffixIconSearch"
-      style="width: 100% ;max-width :400px"
+      style="width: 100%; max-width: 400px;"
     >
       <input
         type="text"
@@ -38,22 +38,22 @@
 </div>
 <br />
 <div nz-row>
-  <div nz-col nzSm="24" nzMd="24" nzLg="24" nzXl="24">      
-    <nz-table #basicTable [nzData]="listOfData">
+  <div nz-col nzSm="24" nzMd="24" nzLg="24" nzXl="24">
+    <nz-table #walletTransactions [nzData]="walletTransactionList">
       <thead>
         <tr>
-          <th>Date</th>
           <th>Type</th>
           <th>Amount</th>
-          <th>Status</th>
+          <th>Mode</th>
+          <th>Transaction ID</th>
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let data of basicTable.data | filter: searchText">
-          <td>{{ data.date }}</td>
-          <td>{{ data.type }}</td>
-          <td>{{ data.amount }}</td>
-          <td></td>
+        <tr *ngFor="let data of walletTransactions.data | filter: searchText">
+          <td>{{ data.wl_tr_type }}</td>
+          <td>{{ data.trn_amount }}</td>
+          <td>{{ data.wl_tr_mode }}</td>
+          <td>{{ data.wl_tr_id }}</td>
         </tr>
       </tbody>
     </nz-table>

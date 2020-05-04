@@ -1,0 +1,85 @@
+<div nz-row>
+  <div nz-col nzSm="12" nzMd="12" nzLg="20" nzXl="20">
+    <h3 class="primary-color-font">Margins</h3>
+    <p>Set Margings for all Users.</p>
+  </div>
+
+  <div nz-col nzSm="12" nzMd="12" nzLg="4" nzXl="4">
+    <button
+      class="margin-5px"
+      nz-button
+      nzType="primary"
+      [routerLink]="['/', 'margins', 'add']"
+    >
+      <i nz-icon nzType="plus-circle" nzTheme="outline" style="color: #fff;"></i
+      >&nbsp;Add Margin
+    </button>
+  </div>
+</div>
+
+<div nz-row>
+  <!-- <div nz-col nzSm="24" nzMd="24" nzLg="22" nzXl="22">
+      <nz-input-group
+        class="margin-5px"
+        [nzSuffix]="suffixIconSearch"
+        style="width: 100% ;max-width :400px"
+      >
+        <input
+          type="text"
+          [(ngModel)]="searchText"
+          nz-input
+          placeholder="Search Super Distributor"
+        />
+      </nz-input-group>
+      <ng-template #suffixIconSearch>
+        <i nz-icon nzType="search"></i>
+      </ng-template>
+    </div> -->
+  <div nz-col nzSm="24" nzMd="24" nzLg="4" nzXl="4">
+    <nz-form-label>Choose Margin Set</nz-form-label>
+  </div>
+
+  <div nz-col nzSm="24" nzMd="24" nzLg="4" nzXl="4">
+    <nz-select [ngModel]="selectedValue" (ngModelChange)="marginChange($event)">
+      <nz-option nzValue="Fundtransfer" nzLabel="Fund Transfer"></nz-option>
+      <nz-option nzValue="Recharge" nzLabel="Recharge"></nz-option>
+    </nz-select>
+  </div>
+</div>
+
+<br />
+<div nz-row>
+  <nz-table
+    #marginTable
+    [nzData]="marginList"
+    [nzPageSize]="1000"
+    [nzScroll]="{ y: '240px' }"
+  >
+    <thead>
+      <tr>
+        <th nzWidth="200px">Role</th>
+        <th nzWidth="200px">Mode</th>
+        <th nzWidth="200px">Value</th>
+        <!-- <th></th> -->
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let data of marginTable.data | filter: searchText">
+        <td>
+          {{ data.margin_role }}
+        </td>
+        <td>
+          {{ displayMarginMode(data) }}
+        </td>
+        <td>
+          {{ displayMarginValue(data) }}
+        </td>
+        <!-- <td>
+          <button nz-button class="table-btn" (click)="editRoute(data)">
+            <i nz-icon class="edit-icon" nzType="edit"></i>
+          </button>
+        </td> -->
+      </tr>
+    </tbody>
+  </nz-table>
+</div>

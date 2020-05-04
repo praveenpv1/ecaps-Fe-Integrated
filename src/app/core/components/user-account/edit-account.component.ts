@@ -9,6 +9,7 @@ import {
   ADD_CHILD,
   GET_CHILD_USER_INFO,
   UPDATE_CHILD_USER_INFO,
+  USER_EXTRA_DETAILS,
 } from "./../../store/actions/index";
 import { ActivatedRoute } from "@angular/router";
 import * as _ from "lodash";
@@ -17,24 +18,74 @@ import { UserReducers } from "@app/core/store/reducers/user.reducer";
 import { DataStore } from "@app/core/store/app.store";
 
 @Component({
-  selector: 'edit-account',
-  templateUrl: './edit-account.component.html',
-  styleUrls: ['./edit-account.component.scss']
+  selector: "edit-account",
+  templateUrl: "./edit-account.component.html",
+  styleUrls: ["./edit-account.component.scss"],
 })
 export class EditAccountComponent implements OnInit {
   validateForm: FormGroup;
   isFormValid: boolean = false;
-  userDetails: any;
-
+  userDetails: any = null;
+  initialState: any;
   constructor(
     private fb: FormBuilder,
     private child: UserReducers,
     private activatedRoute: ActivatedRoute,
     private _dataStore: DataStore
-  ) { }
+  ) {
+    this.initialState = this._dataStore.dataStore$.getValue();
+    this.child.userReducer({
+      type: USER_EXTRA_DETAILS,
+      payload: { id: this.initialState.userInfo._id },
+    });
+
+    this.createForm();
+  }
+
+  createForm() {
+    this.validateForm = this.fb.group({
+      first_name: [
+        null,
+        [Validators.required, Validators.pattern("[a-zA-Z ]*")],
+      ],
+      last_name: [
+        null,
+        [Validators.required, Validators.pattern("[a-zA-Z ]*")],
+      ],
+      // company_name: [null],
+      dateOfBirth: [null, [Validators.required]],
+      phoneNumber: [
+        null,
+        [
+          Validators.required,
+          Validators.pattern(/^[0-9]\d*$/),
+          Validators.minLength(10),
+          Validators.maxLength(10),
+        ],
+      ],
+      userName: [null, [Validators.required]],
+      email: [null, [Validators.email, Validators.required]],
+      // password: [null],
+      role: [null, [Validators.required]],
+      pan: [null, [Validators.required]],
+      aadhaarNo: [
+        null,
+        [
+          Validators.required,
+          Validators.pattern(/^[0-9]\d*$/),
+          Validators.minLength(12),
+          Validators.maxLength(12),
+        ],
+      ],
+      voterId: [null, [Validators.required]],
+      kitNo: [null, [Validators.required]],
+    });
+    this.validateForm.controls.role.disable();
+  }
 
   submitForm() {
     const store = this._dataStore.dataStore$.getValue();
+    console.log("userDetails", this.userDetails);
 
     // this.isFormValid =
     //   _.get(this.validateForm, "status", "INVALID") === "VALID";
@@ -46,74 +97,54 @@ export class EditAccountComponent implements OnInit {
       this.validateForm.controls[i].updateValueAndValidity();
     }
     if (this.validateForm.valid) {
-      
-        if (!_.isEmpty(this.userDetails)) {
-          this.child.userReducer({
-            type: UPDATE_CHILD_USER_INFO,
-            payload: {
-              id: this.userDetails._id,
-              dob: moment(this.validateForm.controls.dateOfBirth.value).format(
-                "DD-MM-YYYY"
-              ),
-              // is_verified: true,
-              // status: true,
-              // tpin: "",
-              aadhaar: this.validateForm.controls.aadhaarNo.value,
-              pan: this.validateForm.controls.pan.value,
-              voter_id: this.validateForm.controls.voterId.value,
-              kit_number: this.validateForm.controls.kitNo.value,
-              // wallet_balance: this.userDetails.wallet_balance,
-              firstname: this.validateForm.controls.first_name.value,
-              lastname: this.validateForm.controls.last_name.value,
-              phone: this.validateForm.controls.phoneNumber.value,
-              username: this.validateForm.controls.userName.value,
-              email: this.validateForm.controls.email.value,
-              role: this.validateForm.controls.role.value,
-              updated_at: moment.utc().format(),
-            },
-          });
-        }
-       
+      if (!_.isEmpty(this.userDetails)) {
+        this.child.userReducer({
+          type: UPDATE_CHILD_USER_INFO,
+          payload: {
+            id: this.userDetails._id,
+            dob: moment(this.validateForm.controls.dateOfBirth.value).format(
+              "DD-MM-YYYY"
+            ),
+            // is_verified: true,
+            // status: true,
+            // tpin: "",
+            aadhaar: this.validateForm.controls.aadhaarNo.value,
+            pan: this.validateForm.controls.pan.value,
+            voter_id: this.validateForm.controls.voterId.value,
+            kit_number: this.validateForm.controls.kitNo.value,
+            // wallet_balance: this.userDetails.wallet_balance,
+            firstname: this.validateForm.controls.first_name.value,
+            lastname: this.validateForm.controls.last_name.value,
+            phone: this.validateForm.controls.phoneNumber.value,
+            username: this.validateForm.controls.userName.value,
+            email: this.validateForm.controls.email.value,
+            role: this.validateForm.controls.role.value,
+            updated_at: moment.utc().format(),
+          },
+          navigation: {
+            path: "/my-account",
+          },
+        });
+      }
     }
   }
 
   ngOnInit() {
     this._dataStore.dataStore$.subscribe((data) => {
-      if (data.childUser) {
+      console.log("childUser", data.childUser);
+
+      if (data.userExtraDetails) {
         this.userDetails = data.userExtraDetails;
         if (this.userDetails != null) {
-          this.setDetails({});
+          this.setDetails();
         }
       }
     });
-
-    this.validateForm = this.fb.group({ 
-      first_name: [null, [Validators.required,
-        Validators.pattern('[a-zA-Z ]*')]],
-      last_name: [null, [Validators.required,
-        Validators.pattern('[a-zA-Z ]*')]],
-      // company_name: [null],
-      dateOfBirth: [null, [Validators.required]],
-      phoneNumber: [null, [Validators.required,
-        Validators.pattern(/^[0-9]\d*$/),
-        Validators.minLength(10),
-        Validators.maxLength(10)]],
-      userName: [null, [Validators.required]],
-      email: [null, [Validators.email, Validators.required]],
-      // password: [null],
-      role: [null, [Validators.required]],
-      pan: [null, [Validators.required]],
-      aadhaarNo: [null, [Validators.required,
-        Validators.pattern(/^[0-9]\d*$/),
-        Validators.minLength(12),
-        Validators.maxLength(12)]],
-      voterId: [null, [Validators.required]],
-      kitNo: [null, [Validators.required]],    
-    });
-    this.validateForm.controls.role.disable();
   }
 
-  setDetails(data: any) {
+  setDetails() {
+    console.log("userDetails", this.userDetails);
+
     if (!_.isEmpty(this.userDetails)) {
       this.validateForm.patchValue({
         first_name: this.userDetails.firstname,
@@ -146,5 +177,4 @@ export class EditAccountComponent implements OnInit {
       });
     }
   }
-
 }

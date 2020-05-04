@@ -29,12 +29,13 @@ import {
   NavigationError,
 } from "@angular/router";
 import { DataStore } from "@app/core/store/app.store";
-import { HIDE_TOAST } from "@app/core/store/actions";
+import { HIDE_TOAST, USER_EXTRA_DETAILS } from "@app/core/store/actions";
 import { ToastReducers } from "@app/core/store/reducers/toast.reducer";
 import { NzMessageService } from "ng-zorro-antd/message";
 import { NgxSpinnerService } from "ngx-spinner";
 import * as _ from "lodash";
 import { isAdmin } from "@app/core/services/utils";
+import { UserReducers } from "@app/core/store/reducers/user.reducer";
 
 interface SideNavRoute {
   icon?: string;
@@ -76,6 +77,7 @@ export class NavComponent implements OnInit, OnDestroy {
   subscribers: Subscription;
   company_id: string = "";
   customTheme: string = "theme-enviar";
+  currentNavigationPath: string = "";
   constructor(
     private commandBarSidenavService: SidenavService,
     private dashboardService: MockDashboardService,
@@ -88,8 +90,16 @@ export class NavComponent implements OnInit, OnDestroy {
     private _dataStore: DataStore,
     private _toastReducer: ToastReducers,
     private message: NzMessageService,
-    private spinner: NgxSpinnerService
+    private spinner: NgxSpinnerService,
+    private child: UserReducers
   ) {
+    const initialState = this._dataStore.dataStore$.getValue();
+
+    // this.child.userReducer({
+    //   type: USER_EXTRA_DETAILS,
+    //   payload: { id: initialState.userInfo._id },
+    // });
+
     this.company_id = sessionStorage.getItem("company_id");
 
     this.router.events.subscribe((event: Event) => {
@@ -98,6 +108,7 @@ export class NavComponent implements OnInit, OnDestroy {
       }
 
       if (event instanceof NavigationEnd) {
+        this.currentNavigationPath = event.url;
         // Hide loading indicator
         this.route.firstChild.data.subscribe((res) => {
           this.currentMenuType = res.menuType;
@@ -149,6 +160,7 @@ export class NavComponent implements OnInit, OnDestroy {
 
       this.showUserName();
       this.checkRole();
+      this.setTheme(data.userExtraDetails);
     });
   }
 
@@ -205,6 +217,7 @@ export class NavComponent implements OnInit, OnDestroy {
   }
 
   showMenuForUser(menuName) {
+    const initialState = this._dataStore.dataStore$.getValue();
     const allUsers = [
       "master",
       "admin",
@@ -212,83 +225,147 @@ export class NavComponent implements OnInit, OnDestroy {
       "superdistributor",
       "retailer",
     ];
-    switch (menuName) {
-      case "dashboard":
-        return allUsers.includes(this.userRole);
-      case "superDistributor":
-        return [
-          "admin", 
-          "master"
-        ].includes(this.userRole);
+    const masterRoles = ["main", "marketing", "kyc", "accounting"];
+    const masterRole = _.get(initialState.userExtraDetails, "pan", null);
+    // console.log(
+    //   "INSIDE SHOW MENU",
+    //   this.userRole,
+    //   masterRole,
+    //   initialState.userExtraDetails
+    // );
 
-      case "distributor":
-        return [
-          "admin", 
-          "master", 
-          "superdistributor"
-      ].includes(this.userRole);
-      case "retailer":
-        return ["admin", 
-          "master", 
-          "superdistributor", 
-          "distributor"
-      ].includes(
-          this.userRole
-        );
-      case "ledgers":
-        return [
-          "master",
-          "admin",
-          "distributor",
-          "superdistributor",
-          "retailer",
-        ].includes(this.userRole);
-      case "earnings":
-        return [
-          "master",
-          "admin",
-          "distributor",
-          "superdistributor",
-          "retailer",
-        ].includes(this.userRole);
-      case "commissions":
-        return [
-          "master",
-          "admin",
-          "distributor",
-          "superdistributor",
-          "retailer",
-        ].includes(this.userRole);
-      case "loyalty":
-        return [
-          "master" 
-        ].includes(this.userRole);
-      
-      case "transactions":
-        return [
-          "master",
-          "admin",
-          "distributor",
-          "superdistributor",
-          "retailer",
-        ].includes(this.userRole);
-      case "walletLoadRequest":
-        return [
-          "master",
-          "admin",
-          "distributor",
-          "superdistributor",
-          "retailer",
-        ].includes(this.userRole);
-      case "walletTopUp":
-        return [
-          "master",
-          "admin",
-          "distributor",
-          "superdistributor",
-          "retailer",
-        ].includes(this.userRole);
+    if (this.userRole === "master") {
+      switch (menuName) {
+        case "dashboard":
+          return masterRoles.includes(masterRole);
+        case "superDistributor":
+          return ["kyc", "main"].includes(masterRole);
+
+        case "distributor":
+          return ["kyc", "main"].includes(masterRole);
+
+        case "retailer":
+          return ["kyc", "main"].includes(masterRole);
+
+        case "ledgers":
+          return ["accounting", "main"].includes(masterRole);
+
+        case "earnings":
+          return ["accounting", "main"].includes(masterRole);
+
+        case "commissions":
+          return ["accounting", "main"].includes(masterRole);
+
+        case "loyalty":
+          return ["marketing", "main"].includes(masterRole);
+
+        case "transactions":
+          return masterRoles.includes(masterRole);
+        case "walletLoadRequest":
+          return ["accounting", "main"].includes(masterRole);
+        case "walletTopUp":
+          return false;
+        // return [
+        //   "master",
+        //   "admin",
+        //   "distributor",
+        //   "superdistributor",
+        //   "retailer",
+        // ].includes(masterRole);
+        case "margins":
+          return masterRoles.includes(masterRole);
+      }
+    } else {
+      switch (menuName) {
+        case "dashboard":
+          return allUsers.includes(this.userRole);
+        case "superDistributor":
+          return [
+            "admin",
+            // "master"
+          ].includes(this.userRole);
+
+        case "distributor":
+          return [
+            "admin",
+            // "master",
+            "superdistributor",
+          ].includes(this.userRole);
+        case "retailer":
+          return [
+            "admin",
+            // "master",
+            "superdistributor",
+            "distributor",
+          ].includes(this.userRole);
+        case "ledgers":
+          return [
+            // "master",
+            "admin",
+            "distributor",
+            "superdistributor",
+            "retailer",
+          ].includes(this.userRole);
+        case "earnings":
+          return [
+            // "master",
+            "admin",
+            "distributor",
+            "superdistributor",
+            "retailer",
+          ].includes(this.userRole);
+        case "commissions":
+          return [
+            // "master",
+            "admin",
+            "distributor",
+            "superdistributor",
+            "retailer",
+          ].includes(this.userRole);
+        // case "loyalty":
+        //   return ["master"].includes(this.userRole);
+
+        case "transactions":
+          return [
+            // "master",
+            "admin",
+            "distributor",
+            "superdistributor",
+            "retailer",
+          ].includes(this.userRole);
+        case "walletLoadRequest":
+          return [
+            // "master",
+            "admin",
+            "distributor",
+            "superdistributor",
+            // "retailer",
+          ].includes(this.userRole);
+        case "walletTopUp":
+          return [
+            // "master",
+            "admin",
+            "distributor",
+            "superdistributor",
+            "retailer",
+          ].includes(this.userRole);
+      }
     }
+  }
+
+  setTheme(data: any) {
+    const themeKey = _.get(data, "loyalty", "enviar");
+    if (
+      ["enviar", "goldColor", "silverColor", "bronzeColor"].includes(themeKey)
+    ) {
+      this.customTheme = `theme-${themeKey}`;
+    } else this.customTheme = "theme-enviar";
+
+    console.log("THEME", this.customTheme);
+  }
+
+  isMenuSelected(route: string = "") {
+    return this.currentNavigationPath.includes(route);
   }
 
   async loadNavListItems() {

@@ -9,13 +9,24 @@
   >
     <nz-card class="primary-color-border-card" [ngClass]="item.bgClass">
       <p>{{ item.title }}</p>
-      <h1>{{ item.text }}</h1>
-      <!-- <p>
-        <span>
-          {{ item.desc }} 
-         &nbsp;<i nz-icon nzType="arrow-right" nzTheme="outline"></i>
-        </span>
-      </p> -->
+      <ng-container *ngIf="item.type === 1; else amountText">
+        <h1>{{ item.text | currency: "INR" }}</h1>
+      </ng-container>
+      <ng-template #amountText>
+        <h1>{{ item.text }}</h1>
+      </ng-template>
+
+      <ng-container *ngIf="item.routerLink; else emptyNavigateButtonTemplate">
+        <p [routerLink]="item.routerLink" class="pointer">
+          <span>
+            {{ item.desc }}
+            &nbsp;<i nz-icon nzType="arrow-right" nzTheme="outline"></i>
+          </span>
+        </p>
+      </ng-container>
+      <ng-template #emptyNavigateButtonTemplate>
+        <p style="height: 25px;"></p>
+      </ng-template>
     </nz-card>
   </div>
 </div>

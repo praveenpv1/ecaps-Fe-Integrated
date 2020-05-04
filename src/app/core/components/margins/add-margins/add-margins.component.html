@@ -1,0 +1,132 @@
+<div nz-row>
+  <div nz-col nzSm="24" nzMd="24" nzLg="24" nzXl="24">
+    <a class="back-button-text" [routerLink]="['/', 'margins']"
+      ><img
+        class="back-img"
+        src="assets/images/back-button.svg"
+      />&nbsp;&nbsp;BACK</a
+    >
+    <br />
+    <h3 class="primary-color-font">
+      {{ _id != "" ? "Edit" : "Add New" }} Margin
+    </h3>
+    <p *ngIf="_id == ''">Add a new Margin here</p>
+  </div>
+  <div nz-col nzSm="24" nzMd="24" nzLg="24" nzXl="24">
+    <div nz-row>
+      <div nz-col nzSm="24" nzMd="24" nzLg="3" nzXl="3"></div>
+      <div nz-col nzSm="24" nzMd="24" nzLg="21" nzXl="21">
+        <div nzSm="24" nzMd="24" nzLg="24" nzXl="24" class="text-center">
+          <form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()">
+            <nz-form-item>
+              <nz-form-label
+                [nzSm]="6"
+                [nzXs]="24"
+                nzFor="margin_type"
+                nzRequired
+                >Choose Margin Set</nz-form-label
+              >
+              <nz-form-control
+                [nzSm]="14"
+                [nzXs]="24"
+                nzErrorTip="Please choose Margin Set"
+              >
+                <nz-select
+                  id="margin_type"
+                  formControlName="margin_type"
+                  nzPlaceHolder="Select Margin Set"
+                >
+                  <nz-option
+                    *ngFor="let marginType of marginTypeList"
+                    [nzValue]="marginType.value"
+                    [nzLabel]="marginType.display"
+                  ></nz-option>
+                </nz-select>
+              </nz-form-control>
+            </nz-form-item>
+            <nz-form-item>
+              <nz-form-label [nzSm]="6" [nzXs]="24" nzFor="margin_mode">
+                Margin Mode
+              </nz-form-label>
+              <nz-form-control
+                [nzSm]="14"
+                [nzXs]="24"
+                nzErrorTip="Please select one value"
+              >
+                <nz-radio-group
+                  id="margin_mode"
+                  formControlName="margin_mode"
+                  [(nzName)]="margin_mode"
+                >
+                  <label nz-radio nzValue="1">Absolute Value</label>
+                  <label nz-radio nzValue="2">Percentage Value</label>
+                </nz-radio-group>
+              </nz-form-control>
+            </nz-form-item>
+            <nz-form-item>
+              <nz-form-label
+                [nzSm]="6"
+                [nzXs]="24"
+                nzFor="margin_role"
+                nzRequired
+                >Choose Margin Set</nz-form-label
+              >
+              <nz-form-control
+                [nzSm]="14"
+                [nzXs]="24"
+                nzErrorTip="Please choose Margin Set"
+              >
+                <nz-select
+                  id="margin_role"
+                  formControlName="margin_role"
+                  nzPlaceHolder="Select Margin Set"
+                >
+                  <nz-option
+                    *ngFor="let role of marginRoles"
+                    [nzValue]="role.value"
+                    [nzLabel]="role.display"
+                  ></nz-option>
+                </nz-select>
+              </nz-form-control>
+            </nz-form-item>
+
+            <nz-form-item>
+              <nz-form-label
+                [nzSm]="6"
+                [nzXs]="24"
+                nzRequired
+                nzFor="margin_actual"
+              >
+                Actual Margin
+              </nz-form-label>
+              <nz-form-control
+                [nzSm]="14"
+                [nzXs]="24"
+                nzErrorTip="Please enter Actual Margin."
+              >
+                <input
+                  nz-input
+                  formControlName="margin_actual"
+                  id="margin_actual"
+                />
+              </nz-form-control>
+            </nz-form-item>
+
+            <nz-form-item nz-row class="register-area">
+              <nz-form-control [nzSpan]="14" [nzOffset]="6">
+                <button
+                  nz-button
+                  nzType="primary"
+                  [disabled]="!validateForm.valid"
+                >
+                  {{ _id != "" ? "Update" : "Add new Margin" }}
+                </button>
+              </nz-form-control>
+            </nz-form-item>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<br /><br />

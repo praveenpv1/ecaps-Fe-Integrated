@@ -72,6 +72,9 @@ export class AddRetailerComponent implements OnInit {
               role: "retailer",
               updated_at: moment.utc().format(),
             },
+            navigation: {
+              path: "/retailer",
+            },
           });
         }
       } else {

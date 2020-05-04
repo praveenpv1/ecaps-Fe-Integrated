@@ -58,12 +58,12 @@ import { SignUpComponent } from "@app/core/components/company/sign-up.component"
 import { SuperDistributorComponent } from "@app/core/components/super-distributor/super-distributor.component";
 import { AddSuperDistributorComponent } from "@app/core/components/super-distributor/add-super-distributor.component";
 import { DistributorComponent } from "@app/core/components/distributor/distributor.component";
-import { AddDistributorComponent } from "@app/core/components/distributor/add-distributor.component"; 
+import { AddDistributorComponent } from "@app/core/components/distributor/add-distributor.component";
 import { RetailerComponent } from "@app/core/components/retailer/retailer.component";
 import { AddRetailerComponent } from "@app/core/components/retailer/add-retailer.component";
 import { LedgersComponent } from "@app/core/components/ledgers/ledgers.component";
 import { EarningsComponent } from "@app/core/components/earnings/earnings.component";
-import { MonthlyTransactionsComponent } from "@app/core/components/monthly-transactions/monthly-transactions.component";
+import { TransactionsComponent } from "@app/core/components/transactions/transactions.component";
 import { WalletLoadRequestComponent } from "@app/core/components/wallet-load-request/wallet-load-request.component";
 import { WalletTopUpComponent } from "@app/core/components/wallet-top-up/wallet-top-up.component";
 import { PaymentsComponent } from "@app/core/components/payments/payments.component";
@@ -74,15 +74,14 @@ import { UserAccountComponent } from "@app/core/components/user-account/user-acc
 import { EditAccountComponent } from "@app/core/components/user-account/edit-account.component";
 import { LoyaltyComponent } from "@app/core/components/loyalty/loyalty.component";
 import { CommissionsComponent } from "@app/core/components/commissions/commissions.component";
-
-
-
+import { MarginsComponent } from "./core/components/margins/margins.component";
+import { AddMarginsComponent } from "./core/components/margins/add-margins/add-margins.component";
 
 export enum menuType {
   initialSetup = 1,
   userRole = 2,
   normal = 3,
-  siginin = 4
+  siginin = 4,
 }
 
 const routes: Routes = [
@@ -107,142 +106,158 @@ const routes: Routes = [
   {
     path: "my-account",
     component: UserAccountComponent,
-    data: { menuType: menuType.normal }
+    data: { menuType: menuType.normal },
   },
   {
     path: "edit-account-details",
     component: EditAccountComponent,
-    data: { menuType: menuType.normal }
+    data: { menuType: menuType.normal },
   },
   {
     path: "distributor",
     component: DistributorComponent,
-    data: { menuType: menuType.normal }
+    data: { menuType: menuType.normal },
   },
   {
     path: "super-distributor",
     component: SuperDistributorComponent,
-    data: { menuType: menuType.normal }
+    data: { menuType: menuType.normal },
   },
   {
     path: "super-distributor/add",
     component: AddSuperDistributorComponent,
-    data: { menuType: menuType.normal }
+    data: { menuType: menuType.normal },
   },
   {
     path: "super-distributor/add/:id",
     component: AddSuperDistributorComponent,
-    data: { menuType: menuType.normal }
+    data: { menuType: menuType.normal },
   },
   {
     path: "distributor/add",
     component: AddDistributorComponent,
-    data: { menuType: menuType.normal }
+    data: { menuType: menuType.normal },
   },
   {
     path: "distributor/add/:id",
     component: AddDistributorComponent,
-    data: { menuType: menuType.normal }
+    data: { menuType: menuType.normal },
   },
   {
     path: "retailer",
     component: RetailerComponent,
-    data: { menuType: menuType.normal }
+    data: { menuType: menuType.normal },
   },
   {
     path: "retailer/add",
     component: AddRetailerComponent,
-    data: { menuType: menuType.normal }
+    data: { menuType: menuType.normal },
   },
   {
     path: "retailer/add/:id",
     component: AddRetailerComponent,
-    data: { menuType: menuType.normal }
+    data: { menuType: menuType.normal },
   },
   {
     path: "ledgers",
     component: LedgersComponent,
-    data: { menuType: menuType.normal }
+    data: { menuType: menuType.normal },
   },
   {
     path: "earnings",
     component: EarningsComponent,
-    data: { menuType: menuType.normal }
+    data: { menuType: menuType.normal },
   },
   {
     path: "loyalty",
     component: LoyaltyComponent,
-    data: { menuType: menuType.normal }
+    data: { menuType: menuType.normal },
   },
   {
     path: "commissions",
     component: CommissionsComponent,
-    data: { menuType: menuType.normal }
+    data: { menuType: menuType.normal },
   },
   {
     path: "transactions",
-    component: MonthlyTransactionsComponent,
-    data: { menuType: menuType.normal }
+    component: TransactionsComponent,
+    data: { menuType: menuType.normal },
   },
   {
     path: "wallet-load-request",
     component: WalletLoadRequestComponent,
-    data: { menuType: menuType.normal }
+    data: { menuType: menuType.normal },
+  },
+
+  {
+    path: "margins",
+    component: MarginsComponent,
+    data: { menuType: menuType.normal },
+  },
+  {
+    path: "margins/add",
+    component: AddMarginsComponent,
+    data: { menuType: menuType.normal },
+  },
+  {
+    path: "margins/add/:id",
+    component: AddMarginsComponent,
+    data: { menuType: menuType.normal },
   },
   {
     path: "wallet-top-up",
     component: WalletTopUpComponent,
-    data: { menuType: menuType.normal }
+    data: { menuType: menuType.normal },
   },
   {
     path: "payments",
     component: PaymentsComponent,
-    data: { menuType: menuType.normal }
+    data: { menuType: menuType.normal },
   },
   {
     path: "signup",
     component: KopprSignUpComponent,
-    data: { menuType: 4 }
+    data: { menuType: 4 },
   },
   {
     path: "account-update",
     component: SignUpInnerComponent,
-    data: { menuType: 4 }
+    data: { menuType: 4 },
   },
   {
     path: "signin",
     component: SignInComponent,
-    data: { menuType: menuType.siginin }
+    data: { menuType: menuType.siginin },
   },
   {
     path: "forgot-password/:token",
     component: SetPasswordComponent,
-    data: { menuType: menuType.siginin }
+    data: { menuType: menuType.siginin },
   },
   {
     path: "new-password/:token",
     component: SetPasswordComponent,
-    data: { menuType: menuType.siginin }
+    data: { menuType: menuType.siginin },
   },
   {
     path: "verify-email/:token",
     component: VerifyEmailComponent,
-    data: { menuType: menuType.siginin }
+    data: { menuType: menuType.siginin },
   },
   {
     path: "forgot-password",
     component: ForgotPasswordComponent,
-    data: { menuType: menuType.siginin }
+    data: { menuType: menuType.siginin },
   },
   {
     path: "signup",
     component: SignUpComponent,
-    data: { menuType: menuType.siginin }
+    data: { menuType: menuType.siginin },
   },
   {
     path: "dashboard",
     component: DashboardComponent,
-    data: { menuType: menuType.normal }
+    data: { menuType: menuType.normal },
   },
   // {
   //   path: "dashboard/:company_id",
@@ -542,13 +557,13 @@ const routes: Routes = [
   {
     path: "**",
     redirectTo: "signin",
-    data: { menuType: menuType.siginin }
-  }
+    data: { menuType: menuType.siginin },
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes, { onSameUrlNavigation: "reload" })],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
 export class AppRoutingModule {}
 
