@@ -8,6 +8,7 @@ import {
   GET_COMPANY_TXNS,
   GET_CLAIMS_TXNS,
   USER_EXTRA_DETAILS,
+  GET_WALLET_TRANSACTION_LIST,
 } from "@app/core/store/actions";
 import * as _ from "lodash";
 import { environment } from "@env/environment";
@@ -21,6 +22,7 @@ import { barGraphOptions } from "@app/core/services/graphoptions";
 import { ChartOptions, ChartType, ChartDataSets } from "chart.js";
 import * as pluginDataLabels from "chartjs-plugin-datalabels";
 import { Label } from "ng2-charts";
+import { TransactionReducers } from "@app/core/store/reducers/transaction.reducer";
 
 export interface Tile {
   color: string;
@@ -63,6 +65,9 @@ export class DashboardComponent implements OnInit, OnDestroy {
   companyBalance: string = "0";
   balanceCards: InfoCards[] = [];
   mockCards: InfoCards[] = [];
+
+  moneyTransfered: number = 0;
+  userBalance: number = 0;
 
   pendingClaims = 0;
   approvedClaims = 0;
@@ -114,83 +119,96 @@ export class DashboardComponent implements OnInit, OnDestroy {
     private cR: CompanyReducers,
     private ds: DataStore,
     private currencyPipe: CurrencyPipe,
-    private uR: UserReducers
+    private uR: UserReducers,
+    private tR: TransactionReducers
   ) {
     this.initialState = ds.dataStore$.getValue();
     this.clearCompanyTxnsStore();
     this.clearClaimsStore();
 
-    this.subscribers = this.ds.dataStore$.subscribe((res) => {
-      console.log(res);
+    // this.subscribers = this.ds.dataStore$.subscribe((res) => {
+    //   console.log(res);
 
-      if (_.get(res.company.details, "data", null)) {
-        this.companyBalance = _.get(res.company.details, "data.value", 0);
-      }
+    //   if (_.get(res.company.details, "data", null)) {
+    //     this.companyBalance = _.get(res.company.details, "data.value", 0);
+    //   }
 
-      if (_.get(res.company_transactions.details, "data", null)) {
-        this.companyTranscations = res.company_transactions.details.data;
-      }
+    //   if (_.get(res.company_transactions.details, "data", null)) {
+    //     this.companyTranscations = res.company_transactions.details.data;
+    //   }
 
-      if (_.get(res.company_txns.details, "data", null)) {
-        this.expenseData = _.filter(res.company_txns.details.data, function (
-          txns
-        ) {
-          return txns.amount_type === "expense";
-        });
+    //   if (_.get(res.company_txns.details, "data", null)) {
+    //     this.expenseData = _.filter(res.company_txns.details.data, function (
+    //       txns
+    //     ) {
+    //       return txns.amount_type === "expense";
+    //     });
 
-        this.allowanceData = _.filter(res.company_txns.details.data);
-        this.clearCompanyTxnsStore();
-        this.getClaims();
-      }
+    //     this.allowanceData = _.filter(res.company_txns.details.data);
+    //     this.clearCompanyTxnsStore();
+    //     this.getClaims();
+    //   }
 
-      if (_.get(res.claims_txns.details, "data", null)) {
-        this.claimsData = res.claims_txns.details.data;
-        this.settledClaimsData = _.filter(this.claimsData, function (claims) {
-          if (claims.approval_status === "approved") {
-            return true;
-          }
-        });
-        this.settledClaims = this.getSettledClaimAmount(this.settledClaimsData);
+    //   if (_.get(res.claims_txns.details, "data", null)) {
+    //     this.claimsData = res.claims_txns.details.data;
+    //     this.settledClaimsData = _.filter(this.claimsData, function (claims) {
+    //       if (claims.approval_status === "approved") {
+    //         return true;
+    //       }
+    //     });
+    //     // this.settledClaims = this.getSettledClaimAmount(this.settledClaimsData);
 
-        this.pendingClaimsData = _.filter(this.claimsData, function (claims) {
-          return claims.approval_status === "pending_approval";
-        });
-        this.pendingClaims = this.pendingClaimsData.length;
-        this.clearClaimsStore();
-      }
-    });
+    //     this.pendingClaimsData = _.filter(this.claimsData, function (claims) {
+    //       return claims.approval_status === "pending_approval";
+    //     });
+    //     this.pendingClaims = this.pendingClaimsData.length;
+    //     this.clearClaimsStore();
+    //   }
+    // });
   }
 
-  getSettledClaimAmount(data: any): number {
-    let amount = 0;
-    data.forEach((element) => {
-      amount = amount + element.amount;
-    });
-    return amount;
-  }
+  // getSettledClaimAmount(data: any): number {
+  //   let amount = 0;
+  //   data.forEach((element) => {
+  //     amount = amount + element.amount;
+  //   });
+  //   return amount;
+  // }
 
-  public showCompanyWallet() {
-    this.cR.cardReducer({
-      type: GET_COMPANY_WALLET,
-      payload: {},
-    });
-  }
+  // public showCompanyWallet() {
+  //   this.cR.cardReducer({
+  //     type: GET_COMPANY_WALLET,
+  //     payload: {},
+  //   });
+  // }
 
   ngOnInit() {
     this.uR.userReducer({
       type: USER_EXTRA_DETAILS,
       payload: { id: this.initialState.userInfo._id },
     });
+    this.tR.transactionReducer({ type: GET_WALLET_TRANSACTION_LIST });
 
-    this.renderCards();
     // this.showCompanyWallet();
     // this.getCompanyTransactions();
     // this.getCompanyTxns();
     //this.getClaims();
+    this.subscribers = this.ds.dataStore$.subscribe((data) => {
+      const transactions = _.get(
+        data.userWalletTransactionList,
+        "transaction_recs",
+        []
+      );
+      this.moneyTransfered = _.sumBy(transactions, "trn_amount");
+
+      this.userBalance = _.get(data.userExtraDetails, "wallet_balance", 0);
+
+      this.renderCards();
+    });
   }
 
   ngOnDestroy() {
-    this.subscribers.unsubscribe();
+    // this.subscribers.unsubscribe();
   }
 
   getCompanyTxns() {
@@ -288,39 +306,42 @@ export class DashboardComponent implements OnInit, OnDestroy {
     this.balanceCards.push(
       {
         title: "Enviar Account Balance",
-        text: "₹ 9999",
+        text: `${this.userBalance}`,
         icon: "more",
 
         bgClass: "enviar-account-balance",
         desc: "TOP UP",
-        routerLink: ["/", "company", "deposit"],
+        // routerLink: ["/", "company", "deposit"],
+        routerLink: null,
         type: InfoType.amount,
       },
       {
         title: "Money Transferred",
-        text: "₹ 999",
+        text: `${this.moneyTransfered}`,
         icon: "more",
         bgClass: "white-bg-card",
         desc: "VIEW DETAILS",
-        routerLink: ["/", "salary"],
+        routerLink: ["/", "transactions"],
         type: InfoType.amount,
       },
       {
         title: "Earnings",
-        text: "₹ 99",
+        text: "99",
         icon: "more",
         bgClass: "white-bg-card",
         desc: "VIEW DETAILS",
-        routerLink: ["/", "claims"],
+        // routerLink: ["/", "claims"],
+        routerLink: null,
         type: InfoType.amount,
       },
       {
         title: "Ledgers",
-        text: "₹ 9",
+        text: "9",
         icon: "more",
         bgClass: "white-bg-card",
         desc: "VIEW DETAILS",
-        routerLink: ["/", "allowance"],
+        routerLink: null,
+        // routerLink: ["/", "allowance"],
         type: InfoType.amount,
       }
     );
@@ -332,7 +353,8 @@ export class DashboardComponent implements OnInit, OnDestroy {
         icon: "more",
         bgClass: "white-bg-card",
         desc: "VIEW DETAILS",
-        routerLink: ["/", "salary"],
+        routerLink: null,
+        // routerLink: ["/", "salary"],
         type: InfoType.info,
         iconImg: "assets/images/calendar.svg",
       },
@@ -342,7 +364,8 @@ export class DashboardComponent implements OnInit, OnDestroy {
         icon: "more",
         bgClass: "white-bg-card",
         desc: "VIEW DETAILS",
-        routerLink: ["/", "claims"],
+        routerLink: null,
+        // routerLink: ["/", "claims"],
         type: InfoType.info,
         iconImg: "assets/images/re-imbursement.svg",
       },

@@ -121,6 +121,9 @@ export class EditAccountComponent implements OnInit {
             role: this.validateForm.controls.role.value,
             updated_at: moment.utc().format(),
           },
+          navigation: {
+            path: "/my-account",
+          },
         });
       }
     }

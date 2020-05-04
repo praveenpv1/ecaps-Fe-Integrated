@@ -88,6 +88,7 @@ export class MarginReducers {
                 type: SHOW_TOAST,
                 payload: { message: response.message, type: "success" },
               });
+              this.router.navigate(["/margins"]);
             },
             (error) => {
               console.log(error);

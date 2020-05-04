@@ -58,6 +58,10 @@ interface InfoCards {
   styleUrls: ["./wallet-load-request.component.scss"],
 })
 export class WalletLoadRequestComponent implements OnInit, OnDestroy {
+  requestDataStatus: any = {};
+  pendingFundLoadRequests: number = 0;
+  approvedFundLoadRequests: number = 0;
+
   selectedValue = "Sort";
   searchText = "";
   companyBalance: string = "0";
@@ -69,7 +73,7 @@ export class WalletLoadRequestComponent implements OnInit, OnDestroy {
   settledClaims: any = 0;
   approvedCounts: any = 0;
   companyTranscations: any;
-  balanceCards: InfoCards[] = []; 
+  balanceCards: InfoCards[] = [];
   claimsData: any;
   pendingClaimsData: any;
   rejectedClaimsData: any;
@@ -183,16 +187,32 @@ export class WalletLoadRequestComponent implements OnInit, OnDestroy {
     });
     this.subscribers = this.ds.dataStore$.subscribe((data) => {
       if (data.fundLoadRequests) {
-        this.walletLoadRequests = data.fundLoadRequests;
+        this.walletLoadRequests = _.reverse(data.fundLoadRequests);
+        this.requestDataStatus = _.groupBy(
+          this.walletLoadRequests,
+          "fl_status"
+        );
+        if (!_.isEmpty(this.requestDataStatus)) {
+          this.pendingFundLoadRequests = _.get(
+            this.requestDataStatus,
+            "false.length",
+            0
+          );
+          this.approvedFundLoadRequests = _.get(
+            this.requestDataStatus,
+            "true.length",
+            0
+          );
+        }
       }
       this.renderCards();
     });
   }
-  renderCards(): void { 
+  renderCards(): void {
     this.balanceCards = [
       {
         title: "Pending Requests",
-        text: "0 requests",
+        text: `${this.pendingFundLoadRequests} requests`,
         icon: "more",
         bgClass: "white-bg-card",
         desc: "VIEW DETAILS",
@@ -202,7 +222,7 @@ export class WalletLoadRequestComponent implements OnInit, OnDestroy {
       },
       {
         title: "Approved Requests",
-        text: "0 requests",
+        text: `${this.pendingFundLoadRequests} requests`,
         icon: "more",
         bgClass: "white-bg-card",
         desc: "VIEW DETAILS",
@@ -212,7 +232,10 @@ export class WalletLoadRequestComponent implements OnInit, OnDestroy {
       },
       {
         title: "Requests Settled",
-        text: "₹",
+        text: `${_.sumBy(
+          _.get(this.requestDataStatus, "false", {}),
+          "fl_req_amount"
+        )}`,
         icon: "more",
         bgClass: "white-bg-card",
         desc: "VIEW DETAILS",
@@ -220,17 +243,17 @@ export class WalletLoadRequestComponent implements OnInit, OnDestroy {
         type: InfoType.amount,
         showDetail: false,
       },
-      {
-        title: "Enviar Account Balance",
-        text: "₹",
-        icon: "more",
-        bgClass: "enviar-account-balance",
-        desc: "TOP UP",
-        routerLink: ["/", "wallet-top-up"],
-        type: InfoType.amount,
-        showDetail: true,
-        }
-    ]; 
+      // {
+      //   title: "Enviar Account Balance",
+      //   text: "₹",
+      //   icon: "more",
+      //   bgClass: "enviar-account-balance",
+      //   desc: "TOP UP",
+      //   routerLink: ["/", "wallet-top-up"],
+      //   type: InfoType.amount,
+      //   showDetail: true,
+      //   }
+    ];
   }
 
   //   getStatusText(status: string): string {

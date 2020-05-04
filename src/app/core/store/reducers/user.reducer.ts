@@ -218,8 +218,12 @@ export class UserReducers {
                 ...successCommonData,
               });
               // this.router.navigate(["/sigin"]);
+              const path = _.get(action, "navigation.path", null);
+              if (!_.isEmpty(path)) {
+                this.router.navigate([path]);
+              }
 
-              this._location.back();
+              // this._location.back();
             },
             (error) => {
               this.toast.commonCatchToast(
@@ -234,6 +238,8 @@ export class UserReducers {
         state = this._dataStore.dataStore$.getValue();
         this.apiService.get(`main/users/update/${action.payload.id}`).subscribe(
           ({ data }: any) => {
+            localStorage.setItem("userExtraData", JSON.stringify(data));
+
             this._dataStore.dataStore$.next({
               ...state,
               ...successCommonData,

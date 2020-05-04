@@ -92,7 +92,7 @@ export class LoyaltyComponent implements OnInit {
     });
 
     this.ds.dataStore$.subscribe((data) => {
-      this.childLists = [...this.childLists, ...data.childrenList];
+      this.childLists = data.childrenList;
     });
   }
 
@@ -118,6 +118,9 @@ export class LoyaltyComponent implements OnInit {
       payload: {
         id: this.selectedUser._id,
         loyalty: this.loyaltyValue,
+      },
+      navigation: {
+        path: "/loyalty",
       },
     });
   }

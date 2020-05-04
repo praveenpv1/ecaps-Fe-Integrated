@@ -29,12 +29,13 @@ import {
   NavigationError,
 } from "@angular/router";
 import { DataStore } from "@app/core/store/app.store";
-import { HIDE_TOAST } from "@app/core/store/actions";
+import { HIDE_TOAST, USER_EXTRA_DETAILS } from "@app/core/store/actions";
 import { ToastReducers } from "@app/core/store/reducers/toast.reducer";
 import { NzMessageService } from "ng-zorro-antd/message";
 import { NgxSpinnerService } from "ngx-spinner";
 import * as _ from "lodash";
 import { isAdmin } from "@app/core/services/utils";
+import { UserReducers } from "@app/core/store/reducers/user.reducer";
 
 interface SideNavRoute {
   icon?: string;
@@ -76,6 +77,7 @@ export class NavComponent implements OnInit, OnDestroy {
   subscribers: Subscription;
   company_id: string = "";
   customTheme: string = "theme-enviar";
+  currentNavigationPath: string = "";
   constructor(
     private commandBarSidenavService: SidenavService,
     private dashboardService: MockDashboardService,
@@ -88,8 +90,16 @@ export class NavComponent implements OnInit, OnDestroy {
     private _dataStore: DataStore,
     private _toastReducer: ToastReducers,
     private message: NzMessageService,
-    private spinner: NgxSpinnerService
+    private spinner: NgxSpinnerService,
+    private child: UserReducers
   ) {
+    const initialState = this._dataStore.dataStore$.getValue();
+
+    // this.child.userReducer({
+    //   type: USER_EXTRA_DETAILS,
+    //   payload: { id: initialState.userInfo._id },
+    // });
+
     this.company_id = sessionStorage.getItem("company_id");
 
     this.router.events.subscribe((event: Event) => {
@@ -98,6 +108,7 @@ export class NavComponent implements OnInit, OnDestroy {
       }
 
       if (event instanceof NavigationEnd) {
+        this.currentNavigationPath = event.url;
         // Hide loading indicator
         this.route.firstChild.data.subscribe((res) => {
           this.currentMenuType = res.menuType;
@@ -207,7 +218,6 @@ export class NavComponent implements OnInit, OnDestroy {
 
   showMenuForUser(menuName) {
     const initialState = this._dataStore.dataStore$.getValue();
-
     const allUsers = [
       "master",
       "admin",
@@ -216,7 +226,13 @@ export class NavComponent implements OnInit, OnDestroy {
       "retailer",
     ];
     const masterRoles = ["main", "marketing", "kyc", "accounting"];
-    const masterRole = initialState.userExtraDetails.pan;
+    const masterRole = _.get(initialState.userExtraDetails, "pan", null);
+    // console.log(
+    //   "INSIDE SHOW MENU",
+    //   this.userRole,
+    //   masterRole,
+    //   initialState.userExtraDetails
+    // );
 
     if (this.userRole === "master") {
       switch (menuName) {
@@ -338,12 +354,18 @@ export class NavComponent implements OnInit, OnDestroy {
   }
 
   setTheme(data: any) {
-    const themeKey = _.get(data, "voter_id", "enviar");
+    const themeKey = _.get(data, "loyalty", "enviar");
     if (
       ["enviar", "goldColor", "silverColor", "bronzeColor"].includes(themeKey)
     ) {
       this.customTheme = `theme-${themeKey}`;
     } else this.customTheme = "theme-enviar";
+
+    console.log("THEME", this.customTheme);
+  }
+
+  isMenuSelected(route: string = "") {
+    return this.currentNavigationPath.includes(route);
   }
 
   async loadNavListItems() {

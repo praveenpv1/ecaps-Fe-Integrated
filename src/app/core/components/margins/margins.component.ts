@@ -14,7 +14,7 @@ export class MarginsComponent implements OnInit {
   marginList: any;
   subscriber: any;
   constructor(private mR: MarginReducers, private ds: DataStore) {
-    this.marginSet = ["FundTransfer", "Recharge"];
+    this.marginSet = ["Fundtransfer", "Recharge"];
     this.selectedValue = this.marginSet[0];
     this.marginList = [
       {
@@ -41,7 +41,7 @@ export class MarginsComponent implements OnInit {
   ngOnInit() {
     this.getMarginList(this.selectedValue);
     this.subscriber = this.ds.dataStore$.subscribe((data) => {
-      this.marginList = [...this.marginList, ...data.marginList];
+      this.marginList = data.marginList;
     });
   }
 

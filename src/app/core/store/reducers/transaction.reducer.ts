@@ -54,7 +54,7 @@ export class TransactionReducers {
               this._dataStore.dataStore$.next({
                 ...state,
                 ...successCommonData,
-                userWalletTransactionList: response.data,
+                userWalletTransactionList: response,
               });
             },
             (error) => {

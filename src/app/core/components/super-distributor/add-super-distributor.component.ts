@@ -77,6 +77,9 @@ export class AddSuperDistributorComponent implements OnInit {
               role: "superdistributor",
               updated_at: moment.utc().format(),
             },
+            navigation: {
+              path: "/superdistributor",
+            },
           });
         }
       } else {

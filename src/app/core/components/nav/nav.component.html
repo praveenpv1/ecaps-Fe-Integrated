@@ -23,11 +23,11 @@
             My Enviar Balance &nbsp;
             <b>{{ userBalance | currency: "₹" }}</b
             >&nbsp;
-            <img
+            <!-- <img
               src="assets/images/rupay-add.png"
               class="topup-img"
               [routerLink]="['/', 'wallet-top-up']"
-            />
+            /> -->
           </span>
         </ul>
       </div>
@@ -110,6 +110,7 @@
           nzIcon="user"
           [routerLink]="['/', 'dashboard']"
           *ngIf="showMenuForUser('dashboard')"
+          [nzSelected]="isMenuSelected('/dashboard')"
         >
           <i nz-icon nzType="dashboard" nzTheme="outline"></i>
           Dashboard
@@ -120,6 +121,7 @@
           nzIcon="user"
           [routerLink]="['/', 'super-distributor']"
           *ngIf="showMenuForUser('superDistributor')"
+          [nzSelected]="isMenuSelected('/super-distributor')"
         >
           <i nz-icon nzType="global" nzTheme="outline"></i>
           Super Distributor
@@ -130,6 +132,7 @@
           nzIcon="user"
           [routerLink]="['/', 'distributor']"
           *ngIf="showMenuForUser('distributor')"
+          [nzSelected]="isMenuSelected('/distributor')"
         >
           <i nz-icon nzType="deployment-unit" nzTheme="outline"></i>
           Distributor
@@ -140,6 +143,7 @@
           nzIcon="user"
           [routerLink]="['/', 'retailer']"
           *ngIf="showMenuForUser('retailer')"
+          [nzSelected]="isMenuSelected('/retailer')"
         >
           <i nz-icon nzType="user" nzTheme="outline"></i>
           Retailer
@@ -149,6 +153,7 @@
           nzOpen
           [routerLink]="['/', 'ledgers']"
           *ngIf="showMenuForUser('ledgers')"
+          [nzSelected]="isMenuSelected('/ledgers')"
         >
           <i nz-icon nzType="file" nzTheme="outline"></i>
           Ledgers
@@ -158,6 +163,7 @@
           nzOpen
           [routerLink]="['/', 'earnings']"
           *ngIf="showMenuForUser('earnings')"
+          [nzSelected]="isMenuSelected('/earnings')"
         >
           <i nz-icon nzType="dollar" nzTheme="outline"></i>
           Earnings
@@ -167,6 +173,7 @@
           nzOpen
           [routerLink]="['/', 'commissions']"
           *ngIf="showMenuForUser('commissions')"
+          [nzSelected]="isMenuSelected('/commissions')"
         >
           <i nz-icon nzType="dollar" nzTheme="outline"></i>
           Commissions
@@ -176,6 +183,7 @@
           nzOpen
           [routerLink]="['/', 'loyalty']"
           *ngIf="showMenuForUser('loyalty')"
+          [nzSelected]="isMenuSelected('/loyalty')"
         >
           <i nz-icon nzType="crown" nzTheme="outline"></i>
           Loyalty
@@ -185,6 +193,7 @@
           nzOpen
           [routerLink]="['/', 'transactions']"
           *ngIf="showMenuForUser('transactions')"
+          [nzSelected]="isMenuSelected('/transactions')"
         >
           <i nz-icon nzType="calendar" nzTheme="outline"></i>
           Transactions
@@ -194,6 +203,7 @@
           nzOpen
           [routerLink]="['/', 'margins']"
           *ngIf="showMenuForUser('margins')"
+          [nzSelected]="isMenuSelected('/margins')"
         >
           <i nz-icon nzType="sliders" nzTheme="outline"></i>
           Margins
@@ -203,6 +213,7 @@
           nzOpen
           [routerLink]="['/', 'wallet-load-request']"
           *ngIf="showMenuForUser('walletLoadRequest')"
+          [nzSelected]="isMenuSelected('/wallet-load-request')"
         >
           <i nz-icon nzType="interaction" nzTheme="outline"></i>
           Wallet Load Request
@@ -212,6 +223,7 @@
           nzOpen
           [routerLink]="['/', 'wallet-top-up']"
           *ngIf="showMenuForUser('walletTopUp')"
+          [nzSelected]="isMenuSelected('/wallet-top-up')"
         >
           <img src="assets/images/rupay-add.png" style="width: 20px;" />
           &nbsp;&nbsp; Wallet Top Up
