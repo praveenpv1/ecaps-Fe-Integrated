@@ -126,6 +126,11 @@ export class DashboardComponent implements OnInit, OnDestroy {
     this.clearCompanyTxnsStore();
     this.clearClaimsStore();
 
+    this.uR.userReducer({
+      type: USER_EXTRA_DETAILS,
+      payload: { id: this.initialState.userInfo._id },
+    });
+
     // this.subscribers = this.ds.dataStore$.subscribe((res) => {
     //   console.log(res);
 
@@ -183,10 +188,6 @@ export class DashboardComponent implements OnInit, OnDestroy {
   // }
 
   ngOnInit() {
-    this.uR.userReducer({
-      type: USER_EXTRA_DETAILS,
-      payload: { id: this.initialState.userInfo._id },
-    });
     this.tR.transactionReducer({ type: GET_WALLET_TRANSACTION_LIST });
 
     // this.showCompanyWallet();

@@ -265,13 +265,6 @@ export class NavComponent implements OnInit, OnDestroy {
           return ["accounting", "main"].includes(masterRole);
         case "walletTopUp":
           return false;
-        // return [
-        //   "master",
-        //   "admin",
-        //   "distributor",
-        //   "superdistributor",
-        //   "retailer",
-        // ].includes(masterRole);
         case "margins":
           return masterRoles.includes(masterRole);
       }
@@ -412,6 +405,7 @@ export class NavComponent implements OnInit, OnDestroy {
 
   logout(): void {
     localStorage.setItem("userData", null);
+    localStorage.setItem("userExtraData", null);
     this.authService.logout("signin");
   }
 
