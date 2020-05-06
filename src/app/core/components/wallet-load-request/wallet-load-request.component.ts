@@ -10,6 +10,7 @@ import {
   GET_EMPLOYEES,
   GET_FUND_LOADS,
   APPROVE_FUND_LOADS,
+  USER_EXTRA_DETAILS,
 } from "@app/core/store/actions";
 import * as _ from "lodash";
 import { environment } from "@env/environment";
@@ -19,6 +20,7 @@ import {
   catchCommonData,
   successCommonData,
 } from "@app/core/store/commonstoredata";
+import { UserReducers } from "@app/core/store/reducers/user.reducer";
 // import { getStatusText } from "@app/core/services/utils";
 
 export interface Tile {
@@ -88,7 +90,8 @@ export class WalletLoadRequestComponent implements OnInit, OnDestroy {
     private datePipe: DatePipe,
     private currencyPipe: CurrencyPipe,
     private eR: EmployeeReducers,
-    private fR: FundReducers
+    private fR: FundReducers,
+    private user: UserReducers
   ) {
     this.initialState = ds.dataStore$.getValue();
     this.userId = _.get(this.initialState, "userInfo._id", null);
@@ -192,15 +195,16 @@ export class WalletLoadRequestComponent implements OnInit, OnDestroy {
           this.walletLoadRequests,
           "fl_status"
         );
+        console.log("requestDataStatus", this.requestDataStatus);
         if (!_.isEmpty(this.requestDataStatus)) {
           this.pendingFundLoadRequests = _.get(
             this.requestDataStatus,
-            "false.length",
+            "true.length",
             0
           );
           this.approvedFundLoadRequests = _.get(
             this.requestDataStatus,
-            "true.length",
+            "false.length",
             0
           );
         }
@@ -222,7 +226,7 @@ export class WalletLoadRequestComponent implements OnInit, OnDestroy {
       },
       {
         title: "Approved Requests",
-        text: `${this.pendingFundLoadRequests} requests`,
+        text: `${this.approvedFundLoadRequests} requests`,
         icon: "more",
         bgClass: "white-bg-card",
         desc: "VIEW DETAILS",
@@ -279,5 +283,6 @@ export class WalletLoadRequestComponent implements OnInit, OnDestroy {
       type: APPROVE_FUND_LOADS,
       payload: { requestId: data._id, userId: this.userId },
     });
+    this.user.userReducer({ type: USER_EXTRA_DETAILS });
   }
 }

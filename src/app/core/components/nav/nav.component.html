@@ -4,12 +4,12 @@
   <nz-header>
     <div nz-row>
       <div nz-col nzXs="2" nzSm="14" nzMd="14" nzLg="14" nzXl="14">
-        <div class="logo">
+        <div class="logo" [routerLink]="['/', 'dashboard']">
           <img src="assets/images/enviar-logo.png" class="logo" />
         </div>
       </div>
 
-      <div
+      <!-- <div
         *ngIf="currentMenuType != 4"
         nz-col
         nzXs="0"
@@ -23,14 +23,14 @@
             My Enviar Balance &nbsp;
             <b>{{ userBalance | currency: "₹" }}</b
             >&nbsp;
-            <!-- <img
+            <! -- <img
               src="assets/images/rupay-add.png"
               class="topup-img"
               [routerLink]="['/', 'wallet-top-up']"
-            /> -->
+            /> -- >
           </span>
         </ul>
-      </div>
+      </div> -->
       <div
         *ngIf="currentMenuType != 4"
         nz-col

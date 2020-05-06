@@ -36,7 +36,7 @@ export class EditAccountComponent implements OnInit {
     this.initialState = this._dataStore.dataStore$.getValue();
     this.child.userReducer({
       type: USER_EXTRA_DETAILS,
-      payload: { id: this.initialState.userInfo._id },
+      // payload: { id: this.initialState.userInfo._id },
     });
 
     this.createForm();

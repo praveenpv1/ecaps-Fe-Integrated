@@ -9,6 +9,7 @@ import {
   GET_CLAIMS_TXNS,
   USER_EXTRA_DETAILS,
   GET_WALLET_TRANSACTION_LIST,
+  DASHBOARD_COMBINED_APIS,
 } from "@app/core/store/actions";
 import * as _ from "lodash";
 import { environment } from "@env/environment";
@@ -23,6 +24,7 @@ import { ChartOptions, ChartType, ChartDataSets } from "chart.js";
 import * as pluginDataLabels from "chartjs-plugin-datalabels";
 import { Label } from "ng2-charts";
 import { TransactionReducers } from "@app/core/store/reducers/transaction.reducer";
+import { DashboardReducers } from "@app/core/store/reducers/dashboard.reducer";
 
 export interface Tile {
   color: string;
@@ -120,16 +122,12 @@ export class DashboardComponent implements OnInit, OnDestroy {
     private ds: DataStore,
     private currencyPipe: CurrencyPipe,
     private uR: UserReducers,
-    private tR: TransactionReducers
+    private tR: TransactionReducers,
+    private dashboard: DashboardReducers
   ) {
     this.initialState = ds.dataStore$.getValue();
     this.clearCompanyTxnsStore();
     this.clearClaimsStore();
-
-    this.uR.userReducer({
-      type: USER_EXTRA_DETAILS,
-      payload: { id: this.initialState.userInfo._id },
-    });
 
     // this.subscribers = this.ds.dataStore$.subscribe((res) => {
     //   console.log(res);
@@ -188,7 +186,14 @@ export class DashboardComponent implements OnInit, OnDestroy {
   // }
 
   ngOnInit() {
-    this.tR.transactionReducer({ type: GET_WALLET_TRANSACTION_LIST });
+    // this.uR.userReducer({
+    //   type: USER_EXTRA_DETAILS,
+    //   payload: { id: this.initialState.userInfo._id },
+    // });
+
+    // this.tR.transactionReducer({ type: GET_WALLET_TRANSACTION_LIST });
+
+    this.dashboard.dashboardReducer({ type: DASHBOARD_COMBINED_APIS });
 
     // this.showCompanyWallet();
     // this.getCompanyTransactions();
@@ -201,6 +206,8 @@ export class DashboardComponent implements OnInit, OnDestroy {
         []
       );
       this.moneyTransfered = _.sumBy(transactions, "trn_amount");
+
+      console.log(data.userExtraDetails);
 
       this.userBalance = _.get(data.userExtraDetails, "wallet_balance", 0);
 

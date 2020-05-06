@@ -105,3 +105,8 @@ export const GET_MARGIN_TYPE_LIST =
 
 export const CREATE_NEW_MARGIN =
   "[CREATE_NEW_MARGIN] Get Margin list for specific type ";
+
+// dashboard
+
+export const DASHBOARD_COMBINED_APIS =
+  "[DASHBOARD_COMBINED_APIS] Dashboard combined apis";
