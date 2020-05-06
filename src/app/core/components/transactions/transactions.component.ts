@@ -22,6 +22,15 @@ export class TransactionsComponent implements OnInit {
         data.userWalletTransactionList,
         "transaction_recs"
       );
+
+      // filter data with no txn amount
+      this.walletTransactionList = _.filter(
+        this.walletTransactionList,
+        (obj) => obj.trn_amount
+      );
+
+      //reverse wallet data
+      this.walletTransactionList = _.reverse(this.walletTransactionList);
     });
   }
 }
