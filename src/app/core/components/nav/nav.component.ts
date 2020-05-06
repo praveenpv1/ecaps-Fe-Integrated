@@ -148,9 +148,10 @@ export class NavComponent implements OnInit, OnDestroy {
         this._toastReducer.toastState({ type: HIDE_TOAST });
       }
       if (data.loader) {
-        if (this.noLoaderExists) {
-          this.spinner.show();
-        }
+        this.spinner.show();
+        //   if (this.noLoaderExists) {
+        //   this.spinner.show();
+        // }
       } else {
         this.spinner.hide();
         this.noLoaderExists = true;

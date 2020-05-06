@@ -14,6 +14,7 @@ import {
   SET_PASSWORD,
   CHILD_USERS_LIST,
   USER_EXTRA_DETAILS,
+  GET_WALLET_TRANSACTION_LIST,
 } from "../actions";
 import { LoadingReducers } from "./loading.reducer";
 import { catchCommonData, successCommonData } from "../commonstoredata";
@@ -23,6 +24,7 @@ import { Router } from "@angular/router";
 import { ToastReducers } from "./toast.reducer";
 import { ResetStateReducers } from "@app/core/store/reducers/resetstate.reducer";
 import { UserReducers } from "./user.reducer";
+import { TransactionReducers } from "./transaction.reducer";
 
 @Injectable()
 export class LoginReducers {
@@ -34,7 +36,8 @@ export class LoginReducers {
     private router: Router,
     private toast: ToastReducers,
     private resetReducer: ResetStateReducers,
-    private user: UserReducers
+    private user: UserReducers,
+    private transaction: TransactionReducers
   ) {}
 
   loginReducer(action: any) {
@@ -64,11 +67,16 @@ export class LoginReducers {
                 userInfo: _.omit(data, "token"),
               });
               localStorage.setItem("userData", JSON.stringify(data));
+              // this.user.userReducer({
+              //   type: USER_EXTRA_DETAILS,
+              //   payload: { id: data._id },
+              // });
+              // this.transaction.transactionReducer({
+              //   type: GET_WALLET_TRANSACTION_LIST,
+              // });
+
               this.router.navigate(["/", ...defaultRedirectURL]);
-              this.user.userReducer({
-                type: USER_EXTRA_DETAILS,
-                payload: { id: data._id },
-              });
+
               // this.user.userReducer({
               //   type: CHILD_USERS_LIST,
               //   payload: {

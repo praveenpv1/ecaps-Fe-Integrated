@@ -11,6 +11,7 @@ import { LoginReducers } from "./login.reducer";
 import { FundReducers } from "./fund.reducer";
 import { TransactionReducers } from "./transaction.reducer";
 import { MarginReducers } from "./margin.reducer";
+import { DashboardReducers } from "./dashboard.reducer";
 
 export const rootReducers = [
   UserReducers,
@@ -26,4 +27,5 @@ export const rootReducers = [
   FundReducers,
   TransactionReducers,
   MarginReducers,
+  DashboardReducers,
 ];

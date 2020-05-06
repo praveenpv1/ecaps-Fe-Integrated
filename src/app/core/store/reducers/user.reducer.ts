@@ -44,71 +44,6 @@ export class UserReducers {
     let state = this._dataStore.dataStore$.getValue();
     const employeePath = MODEL_PATHS.employees;
     switch (action.type) {
-      // case LOGIN:
-      //   this._loader.loadingState({ type: LOADING });
-
-      //   console.log("IN USER LOGIN");
-
-      //   let defaultRedirectURL = ["dashboard"];
-
-      //   //clear state
-      //   this.resetReducer.resetState({
-      //     type: RESET_STATE,
-      //     payload: {},
-      //   });
-
-      //   state = this._dataStore.dataStore$.getValue();
-      //   this.apiService.login(action.payload).subscribe(
-      //     (response: any) => {
-      //       this.authService.setAccessToken(response.token);
-      //       if (response.is_verified) {
-      //         this._dataStore.dataStore$.next({
-      //           ...state,
-      //           ...successCommonData,
-      //           userInfo: _.omit(response, "token"),
-      //         });
-      //         localStorage.setItem("userData", JSON.stringify(response));
-      //         this.router.navigate(["/", ...defaultRedirectURL]);
-      //       } else {
-      //         this._dataStore.dataStore$.next({
-      //           ...state,
-      //           ...catchCommonData,
-      //           toastMessage: "Not verified.",
-      //         });
-      //         this.router.navigate(["/sigin"]);
-      //       }
-      //       console.log(response);
-      //     },
-      //     (error) => {
-      //       console.log(error);
-      //     }
-      //   );
-      //   break;
-      // case ADD_USER_INFO:
-      //   console.log("IN USER ADD");
-      //   this._loader.loadingState({ type: LOADING });
-      //   this.apiService
-      //     .pk_get(MODEL_PATHS.employees, "me", {})
-      //     .then((data) => {
-      //       sessionStorage.setItem("userInfo", JSON.stringify(data));
-
-      //       this._dataStore.dataStore$.next({
-      //         ...state,
-      //         ...successCommonData,
-      //         userInfo: data,
-      //       });
-      //     })
-      //     .catch((error) => {
-      //       state = this._dataStore.dataStore$.getValue();
-
-      //       this._dataStore.dataStore$.next({
-      //         ...state,
-      //         ...catchCommonData,
-      //         toastMessage: error.response.data.error,
-      //       });
-      //     });
-      //   break;
-
       case CHILD_USERS_LIST:
         console.log("IN CHILD_USERS_LIST");
         this._loader.loadingState({ type: LOADING });
@@ -154,19 +89,6 @@ export class UserReducers {
           }
         );
         break;
-      // .then(data => {
-      //   this._dataStore.dataStore$.next({
-      //     ...state,
-      //     ...successCommonData,
-      //     childUser: {
-      //       data: data
-      //     }
-      //   });
-      // })
-      // .catch(error => {
-      //   this.toast.commonCatchToast(error.response.data.error);
-      // });
-      // break;
 
       case ADD_CHILD:
         console.log("payload", action.payload);
@@ -236,23 +158,25 @@ export class UserReducers {
       case USER_EXTRA_DETAILS:
         this._loader.loadingState({ type: LOADING });
         state = this._dataStore.dataStore$.getValue();
-        this.apiService.get(`main/users/update/${action.payload.id}`).subscribe(
-          ({ data }: any) => {
-            localStorage.setItem("userExtraData", JSON.stringify(data));
+        this.apiService
+          .get(`main/users/update/${state.userInfo._id}`)
+          .subscribe(
+            ({ data }: any) => {
+              localStorage.setItem("userExtraData", JSON.stringify(data));
 
-            this._dataStore.dataStore$.next({
-              ...state,
-              ...successCommonData,
-              userExtraDetails: data,
-            });
-          },
-          (error) => {
-            console.log(error);
-            this.toast.commonCatchToast(
-              _.get(error, "message", "Something Went Wrong!!")
-            );
-          }
-        );
+              this._dataStore.dataStore$.next({
+                ...state,
+                ...successCommonData,
+                userExtraDetails: data,
+              });
+            },
+            (error) => {
+              console.log(error);
+              this.toast.commonCatchToast(
+                _.get(error, "message", "Something Went Wrong!!")
+              );
+            }
+          );
         break;
 
       default:

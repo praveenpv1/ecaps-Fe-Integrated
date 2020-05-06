@@ -2,6 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { MarginReducers } from "@app/core/store/reducers/margin.reducer";
 import { GET_MARGIN_TYPE_LIST } from "@app/core/store/actions";
 import { DataStore } from "@app/core/store/app.store";
+import { CurrencyPipe } from "@angular/common";
 
 @Component({
   selector: "app-margins",
@@ -13,7 +14,11 @@ export class MarginsComponent implements OnInit {
   selectedValue: any;
   marginList: any;
   subscriber: any;
-  constructor(private mR: MarginReducers, private ds: DataStore) {
+  constructor(
+    private mR: MarginReducers,
+    private ds: DataStore,
+    private currencyPipe: CurrencyPipe
+  ) {
     this.marginSet = ["Fundtransfer", "Recharge"];
     this.selectedValue = this.marginSet[0];
     this.marginList = [
@@ -62,7 +67,7 @@ export class MarginsComponent implements OnInit {
 
   displayMarginValue(data) {
     return data.margin_mode === 1
-      ? data.margin_actual
+      ? this.currencyPipe.transform(data.margin_actual, "INR")
       : `${data.margin_actual}%`;
   }
 }
