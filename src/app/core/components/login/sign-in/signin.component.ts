@@ -8,28 +8,27 @@ import { LoginReducers } from "@app/core/store/reducers/login.reducer";
 @Component({
   selector: "signin-component",
   templateUrl: "./signin.component.html",
-  styleUrls: ["./signin.component.scss"]
+  styleUrls: ["./signin.component.scss"],
 })
 export class SignInComponent implements OnInit, OnDestroy {
   showPassword: boolean = false;
   signInForm = new FormGroup({
     email: new FormControl(null, [Validators.required]),
-    password: new FormControl(null, [Validators.required])
+    password: new FormControl(null, [Validators.required]),
   });
   constructor(
     private resetReducer: ResetStateReducers,
     private authService: AuthService,
     private loginReducer: LoginReducers
   ) {
-     //clear state
-     this.resetReducer.resetState({
+    //clear state
+    this.resetReducer.resetState({
       type: RESET_STATE,
-      payload: {}
+      payload: {},
     });
 
     localStorage.setItem("token", "");
     sessionStorage.setItem("company_id", "");
-     
   }
   login() {
     if (this.signInForm.valid) {
@@ -37,16 +36,24 @@ export class SignInComponent implements OnInit, OnDestroy {
         type: LOGIN,
         payload: {
           email: this.signInForm.controls["email"].value.toLowerCase(),
-          password: this.signInForm.controls["password"].value
-        }
+          password: this.signInForm.controls["password"].value,
+        },
       });
     }
   }
 
-  public ngOnInit() {}
+  public ngOnInit() {
+    this.logout();
+  }
+
+  logout(): void {
+    localStorage.setItem("userData", null);
+    localStorage.setItem("userExtraData", null);
+    this.authService.logout("signin");
+  }
 
   public ngOnDestroy() {}
-  
+
   togglePasswordDisplay() {
     this.showPassword = !this.showPassword;
   }
