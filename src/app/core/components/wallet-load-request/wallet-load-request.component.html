@@ -1,7 +1,7 @@
 <div nz-row>
   <div nz-col nzSm="24" nzMd="24" nzLg="24" nzXl="24">
     <h3 class="primary-color-font">Wallet Load</h3>
-    <p>Manage your Wallet Load Request</p>
+    <p>Manage your Wallet Load Requests</p>
   </div>
 </div>
 <div nz-row>
@@ -71,14 +71,15 @@
       #nzTable
       [nzData]="walletLoadRequests"
       [nzScroll]="{ y: '240px' }"
+      [nzPageSize]="30"
     >
       <thead>
         <tr>
           <th nzWidth="220px">From</th>
           <th nzWidth="220px">To</th>
           <th nzWidth="120px">Amount</th>
-          <th nzWidth="180px">Status</th>
-          <th>Actions</th>
+          <th nzWidth="120px">Status</th>
+          <th nzWidth="120px"></th>
         </tr>
       </thead>
       <tbody>
@@ -87,18 +88,11 @@
           <td>{{ data.fl_to_uid }}</td>
           <td>{{ data.fl_req_amount }}</td>
           <td>{{ data.fl_status === false ? "Approved" : "Pending" }}</td>
-          <td>
-            <button
-              nz-button
-              nzSize="small"
-              nzType="primary"
-              style="box-shadow: none !important;"
-              (click)="approveLoadRequest(data)"
-              [disabled]="!data.fl_status"
-            >
-              Approve
-            </button>
-          </td>
+          <td> 
+            <a nz-button nzType="link" class="primary-color-font" (click)="viewLoadRequestRoute(data)">
+              View <i nz-icon nzType="right-circle" nzTheme="outline" style="font-size: 16px;"></i>
+            </a>
+          </td> 
         </tr>
       </tbody>
     </nz-table>
