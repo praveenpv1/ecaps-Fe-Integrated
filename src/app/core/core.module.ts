@@ -12,76 +12,6 @@ import {
 import { TranslateHttpLoader } from "@ngx-translate/http-loader";
 import { FlexLayoutModule } from "@angular/flex-layout";
 
-import { PlaceholderComponent } from "./components/placeholder/placeholder.component";
-import { DashboardComponent } from "./components/dashboard/dashboard.component";
-import { KopprSignUpComponent } from "./components/login/sign-up/signup.component";
-import { SalaryComponent } from "./components/salary/salary.component";
-import { AddEmployeeComponent } from "./components/employee/add-employee.component";
-import { EmployeeAddTypeSelectionComponent } from "./components/employee/employee-add-type-selection.component";
-import { BulkUploadComponent } from "./components/employee/bulk-upload.component";
-import { BulkUploadSuccessComponent } from "./components/employee/bulk-upload-success.component";
-import { ListComponent } from "./components/employee/list.component";
-import { SignUpInnerComponent } from "./components/company/sign-up-inner.component";
-import { SignUpComponent } from "./components/company/sign-up.component";
-import { DepositComponent } from "./components/company/deposit.component";
-import { CompanyListComponent } from "./components/company/companylist.component";
-import { CompanyDetailsComponent } from "./components/company/company-details.component";
-import { BankDetailsComponent } from "./components/company/bank-details.component";
-import { SelectPlanComponent } from "./components/company/select-plan.component";
-import { PlanPaymentComponent } from "./components/company/plan-payment.component";
-import { PaySalaryComponent } from "./components/salary/pay-salary.component";
-import { ConfirmSalaryPaymentComponent } from "./components/salary/confirm-salary-payment.component";
-import { SalaryPaymentResponseComponent } from "./components/salary/salary-payment-response.component";
-import { TopUpPaymentResponseComponent } from "./components/salary/top-up-payment-response.component";
-import { TopUpPaymentComponent } from "./components/salary/top-up-payment.component";
-import { TopUpComponent } from "./components/salary/top-up.component";
-import { UserComponent } from "./components/account/user.component";
-import { KopprAccountDetailsComponent } from "./components/account/koppr-account-details.component";
-import { AddNewUserComponent } from "./components/account/addnewuser.component";
-import { UserDetailsComponent } from "./components/account/userdetails.component";
-import { PayAllowanceComponent } from "@app/core/components/allowance/pay-allowance.component";
-import { ConfirmAllowancePaymentComponent } from "@app/core/components/allowance/confirm-allowance-payment.component";
-import { AllowancePaymentResponseComponent } from "@app/core/components/allowance/allowance-payment-response.component";
-import { AllowanceTopUpPaymentResponseComponent } from "@app/core/components/allowance/top-up-payment-response.component";
-import { AllowanceTopUpPaymentComponent } from "@app/core/components/allowance/top-up-payment.component";
-import { AllowanceTopUpComponent } from "@app/core/components/allowance/top-up.component";
-import { AllowanceComponent } from "@app/core/components/allowance/allowance.component";
-import { ViewPotComponent } from "./components/dashboard/viewpot.component";
-import { BulkCategoryComponent } from "@app/core/components/employee/bulk-category.component";
-import { TransferPotComponent } from "./components/dashboard/transferpot.component";
-import { TransferFromToComponent } from "./components/dashboard/transferfromto.component";
-import { PotCongratsComponent } from "./components/dashboard/potcongrats.component";
-import { GoalComponent } from "./components/dashboard/goal.component";
-import { ClaimComponent } from "./components/claim/claim.component";
-import { ClaimApprovedComponent } from "./components/claim/claim-approved.component";
-import { ClaimDetailsComponent } from "./components/claim/claim-details.component";
-import { ClaimRejectedComponent } from "./components/claim/claim-rejected.component";
-import { SpendComponent } from "./components/spend/spend.component";
-import { CardComponent } from "./components/card/card.component";
-import { NavigationBarComponent } from "./components/navigation-bar/navigation-bar.component";
-import { NavComponent } from "./components/nav/nav.component";
-import { SignInComponent } from "./components/login/sign-in/signin.component";
-import { TopupApprovalComponent } from "./components/company/topup-approval.component";
-import { DistributorComponent } from "./components/distributor/distributor.component";
-import { SuperDistributorComponent } from "./components/super-distributor/super-distributor.component";
-import { AddSuperDistributorComponent } from "./components/super-distributor/add-super-distributor.component";
-import { AddDistributorComponent } from "./components/distributor/add-distributor.component";
-import { RetailerComponent } from "./components/retailer/retailer.component";
-import { AddRetailerComponent } from "./components/retailer/add-retailer.component";
-import { LedgersComponent } from "./components/ledgers/ledgers.component";
-import { EarningsComponent } from "./components/earnings/earnings.component";
-import { TransactionsComponent } from "./components/transactions/transactions.component";
-import { WalletLoadRequestComponent } from "./components/wallet-load-request/wallet-load-request.component";
-import { WalletTopUpComponent } from "./components/wallet-top-up/wallet-top-up.component";
-import { PaymentsComponent } from "./components/payments/payments.component";
-import { ForgotPasswordComponent } from "./components/login/forgot-password/forgot-password.component";
-import { VerifyEmailComponent } from "./components/login/verify-email/verify-email.component";
-import { SetPasswordComponent } from "./components/login/set-password/set-password.component";
-import { UserAccountComponent } from "./components/user-account/user-account.component";
-import { EditAccountComponent } from "./components/user-account/edit-account.component";
-import { CommissionsComponent } from "./components/commissions/commissions.component";
-import { LoyaltyComponent } from "./components/loyalty/loyalty.component";
-
 //
 // koppr Components lib
 //
@@ -122,8 +52,79 @@ import { Ng2SearchPipeModule } from "ng2-search-filter";
 import { DatePipe, CurrencyPipe } from "@angular/common";
 import { NgxSpinnerModule } from "ngx-spinner";
 import { NzTabsModule } from "ng-zorro-antd/tabs";
-import { MarginsComponent } from "./components/margins/margins.component";
+
+// import { SalaryComponent } from "./components/salary/salary.component";
+// import { AddEmployeeComponent } from "./components/employee/add-employee.component";
+// import { EmployeeAddTypeSelectionComponent } from "./components/employee/employee-add-type-selection.component";
+// import { BulkUploadComponent } from "./components/employee/bulk-upload.component";
+// import { BulkUploadSuccessComponent } from "./components/employee/bulk-upload-success.component";
+// import { ListComponent } from "./components/employee/list.component";
+// import { DepositComponent } from "./components/company/deposit.component";
+// import { CompanyListComponent } from "./components/company/companylist.component";
+// import { CompanyDetailsComponent } from "./components/company/company-details.component";
+// import { BankDetailsComponent } from "./components/company/bank-details.component";
+// import { SelectPlanComponent } from "./components/company/select-plan.component";
+// import { PlanPaymentComponent } from "./components/company/plan-payment.component";
+// import { PaySalaryComponent } from "./components/salary/pay-salary.component";
+// import { ConfirmSalaryPaymentComponent } from "./components/salary/confirm-salary-payment.component";
+// import { SalaryPaymentResponseComponent } from "./components/salary/salary-payment-response.component";
+// import { TopUpPaymentResponseComponent } from "./components/salary/top-up-payment-response.component";
+// import { TopUpPaymentComponent } from "./components/salary/top-up-payment.component";
+// import { TopUpComponent } from "./components/salary/top-up.component";
+// import { UserComponent } from "./components/account/user.component";
+// import { KopprAccountDetailsComponent } from "./components/account/koppr-account-details.component";
+// import { AddNewUserComponent } from "./components/account/addnewuser.component";
+// import { UserDetailsComponent } from "./components/account/userdetails.component";
+// import { PayAllowanceComponent } from "@app/core/components/allowance/pay-allowance.component";
+// import { ConfirmAllowancePaymentComponent } from "@app/core/components/allowance/confirm-allowance-payment.component";
+// import { AllowancePaymentResponseComponent } from "@app/core/components/allowance/allowance-payment-response.component";
+// import { AllowanceTopUpPaymentResponseComponent } from "@app/core/components/allowance/top-up-payment-response.component";
+// import { AllowanceTopUpPaymentComponent } from "@app/core/components/allowance/top-up-payment.component";
+// import { AllowanceTopUpComponent } from "@app/core/components/allowance/top-up.component";
+// import { AllowanceComponent } from "@app/core/components/allowance/allowance.component";
+// import { ViewPotComponent } from "./components/dashboard/viewpot.component";
+// import { BulkCategoryComponent } from "@app/core/components/employee/bulk-category.component";
+// import { TransferPotComponent } from "./components/dashboard/transferpot.component";
+// import { TransferFromToComponent } from "./components/dashboard/transferfromto.component";
+// import { PotCongratsComponent } from "./components/dashboard/potcongrats.component";
+// import { GoalComponent } from "./components/dashboard/goal.component";
+// import { ClaimComponent } from "./components/claim/claim.component";
+// import { ClaimApprovedComponent } from "./components/claim/claim-approved.component";
+// import { ClaimDetailsComponent } from "./components/claim/claim-details.component";
+// import { ClaimRejectedComponent } from "./components/claim/claim-rejected.component";
+// import { SpendComponent } from "./components/spend/spend.component";
+// import { CardComponent } from "./components/card/card.component";
+// import { TopupApprovalComponent } from "./components/company/topup-approval.component";
+// import { PlaceholderComponent } from "./components/placeholder/placeholder.component";
+import { DashboardComponent } from "./components/dashboard/dashboard.component";
+import { KopprSignUpComponent } from "./components/login/sign-up/signup.component";
+import { SignUpInnerComponent } from "./components/company/sign-up-inner.component";
+import { SignUpComponent } from "./components/company/sign-up.component";
+import { NavigationBarComponent } from "./components/navigation-bar/navigation-bar.component";
+import { NavComponent } from "./components/nav/nav.component";
+import { SignInComponent } from "./components/login/sign-in/signin.component";
+import { DistributorComponent } from "./components/distributor/distributor.component";
+import { SuperDistributorComponent } from "./components/super-distributor/super-distributor.component";
+import { AddSuperDistributorComponent } from "./components/super-distributor/add-super-distributor.component";
+import { AddDistributorComponent } from "./components/distributor/add-distributor.component";
+import { RetailerComponent } from "./components/retailer/retailer.component";
+import { AddRetailerComponent } from "./components/retailer/add-retailer.component";
+import { LedgersComponent } from "./components/ledgers/ledgers.component";
+import { EarningsComponent } from "./components/earnings/earnings.component";
+import { TransactionsComponent } from "./components/transactions/transactions.component";
+import { WalletLoadRequestComponent } from "./components/wallet-load-request/wallet-load-request.component";
+import { ViewLoadRequestsComponent } from "./components/wallet-load-request/view-load-requests.component";
+import { WalletTopUpComponent } from "./components/wallet-top-up/wallet-top-up.component";
+import { PaymentsComponent } from "./components/payments/payments.component";
+import { ForgotPasswordComponent } from "./components/login/forgot-password/forgot-password.component";
+import { VerifyEmailComponent } from "./components/login/verify-email/verify-email.component";
+import { SetPasswordComponent } from "./components/login/set-password/set-password.component";
+import { UserAccountComponent } from "./components/user-account/user-account.component";
+import { EditAccountComponent } from "./components/user-account/edit-account.component";
+import { CommissionsComponent } from "./components/commissions/commissions.component";
+import { LoyaltyComponent } from "./components/loyalty/loyalty.component";
 import { AddMarginsComponent } from './components/margins/add-margins/add-margins.component';
+import { MarginsComponent } from "./components/margins/margins.component";
 
 const antDesignIcons = AllIcons as {
   [key: string]: IconDefinition;
@@ -180,70 +181,71 @@ const icons: IconDefinition[] = Object.keys(antDesignIcons).map(
     CurrencyPipe,
   ],
   declarations: [
-    PlaceholderComponent,
+    
+    // SalaryComponent,
+    // AddEmployeeComponent,
+    // BulkUploadComponent,
+    // BulkUploadSuccessComponent,
+    // BulkCategoryComponent,
+    // CompanyDetailsComponent,
+    // BankDetailsComponent,
+    // SelectPlanComponent,
+    // PlanPaymentComponent,
+    // PaySalaryComponent,
+    // ConfirmSalaryPaymentComponent,
+    // SalaryPaymentResponseComponent,
+    // TopUpPaymentResponseComponent,
+    // TopUpPaymentComponent,
+    // TopUpComponent,
+    // AddNewUserComponent,
+    // UserComponent,
+    // KopprAccountDetailsComponent,
+    // UserDetailsComponent,
+    // PaySalaryComponent,
+    // ConfirmSalaryPaymentComponent,
+    // SalaryPaymentResponseComponent,
+    // TopUpPaymentResponseComponent,
+    // TopUpPaymentComponent,
+    // TopUpComponent,
+    // PaySalaryComponent,
+    // ConfirmSalaryPaymentComponent,
+    // SalaryPaymentResponseComponent,
+    // TopUpPaymentResponseComponent,
+    // TopUpPaymentComponent,
+    // TopUpComponent,
+    // EmployeeAddTypeSelectionComponent,
+    // ListComponent,
+    // TransferPotComponent,
+    // TransferFromToComponent,
+    // PotCongratsComponent,
+    // GoalComponent,
+    // SpendComponent,
+    // CardComponent,
+    // ClaimComponent,
+    // ClaimApprovedComponent,
+    // ClaimDetailsComponent,
+    // ClaimRejectedComponent,
+    // ViewPotComponent,
+    // PayAllowanceComponent,
+    // ConfirmAllowancePaymentComponent,
+    // AllowancePaymentResponseComponent,
+    // AllowanceTopUpPaymentResponseComponent,
+    // AllowanceTopUpPaymentComponent,
+    // AllowanceTopUpComponent,
+    // AllowanceComponent,
+    // DepositComponent,
+    // TopupApprovalComponent,
+    // CompanyListComponent,
+    // PlaceholderComponent,
     DashboardComponent,
-    SalaryComponent,
-    AddEmployeeComponent,
-    BulkUploadComponent,
-    BulkUploadSuccessComponent,
-    BulkCategoryComponent,
     SignUpInnerComponent,
     SignUpComponent,
-    CompanyDetailsComponent,
-    BankDetailsComponent,
-    SelectPlanComponent,
-    PlanPaymentComponent,
-    PaySalaryComponent,
-    ConfirmSalaryPaymentComponent,
-    SalaryPaymentResponseComponent,
-    TopUpPaymentResponseComponent,
-    TopUpPaymentComponent,
-    TopUpComponent,
-    AddNewUserComponent,
-    UserComponent,
-    KopprAccountDetailsComponent,
-    UserDetailsComponent,
-    PaySalaryComponent,
-    ConfirmSalaryPaymentComponent,
-    SalaryPaymentResponseComponent,
-    TopUpPaymentResponseComponent,
-    TopUpPaymentComponent,
-    TopUpComponent,
-    PaySalaryComponent,
-    ConfirmSalaryPaymentComponent,
-    SalaryPaymentResponseComponent,
-    TopUpPaymentResponseComponent,
-    TopUpPaymentComponent,
-    TopUpComponent,
-    EmployeeAddTypeSelectionComponent,
-    ListComponent,
-    TransferPotComponent,
-    TransferFromToComponent,
-    PotCongratsComponent,
-    GoalComponent,
-    SpendComponent,
-    CardComponent,
-    ClaimComponent,
-    ClaimApprovedComponent,
-    ClaimDetailsComponent,
-    ClaimRejectedComponent,
     NavigationBarComponent,
     NavComponent,
-    ViewPotComponent,
     SignInComponent,
     KopprSignUpComponent,
     ModalComponent,
-    PayAllowanceComponent,
-    ConfirmAllowancePaymentComponent,
-    AllowancePaymentResponseComponent,
-    AllowanceTopUpPaymentResponseComponent,
-    AllowanceTopUpPaymentComponent,
-    AllowanceTopUpComponent,
-    AllowanceComponent,
     FilterPipeByField,
-    DepositComponent,
-    TopupApprovalComponent,
-    CompanyListComponent,
     DistributorComponent,
     AddDistributorComponent,
     RetailerComponent,
@@ -265,58 +267,60 @@ const icons: IconDefinition[] = Object.keys(antDesignIcons).map(
     CommissionsComponent,
     MarginsComponent,
     AddMarginsComponent,
+    ViewLoadRequestsComponent 
   ],
   exports: [
-    PlaceholderComponent,
+   
+    // SalaryComponent,
+    // AddEmployeeComponent,
+    // BulkUploadComponent,
+    // BulkUploadSuccessComponent,
+    // ListComponent,
+    // CompanyDetailsComponent,
+    // BankDetailsComponent,
+    // SelectPlanComponent,
+    // PaySalaryComponent,
+    // ConfirmSalaryPaymentComponent,
+    // SalaryPaymentResponseComponent,
+    // TopUpPaymentResponseComponent,
+    // TopUpPaymentComponent,
+    // TopUpComponent,
+    // AddNewUserComponent,
+    // UserComponent,
+    // KopprAccountDetailsComponent,
+    // UserDetailsComponent,
+    // EmployeeAddTypeSelectionComponent,
+    // TransferPotComponent,
+    // TransferFromToComponent,
+    // PotCongratsComponent,
+    // GoalComponent,
+    // SpendComponent,
+    // CardComponent,
+    // ClaimComponent,
+    // ClaimDetailsComponent,
+    // ClaimApprovedComponent,
+    // ClaimRejectedComponent,
+    // ViewPotComponent,
+    // PayAllowanceComponent,
+    // ConfirmAllowancePaymentComponent,
+    // AllowancePaymentResponseComponent,
+    // AllowanceTopUpPaymentResponseComponent,
+    // AllowanceTopUpPaymentComponent,
+    // AllowanceTopUpComponent,
+    // AllowanceComponent,
+    // DepositComponent,
+    // TopupApprovalComponent,
+    // CompanyListComponent,
+    // PlaceholderComponent,
     DashboardComponent,
-    SalaryComponent,
-    AddEmployeeComponent,
-    BulkUploadComponent,
-    BulkUploadSuccessComponent,
-    ListComponent,
     SignUpInnerComponent,
     SignUpComponent,
     VerifyEmailComponent,
-    CompanyDetailsComponent,
-    BankDetailsComponent,
-    SelectPlanComponent,
-    PaySalaryComponent,
-    ConfirmSalaryPaymentComponent,
-    SalaryPaymentResponseComponent,
-    TopUpPaymentResponseComponent,
-    TopUpPaymentComponent,
-    TopUpComponent,
-    AddNewUserComponent,
-    UserComponent,
-    KopprAccountDetailsComponent,
-    UserDetailsComponent,
-    EmployeeAddTypeSelectionComponent,
-    TransferPotComponent,
-    TransferFromToComponent,
-    PotCongratsComponent,
-    GoalComponent,
-    SpendComponent,
-    CardComponent,
-    ClaimComponent,
-    ClaimDetailsComponent,
-    ClaimApprovedComponent,
-    ClaimRejectedComponent,
     NavigationBarComponent,
     NavComponent,
-    ViewPotComponent,
     SignInComponent,
     KopprSignUpComponent,
     ModalComponent,
-    PayAllowanceComponent,
-    ConfirmAllowancePaymentComponent,
-    AllowancePaymentResponseComponent,
-    AllowanceTopUpPaymentResponseComponent,
-    AllowanceTopUpPaymentComponent,
-    AllowanceTopUpComponent,
-    AllowanceComponent,
-    DepositComponent,
-    TopupApprovalComponent,
-    CompanyListComponent,
     DistributorComponent,
     AddDistributorComponent,
     RetailerComponent,
@@ -336,6 +340,7 @@ const icons: IconDefinition[] = Object.keys(antDesignIcons).map(
     LoyaltyComponent,
     CommissionsComponent,
     MarginsComponent,
+    ViewLoadRequestsComponent 
   ],
 })
 export class CoreModule {

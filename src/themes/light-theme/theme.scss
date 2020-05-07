@@ -363,6 +363,18 @@ p {
   justify-content: center;
 }
 
+.container-center {
+  display: flex !important;
+  justify-content: center !important;
+  flex-direction: row !important;
+}
+
+.inline-block-element{
+  display: inline-block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 .button-center {
   display: block !important;
   margin: 0 auto !important;

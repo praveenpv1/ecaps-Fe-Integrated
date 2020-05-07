@@ -65,6 +65,7 @@ import { LedgersComponent } from "@app/core/components/ledgers/ledgers.component
 import { EarningsComponent } from "@app/core/components/earnings/earnings.component";
 import { TransactionsComponent } from "@app/core/components/transactions/transactions.component";
 import { WalletLoadRequestComponent } from "@app/core/components/wallet-load-request/wallet-load-request.component";
+import { ViewLoadRequestsComponent } from "@app/core/components/wallet-load-request/view-load-requests.component";
 import { WalletTopUpComponent } from "@app/core/components/wallet-top-up/wallet-top-up.component";
 import { PaymentsComponent } from "@app/core/components/payments/payments.component";
 import { ForgotPasswordComponent } from "@app/core/components/login/forgot-password/forgot-password.component";
@@ -188,7 +189,11 @@ const routes: Routes = [
     component: WalletLoadRequestComponent,
     data: { menuType: menuType.normal },
   },
-
+  {
+    path: "view-load-request/:id",
+    component: ViewLoadRequestsComponent,
+    data: { menuType: menuType.normal },
+  },
   {
     path: "margins",
     component: MarginsComponent,
