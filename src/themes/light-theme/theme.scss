@@ -426,6 +426,16 @@ p {
   margin-bottom: 0px !important;
 }
 
+.no-border {
+  border: none !important;
+}
+
+.no-shadow {
+-webkit-box-shadow: none !important;
+-moz-box-shadow: none !important;
+box-shadow: none !important;
+}
+
 .ant-btn-primary-disabled,
 .ant-btn-primary.disabled,
 .ant-btn-primary[disabled],
