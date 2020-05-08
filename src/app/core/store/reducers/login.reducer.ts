@@ -15,6 +15,7 @@ import {
   CHILD_USERS_LIST,
   USER_EXTRA_DETAILS,
   GET_WALLET_TRANSACTION_LIST,
+  DASHBOARD_COMBINED_APIS,
 } from "../actions";
 import { LoadingReducers } from "./loading.reducer";
 import { catchCommonData, successCommonData } from "../commonstoredata";
@@ -25,6 +26,7 @@ import { ToastReducers } from "./toast.reducer";
 import { ResetStateReducers } from "@app/core/store/reducers/resetstate.reducer";
 import { UserReducers } from "./user.reducer";
 import { TransactionReducers } from "./transaction.reducer";
+import { DashboardReducers } from "./dashboard.reducer";
 
 @Injectable()
 export class LoginReducers {
@@ -37,7 +39,8 @@ export class LoginReducers {
     private toast: ToastReducers,
     private resetReducer: ResetStateReducers,
     private user: UserReducers,
-    private transaction: TransactionReducers
+    private transaction: TransactionReducers,
+    private dashboard: DashboardReducers
   ) {}
 
   loginReducer(action: any) {
@@ -61,18 +64,53 @@ export class LoginReducers {
           ({ data }: any) => {
             this.authService.setAccessToken(data.token);
             if (data.is_verified) {
-              this._dataStore.dataStore$.next({
-                ...state,
-                ...successCommonData,
-                userInfo: _.omit(data, "token"),
-              });
-              localStorage.setItem("userData", JSON.stringify(data));
+              // this._dataStore.dataStore$.next({
+              //   ...state,
+              //   ...successCommonData,
+              //   userInfo: _.omit(data, "token"),
+              // });
+
+              // this.dashboard.dashboardReducer({
+              //   type: DASHBOARD_COMBINED_APIS,
+              //   payload: { id: data._id },
+              // });
+              // localStorage.setItem("userData", JSON.stringify(data));
+
+              this.apiService.get(`main/users/update/${data._id}`).subscribe(
+                (userExtraDetailsResponse: any) => {
+                  this._dataStore.dataStore$.next({
+                    ...state,
+                    ...successCommonData,
+                    userExtraDetails: userExtraDetailsResponse.data,
+                    userInfo: _.omit(data, "token"),
+                  });
+                  localStorage.setItem(
+                    "userExtraDetails",
+                    JSON.stringify(userExtraDetailsResponse.data)
+                  );
+                  localStorage.setItem("userData", JSON.stringify(data));
+                },
+                (error) => {
+                  console.log(error);
+                  this._dataStore.dataStore$.next({
+                    ...state,
+                    ...successCommonData,
+                    userInfo: _.omit(data, "token"),
+                  });
+                  localStorage.setItem("userData", JSON.stringify(data));
+                  this.toast.commonCatchToast(
+                    _.get(error, "message", "Something Went Wrong!!")
+                  );
+                }
+              );
+
               // this.user.userReducer({
               //   type: USER_EXTRA_DETAILS,
               //   payload: { id: data._id },
               // });
               // this.transaction.transactionReducer({
               //   type: GET_WALLET_TRANSACTION_LIST,
+              //   payload: { id: data._id },
               // });
 
               this.router.navigate(["/", ...defaultRedirectURL]);

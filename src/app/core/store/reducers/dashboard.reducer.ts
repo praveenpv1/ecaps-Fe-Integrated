@@ -41,47 +41,61 @@ export class DashboardReducers {
 
         this._loader.loadingState({ type: LOADING });
         state = this._dataStore.dataStore$.getValue();
-        const userId = state.userInfo._id;
-        this.apiService.get(`main/users/update/${userId}`).subscribe(
-          ({ data }: any) => {
-            localStorage.setItem("userExtraData", JSON.stringify(data));
+        console.log("dashboard state ", localStorage.getItem("userData"));
 
-            this.apiService
-              .get(`main/wallets/transactions/${userId}`)
-              .subscribe(
-                (response: any) => {
-                  this._dataStore.dataStore$.next({
-                    ...state,
-                    ...successCommonData,
-                    userWalletTransactionList: response,
-                    userExtraDetails: data,
-                  });
-                },
-                (error) => {
-                  console.log(error);
+        const userId = !_.isEmpty(_.get(action.payload, "id", ""))
+          ? action.payload.id
+          : _.get(state.userInfo, "_id");
+        if (!_.isEmpty(userId)) {
+          this.apiService.get(`main/users/update/${userId}`).subscribe(
+            ({ data }: any) => {
+              this.apiService
+                .get(`main/wallets/transactions/${userId}`)
+                .subscribe(
+                  (response: any) => {
+                    this._dataStore.dataStore$.next({
+                      ...state,
+                      ...successCommonData,
+                      userWalletTransactionList: response,
+                      userExtraDetails: data,
+                    });
 
-                  state = this._dataStore.dataStore$.getValue();
+                    localStorage.setItem(
+                      "userExtraDetails",
+                      JSON.stringify(data)
+                    );
+                  },
+                  (error) => {
+                    console.log(error);
 
-                  this._dataStore.dataStore$.next({
-                    ...state,
-                    ...catchCommonData,
-                    userExtraDetails: data,
-                    toastMessage: _.get(
-                      error,
-                      "message",
-                      "Something Went Wrong!!"
-                    ),
-                  });
-                }
+                    state = this._dataStore.dataStore$.getValue();
+
+                    this._dataStore.dataStore$.next({
+                      ...state,
+                      ...catchCommonData,
+                      userExtraDetails: data,
+                      toastMessage: _.get(
+                        error,
+                        "message",
+                        "Something Went Wrong!!"
+                      ),
+                    });
+
+                    localStorage.setItem(
+                      "userExtraDetails",
+                      JSON.stringify(data)
+                    );
+                  }
+                );
+            },
+            (error) => {
+              console.log(error);
+              this.toast.commonCatchToast(
+                _.get(error, "message", "Something Went Wrong!!")
               );
-          },
-          (error) => {
-            console.log(error);
-            this.toast.commonCatchToast(
-              _.get(error, "message", "Something Went Wrong!!")
-            );
-          }
-        );
+            }
+          );
+        }
         break;
 
       default:

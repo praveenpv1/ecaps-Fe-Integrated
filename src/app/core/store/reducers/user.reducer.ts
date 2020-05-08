@@ -162,13 +162,12 @@ export class UserReducers {
           .get(`main/users/update/${state.userInfo._id}`)
           .subscribe(
             ({ data }: any) => {
-              localStorage.setItem("userExtraData", JSON.stringify(data));
-
               this._dataStore.dataStore$.next({
                 ...state,
                 ...successCommonData,
                 userExtraDetails: data,
               });
+              localStorage.setItem("userExtraDetails", JSON.stringify(data));
             },
             (error) => {
               console.log(error);

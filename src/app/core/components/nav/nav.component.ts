@@ -73,6 +73,7 @@ export class NavComponent implements OnInit, OnDestroy {
   userBalance = "0";
   userName = "";
   userRole = "";
+  masterRole: string = null;
   noLoaderExists: boolean = true;
   subscribers: Subscription;
   company_id: string = "";
@@ -101,6 +102,7 @@ export class NavComponent implements OnInit, OnDestroy {
     // });
 
     this.company_id = sessionStorage.getItem("company_id");
+    this.masterRole = _.get(initialState.userExtraDetails, "pan", null);
 
     this.router.events.subscribe((event: Event) => {
       if (event instanceof NavigationStart) {
@@ -142,7 +144,17 @@ export class NavComponent implements OnInit, OnDestroy {
 
     this.subscribe();
 
+    const token = localStorage.getItem("token");
+    if (token) {
+      this.child.userReducer({
+        type: USER_EXTRA_DETAILS,
+      });
+    }
+
     this.subscribers = this._dataStore.dataStore$.subscribe((data) => {
+      this.masterRole = _.get(data.userExtraDetails, "pan", null);
+      this.userRole = _.get(data.userInfo, "role", null);
+      console.log("extradetails", data.userExtraDetails);
       if (data.toast) {
         this.showToast(data.toastType, data.toastMessage);
         this._toastReducer.toastState({ type: HIDE_TOAST });
@@ -226,50 +238,52 @@ export class NavComponent implements OnInit, OnDestroy {
       "superdistributor",
       "retailer",
     ];
+    console.log(this.masterRole);
+
     const masterRoles = ["main", "marketing", "kyc", "accounting"];
-    const masterRole = _.get(initialState.userExtraDetails, "pan", null);
     // console.log(
     //   "INSIDE SHOW MENU",
     //   this.userRole,
-    //   masterRole,
+    //   this.masterRole,
     //   initialState.userExtraDetails
     // );
 
     if (this.userRole === "master") {
       switch (menuName) {
         case "dashboard":
-          return masterRoles.includes(masterRole);
+          return masterRoles.includes(this.masterRole);
         case "superDistributor":
-          return ["kyc", "main"].includes(masterRole);
+          return ["kyc", "main"].includes(this.masterRole);
 
         case "distributor":
-          return ["kyc", "main"].includes(masterRole);
+          return ["kyc", "main"].includes(this.masterRole);
 
         case "retailer":
-          return ["kyc", "main"].includes(masterRole);
+          return ["kyc", "main"].includes(this.masterRole);
 
         case "ledgers":
-          return ["accounting", "main"].includes(masterRole);
+          return ["accounting", "main"].includes(this.masterRole);
 
         case "earnings":
-          return ["accounting", "main"].includes(masterRole);
+          return ["accounting", "main"].includes(this.masterRole);
 
         case "commissions":
-          return ["accounting", "main"].includes(masterRole);
+          return ["accounting", "main"].includes(this.masterRole);
 
         case "loyalty":
-          return ["marketing", "main"].includes(masterRole);
+          return ["marketing", "main"].includes(this.masterRole);
 
         case "transactions":
-          return masterRoles.includes(masterRole);
+          return masterRoles.includes(this.masterRole);
         case "walletLoadRequest":
-          return ["accounting", "main"].includes(masterRole);
+          return ["accounting", "main"].includes(this.masterRole);
         case "walletTopUp":
           return false;
         case "margins":
-          return masterRoles.includes(masterRole);
+          return masterRoles.includes(this.masterRole);
       }
     } else {
+      console.log("userRole", this.userRole);
       switch (menuName) {
         case "dashboard":
           return allUsers.includes(this.userRole);
@@ -406,7 +420,7 @@ export class NavComponent implements OnInit, OnDestroy {
 
   logout(): void {
     localStorage.setItem("userData", null);
-    localStorage.setItem("userExtraData", null);
+    localStorage.setItem("userExtraDetails", null);
     this.authService.logout("signin");
   }
 
@@ -433,8 +447,8 @@ export class NavComponent implements OnInit, OnDestroy {
 
   public ngOnDestroy() {
     this.logger.info("NavComponent: ngOnDestroy()");
-    this.subscribers.unsubscribe();
-    this.unsubscribe();
+    // this.subscribers.unsubscribe();
+    // this.unsubscribe();
   }
 }
 
