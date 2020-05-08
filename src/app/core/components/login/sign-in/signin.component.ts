@@ -48,7 +48,7 @@ export class SignInComponent implements OnInit, OnDestroy {
 
   logout(): void {
     localStorage.setItem("userData", null);
-    localStorage.setItem("userExtraData", null);
+    localStorage.setItem("userExtraDetails", null);
     this.authService.logout("signin");
   }
 

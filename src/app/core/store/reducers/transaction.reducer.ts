@@ -48,28 +48,30 @@ export class TransactionReducers {
       case GET_WALLET_TRANSACTION_LIST:
         console.log("IN GET_WALLET_TRANSACTION_LIST");
         this._loader.loadingState({ type: LOADING });
-        this.apiService
-          .get(`main/wallets/transactions/${state.userInfo._id}`)
-          .subscribe(
-            (response: any) => {
-              this._dataStore.dataStore$.next({
-                ...state,
-                ...successCommonData,
-                userWalletTransactionList: response,
-              });
-            },
-            (error) => {
-              console.log(error);
+        const userId = !_.isEmpty(_.get(action.payload, "id", ""))
+          ? action.payload.id
+          : _.get(state.userInfo, "_id");
 
-              state = this._dataStore.dataStore$.getValue();
+        this.apiService.get(`main/wallets/transactions/${userId}`).subscribe(
+          (response: any) => {
+            this._dataStore.dataStore$.next({
+              ...state,
+              ...successCommonData,
+              userWalletTransactionList: response,
+            });
+          },
+          (error) => {
+            console.log(error);
 
-              this._dataStore.dataStore$.next({
-                ...state,
-                ...catchCommonData,
-                toastMessage: _.get(error, "message", "Something Went Wrong!!"),
-              });
-            }
-          );
+            state = this._dataStore.dataStore$.getValue();
+
+            this._dataStore.dataStore$.next({
+              ...state,
+              ...catchCommonData,
+              toastMessage: _.get(error, "message", "Something Went Wrong!!"),
+            });
+          }
+        );
         break;
 
         case SAVE_SELECTED_TRANSACTION_ITEM:
