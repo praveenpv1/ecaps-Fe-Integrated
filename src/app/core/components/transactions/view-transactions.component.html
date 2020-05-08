@@ -1,0 +1,72 @@
+<div nz-row>
+    <div nz-col nzSm="24" nzMd="24" nzLg="24" nzXl="24">
+        <a class="back-button-text" [routerLink]="['/', 'transactions']"
+        ><img
+            class="back-img"
+            src="assets/images/back-button.svg"
+        />&nbsp;&nbsp;BACK</a
+        >
+        <br />
+        <h3 class="primary-color-font">Transactions Details</h3>
+        <p>View your Transactions here</p>
+    </div>
+    <div nz-col nzSm="24" nzMd="24" nzLg="24" nzXl="24" class="container-center">
+        <nz-card class="primary-color-border-card">  
+            <nz-descriptions nzTitle="Wallet Load Request Details" nzLayout="vertical" class="primary-color-font">
+
+                <nz-descriptions-item nzTitle="Type">
+                    {{ viewDetails.wl_tr_type }}
+                </nz-descriptions-item>
+
+                <nz-descriptions-item nzTitle="ID">
+                    {{ viewDetails._id }}
+                </nz-descriptions-item>
+
+                <nz-descriptions-item nzTitle="Amount">
+                    {{ viewDetails.trn_amount }}
+                </nz-descriptions-item>
+                
+                <nz-descriptions-item nzTitle="mode">
+                    {{ viewDetails.wl_tr_mode }}
+                </nz-descriptions-item>
+               
+                
+                 <!-- 
+                <nz-descriptions-item nzTitle="User Balance">
+                    {{ viewDetails.fl_from_uid_balance }}
+                </nz-descriptions-item>
+                <nz-descriptions-item nzTitle="Status">
+                    {{ viewDetails.fl_status === false ? "Approved" : "Pending" }}
+                </nz-descriptions-item>
+                <nz-descriptions-item nzTitle="Created Time">
+                    {{ viewDetails.fl_created_at | date: "dd MMM" }}
+                </nz-descriptions-item>
+                <nz-descriptions-item nzTitle="Updated Time">
+                    {{ viewDetails.fl_updated_at | date: "dd MMM" }}
+                </nz-descriptions-item> -->
+              </nz-descriptions>
+              <!-- <div nzrow class="text-center">
+                <div nz-col nzSm="24" nzMd="24" nzLg="12" nzXl="12">
+                    <button
+                    nz-button
+                    nzType="primary"
+                    (click)="approveLoadRequest()"
+                    [disabled]="!viewDetails.fl_status"
+                    >
+                    Approve
+                    </button> 
+                </div>
+                <div nz-col nzSm="24" nzMd="24" nzLg="12" nzXl="12">
+                    <button
+                    nz-button
+                    nzType="info"
+                    (click)="rejectLoadRequest()"
+                    >
+                    Reject
+                    </button> 
+                </div>                  
+              </div> -->
+        </nz-card>
+    </div>
+    <br><br>
+ 

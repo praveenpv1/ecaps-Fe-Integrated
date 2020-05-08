@@ -112,6 +112,7 @@ import { AddRetailerComponent } from "./components/retailer/add-retailer.compone
 import { LedgersComponent } from "./components/ledgers/ledgers.component";
 import { EarningsComponent } from "./components/earnings/earnings.component";
 import { TransactionsComponent } from "./components/transactions/transactions.component";
+import { ViewTransactionsComponent } from "./components/transactions/view-transactions.component";
 import { WalletLoadRequestComponent } from "./components/wallet-load-request/wallet-load-request.component";
 import { ViewLoadRequestsComponent } from "./components/wallet-load-request/view-load-requests.component";
 import { WalletTopUpComponent } from "./components/wallet-top-up/wallet-top-up.component";
@@ -253,6 +254,7 @@ const icons: IconDefinition[] = Object.keys(antDesignIcons).map(
     LedgersComponent,
     EarningsComponent,
     TransactionsComponent,
+    ViewTransactionsComponent,
     WalletLoadRequestComponent,
     WalletTopUpComponent,
     PaymentsComponent,
@@ -328,6 +330,7 @@ const icons: IconDefinition[] = Object.keys(antDesignIcons).map(
     LedgersComponent,
     EarningsComponent,
     TransactionsComponent,
+    ViewTransactionsComponent,
     WalletLoadRequestComponent,
     WalletTopUpComponent,
     PaymentsComponent,

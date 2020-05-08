@@ -98,6 +98,9 @@ export const APPROVE_FUND_LOADS = "[APPROVE_FUND_LOADS] Approve Fund Load ";
 export const GET_WALLET_TRANSACTION_LIST =
   "[GET_WALLET_TRANSACTION_LIST] Get wallet transactions ";
 
+  export const SAVE_SELECTED_TRANSACTION_ITEM =
+  "[SAVE_SELECTED_TRANSACTION_ITEM] save  transactions items";
+
 //Margins
 
 export const GET_MARGIN_TYPE_LIST =

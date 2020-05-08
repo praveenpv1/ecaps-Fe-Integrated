@@ -54,6 +54,9 @@
           <td>{{ data.trn_amount }}</td>
           <td>{{ data.wl_tr_mode }}</td>
           <td>{{ data.wl_tr_id }}</td>
+          <td><a nz-button nzType="link" class="primary-color-font" (click)="viewTransactionsRoute(data)">
+            View <i nz-icon nzType="right-circle" nzTheme="outline" style="font-size: 16px;"></i>
+          </a></td>
         </tr>
       </tbody>
     </nz-table>

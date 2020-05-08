@@ -1,7 +1,8 @@
 import { DataStore } from "@app/core/store/app.store";
 import { Component, OnInit } from "@angular/core";
 import { TransactionReducers } from "@app/core/store/reducers/transaction.reducer";
-import { GET_WALLET_TRANSACTION_LIST } from "@app/core/store/actions";
+import { GET_WALLET_TRANSACTION_LIST,SAVE_SELECTED_TRANSACTION_ITEM } from "@app/core/store/actions";
+import { Router } from "@angular/router";
 import * as _ from "lodash";
 
 @Component({
@@ -12,7 +13,7 @@ import * as _ from "lodash";
 export class TransactionsComponent implements OnInit {
   searchText = "";
   walletTransactionList: any;
-  constructor(private tR: TransactionReducers, private ds: DataStore) {}
+  constructor(private tR: TransactionReducers, private ds: DataStore,  private router: Router) {}
 
   ngOnInit() {
     this.tR.transactionReducer({ type: GET_WALLET_TRANSACTION_LIST });
@@ -33,4 +34,15 @@ export class TransactionsComponent implements OnInit {
       this.walletTransactionList = _.reverse(this.walletTransactionList);
     });
   }
+  viewTransactionsRoute(data){
+   
+    if (data) {
+      this.tR.transactionReducer({
+        type: SAVE_SELECTED_TRANSACTION_ITEM,
+        payload: data,
+      });
+      this.router.navigate(["/", "view-transactions", data._id]);
+    }
+  }
+
 }

@@ -6,6 +6,7 @@ import {
   UPDATE_CHILD_USER_INFO,
   USER_EXTRA_DETAILS,
   GET_WALLET_TRANSACTION_LIST,
+  SAVE_SELECTED_TRANSACTION_ITEM
 } from "./../actions/index";
 import { Injectable } from "@angular/core";
 import { DataStore } from "../app.store";
@@ -69,6 +70,14 @@ export class TransactionReducers {
               });
             }
           );
+        break;
+
+        case SAVE_SELECTED_TRANSACTION_ITEM:
+          state = this._dataStore.dataStore$.getValue();
+          this._dataStore.dataStore$.next({
+            ...state,
+            selectedTransactionItem: action.payload
+          });
         break;
 
       default:
