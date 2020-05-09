@@ -31,13 +31,13 @@
   </div>
   <div nz-col nzSm="24" nzMd="24" nzLg="12" nzXl="12" class="text-center"> 
     <h2 class="medium-color-font">
-      Sign Into Your Enviar account
+      Login to your account
     </h2>  
     <br> 
     <form
     nz-form
     [formGroup]="signInForm"
-    class="login-form"
+    class="login-form full-width"
     (ngSubmit)="login()"
     >
       <nz-form-item>
@@ -64,37 +64,21 @@
           </nz-input-group>
         </nz-form-control>
       </nz-form-item>
-      <nz-form-item>
-        <nz-form-control>
-          <label>
-            <span>
-              <a class="medium-color-font" [routerLink]="['/', 'forgot-password']">Forgot Password?</a>
-              </span
-            >
-          </label>
-        </nz-form-control>
-      </nz-form-item>
-      <nz-form-item>
-        <nz-form-control>
-          <button  
-          class="login-form-button no-shadow"
-          nz-button 
-          nzType="primary">
-            Sign In
-          </button>
-        </nz-form-control>
-      </nz-form-item>
-      <nz-form-item>
-        <nz-form-control>
-          <label>
-            <span>
-              Don't have Enviar Account? Sign Up
-              <a class="medium-color-font">here</a>
-            </span>
-          </label>
-        </nz-form-control>
-      </nz-form-item>
-    </form> 
-    <br>
+      <div nz-row class="login-form-margin">
+        <div nz-col [nzSpan]="24">
+          <a class="login-form-forgot medium-color-font"
+          [routerLink]="['/', 'forgot-password']"
+          >Forgot Password?</a>
+        </div>
+      </div> 
+      <button  
+      class="full-width login-form-margin"
+      nz-button 
+      nzType="primary">
+        Login
+      </button>
+      Don't have Enviar Account? <a class="medium-color-font"> Sign Up</a>
+    </form>
+    <br><br><br><br> 
   </div>
 </div>
