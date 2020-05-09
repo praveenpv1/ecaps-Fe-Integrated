@@ -69,6 +69,7 @@
   <div nz-col nzSm="24" nzMd="24" nzLg="24" nzXl="24">
     <nz-table
       #nzTable
+      nzSize="middle"
       [nzData]="walletLoadRequests"
       [nzScroll]="{ y: '240px' }"
       [nzPageSize]="30"
@@ -83,15 +84,13 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let data of nzTable.data | filter: searchText">
+        <tr (click)="viewLoadRequestRoute(data)" *ngFor="let data of nzTable.data | filter: searchText">
           <td>{{ data.fl_from_uid }}</td>
           <td>{{ data.fl_to_uid }}</td>
           <td>{{ data.fl_req_amount }}</td>
           <td>{{ data.fl_status === false ? "Approved" : "Pending" }}</td>
           <td> 
-            <a nz-button nzType="link" class="primary-color-font" (click)="viewLoadRequestRoute(data)">
-              View <i nz-icon nzType="right-circle" nzTheme="outline" style="font-size: 16px;"></i>
-            </a>
+            <i nz-icon nzType="right" nzTheme="outline" style="font-size: 16px;"></i>
           </td> 
         </tr>
       </tbody>
