@@ -14,6 +14,7 @@ export class MarginsComponent implements OnInit {
   selectedValue: any;
   marginList: any;
   subscriber: any;
+  searchText: string;
   constructor(
     private mR: MarginReducers,
     private ds: DataStore,
