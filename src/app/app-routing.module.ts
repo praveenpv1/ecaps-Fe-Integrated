@@ -4,9 +4,9 @@ import { AuthGuard } from "auth";
 
 import { DashboardComponent } from "@app/core/components/dashboard/dashboard.component";
 import { SignInComponent } from "@app/core/components/login/sign-in/signin.component";
-import { KopprSignUpComponent } from "@app/core/components/login/sign-up/signup.component";
-import { SignUpInnerComponent } from "@app/core/components/company/sign-up-inner.component";
-import { SignUpComponent } from "@app/core/components/company/sign-up.component";
+// import { KopprSignUpComponent } from "@app/core/components/login/sign-up/signup.component";
+// import { SignUpInnerComponent } from "@app/core/components/company/sign-up-inner.component";
+// import { SignUpComponent } from "@app/core/components/company/sign-up.component";
 // import { AddEmployeeComponent } from "@app/core/components/employee/add-employee.component";
 // import { BulkUploadComponent } from "@app/core/components/employee/bulk-upload.component";
 // import { BulkCategoryComponent } from "@app/core/components/employee/bulk-category.component";
@@ -226,16 +226,6 @@ const routes: Routes = [
     data: { menuType: menuType.normal },
   },
   {
-    path: "signup",
-    component: KopprSignUpComponent,
-    data: { menuType: 4 },
-  },
-  {
-    path: "account-update",
-    component: SignUpInnerComponent,
-    data: { menuType: 4 },
-  },
-  {
     path: "signin",
     component: SignInComponent,
     data: { menuType: menuType.siginin },
@@ -258,11 +248,6 @@ const routes: Routes = [
   {
     path: "forgot-password",
     component: ForgotPasswordComponent,
-    data: { menuType: menuType.siginin },
-  },
-  {
-    path: "signup",
-    component: SignUpComponent,
     data: { menuType: menuType.siginin },
   },
   {

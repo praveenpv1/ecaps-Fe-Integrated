@@ -95,11 +95,11 @@ import { NzTabsModule } from "ng-zorro-antd/tabs";
 // import { SpendComponent } from "./components/spend/spend.component";
 // import { CardComponent } from "./components/card/card.component";
 // import { TopupApprovalComponent } from "./components/company/topup-approval.component";
-// import { PlaceholderComponent } from "./components/placeholder/placeholder.component";
+// import { KopprSignUpComponent } from "./components/login/sign-up/signup.component";
+// import { SignUpInnerComponent } from "./components/company/sign-up-inner.component";
+// import { SignUpComponent } from "./components/company/sign-up.component";
+import { PlaceholderComponent } from "./components/placeholder/placeholder.component";
 import { DashboardComponent } from "./components/dashboard/dashboard.component";
-import { KopprSignUpComponent } from "./components/login/sign-up/signup.component";
-import { SignUpInnerComponent } from "./components/company/sign-up-inner.component";
-import { SignUpComponent } from "./components/company/sign-up.component";
 import { NavigationBarComponent } from "./components/navigation-bar/navigation-bar.component";
 import { NavComponent } from "./components/nav/nav.component";
 import { SignInComponent } from "./components/login/sign-in/signin.component";
@@ -237,14 +237,14 @@ const icons: IconDefinition[] = Object.keys(antDesignIcons).map(
     // DepositComponent,
     // TopupApprovalComponent,
     // CompanyListComponent,
-    // PlaceholderComponent,
+    // SignUpInnerComponent,
+    // SignUpComponent,
+    // KopprSignUpComponent,
+    PlaceholderComponent,
     DashboardComponent,
-    SignUpInnerComponent,
-    SignUpComponent,
     NavigationBarComponent,
     NavComponent,
     SignInComponent,
-    KopprSignUpComponent,
     ModalComponent,
     FilterPipeByField,
     DistributorComponent,
@@ -313,15 +313,15 @@ const icons: IconDefinition[] = Object.keys(antDesignIcons).map(
     // DepositComponent,
     // TopupApprovalComponent,
     // CompanyListComponent,
-    // PlaceholderComponent,
+    // SignUpInnerComponent,
+    // SignUpComponent,
+    // KopprSignUpComponent,
+    PlaceholderComponent,
     DashboardComponent,
-    SignUpInnerComponent,
-    SignUpComponent,
     VerifyEmailComponent,
     NavigationBarComponent,
     NavComponent,
     SignInComponent,
-    KopprSignUpComponent,
     ModalComponent,
     DistributorComponent,
     AddDistributorComponent,
