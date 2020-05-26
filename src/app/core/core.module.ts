@@ -52,6 +52,9 @@ import { Ng2SearchPipeModule } from "ng2-search-filter";
 import { DatePipe, CurrencyPipe } from "@angular/common";
 import { NgxSpinnerModule } from "ngx-spinner";
 import { NzTabsModule } from "ng-zorro-antd/tabs";
+import { NgxsModule } from "@ngxs/store";
+import { NgxsReduxDevtoolsPluginModule } from "@ngxs/devtools-plugin";
+import { NgxsLoggerPluginModule } from "@ngxs/logger-plugin";
 
 // import { SalaryComponent } from "./components/salary/salary.component";
 // import { AddEmployeeComponent } from "./components/employee/add-employee.component";
@@ -124,8 +127,9 @@ import { UserAccountComponent } from "./components/user-account/user-account.com
 import { EditAccountComponent } from "./components/user-account/edit-account.component";
 import { CommissionsComponent } from "./components/commissions/commissions.component";
 import { LoyaltyComponent } from "./components/loyalty/loyalty.component";
-import { AddMarginsComponent } from './components/margins/add-margins/add-margins.component';
+import { AddMarginsComponent } from "./components/margins/add-margins/add-margins.component";
 import { MarginsComponent } from "./components/margins/margins.component";
+import { rootStates } from "./ngxs-store/ngxs-state";
 
 const antDesignIcons = AllIcons as {
   [key: string]: IconDefinition;
@@ -174,6 +178,9 @@ const icons: IconDefinition[] = Object.keys(antDesignIcons).map(
     UtilsModule.forRoot(environment),
     NgxSpinnerModule,
     RouterModule, // There is no directive with "exportAs" set to "routerLinkActive ...
+    NgxsModule.forRoot(rootStates),
+    NgxsReduxDevtoolsPluginModule.forRoot(),
+    NgxsLoggerPluginModule.forRoot(),
   ],
   providers: [
     { provide: NZ_I18N, useValue: en_US },
@@ -182,7 +189,6 @@ const icons: IconDefinition[] = Object.keys(antDesignIcons).map(
     CurrencyPipe,
   ],
   declarations: [
-    
     // SalaryComponent,
     // AddEmployeeComponent,
     // BulkUploadComponent,
@@ -269,10 +275,9 @@ const icons: IconDefinition[] = Object.keys(antDesignIcons).map(
     CommissionsComponent,
     MarginsComponent,
     AddMarginsComponent,
-    ViewLoadRequestsComponent 
+    ViewLoadRequestsComponent,
   ],
   exports: [
-   
     // SalaryComponent,
     // AddEmployeeComponent,
     // BulkUploadComponent,
@@ -343,7 +348,7 @@ const icons: IconDefinition[] = Object.keys(antDesignIcons).map(
     LoyaltyComponent,
     CommissionsComponent,
     MarginsComponent,
-    ViewLoadRequestsComponent 
+    ViewLoadRequestsComponent,
   ],
 })
 export class CoreModule {

@@ -9,7 +9,7 @@ import {
 
 import { MatSidenav } from "@angular/material";
 
-import { Subscription } from "rxjs";
+import { Subscription, Observable } from "rxjs";
 
 import { TranslateService } from "@ngx-translate/core";
 
@@ -36,6 +36,13 @@ import { NgxSpinnerService } from "ngx-spinner";
 import * as _ from "lodash";
 import { isAdmin } from "@app/core/services/utils";
 import { UserReducers } from "@app/core/store/reducers/user.reducer";
+import { LoaderState } from "@app/core/ngxs-store/ngxs-state/LoaderState";
+import { Store } from "@ngxs/store";
+import {
+  HideLoader,
+  ShowLoader,
+} from "@app/core/ngxs-store/ngxs-actions/loader.actions";
+import { HideToast } from "@app/core/ngxs-store/ngxs-actions/toast.actions";
 
 interface SideNavRoute {
   icon?: string;
@@ -92,7 +99,8 @@ export class NavComponent implements OnInit, OnDestroy {
     private _toastReducer: ToastReducers,
     private message: NzMessageService,
     private spinner: NgxSpinnerService,
-    private child: UserReducers
+    private child: UserReducers,
+    private store: Store
   ) {
     const initialState = this._dataStore.dataStore$.getValue();
 
@@ -135,6 +143,26 @@ export class NavComponent implements OnInit, OnDestroy {
   }
 
   public ngOnInit(): void {
+    this.store
+      .select((state) => state)
+      .subscribe((store) => {
+        if (store.loaderState) {
+          const { loaderState } = store;
+          if (loaderState.loading) {
+            this.spinner.show();
+          } else {
+            this.spinner.hide();
+          }
+        }
+        if (store.toastState) {
+          const { toastState } = store;
+          if (toastState.toast) {
+            this.showToast(toastState.toastType, toastState.toastMessage);
+            this.store.dispatch(new HideToast());
+          }
+        }
+      });
+
     this.message.remove(this.loaderId);
     this.logger.info("NavComponent: ngOnInit()");
 
