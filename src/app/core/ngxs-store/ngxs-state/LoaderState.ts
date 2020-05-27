@@ -1,6 +1,9 @@
 import { Injectable } from "@angular/core";
 import { State, Action, StateContext, Selector, Store } from "@ngxs/store";
-import { ShowLoader, HideLoader } from "../ngxs-actions/loader.actions";
+import {
+  ShowLoaderAction,
+  HideLoaderAction,
+} from "../ngxs-actions/loader.actions";
 
 export interface LoaderStateModel {
   loading: boolean;
@@ -15,7 +18,7 @@ export interface LoaderStateModel {
 @Injectable()
 export class LoaderState {
   constructor() {}
-  @Action(ShowLoader)
+  @Action(ShowLoaderAction)
   showLoader(ctx: StateContext<LoaderStateModel>) {
     const state = ctx.getState();
     ctx.setState({
@@ -23,7 +26,7 @@ export class LoaderState {
       loading: true,
     });
   }
-  @Action(HideLoader)
+  @Action(HideLoaderAction)
   hideLoader(ctx: StateContext<LoaderStateModel>) {
     const state = ctx.getState();
     ctx.setState({

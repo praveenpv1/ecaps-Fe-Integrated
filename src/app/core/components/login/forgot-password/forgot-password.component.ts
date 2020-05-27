@@ -8,7 +8,7 @@ import {
 import { LoginReducers } from "@app/core/store/reducers/login.reducer";
 import { FORGOT_PASSWORD } from "@app/core/store/actions";
 import { Store } from "@ngxs/store";
-import { ForgotPassword } from "@app/core/ngxs-store/ngxs-actions/login.actions";
+import { ForgotPasswordAction } from "@app/core/ngxs-store/ngxs-actions/login.actions";
 
 @Component({
   selector: "app-forgot-password",
@@ -33,7 +33,7 @@ export class ForgotPasswordComponent implements OnInit {
       //   payload: { email: this.validateForm.controls["email"].value }
       // });
       this.store.dispatch(
-        new ForgotPassword(this.validateForm.controls["email"].value)
+        new ForgotPasswordAction(this.validateForm.controls["email"].value)
       );
     }
   }

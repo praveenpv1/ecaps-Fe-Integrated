@@ -193,7 +193,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
     // this.tR.transactionReducer({ type: GET_WALLET_TRANSACTION_LIST });
 
-    this.dashboard.dashboardReducer({ type: DASHBOARD_COMBINED_APIS });
+    // this.dashboard.dashboardReducer({ type: DASHBOARD_COMBINED_APIS });
 
     // this.showCompanyWallet();
     // this.getCompanyTransactions();

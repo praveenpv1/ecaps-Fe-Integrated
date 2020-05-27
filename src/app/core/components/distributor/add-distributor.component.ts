@@ -15,6 +15,7 @@ import * as _ from "lodash";
 import * as moment from "moment";
 import { UserReducers } from "@app/core/store/reducers/user.reducer";
 import { DataStore } from "@app/core/store/app.store";
+import { Store } from "@ngxs/store";
 
 @Component({
   selector: "app-addnewuser",
@@ -26,16 +27,18 @@ export class AddDistributorComponent implements OnInit {
   _id: string = "";
   isFormValid: boolean = false;
   userDetails: any;
+  userInfo: any;
 
   constructor(
     private fb: FormBuilder,
     private child: UserReducers,
     private activatedRoute: ActivatedRoute,
-    private _dataStore: DataStore
+    private _dataStore: DataStore,
+    private store: Store
   ) {}
 
   submitForm() {
-    const store = this._dataStore.dataStore$.getValue();
+    // const store = this._dataStore.dataStore$.getValue();
 
     // this.isFormValid =
     //   _.get(this.validateForm, "status", "INVALID") === "VALID";
@@ -81,7 +84,7 @@ export class AddDistributorComponent implements OnInit {
         this.child.userReducer({
           type: ADD_CHILD,
           payload: {
-            pid: store.userInfo._id,
+            pid: this.userInfo._id,
             role: "distributor",
             firstname: this.validateForm.controls.first_name.value,
             lastname: this.validateForm.controls.last_name.value,
@@ -93,7 +96,7 @@ export class AddDistributorComponent implements OnInit {
             username: this.validateForm.controls.userName.value,
             email: this.validateForm.controls.email.value,
             password: this.validateForm.controls.password.value,
-            created_by: store.userInfo._id,
+            created_by: this.userInfo._id,
             aadhaar: this.validateForm.controls.aadhaarNo.value,
             pan: this.validateForm.controls.pan.value,
             voter_id: this.validateForm.controls.voterId.value,
@@ -119,14 +122,30 @@ export class AddDistributorComponent implements OnInit {
         },
       });
 
-      this._dataStore.dataStore$.subscribe((data) => {
-        if (data.childUser) {
-          this.userDetails = data.childUser;
-          if (this.userDetails != null) {
-            this.setDetails({});
+      // this._dataStore.dataStore$.subscribe((data) => {
+      //   if (data.childUser) {
+      //     this.userDetails = data.childUser;
+      //     if (this.userDetails != null) {
+      //       this.setDetails({});
+      //     }
+      //   }
+      // });
+
+      this.store
+        .select((state) => state)
+        .subscribe((store) => {
+          if (store.userState) {
+            const { userState } = store;
+            this.userInfo = userState.userInfo;
+
+            if (store.childUser) {
+              this.userDetails = store.childUser;
+              if (this.userDetails != null) {
+                this.setDetails({});
+              }
+            }
           }
-        }
-      });
+        });
     }
   }
 

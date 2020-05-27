@@ -38,11 +38,7 @@ import { isAdmin } from "@app/core/services/utils";
 import { UserReducers } from "@app/core/store/reducers/user.reducer";
 import { LoaderState } from "@app/core/ngxs-store/ngxs-state/LoaderState";
 import { Store } from "@ngxs/store";
-import {
-  HideLoader,
-  ShowLoader,
-} from "@app/core/ngxs-store/ngxs-actions/loader.actions";
-import { HideToast } from "@app/core/ngxs-store/ngxs-actions/toast.actions";
+import { HideToastAction } from "@app/core/ngxs-store/ngxs-actions/toast.actions";
 
 interface SideNavRoute {
   icon?: string;
@@ -158,7 +154,7 @@ export class NavComponent implements OnInit, OnDestroy {
           const { toastState } = store;
           if (toastState.toast) {
             this.showToast(toastState.toastType, toastState.toastMessage);
-            this.store.dispatch(new HideToast());
+            this.store.dispatch(new HideToastAction());
           }
         }
       });
