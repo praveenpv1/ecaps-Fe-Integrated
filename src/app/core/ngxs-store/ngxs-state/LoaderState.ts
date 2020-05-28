@@ -21,17 +21,20 @@ export class LoaderState {
   @Action(ShowLoaderAction)
   showLoader(ctx: StateContext<LoaderStateModel>) {
     const state = ctx.getState();
-    ctx.setState({
-      ...state,
-      loading: true,
-    });
+    ctx.patchState({ loading: true });
+
+    // ctx.setState({
+    //   ...state,
+    //   loading: true,
+    // });
   }
   @Action(HideLoaderAction)
   hideLoader(ctx: StateContext<LoaderStateModel>) {
     const state = ctx.getState();
-    ctx.setState({
-      ...state,
-      loading: false,
-    });
+    ctx.patchState({ loading: false });
+    // ctx.setState({
+    //   ...state,
+    //   loading: false,
+    // });
   }
 }

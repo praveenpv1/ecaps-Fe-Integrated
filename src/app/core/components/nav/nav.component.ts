@@ -140,7 +140,7 @@ export class NavComponent implements OnInit, OnDestroy {
 
   public ngOnInit(): void {
     this.store
-      .select((state) => state)
+      // .select((state) => state)
       .subscribe((store) => {
         if (store.loaderState) {
           const { loaderState } = store;
