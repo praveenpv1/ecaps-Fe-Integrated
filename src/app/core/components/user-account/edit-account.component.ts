@@ -11,11 +11,16 @@ import {
   UPDATE_CHILD_USER_INFO,
   USER_EXTRA_DETAILS,
 } from "./../../store/actions/index";
-import { ActivatedRoute } from "@angular/router";
+// import { ActivatedRoute } from "@angular/router";
 import * as _ from "lodash";
 import * as moment from "moment";
 import { UserReducers } from "@app/core/store/reducers/user.reducer";
-import { DataStore } from "@app/core/store/app.store";
+// import { DataStore } from "@app/core/store/app.store";
+import { Store } from "@ngxs/store";
+import {
+  GetUserExtraDetailsAction,
+  UpdateChildUserInfoAction,
+} from "@app/core/ngxs-store/ngxs-actions/user.actions";
 
 @Component({
   selector: "edit-account",
@@ -30,14 +35,16 @@ export class EditAccountComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private child: UserReducers,
-    private activatedRoute: ActivatedRoute,
-    private _dataStore: DataStore
+    // private activatedRoute: ActivatedRoute,
+    // private _dataStore: DataStore,
+    private store: Store
   ) {
-    this.initialState = this._dataStore.dataStore$.getValue();
-    this.child.userReducer({
-      type: USER_EXTRA_DETAILS,
-      // payload: { id: this.initialState.userInfo._id },
-    });
+    // this.initialState = this._dataStore.dataStore$.getValue();
+    // this.child.userReducer({
+    //   type: USER_EXTRA_DETAILS,
+    //   // payload: { id: this.initialState.userInfo._id },
+    // });
+    this.store.dispatch(new GetUserExtraDetailsAction());
 
     this.createForm();
   }
@@ -84,8 +91,8 @@ export class EditAccountComponent implements OnInit {
   }
 
   submitForm() {
-    const store = this._dataStore.dataStore$.getValue();
-    console.log("userDetails", this.userDetails);
+    // const store = this._dataStore.dataStore$.getValue();
+    // console.log("userDetails", this.userDetails);
 
     // this.isFormValid =
     //   _.get(this.validateForm, "status", "INVALID") === "VALID";
@@ -98,43 +105,76 @@ export class EditAccountComponent implements OnInit {
     }
     if (this.validateForm.valid) {
       if (!_.isEmpty(this.userDetails)) {
-        this.child.userReducer({
-          type: UPDATE_CHILD_USER_INFO,
-          payload: {
-            id: this.userDetails._id,
-            dob: moment(this.validateForm.controls.dateOfBirth.value).format(
-              "DD-MM-YYYY"
-            ),
-            // is_verified: true,
-            // status: true,
-            // tpin: "",
-            aadhaar: this.validateForm.controls.aadhaarNo.value,
-            pan: this.validateForm.controls.pan.value,
-            voter_id: this.validateForm.controls.voterId.value,
-            kit_number: this.validateForm.controls.kitNo.value,
-            // wallet_balance: this.userDetails.wallet_balance,
-            firstname: this.validateForm.controls.first_name.value,
-            lastname: this.validateForm.controls.last_name.value,
-            phone: this.validateForm.controls.phoneNumber.value,
-            username: this.validateForm.controls.userName.value,
-            email: this.validateForm.controls.email.value,
-            role: this.validateForm.controls.role.value,
-            updated_at: moment.utc().format(),
-          },
-          navigation: {
-            path: "/my-account",
-          },
-        });
+        // this.child.userReducer({
+        //   type: UPDATE_CHILD_USER_INFO,
+        //   payload: {
+        //     id: this.userDetails._id,
+        //     dob: moment(this.validateForm.controls.dateOfBirth.value).format(
+        //       "DD-MM-YYYY"
+        //     ),
+        //     // is_verified: true,
+        //     // status: true,
+        //     // tpin: "",
+        //     aadhaar: this.validateForm.controls.aadhaarNo.value,
+        //     pan: this.validateForm.controls.pan.value,
+        //     voter_id: this.validateForm.controls.voterId.value,
+        //     kit_number: this.validateForm.controls.kitNo.value,
+        //     // wallet_balance: this.userDetails.wallet_balance,
+        //     firstname: this.validateForm.controls.first_name.value,
+        //     lastname: this.validateForm.controls.last_name.value,
+        //     phone: this.validateForm.controls.phoneNumber.value,
+        //     username: this.validateForm.controls.userName.value,
+        //     email: this.validateForm.controls.email.value,
+        //     role: this.validateForm.controls.role.value,
+        //     updated_at: moment.utc().format(),
+        //   },
+        //   navigation: {
+        //     path: "/my-account",
+        //   },
+        // });
+        const payload = {
+          id: this.userDetails._id,
+          dob: moment(this.validateForm.controls.dateOfBirth.value).format(
+            "DD-MM-YYYY"
+          ),
+          // is_verified: true,
+          // status: true,
+          // tpin: "",
+          aadhaar: this.validateForm.controls.aadhaarNo.value,
+          pan: this.validateForm.controls.pan.value,
+          voter_id: this.validateForm.controls.voterId.value,
+          kit_number: this.validateForm.controls.kitNo.value,
+          // wallet_balance: this.userDetails.wallet_balance,
+          firstname: this.validateForm.controls.first_name.value,
+          lastname: this.validateForm.controls.last_name.value,
+          phone: this.validateForm.controls.phoneNumber.value,
+          username: this.validateForm.controls.userName.value,
+          email: this.validateForm.controls.email.value,
+          role: this.validateForm.controls.role.value,
+          updated_at: moment.utc().format(),
+        };
+        const navigation = {
+          path: "/my-account",
+        };
+        this.store.dispatch(new UpdateChildUserInfoAction(payload, navigation));
       }
     }
   }
 
   ngOnInit() {
-    this._dataStore.dataStore$.subscribe((data) => {
-      console.log("childUser", data.childUser);
+    // this._dataStore.dataStore$.subscribe((data) => {
+    //   console.log("childUser", data.childUser);
 
-      if (data.userExtraDetails) {
-        this.userDetails = data.userExtraDetails;
+    //   if (data.userExtraDetails) {
+    //     this.userDetails = data.userExtraDetails;
+    //     if (this.userDetails != null) {
+    //       this.setDetails();
+    //     }
+    //   }
+    // });
+    this.store.subscribe(({ userState }) => {
+      if (userState.userExtraDetails) {
+        this.userDetails = userState.userExtraDetails;
         if (this.userDetails != null) {
           this.setDetails();
         }

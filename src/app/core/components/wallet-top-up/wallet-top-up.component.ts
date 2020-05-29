@@ -28,6 +28,8 @@ import { SalaryIn, getStatusText } from "@app/core/services/utils";
 import { ChangeDetectorRef } from "@angular/core";
 import { environment } from "@env/environment";
 import { FundReducers } from "@app/core/store/reducers/fund.reducer";
+import { Store } from "@ngxs/store";
+import { RequestFundLoadAction } from "@app/core/ngxs-store/ngxs-actions/funds.actions";
 
 @Component({
   selector: "app-wallet-top-up",
@@ -47,7 +49,7 @@ export class WalletTopUpComponent implements OnInit, OnDestroy {
   tabIndex: number = 0;
   subscribers: any = {};
   isAdminRole: any = {};
-  company_id: any = "";
+  // company_id: any = "";
   constructor(
     private fb: FormBuilder,
     private cR: CompanyReducers,
@@ -56,32 +58,28 @@ export class WalletTopUpComponent implements OnInit, OnDestroy {
     private mR: ModalReducers,
     private route: ActivatedRoute,
     private ref: ChangeDetectorRef,
-    private fundload: FundReducers
+    private fundload: FundReducers,
+    private store: Store
   ) {
-    this.initialState = ds.dataStore$.getValue();
-    this.isAdminRole = isAdmin(this.initialState.roles);
-
-    this.company_id = this.initialState.company_id;
-
-    if (this.route.snapshot.paramMap.get("employeeid")) {
-      this.company_id = this.route.snapshot.paramMap.get("company_id");
-    }
-
-    this.subscribers = this.ds.dataStore$.subscribe((res) => {
-      console.log(res);
-
-      // if (_.get(res.topUpTranscations.details, "data", null)) {
-      //   this.companyTranscations = res.topUpTranscations.details.data;
-      //   this.clearCompanyTxnsStore();
-      // }
-
-      // if (_.get(res.transcationAddResponse.details, "data", null)) {
-      //   this.transcationAddResponse = res.transcationAddResponse.details.data;
-      //   this.clearTxnAddResponseStore();
-      //   // this.getCompanyTransactions();
-      //   this.goToTab(2);
-      // }
-    });
+    // this.initialState = ds.dataStore$.getValue();
+    // this.isAdminRole = isAdmin(this.initialState.roles);
+    // this.company_id = this.initialState.company_id;
+    // if (this.route.snapshot.paramMap.get("employeeid")) {
+    //   this.company_id = this.route.snapshot.paramMap.get("company_id");
+    // }
+    // this.subscribers = this.ds.dataStore$.subscribe((res) => {
+    //   console.log(res);
+    // if (_.get(res.topUpTranscations.details, "data", null)) {
+    //   this.companyTranscations = res.topUpTranscations.details.data;
+    //   this.clearCompanyTxnsStore();
+    // }
+    // if (_.get(res.transcationAddResponse.details, "data", null)) {
+    //   this.transcationAddResponse = res.transcationAddResponse.details.data;
+    //   this.clearTxnAddResponseStore();
+    //   // this.getCompanyTransactions();
+    //   this.goToTab(2);
+    // }
+    // });
   }
 
   // goToTab(tab: number): void {
@@ -115,7 +113,7 @@ export class WalletTopUpComponent implements OnInit, OnDestroy {
     // this.getCompanyTransactions();
   }
   ngOnDestroy() {
-    this.subscribers.unsubscribe();
+    // this.subscribers.unsubscribe();
   }
   // clearCompanyTxnsStore(): void {
   //   const state = this.ds.dataStore$.getValue();
@@ -224,28 +222,26 @@ export class WalletTopUpComponent implements OnInit, OnDestroy {
   }
 
   submitOnlineForm(): void {
-    console.log("INSIDE SUBMIT");
-
-    for (const i in this.validateOnlineForm.controls) {
-      this.validateOnlineForm.controls[i].markAsDirty();
-      this.validateOnlineForm.controls[i].updateValueAndValidity();
-    }
-    if (this.validateOnlineForm.valid) {
-      //   this.createRzpayOrder({});
-      const store = this.ds.dataStore$.getValue();
-
-      this.fundload.fundReducer({
-        type: FUND_LOAD,
-        payload: {
-          uid: store.userInfo._id,
-          request_amount: this.validateOnlineForm.controls["onlineAmount"]
-            .value,
-          support_ref: "",
-          support_uploads: "",
-        },
-      });
-      this.validateOnlineForm.reset();
-    }
+    // console.log("INSIDE SUBMIT");
+    // for (const i in this.validateOnlineForm.controls) {
+    //   this.validateOnlineForm.controls[i].markAsDirty();
+    //   this.validateOnlineForm.controls[i].updateValueAndValidity();
+    // }
+    // if (this.validateOnlineForm.valid) {
+    //   //   this.createRzpayOrder({});
+    //   const store = this.ds.dataStore$.getValue();
+    //   this.fundload.fundReducer({
+    //     type: FUND_LOAD,
+    //     payload: {
+    //       uid: store.userInfo._id,
+    //       request_amount: this.validateOnlineForm.controls["onlineAmount"]
+    //         .value,
+    //       support_ref: "",
+    //       support_uploads: "",
+    //     },
+    //   });
+    //   this.validateOnlineForm.reset();
+    // }
   }
 
   submitTransferValueForm(): void {
@@ -255,17 +251,25 @@ export class WalletTopUpComponent implements OnInit, OnDestroy {
     }
     if (this.transferValueForm.valid) {
       //   this.createRzpayOrder({});
-      const store = this.ds.dataStore$.getValue();
+      // const store = this.ds.dataStore$.getValue();
 
-      this.fundload.fundReducer({
-        type: FUND_LOAD,
-        payload: {
-          uid: store.userInfo._id,
-          request_amount: this.transferValueForm.controls["amount"].value,
-          support_ref: this.transferValueForm.controls["ref"].value,
-          support_uploads: "",
-        },
-      });
+      // this.fundload.fundReducer({
+      //   type: FUND_LOAD,
+      //   payload: {
+      //     uid: store.userInfo._id,
+      //     request_amount: this.transferValueForm.controls["amount"].value,
+      //     support_ref: this.transferValueForm.controls["ref"].value,
+      //     support_uploads: "",
+      //   },
+      // });
+
+      const payload = {
+        request_amount: this.transferValueForm.controls["amount"].value,
+        support_ref: this.transferValueForm.controls["ref"].value,
+        support_uploads: "",
+      };
+      this.store.dispatch(new RequestFundLoadAction(payload));
+
       this.transferValueForm.reset();
     }
   }

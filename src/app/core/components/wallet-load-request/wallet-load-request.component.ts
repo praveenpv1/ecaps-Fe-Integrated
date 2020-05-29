@@ -1,14 +1,16 @@
 import { Component, OnInit, OnDestroy } from "@angular/core";
-import { DataStore } from "@app/core/store/app.store";
-import { FundReducers } from "@app/core/store/reducers/fund.reducer";
-import { 
-  GET_FUND_LOADS,
-  APPROVE_FUND_LOADS,
-  USER_EXTRA_DETAILS,
-} from "@app/core/store/actions";
+// import { DataStore } from "@app/core/store/app.store";
+// import { FundReducers } from "@app/core/store/reducers/fund.reducer";
+// import {
+//   GET_FUND_LOADS,
+//   APPROVE_FUND_LOADS,
+//   USER_EXTRA_DETAILS,
+// } from "@app/core/store/actions";
 import * as _ from "lodash";
-import { UserReducers } from "@app/core/store/reducers/user.reducer";
+// import { UserReducers } from "@app/core/store/reducers/user.reducer";
 import { Router } from "@angular/router";
+import { Store } from "@ngxs/store";
+import { GetFundLoadRequestsListAction } from "@app/core/ngxs-store/ngxs-actions/funds.actions";
 // import { getStatusText } from "@app/core/services/utils";
 
 export interface Tile {
@@ -19,7 +21,7 @@ export interface Tile {
   category: string;
   route: string;
   icon: string;
-} 
+}
 
 enum InfoType {
   amount = 1,
@@ -48,40 +50,65 @@ export class WalletLoadRequestComponent implements OnInit, OnDestroy {
   approvedFundLoadRequests: number = 0;
   selectedValue = "Sort";
   searchText = "";
-  public subscribers: any = {};  
-  balanceCards: InfoCards[] = [];  
+  storeSubscribers: any = {};
+  balanceCards: InfoCards[] = [];
   walletLoadRequests: any = [];
   initialState: any = "";
   userId: any = "";
 
   constructor(
-    private ds: DataStore,
-    private fR: FundReducers,
-    private user: UserReducers,
-    private router: Router
+    // private ds: DataStore,
+    // private fR: FundReducers,
+    // private user: UserReducers,
+    private router: Router,
+    private store: Store
   ) {
-    this.initialState = ds.dataStore$.getValue();
-    this.userId = _.get(this.initialState, "userInfo._id", null);
+    // this.initialState = ds.dataStore$.getValue();
+    // this.userId = _.get(this.initialState, "userInfo._id", null);
   }
-  
+
   ngOnDestroy() {
-    this.subscribers.unsubscribe();
-  } 
+    this.storeSubscribers.unsubscribe();
+  }
 
   ngOnInit() {
+    // this.fR.fundReducer({
+    //   type: GET_FUND_LOADS,
+    //   payload: { id: this.userId },
+    // });
+    // this.subscribers = this.ds.dataStore$.subscribe((data) => {
+    //   if (data.fundLoadRequests) {
+    //     this.walletLoadRequests = _.reverse(data.fundLoadRequests);
+    //     this.requestDataStatus = _.groupBy(
+    //       this.walletLoadRequests,
+    //       "fl_status"
+    //     );
+    //     console.log("requestDataStatus", this.requestDataStatus);
+    //     if (!_.isEmpty(this.requestDataStatus)) {
+    //       this.pendingFundLoadRequests = _.get(
+    //         this.requestDataStatus,
+    //         "true.length",
+    //         0
+    //       );
+    //       this.approvedFundLoadRequests = _.get(
+    //         this.requestDataStatus,
+    //         "false.length",
+    //         0
+    //       );
+    //     }
+    //   }
+    //   this.renderCards();
+    // });
 
-    this.fR.fundReducer({
-      type: GET_FUND_LOADS,
-      payload: { id: this.userId },
-    });
-    this.subscribers = this.ds.dataStore$.subscribe((data) => {
-      if (data.fundLoadRequests) {
-        this.walletLoadRequests = _.reverse(data.fundLoadRequests);
+    this.store.dispatch(new GetFundLoadRequestsListAction());
+    this.storeSubscribers = this.store.subscribe(({ fundState }) => {
+      if (fundState.fundLoadRequests) {
+        const cloneFundLoadRequests = _.clone(fundState.fundLoadRequests);
+        this.walletLoadRequests = _.reverse(cloneFundLoadRequests);
         this.requestDataStatus = _.groupBy(
           this.walletLoadRequests,
           "fl_status"
         );
-        console.log("requestDataStatus", this.requestDataStatus);
         if (!_.isEmpty(this.requestDataStatus)) {
           this.pendingFundLoadRequests = _.get(
             this.requestDataStatus,
@@ -145,8 +172,8 @@ export class WalletLoadRequestComponent implements OnInit, OnDestroy {
       //   }
     ];
   }
-  viewLoadRequestRoute(data){
-    if(data._id){
+  viewLoadRequestRoute(data) {
+    if (data._id) {
       this.router.navigate(["/", "view-load-request", data._id]);
     }
   }

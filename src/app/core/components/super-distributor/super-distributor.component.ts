@@ -1,17 +1,19 @@
 import { Component, OnInit, Injectable } from "@angular/core";
-import { DataStore } from "@app/core/store/app.store";
-import {
-  GET_EMPLOYEES,
-  SEND_VERIFICATION,
-  CHILD_USERS_LIST,
-} from "@app/core/store/actions";
+// import { DataStore } from "@app/core/store/app.store";
+// import {
+//   GET_EMPLOYEES,
+//   SEND_VERIFICATION,
+//   CHILD_USERS_LIST,
+// } from "@app/core/store/actions";
 import { EmployeeReducers } from "@app/core/store/reducers/employee.reducer";
 import * as _ from "lodash";
 import { environment } from "@env/environment";
 import { Router } from "@angular/router";
-import { isThisMonth } from "date-fns";
-import { mockData } from "@app/core/services/mock.service";
-import { UserReducers } from "@app/core/store/reducers/user.reducer";
+// import { isThisMonth } from "date-fns";
+// import { mockData } from "@app/core/services/mock.service";
+// import { UserReducers } from "@app/core/store/reducers/user.reducer";
+import { GetChildUsersListAction } from "@app/core/ngxs-store/ngxs-actions/user.actions";
+import { Store } from "@ngxs/store";
 
 export interface Tile {
   color: string;
@@ -46,12 +48,13 @@ export class SuperDistributorComponent implements OnInit {
   searchText = "";
   initialState: any = "";
   constructor(
-    private er: EmployeeReducers,
-    private ds: DataStore,
+    // private er: EmployeeReducers,
+    // private ds: DataStore,
+    // private user: UserReducers,
     private route: Router,
-    private user: UserReducers
+    private store: Store
   ) {
-    this.initialState = ds.dataStore$.getValue();
+    // this.initialState = ds.dataStore$.getValue();
   }
 
   ngOnInit() {
@@ -62,16 +65,23 @@ export class SuperDistributorComponent implements OnInit {
     //   }
     // });
 
-    this.user.userReducer({
-      type: CHILD_USERS_LIST,
-      payload: {
-        id: _.get(this.initialState, "userInfo._id", null),
-        childName: "childrenList",
-      },
-    });
+    // this.user.userReducer({
+    //   type: CHILD_USERS_LIST,
+    //   payload: {
+    //     id: _.get(this.initialState, "userInfo._id", null),
+    //     childName: "childrenList",
+    //   },
+    // });
 
-    this.ds.dataStore$.subscribe((data) => {
-      this.superDistributorList = data.childrenList.filter(
+    // this.ds.dataStore$.subscribe((data) => {
+    //   this.superDistributorList = data.childrenList.filter(
+    //     (child: any) => child.role === "superdistributor"
+    //   );
+    // });
+
+    this.store.dispatch(new GetChildUsersListAction());
+    this.store.subscribe(({ userState }) => {
+      this.superDistributorList = userState.childrenList.filter(
         (child: any) => child.role === "superdistributor"
       );
     });

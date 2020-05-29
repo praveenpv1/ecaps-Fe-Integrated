@@ -9,7 +9,7 @@ import {
 
 import { MatSidenav } from "@angular/material";
 
-import { Subscription } from "rxjs";
+import { Subscription, Observable } from "rxjs";
 
 import { TranslateService } from "@ngx-translate/core";
 
@@ -34,8 +34,12 @@ import { ToastReducers } from "@app/core/store/reducers/toast.reducer";
 import { NzMessageService } from "ng-zorro-antd/message";
 import { NgxSpinnerService } from "ngx-spinner";
 import * as _ from "lodash";
-import { isAdmin } from "@app/core/services/utils";
+// import { isAdmin } from "@app/core/services/utils";
 import { UserReducers } from "@app/core/store/reducers/user.reducer";
+import { LoaderState } from "@app/core/ngxs-store/ngxs-state/LoaderState";
+import { Store } from "@ngxs/store";
+import { HideToastAction } from "@app/core/ngxs-store/ngxs-actions/toast.actions";
+import { StateResetAll } from "ngxs-reset-plugin";
 
 interface SideNavRoute {
   icon?: string;
@@ -92,7 +96,8 @@ export class NavComponent implements OnInit, OnDestroy {
     private _toastReducer: ToastReducers,
     private message: NzMessageService,
     private spinner: NgxSpinnerService,
-    private child: UserReducers
+    private child: UserReducers,
+    private store: Store
   ) {
     const initialState = this._dataStore.dataStore$.getValue();
 
@@ -102,7 +107,7 @@ export class NavComponent implements OnInit, OnDestroy {
     // });
 
     this.company_id = sessionStorage.getItem("company_id");
-    this.masterRole = _.get(initialState.userExtraDetails, "pan", null);
+    // this.masterRole = _.get(initialState.userExtraDetails, "pan", null);
 
     this.router.events.subscribe((event: Event) => {
       if (event instanceof NavigationStart) {
@@ -135,70 +140,105 @@ export class NavComponent implements OnInit, OnDestroy {
   }
 
   public ngOnInit(): void {
+    this.store
+      // .select((state) => state)
+      .subscribe((store) => {
+        if (store) {
+          const { loaderState, toastState, userState } = store;
+          if (loaderState) {
+            if (loaderState.loading) {
+              this.spinner.show();
+            } else {
+              this.spinner.hide();
+            }
+          }
+          if (toastState) {
+            if (toastState.toast) {
+              this.showToast(toastState.toastType, toastState.toastMessage);
+              this.store.dispatch(new HideToastAction());
+            }
+          }
+          if (userState) {
+            // this.masterRole = _.get(userState.userExtraDetails, "pan", null);
+            this.masterRole = "main";
+            this.userRole = _.get(userState.userInfo, "role", null);
+
+            this.userBalance = _.get(
+              userState.userExtraDetails,
+              "wallet_balance",
+              0
+            );
+            this.userName = _.get(userState.userInfo, "name", "");
+          }
+
+          this.setTheme(userState.userExtraDetails);
+        }
+      });
+
     this.message.remove(this.loaderId);
     this.logger.info("NavComponent: ngOnInit()");
 
     this.commandBarSidenavService.setSidenav(this.sidenav);
 
-    this.loadNavListItems();
+    // this.loadNavListItems();
 
-    this.subscribe();
+    // this.subscribe();
 
-    const token = localStorage.getItem("token");
-    if (token) {
-      this.child.userReducer({
-        type: USER_EXTRA_DETAILS,
-      });
-    }
+    // const token = localStorage.getItem("token");
+    // if (token) {
+    //   this.child.userReducer({
+    //     type: USER_EXTRA_DETAILS,
+    //   });
+    // }
 
-    this.subscribers = this._dataStore.dataStore$.subscribe((data) => {
-      this.masterRole = _.get(data.userExtraDetails, "pan", null);
-      this.userRole = _.get(data.userInfo, "role", null);
-      console.log("extradetails", data.userExtraDetails);
-      if (data.toast) {
-        this.showToast(data.toastType, data.toastMessage);
-        this._toastReducer.toastState({ type: HIDE_TOAST });
-      }
-      if (data.loader) {
-        this.spinner.show();
-        //   if (this.noLoaderExists) {
-        //   this.spinner.show();
-        // }
-      } else {
-        this.spinner.hide();
-        this.noLoaderExists = true;
-      }
+    // this.subscribers = this._dataStore.dataStore$.subscribe((data) => {
+    //   this.masterRole = _.get(data.userExtraDetails, "pan", null);
+    //   this.userRole = _.get(data.userInfo, "role", null);
+    //   console.log("extradetails", data.userExtraDetails);
+    //   if (data.toast) {
+    //     this.showToast(data.toastType, data.toastMessage);
+    //     this._toastReducer.toastState({ type: HIDE_TOAST });
+    //   }
+    //   if (data.loader) {
+    //     this.spinner.show();
+    //     //   if (this.noLoaderExists) {
+    //     //   this.spinner.show();
+    //     // }
+    //   } else {
+    //     this.spinner.hide();
+    //     this.noLoaderExists = true;
+    //   }
 
-      this.userBalance = _.get(data.userExtraDetails, "wallet_balance", 0);
+    //   this.userBalance = _.get(data.userExtraDetails, "wallet_balance", 0);
 
-      this.showUserName();
-      this.checkRole();
-      this.setTheme(data.userExtraDetails);
-    });
+    //   this.showUserName();
+    //   this.checkRole();
+    //   this.setTheme(data.userExtraDetails);
+    // });
   }
 
-  showUserName(): void {
-    const initialState = this._dataStore.dataStore$.getValue();
-    if (initialState.userInfo) {
-      this.userName = initialState.userInfo.name;
-    }
-  }
+  // showUserName(): void {
+  //   const initialState = this._dataStore.dataStore$.getValue();
+  //   if (initialState.userInfo) {
+  //     this.userName = initialState.userInfo.name;
+  //   }
+  // }
 
-  checkRole(): void {
-    const initialState = this._dataStore.dataStore$.getValue();
-    if (initialState.userInfo) {
-      this.userRole = initialState.userInfo.role;
-    }
-  }
+  // checkRole(): void {
+  //   const initialState = this._dataStore.dataStore$.getValue();
+  //   if (initialState.userInfo) {
+  //     this.userRole = initialState.userInfo.role;
+  //   }
+  // }
 
-  isRole(role: string): boolean {
-    let roles = [];
-    const initialState = this._dataStore.dataStore$.getValue();
-    if (initialState.roles) {
-      //roles = initialState.roles.split(",");
-    }
-    return roles.includes(role);
-  }
+  // isRole(role: string): boolean {
+  //   let roles = [];
+  //   const initialState = this._dataStore.dataStore$.getValue();
+  //   if (initialState.roles) {
+  //     //roles = initialState.roles.split(",");
+  //   }
+  //   return roles.includes(role);
+  // }
 
   public showToast(type: string, message: string): void {
     switch (type) {
@@ -218,19 +258,18 @@ export class NavComponent implements OnInit, OnDestroy {
     }
   }
 
-  isAdmin(): boolean {
-    let initialState = this._dataStore.dataStore$.getValue();
-    return isAdmin(initialState.roles);
-  }
+  // isAdmin(): boolean {
+  //   let initialState = this._dataStore.dataStore$.getValue();
+  //   return isAdmin(initialState.roles);
+  // }
 
-  createBasicMessage(): void {
-    const id = this.message.loading("Action in progress..", {
-      nzDuration: 0,
-    }).messageId;
-  }
+  // createBasicMessage(): void {
+  //   const id = this.message.loading("Action in progress..", {
+  //     nzDuration: 0,
+  //   }).messageId;
+  // }
 
-  showMenuForUser(menuName) {
-    const initialState = this._dataStore.dataStore$.getValue();
+  showMenuForUser(menuName: string) {
     const allUsers = [
       "master",
       "admin",
@@ -238,7 +277,6 @@ export class NavComponent implements OnInit, OnDestroy {
       "superdistributor",
       "retailer",
     ];
-    console.log(this.masterRole);
 
     const masterRoles = ["main", "marketing", "kyc", "accounting"];
     // console.log(
@@ -376,52 +414,53 @@ export class NavComponent implements OnInit, OnDestroy {
     return this.currentNavigationPath.includes(route);
   }
 
-  async loadNavListItems() {
-    this.myWorkRoutes = await this.configService.get("my-work-routes");
+  // async loadNavListItems() {
+  //   this.myWorkRoutes = await this.configService.get("my-work-routes");
 
-    this.myWorkRoutes.forEach((route) => {
-      this.translate.get(route.title).subscribe((value) => {
-        route.title = value;
-      });
-    });
+  //   this.myWorkRoutes.forEach((route) => {
+  //     this.translate.get(route.title).subscribe((value) => {
+  //       route.title = value;
+  //     });
+  //   });
 
-    this.customerRoutes = await this.configService.get("customer-routes");
+  //   this.customerRoutes = await this.configService.get("customer-routes");
 
-    this.customerRoutes.forEach((route) => {
-      this.translate.get(route.title).subscribe((value) => {
-        route.title = value;
-      });
-    });
-  }
+  //   this.customerRoutes.forEach((route) => {
+  //     this.translate.get(route.title).subscribe((value) => {
+  //       route.title = value;
+  //     });
+  //   });
+  // }
 
-  public getUserInfo(): any {
-    if (this.authService.getUser()) this.userInfo = this.authService.getUser();
+  // public getUserInfo(): any {
+  //   if (this.authService.getUser()) this.userInfo = this.authService.getUser();
 
-    return this.userInfo;
-  }
+  //   return this.userInfo;
+  // }
 
-  protected subscribe() {
-    this.logger.info("NavComponent: subscribe()");
+  // protected subscribe() {
+  //   this.logger.info("NavComponent: subscribe()");
 
-    this.subscription = this.dashboardService
-      .getToolPaletteItems()
-      .subscribe((data) => {
-        this.toolPaletteItems = data;
-      });
-  }
+  //   this.subscription = this.dashboardService
+  //     .getToolPaletteItems()
+  //     .subscribe((data) => {
+  //       this.toolPaletteItems = data;
+  //     });
+  // }
 
-  protected unsubscribe() {
-    this.logger.info("DashboardComponent: unsubscribe()");
+  // protected unsubscribe() {
+  //   this.logger.info("DashboardComponent: unsubscribe()");
 
-    if (this.subscription) {
-      this.subscription.unsubscribe();
-    }
-  }
+  //   if (this.subscription) {
+  //     this.subscription.unsubscribe();
+  //   }
+  // }
 
   logout(): void {
     localStorage.setItem("userData", null);
     localStorage.setItem("userExtraDetails", null);
     this.authService.logout("signin");
+    this.store.dispatch(new StateResetAll());
   }
 
   gotoAccountDetails(): void {
@@ -432,18 +471,18 @@ export class NavComponent implements OnInit, OnDestroy {
     ]);
   }
 
-  public isAuthenticated() {
-    return this.authService.isAuthenticated();
-  }
+  // public isAuthenticated() {
+  //   return this.authService.isAuthenticated();
+  // }
 
-  public onDragStart(event, identifier) {
-    this.logger.info("NavComponent: onDragStart()");
+  // public onDragStart(event, identifier) {
+  //   this.logger.info("NavComponent: onDragStart()");
 
-    event.dataTransfer.setData("widgetIdentifier", identifier);
+  //   event.dataTransfer.setData("widgetIdentifier", identifier);
 
-    event.dataTransfer.setData("text/plain", "Drag Me Button");
-    event.dataTransfer.dropEffect = "move";
-  }
+  //   event.dataTransfer.setData("text/plain", "Drag Me Button");
+  //   event.dataTransfer.dropEffect = "move";
+  // }
 
   public ngOnDestroy() {
     this.logger.info("NavComponent: ngOnDestroy()");

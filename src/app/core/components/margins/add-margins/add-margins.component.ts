@@ -2,8 +2,10 @@ import { ActivatedRoute } from "@angular/router";
 import { Component, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import * as _ from "lodash";
-import { MarginReducers } from "@app/core/store/reducers/margin.reducer";
-import { CREATE_NEW_MARGIN } from "@app/core/store/actions";
+// import { MarginReducers } from "@app/core/store/reducers/margin.reducer";
+// import { CREATE_NEW_MARGIN } from "@app/core/store/actions";
+import { Store } from "@ngxs/store";
+import { CreateNewMarginAction } from "@app/core/ngxs-store/ngxs-actions/margin.actions";
 
 @Component({
   selector: "app-add-margins",
@@ -18,7 +20,8 @@ export class AddMarginsComponent implements OnInit {
   constructor(
     private activatedRoute: ActivatedRoute,
     private fb: FormBuilder,
-    private mR: MarginReducers
+    // private mR: MarginReducers,
+    private store: Store
   ) {
     if (this.activatedRoute.snapshot.paramMap.get("id")) {
       this._id = this.activatedRoute.snapshot.paramMap.get("id");
@@ -58,10 +61,11 @@ export class AddMarginsComponent implements OnInit {
     }
     if (this.validateForm.valid) {
       if (_.isEmpty(this._id)) {
-        this.mR.marginReducer({
-          type: CREATE_NEW_MARGIN,
-          payload: this.validateForm.value,
-        });
+        // this.mR.marginReducer({
+        //   type: CREATE_NEW_MARGIN,
+        //   payload: this.validateForm.value,
+        // });
+        this.store.dispatch(new CreateNewMarginAction(this.validateForm.value));
       }
     }
   }

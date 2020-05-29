@@ -1,24 +1,27 @@
-import { Component, OnInit } from "@angular/core";
-import { MarginReducers } from "@app/core/store/reducers/margin.reducer";
-import { GET_MARGIN_TYPE_LIST } from "@app/core/store/actions";
-import { DataStore } from "@app/core/store/app.store";
+import { Component, OnInit, OnDestroy } from "@angular/core";
+// import { MarginReducers } from "@app/core/store/reducers/margin.reducer";
+// import { GET_MARGIN_TYPE_LIST } from "@app/core/store/actions";
+// import { DataStore } from "@app/core/store/app.store";
 import { CurrencyPipe } from "@angular/common";
+import { Store } from "@ngxs/store";
+import { GetMarginListAction } from "@app/core/ngxs-store/ngxs-actions/margin.actions";
 
 @Component({
   selector: "app-margins",
   templateUrl: "./margins.component.html",
   styleUrls: ["./margins.component.scss"],
 })
-export class MarginsComponent implements OnInit {
+export class MarginsComponent implements OnInit, OnDestroy {
   marginSet: string[] = [];
   selectedValue: any;
   marginList: any;
-  subscriber: any;
+  storeSubscriber: any;
   searchText: string;
   constructor(
-    private mR: MarginReducers,
-    private ds: DataStore,
-    private currencyPipe: CurrencyPipe
+    // private mR: MarginReducers,
+    // private ds: DataStore,
+    private currencyPipe: CurrencyPipe,
+    private store: Store
   ) {
     this.marginSet = ["Fundtransfer", "Recharge"];
     this.selectedValue = this.marginSet[0];
@@ -46,20 +49,26 @@ export class MarginsComponent implements OnInit {
 
   ngOnInit() {
     this.getMarginList(this.selectedValue);
-    this.subscriber = this.ds.dataStore$.subscribe((data) => {
-      this.marginList = data.marginList;
+    // this.subscriber = this.ds.dataStore$.subscribe((data) => {
+    //   this.marginList = data.marginList;
+    // });
+    this.storeSubscriber = this.store.subscribe(({ marginState }) => {
+      this.marginList = marginState.marginList;
     });
   }
-
+  ngOnDestroy(): void {
+    this.storeSubscriber.unsubscribe();
+  }
   marginChange(value: string) {
     this.getMarginList(value);
   }
 
   getMarginList(marginType: string = "") {
-    this.mR.marginReducer({
-      type: GET_MARGIN_TYPE_LIST,
-      payload: { marginType },
-    });
+    // this.mR.marginReducer({
+    //   type: GET_MARGIN_TYPE_LIST,
+    //   payload: { marginType },
+    // });
+    this.store.dispatch(new GetMarginListAction(marginType));
   }
 
   displayMarginMode(data) {

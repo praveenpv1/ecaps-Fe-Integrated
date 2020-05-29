@@ -12,8 +12,10 @@ import { AuthService } from "auth";
 import * as _ from "lodash";
 import { mockData } from "./mock.service";
 import { environment } from "@env/environment";
+import { Store } from "@ngxs/store";
+import { ShowLoaderAction } from "../ngxs-store/ngxs-actions/loader.actions";
 
-const BASE_URL = "http://159.89.168.255:5000";
+const BASE_URL = "http://13.233.208.231:5000";
 
 @Injectable({
   providedIn: "root",
@@ -27,13 +29,15 @@ export class ApiService {
   userInfo: any = JSON.parse(localStorage.getItem("userData"));
   constructor(
     private httpClient: HttpClient,
-    private authService: AuthService
+    private authService: AuthService,
+    private store: Store
   ) {}
 
   public login(params: {
     email: string;
     password: string;
   }): Observable<Object> {
+    this.showLoader();
     const url = `${BASE_URL}/main/auth/sign-in`;
     // const body = new HttpParams()
     //   .set("email", params.email)
@@ -54,6 +58,7 @@ export class ApiService {
 
   public verifyEmail(url: string): Observable<Object> {
     console.log("inverifyemail");
+    this.showLoader();
 
     const getUrl = `${BASE_URL}/${url}`;
     let headers = new HttpHeaders();
@@ -78,6 +83,7 @@ export class ApiService {
   }
 
   public post(url: string, params: object = {}): Observable<Object> {
+    this.showLoader();
     const postUrl = `${BASE_URL}/${url}`;
     const body = this.stringParams(params).toString();
     console.log("body", body);
@@ -123,6 +129,7 @@ export class ApiService {
     params: object = {},
     isUrlEncoded: boolean = true
   ): Observable<Object> {
+    this.showLoader();
     const getUrl = `${BASE_URL}/${url}`;
 
     const headerType: string = isUrlEncoded
@@ -148,6 +155,10 @@ export class ApiService {
         // retry(2),
         catchError(this.handleError)
       );
+  }
+
+  showLoader() {
+    this.store.dispatch(new ShowLoaderAction());
   }
 
   public async pk_get(
