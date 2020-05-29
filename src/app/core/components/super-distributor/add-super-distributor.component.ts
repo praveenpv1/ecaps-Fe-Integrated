@@ -15,6 +15,12 @@ import * as _ from "lodash";
 import * as moment from "moment";
 import { UserReducers } from "@app/core/store/reducers/user.reducer";
 import { DataStore } from "@app/core/store/app.store";
+import { Store } from "@ngxs/store";
+import {
+  UpdateChildUserInfoAction,
+  AddChildUserAction,
+  GetChildUserInfoAction,
+} from "@app/core/ngxs-store/ngxs-actions/user.actions";
 
 @Component({
   selector: "app-addnewuser",
@@ -26,16 +32,19 @@ export class AddSuperDistributorComponent implements OnInit {
   _id: string = "";
   isFormValid: boolean = false;
   userDetails: any;
+  userInfo: any;
+  storeSubscriber: any;
 
   constructor(
     private fb: FormBuilder,
     private child: UserReducers,
     private activatedRoute: ActivatedRoute,
-    private _dataStore: DataStore
+    private _dataStore: DataStore,
+    private store: Store
   ) {}
 
   submitForm() {
-    const store = this._dataStore.dataStore$.getValue();
+    // const store = this._dataStore.dataStore$.getValue();
 
     // this.isFormValid =
     //   _.get(this.validateForm, "status", "INVALID") === "VALID";
@@ -46,7 +55,6 @@ export class AddSuperDistributorComponent implements OnInit {
       this.validateForm.controls[i].markAsDirty();
       this.validateForm.controls[i].updateValueAndValidity();
     }
-    console.log("form", this.validateForm.valid);
     if (this.validateForm.valid) {
       console.log(this._id, this.userDetails);
 
@@ -54,57 +62,104 @@ export class AddSuperDistributorComponent implements OnInit {
         if (!_.isEmpty(this.userDetails)) {
           console.log("inside");
 
-          this.child.userReducer({
-            type: UPDATE_CHILD_USER_INFO,
-            payload: {
-              id: this._id,
-              dob: moment(this.validateForm.controls.dateOfBirth.value).format(
-                "DD-MM-YYYY"
-              ),
-              is_verified: true,
-              status: true,
-              // tpin: "",
-              aadhaar: this.validateForm.controls.aadhaarNo.value,
-              pan: this.validateForm.controls.pan.value,
-              voter_id: this.validateForm.controls.voterId.value,
-              kit_number: this.validateForm.controls.kitNo.value,
-              // wallet_balance: this.userDetails.wallet_balance,
-              firstname: this.validateForm.controls.first_name.value,
-              lastname: this.validateForm.controls.last_name.value,
-              phone: this.validateForm.controls.phoneNumber.value,
-              username: this.validateForm.controls.userName.value,
-              email: this.validateForm.controls.email.value,
-              role: "superdistributor",
-              updated_at: moment.utc().format(),
-            },
-            navigation: {
-              path: "/superdistributor",
-            },
-          });
-        }
-      } else {
-        this.child.userReducer({
-          type: ADD_CHILD,
-          payload: {
-            pid: store.userInfo._id,
-            role: "superdistributor",
-            firstname: this.validateForm.controls.first_name.value,
-            lastname: this.validateForm.controls.last_name.value,
-            company_name: this.validateForm.controls.company_name.value,
+          // this.child.userReducer({
+          //   type: UPDATE_CHILD_USER_INFO,
+          //   payload: {
+          //     id: this._id,
+          //     dob: moment(this.validateForm.controls.dateOfBirth.value).format(
+          //       "DD-MM-YYYY"
+          //     ),
+          //     is_verified: true,
+          //     status: true,
+          //     // tpin: "",
+          //     aadhaar: this.validateForm.controls.aadhaarNo.value,
+          //     pan: this.validateForm.controls.pan.value,
+          //     voter_id: this.validateForm.controls.voterId.value,
+          //     kit_number: this.validateForm.controls.kitNo.value,
+          //     // wallet_balance: this.userDetails.wallet_balance,
+          //     firstname: this.validateForm.controls.first_name.value,
+          //     lastname: this.validateForm.controls.last_name.value,
+          //     phone: this.validateForm.controls.phoneNumber.value,
+          //     username: this.validateForm.controls.userName.value,
+          //     email: this.validateForm.controls.email.value,
+          //     role: "superdistributor",
+          //     updated_at: moment.utc().format(),
+          //   },
+          //   navigation: {
+          //     path: "/superdistributor",
+          //   },
+          // });
+
+          const payload = {
+            id: this._id,
             dob: moment(this.validateForm.controls.dateOfBirth.value).format(
               "DD-MM-YYYY"
             ),
-            phone: this.validateForm.controls.phoneNumber.value,
-            username: this.validateForm.controls.userName.value,
-            email: this.validateForm.controls.email.value,
-            password: this.validateForm.controls.password.value,
-            created_by: store.userInfo._id,
             aadhaar: this.validateForm.controls.aadhaarNo.value,
             pan: this.validateForm.controls.pan.value,
             voter_id: this.validateForm.controls.voterId.value,
             kit_number: this.validateForm.controls.kitNo.value,
-          },
-        });
+            firstname: this.validateForm.controls.first_name.value,
+            lastname: this.validateForm.controls.last_name.value,
+            phone: this.validateForm.controls.phoneNumber.value,
+            username: this.validateForm.controls.userName.value,
+            email: this.validateForm.controls.email.value,
+            role: "superdistributor",
+            updated_at: moment.utc().format(),
+          };
+
+          const navigation = {
+            path: "/super-distributor",
+          };
+
+          this.store.dispatch(
+            new UpdateChildUserInfoAction(payload, navigation)
+          );
+        }
+      } else {
+        // this.child.userReducer({
+        //   type: ADD_CHILD,
+        //   payload: {
+        //     pid: store.userInfo._id,
+        //     role: "superdistributor",
+        //     firstname: this.validateForm.controls.first_name.value,
+        //     lastname: this.validateForm.controls.last_name.value,
+        //     company_name: this.validateForm.controls.company_name.value,
+        //     dob: moment(this.validateForm.controls.dateOfBirth.value).format(
+        //       "DD-MM-YYYY"
+        //     ),
+        //     phone: this.validateForm.controls.phoneNumber.value,
+        //     username: this.validateForm.controls.userName.value,
+        //     email: this.validateForm.controls.email.value,
+        //     password: this.validateForm.controls.password.value,
+        //     created_by: store.userInfo._id,
+        //     aadhaar: this.validateForm.controls.aadhaarNo.value,
+        //     pan: this.validateForm.controls.pan.value,
+        //     voter_id: this.validateForm.controls.voterId.value,
+        //     kit_number: this.validateForm.controls.kitNo.value,
+        //   },
+        // });
+
+        const payload = {
+          pid: this.userInfo._id,
+          role: "superdistributor",
+          firstname: this.validateForm.controls.first_name.value,
+          lastname: this.validateForm.controls.last_name.value,
+          company_name: this.validateForm.controls.company_name.value,
+          dob: moment(this.validateForm.controls.dateOfBirth.value).format(
+            "DD-MM-YYYY"
+          ),
+          phone: this.validateForm.controls.phoneNumber.value,
+          username: this.validateForm.controls.userName.value,
+          email: this.validateForm.controls.email.value,
+          password: this.validateForm.controls.password.value,
+          created_by: this.userInfo._id,
+          aadhaar: this.validateForm.controls.aadhaarNo.value,
+          pan: this.validateForm.controls.pan.value,
+          voter_id: this.validateForm.controls.voterId.value,
+          kit_number: this.validateForm.controls.kitNo.value,
+        };
+        this.store.dispatch(new AddChildUserAction(payload));
       }
     }
   }
@@ -117,22 +172,37 @@ export class AddSuperDistributorComponent implements OnInit {
     }
 
     if (!_.isEmpty(this._id)) {
-      this.child.userReducer({
-        type: GET_CHILD_USER_INFO,
-        payload: {
-          id: this._id,
-        },
-      });
+      this.store.dispatch(new GetChildUserInfoAction(this._id));
 
-      this._dataStore.dataStore$.subscribe((data) => {
-        if (data.childUser) {
-          this.userDetails = data.childUser;
+      // this.child.userReducer({
+      //   type: GET_CHILD_USER_INFO,
+      //   payload: {
+      //     id: this._id,
+      //   },
+      // });
+
+      // this._dataStore.dataStore$.subscribe((data) => {
+      //   if (data.childUser) {
+      //     this.userDetails = data.childUser;
+      //     if (this.userDetails != null) {
+      //       this.setDetails({});
+      //     }
+      //   }
+      // });
+    }
+
+    this.storeSubscriber = this.store.subscribe(({ userState }) => {
+      if (userState) {
+        this.userInfo = userState.userInfo;
+
+        if (userState.childUser && this._id) {
+          this.userDetails = userState.childUser;
           if (this.userDetails != null) {
             this.setDetails({});
           }
         }
-      });
-    }
+      }
+    });
   }
 
   setDetails(data: any) {

@@ -138,7 +138,7 @@ export class AddDistributorComponent implements OnInit, OnDestroy {
       if (userState) {
         this.userInfo = userState.userInfo;
 
-        if (userState.childUser) {
+        if (userState.childUser && this._id) {
           this.userDetails = userState.childUser;
           if (this.userDetails != null) {
             this.setDetails({});

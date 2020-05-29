@@ -28,8 +28,5 @@ export class VerifyEmailComponent implements OnInit {
     //   }
     // });
     this.store.dispatch(new VerifyEmailAction(this.token));
-    console.log("====================================");
-    console.log("Clicked", this.token);
-    console.log("====================================");
   }
 }

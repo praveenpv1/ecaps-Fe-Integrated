@@ -15,6 +15,8 @@ import {
   ErrorApiToastAction,
 } from "../ngxs-actions/toast.actions";
 import { UserState } from "./UserState";
+import { GetUserExtraDetailsAction } from "../ngxs-actions/user.actions";
+import { Router } from "@angular/router";
 
 export interface LoaderStateModel {
   fundLoadRequests: [];
@@ -28,16 +30,23 @@ export interface LoaderStateModel {
 })
 @Injectable()
 export class FundState {
-  constructor(private apiService: ApiService, private store: Store) {}
+  constructor(
+    private apiService: ApiService,
+    private store: Store,
+    private router: Router
+  ) {}
 
   @Action(RequestFundLoadAction)
   requestFundLoad(
     ctx: StateContext<LoaderStateModel>,
     action: RequestFundLoadAction
   ) {
+    const userInfo = this.store.selectSnapshot(UserState.userInfo);
+    const userId = userInfo._id;
     this.apiService
       .post(`main/fundloads/new-request`, {
         ...action.payload,
+        uid: userId,
       })
       .subscribe(
         (response: any) => {
@@ -77,7 +86,10 @@ export class FundState {
     this.apiService.get(`main/fundloads/approve/${action.requestId}`).subscribe(
       (response: any) => {
         this.store.dispatch(new ShowToastAction(response.message, "success"));
-        this.store.dispatch(new GetFundLoadRequestsListAction());
+        // this.store.dispatch(new GetFundLoadRequestsListAction());
+        this.store.dispatch(new GetUserExtraDetailsAction());
+        this.router.navigate(["/wallet-load-request"]);
+
         this.store.dispatch(new HideLoaderAction());
       },
       (error) => {

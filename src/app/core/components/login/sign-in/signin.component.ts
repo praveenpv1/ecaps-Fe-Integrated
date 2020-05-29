@@ -26,14 +26,6 @@ export class SignInComponent implements OnInit, OnDestroy {
     private loginReducer: LoginReducers,
     private store: Store
   ) {
-    //clear state
-    this.resetReducer.resetState({
-      type: RESET_STATE,
-      payload: {},
-    });
-
-    localStorage.setItem("token", "");
-    sessionStorage.setItem("company_id", "");
     this.logout();
   }
   login() {
@@ -51,13 +43,12 @@ export class SignInComponent implements OnInit, OnDestroy {
     }
   }
 
-  public ngOnInit() {
-    this.logout();
-  }
+  public ngOnInit() {}
 
   logout(): void {
     localStorage.setItem("userData", null);
     localStorage.setItem("userExtraDetails", null);
+    localStorage.setItem("token", "");
     this.store.dispatch(new StateResetAll());
     this.authService.logout("signin");
   }
