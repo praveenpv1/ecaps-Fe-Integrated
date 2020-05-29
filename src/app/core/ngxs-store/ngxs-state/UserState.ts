@@ -1,6 +1,6 @@
 import {
-  AddUserInfoAction,
-  AddUserExtraDetailsAction,
+  GetUserInfoAction,
+  GetUserExtraDetailsAction,
   UpdateChildUserInfoAction,
   AddChildUserAction,
   GetChildUserInfoAction,
@@ -48,13 +48,13 @@ export class UserState {
     return state.userInfo;
   }
 
-  @Action(AddUserInfoAction)
-  addUserInfo(ctx: StateContext<UserStateModel>, action: AddUserInfoAction) {
+  @Action(GetUserInfoAction)
+  addUserInfo(ctx: StateContext<UserStateModel>, action: GetUserInfoAction) {
     const { userInfo } = action;
     ctx.patchState({ userInfo });
   }
 
-  @Action(AddUserExtraDetailsAction)
+  @Action(GetUserExtraDetailsAction)
   addUserExtraDetails(ctx: StateContext<UserStateModel>) {
     const state = ctx.getState();
     this.apiService.get(`main/users/update/${state.userInfo._id}`).subscribe(
@@ -130,19 +130,18 @@ export class UserState {
   }
 
   @Action(GetChildUsersListAction)
-  getChildUsersList(
-    ctx: StateContext<UserStateModel>,
-    action: GetChildUsersListAction
-  ) {
+  getChildUsersList(ctx: StateContext<UserStateModel>) {
     const state = ctx.getState();
-    this.apiService.post(`main/users/allusers`, { pid: action.id }).subscribe(
-      (response: any) => {
-        ctx.patchState({ childrenList: response.data });
-        this.store.dispatch(new HideLoaderAction());
-      },
-      (error) => {
-        this.store.dispatch(new ErrorApiToastAction(error));
-      }
-    );
+    this.apiService
+      .post(`main/users/allusers`, { pid: state.userInfo._id })
+      .subscribe(
+        (response: any) => {
+          ctx.patchState({ childrenList: response.data });
+          this.store.dispatch(new HideLoaderAction());
+        },
+        (error) => {
+          this.store.dispatch(new ErrorApiToastAction(error));
+        }
+      );
   }
 }

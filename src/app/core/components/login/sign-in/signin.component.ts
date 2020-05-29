@@ -7,6 +7,7 @@ import { LoginReducers } from "@app/core/store/reducers/login.reducer";
 import { Store } from "@ngxs/store";
 import { LoginAction } from "@app/core/ngxs-store/ngxs-actions/login.actions";
 import * as _ from "lodash";
+import { StateResetAll } from "ngxs-reset-plugin";
 
 @Component({
   selector: "signin-component",
@@ -57,6 +58,7 @@ export class SignInComponent implements OnInit, OnDestroy {
   logout(): void {
     localStorage.setItem("userData", null);
     localStorage.setItem("userExtraDetails", null);
+    this.store.dispatch(new StateResetAll());
     this.authService.logout("signin");
   }
 

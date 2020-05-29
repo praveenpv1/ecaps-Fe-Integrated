@@ -55,6 +55,7 @@ import { NzTabsModule } from "ng-zorro-antd/tabs";
 import { NgxsModule } from "@ngxs/store";
 import { NgxsReduxDevtoolsPluginModule } from "@ngxs/devtools-plugin";
 import { NgxsLoggerPluginModule } from "@ngxs/logger-plugin";
+import { NgxsResetPluginModule } from "ngxs-reset-plugin";
 
 // import { SalaryComponent } from "./components/salary/salary.component";
 // import { AddEmployeeComponent } from "./components/employee/add-employee.component";
@@ -178,7 +179,10 @@ const icons: IconDefinition[] = Object.keys(antDesignIcons).map(
     UtilsModule.forRoot(environment),
     NgxSpinnerModule,
     RouterModule, // There is no directive with "exportAs" set to "routerLinkActive ...
-    NgxsModule.forRoot(rootStates),
+    NgxsModule.forRoot(rootStates, {
+      developmentMode: !environment.production,
+    }),
+    NgxsResetPluginModule.forRoot(),
     NgxsReduxDevtoolsPluginModule.forRoot(),
     NgxsLoggerPluginModule.forRoot(),
   ],

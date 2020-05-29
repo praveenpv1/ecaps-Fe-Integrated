@@ -1,7 +1,7 @@
 import { UserReducers } from "@app/core/store/reducers/user.reducer";
 import { Component, OnInit, OnDestroy } from "@angular/core";
 import { DataStore } from "@app/core/store/app.store";
-import { CompanyReducers } from "@app/core/store/reducers/company.reducer";
+// import { CompanyReducers } from "@app/core/store/reducers/company.reducer";
 import {
   GET_COMPANY_WALLET,
   GET_COMPANY_MAIN_TXNS,
@@ -25,6 +25,9 @@ import * as pluginDataLabels from "chartjs-plugin-datalabels";
 import { Label } from "ng2-charts";
 import { TransactionReducers } from "@app/core/store/reducers/transaction.reducer";
 import { DashboardReducers } from "@app/core/store/reducers/dashboard.reducer";
+import { Store } from "@ngxs/store";
+import { GetUserExtraDetailsAction } from "@app/core/ngxs-store/ngxs-actions/user.actions";
+import { GetTransactionListAction } from "@app/core/ngxs-store/ngxs-actions/transactions.actions";
 
 export interface Tile {
   color: string;
@@ -118,16 +121,17 @@ export class DashboardComponent implements OnInit, OnDestroy {
   ];
 
   constructor(
-    private cR: CompanyReducers,
+    // private cR: CompanyReducers,
     private ds: DataStore,
     private currencyPipe: CurrencyPipe,
     private uR: UserReducers,
     private tR: TransactionReducers,
-    private dashboard: DashboardReducers
+    private dashboard: DashboardReducers,
+    private store: Store
   ) {
     this.initialState = ds.dataStore$.getValue();
-    this.clearCompanyTxnsStore();
-    this.clearClaimsStore();
+    // this.clearCompanyTxnsStore();
+    // this.clearClaimsStore();
 
     // this.subscribers = this.ds.dataStore$.subscribe((res) => {
     //   console.log(res);
@@ -186,6 +190,9 @@ export class DashboardComponent implements OnInit, OnDestroy {
   // }
 
   ngOnInit() {
+    this.store.dispatch(new GetUserExtraDetailsAction());
+    this.store.dispatch(new GetTransactionListAction());
+
     // this.uR.userReducer({
     //   type: USER_EXTRA_DETAILS,
     //   payload: { id: this.initialState.userInfo._id },
@@ -199,114 +206,149 @@ export class DashboardComponent implements OnInit, OnDestroy {
     // this.getCompanyTransactions();
     // this.getCompanyTxns();
     //this.getClaims();
-    this.subscribers = this.ds.dataStore$.subscribe((data) => {
-      const transactions = _.get(
-        data.userWalletTransactionList,
-        "transaction_recs",
-        []
-      );
-      this.moneyTransfered = _.sumBy(transactions, "trn_amount");
+    this.store.subscribe(({ transactionState, userState }) => {
+      // if (store) {
+      //   const { transactionState, userState } = store;
+      //   const transactions = _.get(
+      //     transactionState.userWalletTransactionList,
+      //     "transaction_recs",
+      //     []
+      //   );
+      //   this.moneyTransfered = _.sumBy(transactions, "trn_amount");
+      //   this.userBalance = _.get(
+      //     userState.userExtraDetails,
+      //     "wallet_balance",
+      //     0
+      //   );
 
-      console.log(data.userExtraDetails);
-
-      this.userBalance = _.get(data.userExtraDetails, "wallet_balance", 0);
-
-      this.renderCards();
+      //   this.renderCards();
+      // }
+      if (transactionState) {
+        const transactions = _.get(
+          transactionState.userWalletTransactionList,
+          "transaction_recs",
+          []
+        );
+        this.moneyTransfered = _.sumBy(transactions, "trn_amount");
+      }
+      if (userState) {
+        this.userBalance = _.get(
+          userState.userExtraDetails,
+          "wallet_balance",
+          0
+        );
+      }
+      if (transactionState && userState) this.renderCards();
     });
+
+    // this.subscribers = this.ds.dataStore$.subscribe((data) => {
+    //   const transactions = _.get(
+    //     data.userWalletTransactionList,
+    //     "transaction_recs",
+    //     []
+    //   );
+    //   this.moneyTransfered = _.sumBy(transactions, "trn_amount");
+
+    //   console.log(data.userExtraDetails);
+
+    //   this.userBalance = _.get(data.userExtraDetails, "wallet_balance", 0);
+
+    //   this.renderCards();
+    // });
   }
 
   ngOnDestroy() {
     // this.subscribers.unsubscribe();
   }
 
-  getCompanyTxns() {
-    this.cR.cardReducer({
-      type: GET_COMPANY_TXNS,
-      payload: {},
-    });
-  }
+  // getCompanyTxns() {
+  //   this.cR.cardReducer({
+  //     type: GET_COMPANY_TXNS,
+  //     payload: {},
+  //   });
+  // }
 
-  getClaims() {
-    this.cR.cardReducer({
-      type: GET_CLAIMS_TXNS,
-      payload: {},
-    });
-  }
+  // getClaims() {
+  //   this.cR.cardReducer({
+  //     type: GET_CLAIMS_TXNS,
+  //     payload: {},
+  //   });
+  // }
 
-  getCompanyTransactions() {
-    this.cR.cardReducer({
-      type: GET_COMPANY_MAIN_TXNS,
-      payload: { company: this.initialState.company_id },
-    });
-  }
+  // getCompanyTransactions() {
+  //   this.cR.cardReducer({
+  //     type: GET_COMPANY_MAIN_TXNS,
+  //     payload: { company: this.initialState.company_id },
+  //   });
+  // }
 
   getStatusText(status: string): string {
     return getStatusText(status);
   }
 
-  getTotalSalary(amounts: any): string {
-    let totalSalary = 0;
-    amounts.forEach((element) => {
-      totalSalary = totalSalary + element.amount;
-    });
-    return totalSalary.toString();
-  }
+  // getTotalSalary(amounts: any): string {
+  //   let totalSalary = 0;
+  //   amounts.forEach((element) => {
+  //     totalSalary = totalSalary + element.amount;
+  //   });
+  //   return totalSalary.toString();
+  // }
 
-  clearCompanyTxnsStore(): void {
-    const state = this.ds.dataStore$.getValue();
-    this.ds.dataStore$.next({
-      ...state,
-      ...successCommonData,
-      company_txns: {
-        details: {},
-      },
-    });
-  }
+  // clearCompanyTxnsStore(): void {
+  //   const state = this.ds.dataStore$.getValue();
+  //   this.ds.dataStore$.next({
+  //     ...state,
+  //     ...successCommonData,
+  //     company_txns: {
+  //       details: {},
+  //     },
+  //   });
+  // }
 
-  clearClaimsStore(): void {
-    const state = this.ds.dataStore$.getValue();
-    this.ds.dataStore$.next({
-      ...state,
-      ...successCommonData,
-      claims_txns: {
-        details: {},
-      },
-    });
-  }
+  // clearClaimsStore(): void {
+  //   const state = this.ds.dataStore$.getValue();
+  //   this.ds.dataStore$.next({
+  //     ...state,
+  //     ...successCommonData,
+  //     claims_txns: {
+  //       details: {},
+  //     },
+  //   });
+  // }
 
-  public chartClicked({
-    event,
-    active,
-  }: {
-    event: MouseEvent;
-    active: {}[];
-  }): void {
-    console.log(event, active);
-  }
+  // public chartClicked({
+  //   event,
+  //   active,
+  // }: {
+  //   event: MouseEvent;
+  //   active: {}[];
+  // }): void {
+  //   console.log(event, active);
+  // }
 
-  public chartHovered({
-    event,
-    active,
-  }: {
-    event: MouseEvent;
-    active: {}[];
-  }): void {
-    console.log(event, active);
-  }
+  // public chartHovered({
+  //   event,
+  //   active,
+  // }: {
+  //   event: MouseEvent;
+  //   active: {}[];
+  // }): void {
+  //   console.log(event, active);
+  // }
 
-  public randomize(): void {
-    // Only Change 3 values
-    const data = [
-      Math.round(Math.random() * 100),
-      59,
-      80,
-      Math.random() * 100,
-      56,
-      Math.random() * 100,
-      40,
-    ];
-    this.barChartData[0].data = data;
-  }
+  // public randomize(): void {
+  //   // Only Change 3 values
+  //   const data = [
+  //     Math.round(Math.random() * 100),
+  //     59,
+  //     80,
+  //     Math.random() * 100,
+  //     56,
+  //     Math.random() * 100,
+  //     40,
+  //   ];
+  //   this.barChartData[0].data = data;
+  // }
 
   renderCards(): void {
     this.balanceCards = [];

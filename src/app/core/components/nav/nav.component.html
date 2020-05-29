@@ -9,7 +9,7 @@
         </div>
       </div>
       <div nz-col nzXs="0" nzSm="0" nzMd="6" nzLg="6" nzXl="6"></div>
-      <!-- <div
+      <div
         *ngIf="currentMenuType != 4"
         nz-col
         nzXs="0"
@@ -18,19 +18,19 @@
         nzLg="6"
         nzXl="6"
       >
-        <ul *ngIf="!isAdmin()" nzMode="inline" class="my-account-top-section">
+        <ul nzMode="inline" class="my-account-top-section">
           <span class="dark-brown">
             My Enviar Balance &nbsp;
             <b>{{ userBalance | currency: "₹" }}</b
             >&nbsp;
-            <! -- <img
+            <!-- <img
               src="assets/images/rupay-add.png"
               class="topup-img"
               [routerLink]="['/', 'wallet-top-up']"
-            /> -- >
+            /> -->
           </span>
         </ul>
-      </div> -->
+      </div>
       <div
         *ngIf="currentMenuType != 4"
         nz-col

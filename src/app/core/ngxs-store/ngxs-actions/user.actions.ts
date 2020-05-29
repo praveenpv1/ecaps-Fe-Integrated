@@ -1,15 +1,15 @@
-export class AddUserInfoAction {
-  static readonly type = "[USER] Add UserInfo";
+export class GetUserInfoAction {
+  static readonly type = "[USER] Get UserInfo";
   constructor(public userInfo: object) {}
 }
 
-export class AddUserExtraDetailsAction {
-  static readonly type = "[USER] Add User Extra Details";
+export class GetUserExtraDetailsAction {
+  static readonly type = "[USER] Get User Extra Details";
 }
 
 export class UpdateChildUserInfoAction {
   static readonly type = "[USER] Update Child User Info";
-  constructor(public payload: any) {}
+  constructor(public payload: any, public navigation: any = {}) {}
 }
 
 export class AddChildUserAction {
@@ -24,5 +24,4 @@ export class GetChildUserInfoAction {
 
 export class GetChildUsersListAction {
   static readonly type = "[USER] Get Child Users List";
-  constructor(public id: string) {}
 }

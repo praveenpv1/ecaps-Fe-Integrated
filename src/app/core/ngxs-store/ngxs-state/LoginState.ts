@@ -4,14 +4,10 @@ import {
   VerifyEmailAction,
   SetPasswordAction,
 } from "./../ngxs-actions/login.actions";
-import {
-  AddUserInfoAction,
-  AddUserExtraDetailsAction,
-} from "./../ngxs-actions/user.actions";
+import { GetUserInfoAction } from "./../ngxs-actions/user.actions";
 import { Injectable } from "@angular/core";
 import { State, Action, StateContext, Selector, Store } from "@ngxs/store";
 import { ApiService } from "@app/core/services/api.service";
-import { LoaderState } from "./LoaderState";
 import { HideLoaderAction } from "../ngxs-actions/loader.actions";
 import {
   ShowToastAction,
@@ -68,21 +64,16 @@ export class LoginState {
   loginAction(ctx: StateContext<LoginStateModel>, action: LoginAction) {
     this.apiService.login(action).subscribe(
       ({ data }: any) => {
-        this.store.dispatch(new HideLoaderAction());
         this.authService.setAccessToken(data.token);
         if (data.is_verified) {
-          this.store.dispatch(new AddUserInfoAction(data));
+          this.store.dispatch(new GetUserInfoAction(data));
           localStorage.setItem("userData", JSON.stringify(data));
-          this.store.dispatch(new AddUserExtraDetailsAction());
-          // this.transaction.transactionReducer({
-          //   type: GET_WALLET_TRANSACTION_LIST,
-          //   payload: { id: data._id },
-          // });
           this.router.navigate(["/", "dashboard"]);
         } else {
           this.store.dispatch(new ShowToastAction("Not Verified"));
           this.router.navigate(["/sigin"]);
         }
+        this.store.dispatch(new HideLoaderAction());
       },
       (error) => {
         this.store.dispatch(new ErrorApiToastAction(error));
