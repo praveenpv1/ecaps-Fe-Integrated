@@ -39,24 +39,39 @@
 <br />
 <div nz-row>
   <div nz-col nzSm="24" nzMd="24" nzLg="24" nzXl="24">
-    <nz-table #walletTransactions [nzData]="walletTransactionList">
+    <nz-table
+      #nzTable
+      nzSize="middle"
+      [nzData]="walletTransactionList"
+      [nzScroll]="{ y: '240px' }"
+      [nzPageSize]="30"
+    >
       <thead>
         <tr>
-          <th>Type</th>
-          <th>Amount</th>
-          <th>Mode</th>
-          <th>Transaction ID</th>
+          <th nzWidth="120px">Type</th>
+          <th nzWidth="120px">Amount</th>
+          <th nzWidth="120px">Mode</th>
+          <th nzWidth="220px">Transaction ID</th>
+          <th nzWidth="120px"></th>
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let data of walletTransactions.data | filter: searchText">
+        <tr
+          (click)="viewTransactionsRoute(data)"
+          *ngFor="let data of nzTable.data | filter: searchText"
+        >
           <td>{{ data.wl_tr_type }}</td>
           <td>{{ data.trn_amount }}</td>
           <td>{{ data.wl_tr_mode }}</td>
           <td>{{ data.wl_tr_id }}</td>
-          <td><a nz-button nzType="link" class="primary-color-font" (click)="viewTransactionsRoute(data)">
-            View <i nz-icon nzType="right-circle" nzTheme="outline" style="font-size: 16px;"></i>
-          </a></td>
+          <td>
+            <i
+              nz-icon
+              nzType="right"
+              nzTheme="outline"
+              style="font-size: 16px;"
+            ></i>
+          </td>
         </tr>
       </tbody>
     </nz-table>

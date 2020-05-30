@@ -39,14 +39,19 @@
 <br />
 <div nz-row>
   <div nz-col nzSm="24" nzMd="24" nzLg="24" nzXl="24">
-    <nz-table #nzTable [nzData]="childLists" [nzScroll]="{ y: '240px' }">
+    <nz-table
+      #nzTable
+      nzSize="middle"
+      [nzData]="childLists"
+      [nzScroll]="{ y: '240px' }"
+    >
       <thead>
         <tr>
           <th nzWidth="220px">Name</th>
           <th nzWidth="220px">Company</th>
-          <th nzWidth="120px">Role</th>
+          <th nzWidth="180px">Role</th>
           <th nzWidth="180px">Phone</th>
-          <th>Actions</th>
+          <th nzWidth="180px">Actions</th>
         </tr>
       </thead>
       <tbody>
@@ -56,15 +61,13 @@
           <td>{{ data.role }}</td>
           <td>{{ data.phone }}</td>
           <td>
-            <button
+            <a
               nz-button
-              nzSize="small"
-              nzType="primary"
-              style="box-shadow: none !important;"
+              nzType="link"
+              class="table-link"
               (click)="showModal(data)"
+              >Set Loyalty</a
             >
-              Set Loyalty
-            </button>
           </td>
         </tr>
       </tbody>

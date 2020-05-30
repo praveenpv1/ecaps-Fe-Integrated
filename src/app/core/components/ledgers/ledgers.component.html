@@ -1,68 +1,78 @@
 <div nz-row>
-    <div nz-col nzSm="24" nzMd="24" nzLg="24" nzXl="24">
-      <h3 class="primary-color-font">My Ledger</h3>
-      <p>Get Ledger By Date</p>
-    </div>
+  <div nz-col nzSm="24" nzMd="24" nzLg="24" nzXl="24">
+    <h3 class="primary-color-font">My Ledger</h3>
+    <p>Get Ledger By Date</p>
   </div>
-  <div nz-row >
-    <!-- <nz-card class="primary-color-border-card text-center">
+</div>
+<div nz-row>
+  <!-- <nz-card class="primary-color-border-card text-center">
       <div nz-row> -->
-        <h3 class="medium-color-font text-center">VIEW LEDGER BY DATE</h3>
-      </div>
-      <br>
-      <div nz-row>
-        <form nz-form [formGroup]="validateForm" (ngSubmit)="submitForm()" class="text-center">
-          <nz-form-item>
-            <nz-form-label [nzSm]="8" [nzXs]="24" nzRequired>Start Date</nz-form-label>
-            <nz-form-control [nzSm]="16" [nzXs]="24">
-              <nz-date-picker formControlName="startDate"></nz-date-picker>
-            </nz-form-control>
-          </nz-form-item>
-          <nz-form-item>
-            <nz-form-label [nzSm]="8" [nzXs]="24" nzRequired>End Date</nz-form-label>
-            <nz-form-control [nzSm]="16" [nzXs]="24">
-              <nz-date-picker formControlName="endDate"></nz-date-picker>
-            </nz-form-control>
-          </nz-form-item>
-          <nz-form-item>
-            <nz-form-control [nzSm]="24" [nzXs]="24">
-              <button nz-button nzType="primary" class="button-center">Get My Ledgers</button>
-            </nz-form-control>
-          </nz-form-item>
-        </form>
-      <!-- </div>
+  <h3 class="medium-color-font text-center">VIEW LEDGER BY DATE</h3>
+</div>
+<br />
+<div nz-row>
+  <form
+    nz-form
+    [formGroup]="validateForm"
+    (ngSubmit)="submitForm()"
+    class="text-center"
+  >
+    <nz-form-item>
+      <nz-form-label [nzSm]="8" [nzXs]="24" nzRequired
+        >Start Date</nz-form-label
+      >
+      <nz-form-control [nzSm]="16" [nzXs]="24">
+        <nz-date-picker formControlName="startDate"></nz-date-picker>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-label [nzSm]="8" [nzXs]="24" nzRequired>End Date</nz-form-label>
+      <nz-form-control [nzSm]="16" [nzXs]="24">
+        <nz-date-picker formControlName="endDate"></nz-date-picker>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-control [nzSm]="24" [nzXs]="24">
+        <button nz-button nzType="primary" class="button-center">
+          Get My Ledgers
+        </button>
+      </nz-form-control>
+    </nz-form-item>
+  </form>
+  <!-- </div>
     </nz-card> -->
-    <br><br>
-    <nz-table
-      #ledgersTable
-      [nzData]=""
-      [nzPageSize]="1000"
-      [nzScroll]="{ y: '240px' }"
-    >
-      <thead>
-        <tr>
-          <th>SNo</th>
-          <th>TimeStamp</th>
-          <th>TransType</th>
-          <th>PrevBal</th>
-          <th>Amount</th>
-          <th>AfterBal</th>
-          <th>OpName</th>
-          <th>CustNo</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let data of ledgersTable.data">
-           <td>{{ sNo.data }}</td>
-           <td>{{ time.data }}</td>
-           <td>{{ transType.data }}</td>
-           <td>{{ prevBal.data }}</td>
-           <td>{{ amount.data }}</td>
-           <td>{{ afterBal.data }}</td>
-           <td>{{ opName.data }}</td>
-           <td>{{ cusNo.data }}</td>
-        </tr>
-      </tbody>
-    </nz-table>
-    <br><br>
-  </div>
+  <br /><br />
+  <nz-table
+    #ledgersTable
+    [nzData]=""
+    nzSize="middle"
+    [nzPageSize]="1000"
+    [nzScroll]="{ y: '240px' }"
+  >
+    <thead>
+      <tr>
+        <th>SNo</th>
+        <th>TimeStamp</th>
+        <th>TransType</th>
+        <th>PrevBal</th>
+        <th>Amount</th>
+        <th>AfterBal</th>
+        <th>OpName</th>
+        <th>CustNo</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let data of ledgersTable.data">
+        <td>{{ sNo.data }}</td>
+        <td>{{ time.data }}</td>
+        <td>{{ transType.data }}</td>
+        <td>{{ prevBal.data }}</td>
+        <td>{{ amount.data }}</td>
+        <td>{{ afterBal.data }}</td>
+        <td>{{ opName.data }}</td>
+        <td>{{ cusNo.data }}</td>
+      </tr>
+    </tbody>
+  </nz-table>
+  <br /><br />
+</div>

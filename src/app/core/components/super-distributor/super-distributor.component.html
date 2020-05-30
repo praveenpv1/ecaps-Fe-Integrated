@@ -6,12 +6,12 @@
 
   <div nz-col nzSm="12" nzMd="12" nzLg="4" nzXl="4">
     <button
-      class="margin-5px "
+      class="margin-5px"
       nz-button
       nzType="primary"
       [routerLink]="['/', 'super-distributor', 'add']"
     >
-      <i nz-icon nzType="plus-circle" nzTheme="outline" style="color: #fff"></i
+      <i nz-icon nzType="plus-circle" nzTheme="outline" style="color: #fff;"></i
       >&nbsp;Add Super Distributor
     </button>
   </div>
@@ -22,7 +22,7 @@
     <nz-input-group
       class="margin-5px"
       [nzSuffix]="suffixIconSearch"
-      style="width: 100% ;max-width :400px"
+      style="width: 100%; max-width: 400px;"
     >
       <input
         type="text"
@@ -55,21 +55,22 @@
 <div nz-row>
   <nz-table
     #headerTable
+    nzSize="middle"
     [nzData]="superDistributorList"
     [nzPageSize]="1000"
     [nzScroll]="{ y: '240px' }"
   >
     <thead>
-      <tr> 
+      <tr>
         <th nzWidth="200px">Name</th>
         <th nzWidth="200px">Mobile</th>
-        <th nzWidth="200px">Company</th> 
-        <th nzWidth="250px">Email</th> 
-        <th></th>
+        <th nzWidth="200px">Company</th>
+        <th nzWidth="250px">Email</th>
+        <th nzWidth="120px"></th>
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let data of headerTable.data | filter: searchText"> 
+      <tr *ngFor="let data of headerTable.data | filter: searchText">
         <td>{{ data.firstname }} {{ data.lastname }}</td>
         <td>
           {{ data.phone }}
@@ -79,7 +80,7 @@
         </td>
         <td>
           {{ data.email }}
-        </td> 
+        </td>
         <td>
           <button nz-button class="table-btn" (click)="editRoute(data)">
             <i nz-icon class="edit-icon" nzType="edit"></i>
