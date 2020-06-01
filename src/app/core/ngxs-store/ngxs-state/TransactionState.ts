@@ -29,11 +29,11 @@ export class TransactionState {
   constructor(private store: Store, private apiService: ApiService) {}
 
   @Action(GetTransactionListAction)
-  getTransactionListAction(ctx: StateContext<TransactionStateModel>) {
+  getTransactionListAction(ctx: StateContext<TransactionStateModel>, action: GetTransactionListAction) {
     const userId = this.store.selectSnapshot(UserState.userId);
     // const userId = userInfo._id;
     console.log("USER ID ", userId);
-    this.apiService.get(`main/wallets/transactions/${userId}`).subscribe(
+    this.apiService.get(`main/wallets/transactions/${userId}`, { ...action.payload }).subscribe(
       (response: any) => {
         ctx.patchState({ userWalletTransactionList: response });
         this.store.dispatch(new HideLoaderAction());

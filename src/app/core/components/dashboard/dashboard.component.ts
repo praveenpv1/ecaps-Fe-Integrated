@@ -191,7 +191,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.store.dispatch(new GetUserExtraDetailsAction());
-    this.store.dispatch(new GetTransactionListAction());
+    this.store.dispatch(new GetTransactionListAction({}));
 
     // this.uR.userReducer({
     //   type: USER_EXTRA_DETAILS,

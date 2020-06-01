@@ -4,6 +4,46 @@
     <p>View and Manage your Transactions here.</p>
   </div>
 </div>
+<br />
+<div nzSm="24" nzMd="24" nzLg="24" nzXl="24" class="text-center">
+  <h4 class="primary-color-font">Select Date Range</h4>
+  <br />
+  <form
+    nz-form
+    [formGroup]="dateRangeForm"
+    (ngSubmit)="submitForm()"
+    class="inline-block-element"
+  >
+    <nz-form-item>
+      <nz-form-control
+        [nzSm]="24"
+        [nzXs]="24"
+        nzErrorTip="Please Select Date Range"
+      >
+        <nz-range-picker formControlName="rangePicker"></nz-range-picker>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-control [nzSm]="24" [nzXs]="24" nzErrorTip="Please Select One">
+        <nz-select
+          id="txnType"
+          formControlName="txnType"
+          nzPlaceHolder="Select Transaction Type"
+        >
+          <nz-option nzValue="none" nzLabel="none">None</nz-option>
+          <nz-option nzValue="debit" nzLabel="debit">Debit</nz-option>
+          <nz-option nzValue="credit" nzLabel="credit">Credit</nz-option>
+        </nz-select>
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-control [nzSm]="24" [nzXs]="24">
+        <button nz-button nzType="primary">Submit</button>
+      </nz-form-control>
+    </nz-form-item>
+  </form>
+</div>
+<br />
 <div nz-row>
   <div nz-col nzSm="24" nzMd="24" nzLg="22" nzXl="22">
     <nz-input-group
