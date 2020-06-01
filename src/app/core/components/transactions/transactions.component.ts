@@ -21,9 +21,15 @@ import {
   styleUrls: ["./transactions.component.scss"],
 })
 export class TransactionsComponent implements OnInit {
-  dateRangeForm!: FormGroup;
   searchText = "";
   walletTransactionList: any;
+  dateRange = [moment().subtract(7, 'days').calendar(), moment().format()];
+  optionList = [
+    { label: 'None', value: 'none' },
+    { label: 'Debit', value: 'debit' },
+    { label: 'Credit', value: 'credit' }
+  ];
+  selectedValue = { label: 'None', value: 'none' };
 
   constructor(
     private tR: TransactionReducers,
@@ -33,22 +39,24 @@ export class TransactionsComponent implements OnInit {
     private fb: FormBuilder
   ) { }
 
-  submitForm(): void {
-    for (const i in this.dateRangeForm.controls) {
-      this.dateRangeForm.controls[i].markAsDirty();
-      this.dateRangeForm.controls[i].updateValueAndValidity();
+  onDateChange(result: Date): void {
+    const payload = {
+      startDate: moment(result[0]).toISOString(),
+      endDate: moment(result[1]).toISOString()
     }
-    if (this.dateRangeForm.valid) {
-      const payload = {
-        startDate: moment(this.dateRangeForm.value.rangePicker[0]).toISOString(),
-        endDate: moment(this.dateRangeForm.value.rangePicker[1]).toISOString(),
-      }
-      this.store.dispatch(new GetTransactionListAction(payload));
-    }
+    this.store.dispatch(new GetTransactionListAction(payload));
+  }
+
+  onTxnTypeChange(value: { label: string; value: string; }): void {
+    console.log(value);
   }
 
   ngOnInit() {
-    this.store.dispatch(new GetTransactionListAction({}));
+    const payload = {
+      startDate: moment(moment().subtract(7, 'days').calendar()).toISOString(),
+      endDate: moment(moment().format()).toISOString()
+    }
+    this.store.dispatch(new GetTransactionListAction(payload));
     // this.tR.transactionReducer({ type: GET_WALLET_TRANSACTION_LIST });
 
     this.store.subscribe(({ transactionState }) => {
@@ -65,11 +73,6 @@ export class TransactionsComponent implements OnInit {
 
       //reverse wallet data
       this.walletTransactionList = _.reverse(this.walletTransactionList);
-    });
-
-    this.dateRangeForm = this.fb.group({
-      rangePicker: [[], [Validators.required]],
-      txnType: [null, [Validators.required]]
     });
 
     // this.ds.dataStore$.subscribe((data) => {
