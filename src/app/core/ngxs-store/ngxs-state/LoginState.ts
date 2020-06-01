@@ -86,7 +86,6 @@ export class LoginState {
     ctx: StateContext<LoginStateModel>,
     action: VerifyEmailAction
   ) {
-    console.log("STATEEEE", this.store.selectSnapshot(UserState.userInfo));
     this.apiService.verifyEmail(`main/auth/verify/${action.token}`).subscribe(
       (response: any) => {
         this.store.dispatch(new ShowToastAction(response.message, "success"));

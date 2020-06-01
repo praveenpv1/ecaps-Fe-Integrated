@@ -30,8 +30,8 @@ export class TransactionState {
 
   @Action(GetTransactionListAction)
   getTransactionListAction(ctx: StateContext<TransactionStateModel>) {
-    const userInfo = this.store.selectSnapshot(UserState.userInfo);
-    const userId = userInfo._id;
+    const userId = this.store.selectSnapshot(UserState.userId);
+    // const userId = userInfo._id;
     console.log("USER ID ", userId);
     this.apiService.get(`main/wallets/transactions/${userId}`).subscribe(
       (response: any) => {

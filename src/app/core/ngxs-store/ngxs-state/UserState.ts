@@ -44,8 +44,8 @@ export class UserState {
   ) {}
 
   @Selector()
-  static userInfo(state: UserStateModel) {
-    return state.userInfo;
+  static userId(state: UserStateModel) {
+    return state.userInfo._id;
   }
 
   @Action(GetUserInfoAction)

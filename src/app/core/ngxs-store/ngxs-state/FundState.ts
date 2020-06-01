@@ -41,8 +41,9 @@ export class FundState {
     ctx: StateContext<LoaderStateModel>,
     action: RequestFundLoadAction
   ) {
-    const userInfo = this.store.selectSnapshot(UserState.userInfo);
-    const userId = userInfo._id;
+    // const userInfo = this.store.selectSnapshot(UserState.userInfo);
+    // const userId = userInfo._id;
+    const userId = this.store.selectSnapshot(UserState.userId);
     this.apiService
       .post(`main/fundloads/new-request`, {
         ...action.payload,
@@ -64,9 +65,10 @@ export class FundState {
     ctx: StateContext<LoaderStateModel>,
     action: GetFundLoadRequestsListAction
   ) {
-    const userInfo = this.store.selectSnapshot(UserState.userInfo);
-    const userId = userInfo._id;
+    // const userInfo = this.store.selectSnapshot(UserState.userInfo);
+    // const userId = userInfo._id;
 
+    const userId = this.store.selectSnapshot(UserState.userId);
     this.apiService.get(`main/fundloads/pendingtoapprove/${userId}`).subscribe(
       (response: any) => {
         ctx.patchState({ fundLoadRequests: response.data });
