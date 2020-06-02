@@ -23,7 +23,7 @@ import {
 export class TransactionsComponent implements OnInit {
   searchText = "";
   walletTransactionList: any;
-  dateRange = [moment().subtract(7, 'days').calendar(), moment().format()];
+  dateRange = []
   optionList = [
     { label: 'None', value: 'none' },
     { label: 'Debit', value: 'debit' },
@@ -37,7 +37,9 @@ export class TransactionsComponent implements OnInit {
     private router: Router,
     private store: Store,
     private fb: FormBuilder
-  ) { }
+  ) {
+    this.dateRange = [moment().subtract(7, 'days').calendar(), moment().format()];
+  }
 
   onDateChange(result: Date): void {
     const payload = {

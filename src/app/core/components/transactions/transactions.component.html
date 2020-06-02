@@ -52,6 +52,7 @@
       nzSize="middle"
       [nzData]="walletTransactionList"
       [nzScroll]="{ y: '240px' }"
+      [nzFrontPagination]="false"
     >
       <thead>
         <tr>
@@ -82,5 +83,9 @@
         </tr>
       </tbody>
     </nz-table>
+    <br />
+    <div nzSm="24" nzMd="24" nzLg="24" nzXl="24" class="text-right">
+      <button nz-button nzType="info" nzSize="small">View more</button>
+    </div>
   </div>
 </div>
