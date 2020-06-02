@@ -24,6 +24,8 @@
       [(ngModel)]="dateRange"
       (ngModelChange)="onDateChange($event)"
       class="full-width"
+      [(nzDisabledDate)]="disabledDate"
+      [(nzAllowClear)]="clearDate"
     ></nz-range-picker>
     <!-- <nz-range-picker [nzRanges]="ranges1" ngModel (ngModelChange)="onChange($event)"></nz-range-picker> -->
   </div>
@@ -84,8 +86,22 @@
       </tbody>
     </nz-table>
     <br />
-    <div nzSm="24" nzMd="24" nzLg="24" nzXl="24" class="text-right">
-      <button nz-button nzType="info" nzSize="small">View more</button>
+    <div
+      nzSm="24"
+      nzMd="24"
+      nzLg="24"
+      nzXl="24"
+      class="text-center"
+      *ngIf="showViewMore"
+    >
+      <button
+        nz-button
+        nzType="info"
+        nzSize="small"
+        (click)="onViewMoreClick()"
+      >
+        View more
+      </button>
     </div>
   </div>
 </div>
