@@ -53,8 +53,8 @@ export class TransactionsComponent implements OnInit {
 
   ngOnInit() {
     const payload = {
-      startDate: moment(moment().subtract(7, 'days').calendar()).toISOString(),
-      endDate: moment(moment().format()).toISOString()
+      startDate: moment(this.dateRange[0]).toISOString(),
+      endDate: moment(this.dateRange[1]).toISOString()
     }
     this.store.dispatch(new GetTransactionListAction(payload));
     // this.tR.transactionReducer({ type: GET_WALLET_TRANSACTION_LIST });
