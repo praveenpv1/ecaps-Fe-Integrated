@@ -5,12 +5,8 @@
   </div>
 </div>
 <div nz-row>
-  <div nz-col nzSm="24" nzMd="24" nzLg="22" nzXl="22">
-    <nz-input-group
-      class="margin-5px"
-      [nzSuffix]="suffixIconSearch"
-      style="width: 100%; max-width: 400px;"
-    >
+  <div nz-col nzSm="24" nzMd="24" nzLg="8" nzXl="8">
+    <nz-input-group class="full-width" [nzSuffix]="suffixIconSearch">
       <input
         type="text"
         [(ngModel)]="searchText"
@@ -22,18 +18,32 @@
       <i nz-icon nzType="search"></i>
     </ng-template>
   </div>
-  <div nz-col nzSm="24" nzMd="24" nzLg="2" nzXl="2">
-    <!-- <button class="margin-5px" nz-button nz-dropdown [nzDropdownMenu]="menu0">
-          Sort
-          <i nz-icon nzType="down"></i>
-        </button>
-        <nz-dropdown-menu #menu0="nzDropdownMenu">
-          <ul nz-menu>
-            <li nz-menu-item>By ??</li>
-            <li nz-menu-item>By ??</li>
-            <li nz-menu-item>By ??</li>
-          </ul>
-        </nz-dropdown-menu> -->
+  <div nz-col nzSm="24" nzMd="24" nzLg="2" nzXl="2"></div>
+  <div nz-col nzSm="24" nzMd="24" nzLg="8" nzXl="8">
+    <nz-range-picker
+      [(ngModel)]="dateRange"
+      (ngModelChange)="onDateChange($event)"
+      class="full-width"
+      [(nzDisabledDate)]="disabledDate"
+      [(nzAllowClear)]="clearDate"
+    ></nz-range-picker>
+    <!-- <nz-range-picker [nzRanges]="ranges1" ngModel (ngModelChange)="onChange($event)"></nz-range-picker> -->
+  </div>
+  <div nz-col nzSm="24" nzMd="24" nzLg="2" nzXl="2"></div>
+  <div nz-col nzSm="24" nzMd="24" nzLg="4" nzXl="4">
+    <nz-select
+      [(ngModel)]="selectedValue"
+      (ngModelChange)="onTxnTypeChange($event)"
+      nzAllowClear
+      nzPlaceHolder="Choose"
+      class="full-width"
+    >
+      <nz-option
+        *ngFor="let option of optionList"
+        [nzValue]="option"
+        [nzLabel]="option.label"
+      ></nz-option>
+    </nz-select>
   </div>
 </div>
 <br />
@@ -44,7 +54,7 @@
       nzSize="middle"
       [nzData]="walletTransactionList"
       [nzScroll]="{ y: '240px' }"
-      [nzPageSize]="30"
+      [nzFrontPagination]="false"
     >
       <thead>
         <tr>
@@ -75,5 +85,23 @@
         </tr>
       </tbody>
     </nz-table>
+    <br />
+    <div
+      nzSm="24"
+      nzMd="24"
+      nzLg="24"
+      nzXl="24"
+      class="text-center"
+      *ngIf="showViewMore"
+    >
+      <button
+        nz-button
+        nzType="info"
+        nzSize="small"
+        (click)="onViewMoreClick()"
+      >
+        View more
+      </button>
+    </div>
   </div>
 </div>
