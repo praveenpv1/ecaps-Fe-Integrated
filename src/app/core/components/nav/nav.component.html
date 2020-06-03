@@ -8,7 +8,6 @@
           <img src="assets/images/enviar-logo.png" class="logo" />
         </div>
       </div>
-      <div nz-col nzXs="0" nzSm="0" nzMd="6" nzLg="6" nzXl="6"></div>
       <div
         *ngIf="currentMenuType != 4"
         nz-col
@@ -17,6 +16,7 @@
         nzMd="6"
         nzLg="6"
         nzXl="6"
+        class="text-center"
       >
         <ul nzMode="inline" class="my-account-top-section">
           <span class="dark-brown">
@@ -39,56 +39,41 @@
         nzMd="4"
         nzLg="4"
         nzXl="4"
+        class="text-center"
       >
-        <ul nz-menu nzMode="horizontal" class="header-menu">
-          <!-- <li nz-menu-item>
-            <img src="assets/images/bell.svg" class=" top-menu-icons" />
-          </li> -->
-          <li nz-menu-item>
-            <ul class="header-profile" nz-menu nzMode="horizontal">
-              <li nz-submenu nzTitle="&nbsp;">
-                <ul style="min-width: 200px;">
-                  <!-- Role(s) - {{ userRole }} -->
-                  <li
-                    nz-menu-group
-                    class="dark-brown"
-                    nzTitle="Hey {{ userName }}!"
-                  >
-                    <ul>
-                      <li nz-menu-item [routerLink]="['/', 'my-account']">
-                        <i nz-icon nzType="robot" nzTheme="outline"></i>
-                        My Account
-                      </li>
-                      <!-- <li
-                        nz-submenu
-                        nzTitle="My Enviar Account"
-                        *ngIf="!isAdmin()"
-                      >
-                        <ul>
-                          (click)="gotoAccountDetails()" function for acct settings
-                          <li nz-menu-item class="dark-brown">
-                            <i nz-icon nzType="setting" nzTheme="outline"></i
-                            >Account Settings
-                          </li>
-                          <li nz-menu-item class="dark-brown">
-                            <img
-                              src="assets/images/rupay-add.png"
-                              style="width: 20px;"
-                            />&nbsp;&nbsp;Top Up Balance
-                          </li>
-                        </ul>
-                      </li> -->
-                      <li nz-menu-item (click)="logout()">
-                        <i nz-icon nzType="logout" nzTheme="outline"></i>Sign
-                        Out
-                      </li>
-                    </ul>
-                  </li>
-                </ul>
-              </li>
-            </ul>
-          </li>
-        </ul>
+        <nz-avatar
+          class="primary-color pointer"
+          nzSize="large"
+          nzIcon="user"
+          nz-popover
+          nzPopoverTitle="Hey {{ userName }}!"
+          [nzPopoverContent]="contentTemplate"
+          nzPopoverPlacement="bottom"
+        ></nz-avatar>
+        <ng-template #contentTemplate>
+          <div>
+            <nz-list>
+              <nz-list-item class="pointer dark-brown" [routerLink]="['/', 'my-account']">
+                <i
+                  nz-icon
+                  nzType="robot"
+                  nzTheme="outline"
+                  style="margin-right: 8px;"
+                ></i>
+                My Account
+              </nz-list-item>
+              <nz-list-item class="pointer dark-brown" (click)="logout()">
+                <i
+                  nz-icon
+                  nzType="logout"
+                  nzTheme="outline"
+                  style="margin-right: 8px;"
+                ></i>
+                Sign Out
+              </nz-list-item>
+            </nz-list>
+          </div>
+        </ng-template>
       </div>
     </div>
   </nz-header>
@@ -293,7 +278,8 @@
           <i nz-icon nzType="fund"></i> Users and Roles
         </li>
       </ul>
-    </nz-sider> -->
+    </nz-sider> --> 
+    
     <nz-layout class="inner-layout">
       <nz-content>
         <router-outlet></router-outlet>
