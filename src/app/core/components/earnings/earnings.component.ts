@@ -70,9 +70,9 @@ export class EarningsComponent implements OnInit, OnDestroy {
     balanceCards: InfoCards[] = [];
     validateForm: FormGroup;
 
-  submitForm(): void {
-    console.log(this.validateForm.value);
-  }
+    submitForm(): void {
+        console.log(this.validateForm.value);
+    }
     public subscribers: any = {};
 
     infoCards: InfoCards[] = [
@@ -87,12 +87,12 @@ export class EarningsComponent implements OnInit, OnDestroy {
             iconImg: "assets/images/calendar.svg"
         }
     ];
-    public barChartLabels: Label[] = [];
+    public barChartLabels: Label[] = ["2006", "2007", "2008", "2009", "2010", "2011", "2012",];
     public barChartType: ChartType = "bar";
     public barChartLegend = true;
     public barChartPlugins = [pluginDataLabels];
 
-    public barChartData: ChartDataSets[] = [{ data: [] }];
+    public barChartData: ChartDataSets[] = [{ data: [65, 59, 80, 81, 56, 55, 40], label: "Series A" }];
     employees: any;
     constructor(
         private cR: CompanyReducers,
@@ -127,7 +127,7 @@ export class EarningsComponent implements OnInit, OnDestroy {
             if (_.get(res.company_txns.details, "data", null)) {
                 this.txnsData = _.filter(
                     res.company_txns.details.data,
-                    function(txns) {
+                    function (txns) {
                         return txns.amount_type === "expense";
                     }
                 );
@@ -167,7 +167,7 @@ export class EarningsComponent implements OnInit, OnDestroy {
         this.validateForm = this.fb.group({
             startDate: [null],
             endDate: [null]
-          });
+        });
         // this.showCompanyWallet();
         //get all employees
         // this.eR.cardReducer({
@@ -185,7 +185,7 @@ export class EarningsComponent implements OnInit, OnDestroy {
 
         let dateGroup: any = _.orderBy(txnData, ["initiated_ts"], ["asc"]);
 
-        dateGroup = _.groupBy(dateGroup, function(data) {
+        dateGroup = _.groupBy(dateGroup, function (data) {
             return moment(data.initiated_ts * 1000)
                 .startOf("month")
                 .format("MMMM");

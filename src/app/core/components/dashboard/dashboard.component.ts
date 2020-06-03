@@ -358,11 +358,10 @@ export class DashboardComponent implements OnInit, OnDestroy {
         title: "Enviar Account Balance",
         text: `${this.userBalance}`,
         icon: "more",
-
         bgClass: "enviar-account-balance",
-        desc: "TOP UP",
-        // routerLink: ["/", "company", "deposit"],
-        routerLink: null,
+        desc: "MY ACCOUNT",
+        routerLink: ["/", "my-account"],
+        // routerLink: null,
         type: InfoType.amount,
       },
       {

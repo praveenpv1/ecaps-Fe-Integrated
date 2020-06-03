@@ -136,6 +136,11 @@ $sidenav-width: 320px; // 240px;
 // https://ultimatecourses.com/blog/the-missing-guide-to-angular-material
 
 // ----------------------------------------------------SWITCH THEMES---------------------------------------------------- //
+.primary-color {
+  @include themify($themes) {
+    color: themed("primaryColor");     
+  }
+}
 
 .light-color-font,
 .light-color-font a {
@@ -497,6 +502,7 @@ p {
   width: 30px;
   object-fit: contain;
 }
+
 .success-tick {
   width: 80px;
   height: 80px;
@@ -516,7 +522,7 @@ nz-select {
 //   position: absolute !important;
 //   height: 100%;
 //   z-index: 1000;
-// }
+// } 
 
 .pointer {
   cursor: pointer;

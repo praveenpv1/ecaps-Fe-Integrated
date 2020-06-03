@@ -44,6 +44,7 @@
 .inner-layout {
   padding: 0 24px 24px;
 }
+
 .topup-img {
   width: 8%;
   height: auto;
@@ -116,17 +117,17 @@ nz-footer {
   text-align: center;
 }
 
-.header-profile .ant-menu-submenu-title:nth-child(1) {
-  background-image: url("/assets/images/menu-avatar.svg");
-}
+// .header-profile .ant-menu-submenu-title:nth-child(1) {
+//   background-image: url("/assets/images/menu-avatar.svg");
+// }
 
-.header-profile .ant-menu-horizontal > .ant-menu-item:hover,
-.ant-menu-horizontal > .ant-menu-submenu:hover,
-.ant-menu-horizontal > .ant-menu-item-active,
-.ant-menu-horizontal > .ant-menu-submenu-active,
-.ant-menu-horizontal > .ant-menu-item-open,
-.ant-menu-horizontal > .ant-menu-submenu-open,
-.ant-menu-horizontal > .ant-menu-item-selected,
-.ant-menu-horizontal > .ant-menu-submenu-selected {
-  border-bottom: 0px !important;
-}
+// .header-profile .ant-menu-horizontal > .ant-menu-item:hover,
+// .ant-menu-horizontal > .ant-menu-submenu:hover,
+// .ant-menu-horizontal > .ant-menu-item-active,
+// .ant-menu-horizontal > .ant-menu-submenu-active,
+// .ant-menu-horizontal > .ant-menu-item-open,
+// .ant-menu-horizontal > .ant-menu-submenu-open,
+// .ant-menu-horizontal > .ant-menu-item-selected,
+// .ant-menu-horizontal > .ant-menu-submenu-selected {
+//   border-bottom: 0px !important;
+// }
