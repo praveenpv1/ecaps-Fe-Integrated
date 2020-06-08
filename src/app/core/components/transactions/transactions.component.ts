@@ -3,10 +3,6 @@ import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { DataStore } from "@app/core/store/app.store";
 import * as moment from "moment";
 import { TransactionReducers } from "@app/core/store/reducers/transaction.reducer";
-import {
-  GET_WALLET_TRANSACTION_LIST,
-  SAVE_SELECTED_TRANSACTION_ITEM,
-} from "@app/core/store/actions";
 import { Router } from "@angular/router";
 import * as _ from "lodash";
 import { Store } from "@ngxs/store";
@@ -34,6 +30,7 @@ export class TransactionsComponent implements OnInit {
   showViewMore = true;
   pageNumber = 1;
   pageSize = 10;
+  apiTransactionList: any = [];
   constructor(
     private tR: TransactionReducers,
     private ds: DataStore,
@@ -45,12 +42,9 @@ export class TransactionsComponent implements OnInit {
   }
 
   onDateChange(result: Date): void {
-    // const payload = {
-    //   startDate: moment(result[0]).toISOString(),
-    //   endDate: moment(result[1]).toISOString(),
-    // };
+    this.walletTransactionList = [];
+    this.apiTransactionList = [];
     this.dateRange = result;
-    // this.store.dispatch(new GetTransactionListAction(payload));
     this.resetPaginationData();
     this.getTransactionList();
   }
@@ -60,68 +54,41 @@ export class TransactionsComponent implements OnInit {
   }
 
   ngOnInit() {
-    // const payload = {
-    //   startDate: moment(this.dateRange[0]).toISOString(),
-    //   endDate: moment(this.dateRange[1]).toISOString(),
-    //   pageNumber: this.pageNumber,
-    //   pageSize: this.pageSize,
-    // };
-
-    // this.store.dispatch(new GetTransactionListAction(payload));
     this.getTransactionList();
 
-    // this.tR.transactionReducer({ type: GET_WALLET_TRANSACTION_LIST });
-    let apiTransactionList = [];
     this.store.subscribe(({ transactionState }) => {
-      apiTransactionList = _.get(
+      this.apiTransactionList = _.get(
         transactionState.userWalletTransactionList,
         "transaction_recs",
         []
       );
 
-      this.showViewMore = !_.isEmpty(apiTransactionList);
+      console.log("TRANSAC", this.apiTransactionList);
+
+      this.showViewMore = !_.isEmpty(this.apiTransactionList);
 
       // filter data with no txn amount
-      apiTransactionList = _.filter(
-        apiTransactionList,
+      this.apiTransactionList = _.filter(
+        this.apiTransactionList,
         (obj) => obj.trn_amount
       );
 
       //reverse wallet data
-      apiTransactionList = _.reverse(apiTransactionList);
+      this.apiTransactionList = _.reverse(this.apiTransactionList);
 
       this.walletTransactionList = [
         ...this.walletTransactionList,
-        ...apiTransactionList,
+        ...this.apiTransactionList,
       ];
       this.walletTransactionList = _.uniqBy(
         this.walletTransactionList,
         "wl_tr_id"
       );
+      console.log("walletTransactionList", this.walletTransactionList);
     });
-
-    // this.ds.dataStore$.subscribe((data) => {
-    //   this.walletTransactionList = _.get(
-    //     data.userWalletTransactionList,
-    //     "transaction_recs"
-    //   );
-
-    //   // filter data with no txn amount
-    //   this.walletTransactionList = _.filter(
-    //     this.walletTransactionList,
-    //     (obj) => obj.trn_amount
-    //   );
-
-    //   //reverse wallet data
-    //   this.walletTransactionList = _.reverse(this.walletTransactionList);
-    // });
   }
   viewTransactionsRoute(data) {
     if (data) {
-      // this.tR.transactionReducer({
-      //   type: SAVE_SELECTED_TRANSACTION_ITEM,
-      //   payload: data,
-      // });
       this.store.dispatch(new SaveSelectedTransactionItemAcion(data));
       this.router.navigate(["/", "view-transactions", data._id]);
     }
@@ -146,7 +113,7 @@ export class TransactionsComponent implements OnInit {
       endDate: moment(this.dateRange[1]).toISOString(),
     };
     const params = {
-      ...payload,
+      filters: JSON.stringify(payload),
       pageNumber: this.pageNumber,
       pageSize: this.pageSize,
     };

@@ -225,8 +225,8 @@ export class DashboardComponent implements OnInit, OnDestroy {
       // }
       if (transactionState) {
         const transactions = _.get(
-          transactionState.userWalletTransactionList,
-          "transaction_recs",
+          transactionState,
+          "userWalletTransactionList",
           []
         );
         this.moneyTransfered = _.sumBy(transactions, "trn_amount");
