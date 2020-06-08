@@ -12,10 +12,6 @@ import {
 import { TranslateHttpLoader } from "@ngx-translate/http-loader";
 import { FlexLayoutModule } from "@angular/flex-layout";
 
-//
-// koppr Components lib
-//
-
 import { kopprComponentsModule } from "koppr-components";
 import { ModalComponent } from "./components/modal/modal.component";
 import { environment } from "@env/environment";

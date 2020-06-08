@@ -11,6 +11,7 @@ import {
 import { UserState } from "./UserState";
 import { ApiService } from "@app/core/services/api.service";
 import { ErrorApiToastAction } from "../ngxs-actions/toast.actions";
+import * as _ from "lodash";
 
 export interface TransactionStateModel {
   userWalletTransactionList: [];
@@ -29,19 +30,23 @@ export class TransactionState {
   constructor(private store: Store, private apiService: ApiService) {}
 
   @Action(GetTransactionListAction)
-  getTransactionListAction(ctx: StateContext<TransactionStateModel>, action: GetTransactionListAction) {
+  getTransactionListAction(
+    ctx: StateContext<TransactionStateModel>,
+    action: GetTransactionListAction
+  ) {
     const userId = this.store.selectSnapshot(UserState.userId);
-    // const userId = userInfo._id;
-    console.log("USER ID ", userId);
-    this.apiService.get(`main/wallets/transactions/${userId}`, { ...action.payload }).subscribe(
-      (response: any) => {
-        ctx.patchState({ userWalletTransactionList: response });
-        this.store.dispatch(new HideLoaderAction());
-      },
-      (error) => {
-        this.store.dispatch(new ErrorApiToastAction(error));
-      }
-    );
+    const encodeUrl = encodeURIComponent(JSON.stringify(action.payload));
+    this.apiService
+      .get(`main/wallets/transactions/${userId}`, { ...action.payload })
+      .subscribe(
+        (response: any) => {
+          ctx.patchState({ userWalletTransactionList: response });
+          this.store.dispatch(new HideLoaderAction());
+        },
+        (error) => {
+          this.store.dispatch(new ErrorApiToastAction(error));
+        }
+      );
   }
 
   @Action(SaveSelectedTransactionItemAcion)
