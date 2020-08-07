@@ -54,7 +54,7 @@
     "buffer": "^5.4.3",
     "chart.js": "^2.9.3",
     "chartjs-plugin-datalabels": "^0.7.0",
-    "class-transformer": "^0.2.3",
+    "class-transformer": "^0.3.1",
     "core-js": "^3.6.4",
     "crypto": "^1.0.1",
     "date-fns": "1.30.1",
